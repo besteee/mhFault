@@ -1,0 +1,37 @@
+<div class="group-buy-list box">
+	<b class="tp"><b></b></b>
+	<div class="hd"><h3>{$lang.group_buy_goods}</h3></div>
+	<div class="bd">
+		{if $gb_list}
+		{foreach from=$gb_list item=group_buy name=gb_list}
+		<div class="item{if $smarty.foreach.gb_list.first} first{/if}">
+			<p class="photo"><a href="{$group_buy.url}"><img src="{$group_buy.goods_thumb}" alt="{$group_buy.goods_name|escape:html}"/></a></p>
+			<dl class="info table">
+				<dt>{$lang.gb_goods_name}</dt>
+				<dd><a href="{$group_buy.url}" class="name">{$group_buy.goods_name|escape:html}</a></dd>
+				<dt>{$lang.gb_start_date}</dt>
+				<dd class="even">{$group_buy.formated_start_date}</dd>
+				<dt>{$lang.gb_end_date}</dt>
+				<dd>{$group_buy.formated_end_date}</dd>
+				<dt>{$lang.gb_price_ladder}</dt>
+				<dd class="even">
+					<dl class="table">
+						<dt class="title">{$lang.volume_price_title}</dt>
+						<dt class="head">{$lang.gb_ladder_amount}</dt>
+						<dd class="head">{$lang.gb_ladder_price}</dd>
+						{foreach from=$group_buy.price_ladder item=item}
+						<dt>{$item.amount}</dt>
+						<dd class="price {cycle values="odd,even"}">{$item.formated_price}</dd>
+						{/foreach}
+					</dl>
+				</dd>
+			</dl>
+		</div>
+		{/foreach}
+		{else}
+		<div class="empty">{$lang.group_goods_empty}</div>
+		{/if}
+		{include file="/library/pages.lbi"}
+	</div>
+	<b class="bt"><b></b></b>
+</div>

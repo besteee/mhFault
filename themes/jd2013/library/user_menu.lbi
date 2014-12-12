@@ -1,0 +1,50 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div id="myjd">	
+<div class="mt">		
+<h2><a href="user.php">会员中心</a></h2>	</div>	
+	<div class="mc">
+		<dl>
+			<dt>故障诊断</dt>
+			<dd>
+				<div class="item"><a href="user.php?act=faultDiy">套餐定制</a></div>
+			</dd>
+		</dl>
+		<dl>		
+			<dt>订单中心<b></b></dt>		
+				<dd>				
+				<div class="item{if $action eq 'order_list'} curr{/if}"><a rel="nofollow" href="user.php?act=order_list">{$lang.label_order}</a><img src="images/icon_new.png" style="position:absolute;margin-top:2px;margin-left:3px"></div>
+				<div class="item{if $action eq 'address_list'} curr{/if}"><a href="user.php?act=address_list"}>{$lang.label_address}</a></div>
+				<div class="item{if $action eq 'track_packages'} curr{/if}"><a href="user.php?act=track_packages">{$lang.label_track_packages}</a></div>
+				<div class="item{if $action eq 'collection_list'} curr{/if}"><a href="user.php?act=collection_list">{$lang.label_collection}</a></div>
+				<div class="item{if $action eq 'comment_list'} curr{/if}"><a href="user.php?act=comment_list">{$lang.label_comment}</a></div>	
+				<div class="item{if $action eq 'booking_list'} curr{/if}"><a href="user.php?act=booking_list">{$lang.label_booking}</a></div>
+				</dd>
+		</dl>	
+		
+			<dl>		
+			<dt>会员信息<b></b></dt>		
+				<dd>				
+				<div class="item {if $action eq 'message_list'} curr{/if}"><a href="user.php?act=message_list">{$lang.label_message}</a></div>
+					  <div class="item {if $action eq 'tag_list'} curr{/if}"><a href="user.php?act=tag_list">{$lang.label_tag}</a></div>
+					  <div class="item {if $action eq 'account_log'} curr{/if}"><a href="user.php?act=account_log">{$lang.label_user_surplus}</a></div>
+					  <!--{if $show_transform_points}-->
+					  <div class="item {if $action eq 'transform_points'} curr{/if}"><a href="user.php?act=transform_points">{$lang.label_transform_points}</a></div>
+					  <!--{/if}-->					
+					  <div class="item {if $action eq 'bonus'} curr{/if}"><a href="user.php?act=bonus">我的代金券</a></div>
+				<!-- {if $affiliate.on eq 1} --><div class="item {if $action eq 'affiliate'} curr{/if}"><a href="user.php?act=affiliate">{$lang.label_affiliate}</a></div><!-- {/if} -->
+			</dd>
+		</dl>	
+		
+		<dl>		
+			<dt>帐户中心<b></b></dt>		
+				<dd>				
+				  <div class="item {if $action eq 'default'} curr{/if}"><a href="user.php?act=default">{$lang.label_welcome}</a></div>
+			 	 <div class="item {if $action eq 'profile'} curr{/if}"><a href="user.php?act=profile">{$lang.label_profile}</a></div>
+			</dd>
+		</dl>	
+			
+				
+			</div>
+			</div>
+			<div class="blank"></div>
+			

@@ -1,0 +1,33 @@
+{include file="mhFaultpageheader.htm"}
+
+<table id="mhFaultAll">
+{foreach from=$fault item=mhFault key=key}
+	<tr class="mhF">
+		<td class="mhFault" fault_id="{$mhFault.id}">{$mhFault.name}</td>
+		<td class="subMhF">
+		{foreach from=$mhFault.subMhFault item=subMhFault key=key}
+			<a href="/admin/mhFault.php?act=detail&fault_id={$subMhFault.id}&fault_name={$subMhFault.name}"><li class="subMhFault" fault_id="{$subMhFault.id}">{$subMhFault.name}</li></a>
+		{/foreach}
+		</td>
+	</tr>
+{/foreach}
+</table>
+
+<button id="btn111">111</button>
+
+
+<script type="text/javascript">
+$("#btn111").click(function(){
+		$.ajax({
+			url: 'addgoods.php',
+			type: 'POST',
+			data:{action:'subCarType'},
+			dataType: 'html',
+			success: function(result)
+			{
+				alert(result);
+			}
+		});
+});
+</script>
+{include file="pagefooter.htm"}

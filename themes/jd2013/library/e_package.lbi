@@ -1,0 +1,97 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $package_goods_list} -->
+<script type="text/javascript">
+function init(ids,cons,dis){
+	 	document.getElementById(ids).getElementsByTagName('li')[0].className='active';
+		document.getElementById(cons).innerHTML=document.getElementById(dis+"l1").innerHTML;
+//		document.getElementById(ids).onmouseover=function(){onmousOver(ids,cons,dis);}//鼠标指向激发效果
+		document.getElementById(ids).onclick=function(){onmousOver(ids,cons,dis);}//点击激发效果
+}
+function onmousOver(ids,cons,dis){
+o = o || window.event;
+var obj=o.target || o.srcElement;
+if (obj.tagName=='LI'){
+		if (obj.className=='active'||obj.id=='more')return;
+		var o=document.getElementById(ids).getElementsByTagName('li');
+		for (var i=0;i<=o.length-1;i++){o[i].className='current'}
+		
+		obj.className='active';
+		if (obj.className=='active'){document.getElementById(cons).innerHTML=document.getElementById(dis+obj.id).innerHTML;}
+}
+}
+</script>
+<style>
+.B_eee{border:1px solid #eee;width:100px;height:100px;}
+.package{background:#fff; padding-bottom:2px; overflow:hidden;}
+.pa_tit{width:100%;height:33px;background:url(images/bg_package.gif) repeat-x 0 bottom;}
+.pa_tit li{
+	float:left;width:132px;height:33px;line-height:33px;
+	background:url(images/bg_package.gif) no-repeat 0 0;
+	font-size:14px;text-align:center;margin-right:3px; cursor:pointer
+}
+.pa_tit li.current{background:url(images/bg_package.gif) no-repeat 0 -33px;}
+.pa_box{height:auto;border:1px solid #dadada;border-top:none;padding-bottom:10px;}
+.pa_box ul{float:left;width:77%;padding:10px;overflow:hidden;}
+.pa_box ul li{float:left;width:133px;padding-left:10px;background:url(images/bg_package_add.gif) no-repeat right 50px;}
+.pa_box ul li a{color:#000;text-decoration:none;width:100px;display:block;}
+.pa_box ul li.last{background:none;}
+.pa_box .buypack{float:right;width:20%;padding-top:30px;}
+.pa_box .buypack .f_yuan{font-size:14px; text-decoration:line-through;}
+.pa_box .buypack .f_save{font-size:14px; font-weight:bold;}
+.pa_box .buypack .f_pack{color:#ff3300; font-size:17px; font-weight:bold;}
+.pa_box .buypack .f_pack1{color:#ff3300;font-size:14px;}
+.btn_pack{width:103px;height:32px;margin-top:10px;border:none;background:url(images/bg_package_buy.gif) no-repeat 0 0;cursor:pointer;}
+</style>
+
+<div class="package">
+	<div class="pa_tit" id='nav1'>
+    <!-- {foreach from=$package_goods_list item=package_goods name=curn} -->   
+		<li class="current" id='l{$smarty.foreach.curn.iteration}'>{$package_goods.act_name}</li>
+        <!-- {/foreach} -->   
+	</div>
+   
+	<div class="pa_box clearfix" >	
+     <!-- {foreach from=$package_goods_list item=package_goods name=curn} -->      	
+	    <div id='con1'></div>
+        <div style="display:none">
+       <div id="div1_l{$smarty.foreach.curn.iteration}">
+		<ul >
+			<!-- {foreach name=package_goods from=$package_goods.goods_list item=goods_list} -->
+            {if $goods_list.goods_id eq $package_goods.goods_id}
+            <li>
+			<a href="goods.php?id={$goods_list.goods_id}" target="_blank">
+			<img src="{$goods_list.goods_thumb}" class="B_eee" >
+			</a>
+			<a href="goods.php?id={$goods_list.goods_id}" target="_blank">{$goods_list.short_name}<font size="1">×</font><font color=#ff3300>{$goods_list.goods_number}</font></a>
+            原价：<font color=#ff3300>{$goods_list.shop_price}</font>
+			</li>
+            {/if}
+            <!-- {/foreach} -->
+           <!-- {foreach name=package_good from=$package_goods.goods_list item=goods_lists} --> 
+           {if $goods_lists.goods_id neq $package_goods.goods_id}
+            <li class="last"}>
+			<a href="goods.php?id={$goods_lists.goods_id}" target="_blank"><img src="{$goods_lists.goods_thumb}" class="B_eee" ></a>
+			<a href="goods.php?id={$goods_lists.goods_id}" target="_blank">{$goods_lists.short_name}<font size="1">×</font><font color=#ff3300>{$goods_lists.goods_number}</font></a>
+            原价：<font color=#ff3300>{$goods_lists.shop_price}</font>
+			</li>
+			 {/if}
+            <!-- {/foreach} -->	
+			</ul>
+            <div class="buypack">
+                <strong>原  价：</strong><font class="f_yuan" id="price_yuan_0">:{$package_goods.subtotal}</font><br />
+                <strong><font class="f_pack1">套餐价：</font></strong><font class="f_pack">{$package_goods.package_price}</font><br />
+                <strong>节  省：</strong><font class="f_save" id="price_save_0">{$package_goods.saving}</font><br />
+                <input type="button" class="btn_pack" onClick="javascript:addPackageToCart({$package_goods.act_id}, 0)" >			
+            </div>
+		</div>
+        </div> 
+         <!-- {/foreach} -->  
+	</div>	 
+   
+</div>
+<div class="blank"></div>
+
+ <script>
+init('nav1','con1',"div1_");
+</script>
+<!-- {/if} -->

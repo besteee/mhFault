@@ -1,0 +1,66 @@
+<!-- $Id: goods_info.htm 17126 2010-04-23 10:30:26Z liuhui $ -->
+{include file="pageheader.htm"}
+<script type="text/javascript" src="../js/calendar.php?lang={$cfg_lang}"></script>
+<link href="../js/calendar/calendar.css" rel="stylesheet" type="text/css" />
+
+<!-- start goods form -->
+<div class="tab-div">
+    <!-- tab bar -->
+    <div id="tabbar-div">
+      <p>
+        <span class="tab-front" id="general-tab">{$lang.tab_general}</span>
+      </p>
+    </div>
+
+    <!-- tab body -->
+    <div id="tabbody-div">
+      <form enctype="multipart/form-data" action="" method="post" name="theForm" >
+        <!-- 最大文件限制 -->
+        <input type="hidden" name="MAX_FILE_SIZE" value="2097152" />
+        <!-- 通用信息 -->
+        <table width="90%" id="general-table" align="center">
+            <tr>
+                <td class="label">规则名称：</td>
+                <td>
+                    <input type="text" name="name" value="{$data.name}" style="float:left;color:;" size="30" />
+                    <span class="require-field">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">关键词(KEY值)：</td>
+                <td>
+                    <input type="text" name="keyword" value="{$data.keyword}" style="float:left;color:;" size="30" />
+                    <span class="require-field">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">消息类型：</td>
+                <td>
+                    <select name="type">
+                        <option value="1">文字</option>
+                    </select>
+                    <span class="require-field">*</span>
+                </td>
+            </tr>
+            
+        </table>
+
+        <!-- 详细描述 -->
+        <table width="90%"  align="center">
+          <tr>
+            <td align="center">{$FCKeditor}</td>
+          </tr>
+        </table>
+
+
+        <div class="button-div">
+          <input type="hidden" name="id" value="{$data.id}" />
+          <input type="submit" value="保存" class="button" />
+          <input type="reset" value="重置" class="button" />
+        </div>
+      </form>
+    </div>
+</div>
+<!-- end keywords form -->
+
+{include file="pagefooter.htm"}

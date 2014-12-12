@@ -1,0 +1,79 @@
+<div class="goods-intro box">
+	<b class="tp"><b></b></b>
+	<div class="bd">
+		<h1>{$goods.goods_name}{if $cfg.show_goodssn}<em>({$lang.goods_sn}{$lang.colon}{$goods.goods_sn})</em>{/if}</h1>
+		<div class="info">
+			<form action="exchange.php?act=buy" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY">
+				<fieldset>
+				<dl class="basic clearfix">
+					<dt class="first">{$lang.exchange_integral}</dt><dd class="price shop first">{$goods.exchange_integral}</dd>
+					{if $goods.goods_brand neq "" and $cfg.show_brand}
+					<dt>{$lang.goods_brand}</dt><dd><a href="{$goods.goods_brand_url}" >{$goods.goods_brand}</a></dd>
+					{/if}
+					{if $cfg.show_marketprice}
+					<dt>{$lang.market_price}</dt><dd><span class="price market">{$goods.market_price}</span></dd>
+					{/if}
+					{if $cfg.show_goodsweight}
+					<dt>{$lang.goods_weight}</dt><dd>{$goods.goods_weight}</dd>
+					{/if}
+					{if $goods.goods_number neq "" and $cfg.show_goodsnumber0}
+					<dt>{$lang.goods_number}</dt><dd>{$goods.goods_number} {$goods.measure_unit}</dd>
+					{/if}
+					{if $cfg.show_addtime}
+					<dt>{$lang.add_time}</dt><dd>{$goods.add_time}</dd>
+					{/if}
+					<dt>{$lang.goods_click_count}</dt><dd>{$goods.click_count}</dd>
+					{if $goods.give_integral > 0}
+					<dt>{$lang.goods_give_integral}</dt><dd>{$goods.give_integral} {$points_name}</dd>
+					{/if}
+				</dl>
+				{if $specification}
+				<dl class="spec table">
+					{foreach from=$specification item=spec key=spec_key name=specification}
+					<dt{if $smarty.foreach.specification.first} class="first"{/if}>{$spec.name}{$lang.colon}</dt>
+					{if $spec.attr_type eq 1}
+						{if $cfg.goodsattr_style eq 1}
+							{foreach from=$spec.values item=value key=key}
+							<dd class="{cycle values="odd,even"}"><label for="spec_value_{$value.id}">
+							<input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" {if $key eq 0}checked{/if} onclick="changePrice()" hidefocus="true"/>
+							{$value.label}{if $value.price gt 0} [{$lang.plus}{$value.format_price|abs}] {elseif $value.price lt 0} [{$lang.minus}{$value.format_price|abs}] {/if}</label></dd>
+							{/foreach}
+						{else}
+							<dd class="{cycle values="odd,even"}"><select name="spec_{$spec_key}" onChange="changePrice()">
+							{foreach from=$spec.values item=value key=key}
+							<dd class="{cycle values="odd,even"}"><option label="{$value.label} {if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if}{if $value.price neq 0}{$value.format_price}{/if}" value="{$value.id}">{$value.label} {if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if}{if $value.price neq 0}{$value.format_price}{/if}</option>
+							{/foreach}
+							</select></dd>
+						{/if}
+					{else}
+						{foreach from=$spec.values item=value key=key}
+						<dd class="{cycle values="odd,even"}"><label for="spec_value_{$value.id}">
+						<input type="checkbox" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" onclick="changePrice()" />
+						{$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}] </label></dd>
+						{/foreach}
+					{/if}
+					<input type="hidden" name="spec_list" value="{$key}" />
+					{/foreach}
+				</dl>
+				{/if}
+				<div class="action">
+					<p><b>{$lang.number}{$lang.colon}</b><input name="number" type="text" value="1" size="4" onKeyUp="changePrice()" id="number" />{$goods.measure_unit}{if $goods.goods_number neq "" and $cfg.show_goodsnumber}<span class="stock">({$lang.goods_number}{$goods.goods_number}{$goods.measure_unit})</span>{/if}</p>
+					<input type="submit" value="{$lang.exchange_goods}" class="submit btn-hg"/>
+					<input type="hidden" name="goods_id" value="{$goods.goods_id}" />
+				</div>
+				</fieldset>
+			</form>
+		</div>
+		<div class="extra">
+			<div class="gallery">
+				{if $pictures.0.img_url}<a href="{$pictures.0.img_url}" rel="gallery" title="{$goods.goods_name}" class="cover"><img src="{$goods.goods_img}"/></a>{else}<span class="cover"><img src="{$goods.goods_img}" alt="{$goods.goods_name}"/></span>{/if}
+				{if $pictures.1.img_url}<p class="thumb">
+					{foreach from=$pictures item=picture name=pictures}
+					{if $smarty.foreach.pictures.index > 0}<a href="{$picture.img_url}" rel="gallery" title="{$picture.img_desc}"><img src="{if $picture.thumb_url}{$picture.thumb_url}{else}{$picture.img_url}{/if}" alt="{$picture.img_desc}"></a>{/if}
+					{/foreach}
+				</p>{/if}
+			</div>
+		</div>
+	</div>
+	<b class="bt"><b></b></b>
+</div>

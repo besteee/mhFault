@@ -1,0 +1,123 @@
+{if $comments}
+<ul class="comment-list clearfix">
+	{foreach from=$comments item=comment name=comments}
+	<li class="{cycle values="odd,even"}{if $smarty.foreach.comments.first} first{/if}">
+		<div class="info">
+			<span class="name">{if $comment.username}{$comment.username|escape:html}{else}{$lang.anonymous}{/if}</span>
+			<span class="time">{$comment.add_time}</span>
+			<span class="rank">{$lang.label_comment_rank}{if $comment.rank eq '1'}{$lang.comment_rank_1}{elseif $comment.rank eq '2'}{$lang.comment_rank_2}{elseif $comment.rank eq '3'}{$lang.comment_rank_3}{elseif $comment.rank eq '4'}{$lang.comment_rank_4}{elseif $comment.rank eq '5'}{$lang.comment_rank_5}{/if}</span>
+		</div>
+		<div class="talk">
+			<p class="text">{$comment.content}</p>
+			{if $comment.re_content}
+			<blockquote class="reply"><span class="name">{$lang.re_name}</span><p>{$comment.re_content}</p></blockquote>
+			{/if}
+		</div>
+	</li>
+	{/foreach}
+</ul>
+{include file="/library/pages.lbi"}
+{else}
+<span class="empty">{$lang.no_comments}</span>
+{/if}
+<form action="javascript:;" onsubmit="submitComment(this)" method="post" class="form">
+	<div class="req"><b>*</b>{$lang.required_indicates}</div>
+	<fieldset>
+		<h4>{$lang.comment_form_title}</h4>
+		<p class="label"><b>{$lang.label_username}</b>
+			<em>{if $smarty.session.user_name}{$username}{else}{$lang.anonymous}{/if}</em>
+		</p>
+		<label for="cf-email"><b><span class="req">*</span>{$lang.label_email}</b>
+			<input type="text" name="email" tabindex="1" value="{$smarty.session.email|escape}" id="cf-email"/>
+		</label>
+		<fieldset class="radio-wrap label"><b>{$lang.label_comment_rank}</b>
+			<fieldset>
+			<label for="cf-rank5"><input type="radio" name="comment_rank" value="5" checked="checked" tabindex="2" class="radio" id="cf-rank5"/>{$lang.comment_rank_5}</label>
+			<label for="cf-rank4"><input type="radio" name="comment_rank" value="4" tabindex="3" class="radio" id="cf-rank4"/>{$lang.comment_rank_4}</label>
+			<label for="cf-rank3"><input type="radio" name="comment_rank" value="3" tabindex="4" class="radio" id="cf-rank3"/>{$lang.comment_rank_3}</label>
+			<label for="cf-rank2"><input type="radio" name="comment_rank" value="2" tabindex="5" class="radio" id="cf-rank2"/>{$lang.comment_rank_2}</label>
+			<label for="cf-rank1"><input type="radio" name="comment_rank" value="1" tabindex="6" class="radio" id="cf-rank1"/>{$lang.comment_rank_1}</label>
+			</fieldset>
+		</fieldset>
+		<label for="cf-content"><b><span class="req">*</span>{$lang.comment_content}{$lang.colon}</b>
+			<textarea name="content" rows="6" cols="20" tabindex="7" id="cf-content"></textarea>
+		</label>
+		{if $enabled_captcha}
+		<label for="cf-captcha"><b><span class="req">*</span>{$lang.comment_captcha}{$lang.colon}</b>
+			<input type="text" name="captcha" size="6" tabindex="8" class="captcha" id="cf-captcha"/><img src="captcha.php?{$rand}" alt="{$lang.comment_captcha}" class="captcha" onClick="this.src='captcha.php?'+Math.random()"/>
+		</label>
+		{/if}
+		<div class="submit-wrap">
+			<input type="submit" value="{$lang.submit_comment}" tabindex="9" class="submit btn-sm"/>
+			<input type="hidden" name="cmt_type" value="{$comment_type}" />
+			<input type="hidden" name="id" value="{$id}" />
+		</div>
+	</fieldset>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+{foreach from=$lang.cmt_lang item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+{literal}
+function submitComment(frm)
+{
+	var cmt = new Object;
+	cmt.email           = frm.elements['email'].value;
+	cmt.content         = frm.elements['content'].value;
+	cmt.type            = frm.elements['cmt_type'].value;
+	cmt.id              = frm.elements['id'].value;
+	cmt.enabled_captcha = frm.elements['enabled_captcha'] ? frm.elements['enabled_captcha'].value : '0';
+	cmt.captcha         = frm.elements['captcha'] ? frm.elements['captcha'].value : '';
+	cmt.rank            = 0;
+	for (i = 0; i < frm.elements['comment_rank'].length; i++)
+	{
+		if (frm.elements['comment_rank'][i].checked)
+		{
+			cmt.rank = frm.elements['comment_rank'][i].value;
+		}
+	}
+	if (cmt.email.length > 0)
+	{
+		if (!(Utils.isEmail(cmt.email)))
+		{
+		alert(cmt_error_email);
+		return false;
+		}
+	}
+	else
+	{
+		alert(cmt_empty_email);
+		return false;
+	}
+	if (cmt.content.length == 0)
+	{
+		alert(cmt_empty_content);
+		return false;
+	}
+	if (cmt.enabled_captcha > 0 && cmt.captcha.length == 0 )
+	{
+		alert(captcha_not_null);
+		return false;
+	}
+	Ajax.call('comment.php', 'cmt=' + $.toJSON(cmt), commentResponse, 'POST', 'JSON');
+	return false;
+}
+function commentResponse(result)
+{
+	if (result.message)
+	{
+		alert(result.message);
+	}
+	if (result.error == 0)
+	{
+		var layer = document.getElementById('ECS_COMMENT');
+		if (layer)
+		{
+			layer.innerHTML = result.content;
+		}
+	}
+}
+{/literal}
+//]]>
+</script>

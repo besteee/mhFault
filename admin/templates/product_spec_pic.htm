@@ -1,0 +1,148 @@
+<!-- $Id: goods_list.htm 16529 2009-08-12 05:38:57Z wangleisvn $ -->
+
+{if $full_page}
+
+{include file="pageheader.htm"}
+
+{insert_scripts files="../js/utils.js,listtable.js"}
+{insert_scripts files="../js/jscolor/jscolor.js"}
+
+<!-- 添加货品 -->
+<div class="list-div" style="margin-bottom: 5px; margin-top: 10px;" id="listDiv">
+
+{/if}
+
+<form method="post" action="goods.php" name="addForm" id="addForm">
+<input type="hidden" name="goods_id" value="{$goods_id}" />
+<input type="hidden" name="act" value="product_add_execute" />
+  <table width="100%" cellpadding="3" cellspacing="1" id="table_list">
+    <tr>
+      <th width="13%" align="right">{$lang.attr_record_id}</th>
+      <th width="26%" align="right" class="label_2">{$lang.attr_value}</th>
+      <th width="15%" align="right" class="label_2">颜色色块</th>
+      <th width="18%" align="right" class="label_2">{$lang.thumb_url}</th>
+      <th width="14%" align="right" class="label_2">属性大图</th>
+	  <th width="14%" align="right" class="label_2">{$lang.handler}</th>
+    </tr>
+    {foreach from=$attribute item=attribute}
+    <tr>
+      <td align="right">{$attribute.goods_attr_id}</td>
+      <td align="right">{$attribute.attr_name}:{$attribute.attr_value}</td>
+      <td align="right">
+        <div style="height:45px; width:45px; background:{$attribute.hex_color}">
+      
+        </div>
+      </td>
+      <td align="right">{if $attribute.thumb_url neq ''}<img src="{$attribute.thumb_url}" width="45"/>{/if}</td>
+      <td align="right">{if $attribute.img_url neq ''}<img src="{$attribute.img_url}" width="45"/>{/if}</td>
+	  <td align="right">
+      <a href="../goods.php?id={$goods_id}" target="_blank" title="{$lang.view}"><img src="images/icon_view.gif" width="16" height="16" border="0" /></a>
+      <a href="product_spec_pic.php?goods_id={$goods_id}&goods_attr_id={$attribute.goods_attr_id}&act=drop_image" title=""><img src="images/icon_drop.gif" width="16" height="16" border="0" /></a>
+      <a href="product_spec_pic.php?act=edit_specification_pic&goods_id={$goods_id}&goods_attr_id={$attribute.goods_attr_id}" title="{$lang.edit}"><img src="images/icon_edit.gif" width="16" height="16" border="0" /></a></td>
+    </tr>
+    {/foreach}
+  </table>
+</form>
+
+{if $full_page}
+
+</div>
+<!-- end 添加货品 -->
+
+<script type="text/javascript">
+
+{foreach from=$filter item=item key=key}
+listTable.filter.{$key} = '{$item}';
+{/foreach}
+
+listTable.query = 'product_query';
+
+var _attr = new Array;
+{foreach from=$attribute item=attribute_value key=attribute_key}
+_attr[{$attribute_key}] = '{$attribute_value.attr_id}';
+{/foreach}
+
+{literal}
+onload = function()
+{
+  startCheckOrder(); // 开始检查订单
+}
+
+/**
+ * 追加货品添加表格
+ */
+function add_attr_product()
+{
+  var table_list = document.getElementById('table_list');
+  var new_tr_id = rand_str('t');
+  var attr_row, attr_col, new_row, new_col;
+  var index = table_list.rows.length - 2; //此行号为输入框所在行
+
+  //创建新行
+  attr_row = document.getElementById('attr_row');
+  attr_col = attr_row.getElementsByTagName('td');
+
+  new_row = table_list.insertRow(index);//新增行
+  new_row.setAttribute("id", new_tr_id);
+
+  //创建新行的列
+  for (var i = 0; i < attr_col.length; i++)
+  {
+    new_col = new_row.insertCell(-1);
+    new_col.setAttribute("align", attr_col[i].getAttribute("align"));
+    new_col.setAttribute("class", attr_col[i].getAttribute("class"));
+    new_col.setAttribute("className", attr_col[i].getAttribute("className"));
+
+    if (i + 1 == attr_col.length)
+    {
+      new_col.innerHTML = '<input type="button" class="button" value=" - " onclick="javascript:minus_attr_product(\'' + new_tr_id + '\');"/>';
+    }
+    else
+    {
+      new_col.innerHTML = attr_col[i].innerHTML;
+    }
+  }
+
+  //重置选项
+//  var sel = new_row.getElementsByTagName('select');
+//  if (sel.length > 0)
+//  {
+//    for (var j = 0; j < sel.length; j++)
+//    {
+//      sel[j].value = '';
+//    }
+//  }
+
+  return true;
+}
+
+/**
+ * 删除追加的货品表格
+ */
+function minus_attr_product(tr_number)
+{
+  if (tr_number.length > 0)
+  {
+    if (confirm("确定删除吗？") == false)
+    {
+      return false;
+    }
+
+    var table_list = document.getElementById('table_list');
+
+    for (var i = 0; i < table_list.rows.length; i++)
+    {
+      if (table_list.rows[i].id == tr_number)
+      {
+        table_list.deleteRow(i);
+      }
+    }
+  }
+
+  return true;
+}
+{/literal}
+</script>
+{include file="pagefooter.htm"}
+
+{/if}

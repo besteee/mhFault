@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="Keywords" content="{$keywords}"/>
+<meta name="Description" content="{$description}"/>
+<!-- TemplateBeginEditable name="doctitle" --><title>{$page_title}</title><!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link href="{$static_path}static/css/style.css" rel="stylesheet" type="text/css"/>
+<!--[if IE]><link href="{$static_path}static/css/ie.css" rel="stylesheet" type="text/css"/><![endif]-->
+
+<script type="text/javascript" src="{$static_path}static/js/jquery.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.json.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/common.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/effect.js"></script>
+</head>
+<body>
+{include file="/library/page_header.lbi"}
+<div id="content"><div class="container">
+	{include file="/library/ur_here.lbi"}
+	<div class="col-main">
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+		<div class="tags-cloud box">
+			<b class="tp"><b></b></b>
+			<div class="hd"><h3>{$lang.tag_cloud}</h3></div>
+			<div class="bd">
+				{if $tags}
+				<p class="text">{$lang.tag_cloud_desc}</p>
+				<p>
+				{foreach from=$tags item=tag}
+				<a href="{$tag.url}">{if $tag.bold}<b>{$tag.tag_words|escape:html}</b>{else}{$tag.tag_words|escape:html}{/if}</a>
+				{if $tags_from eq 'user'}<a href="user.php?act=act_del_tag&amp;tag_words={$tag.tag_words|escape:url}&amp;uid={$tag.user_id}" title="{$lang.drop}">{$lang.drop}</a>{/if}
+				{/foreach}</p>
+				{else}
+				<p class="empty">{$lang.tags_cloud_empty}<p>
+				{/if}
+			</div>
+			<b class="bt"><b></b></b>
+		</div>
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+	</div>
+	<div class="col-sub">
+	<!-- TemplateBeginEditable name="侧栏上方" --><!-- TemplateEndEditable -->
+	<!-- TemplateBeginEditable name="侧栏" -->
+	<!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+	<!-- TemplateEndEditable -->
+	<!-- TemplateBeginEditable name="侧栏下方" --><!-- TemplateEndEditable -->
+	</div>
+</div></div>
+{include file="/library/page_footer.lbi"}
+</body>
+</html>

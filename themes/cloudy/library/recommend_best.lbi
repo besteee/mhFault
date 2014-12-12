@@ -1,0 +1,40 @@
+{if $best_goods}
+{if $cat_rec_sign neq 1}
+<div class="best-goods box" id="best">
+	<b class="tp"><b></b></b>
+	<div class="hd"><h3>{$lang.best_goods}</h3><a href="../search.php?intro=best" class="more">{$lang.more}</a></div>
+	<div class="bd">
+		<ul class="goods-list" id="show_best_area">
+{/if}
+			{foreach from=$best_goods item=goods name=best_goods}
+			{if $cat_rec_sign eq 1}{if $smarty.foreach.best_goods.index %3==0}<b class="clearer"></b>{/if}{/if}
+			<li{if ($page eq 'index') or ($cat_rec_sign eq 1)}{if $smarty.foreach.best_goods.index %3==0} class="first-child"{/if}{else}{if $smarty.foreach.best_goods.index %4==0} class="first-child"{/if}{/if}>
+				<span class="photo">
+					<a href="{$goods.url}" title="{$goods.name|escape:html}" class="image"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}"/></a>
+				</span>
+				<span class="info">
+					<a href="{$goods.url}" title="{$goods.name|escape:html}" class="name">{$goods.name}</a>
+					<em class="price{if $goods.promote_price} promote{/if}">{if $goods.promote_price}{$goods.promote_price}{else}{$goods.shop_price}{/if}</em>
+				</span>
+				<span class="action">
+					<a href="{$goods.url}" class="detail">{$lang.btn_detail}</a>
+					<a href="javascript:addToCart({$goods.id})" class="buy">{$lang.btn_buy}</a>
+					<a href="javascript:collect({$goods.id});" class="collect">{$lang.btn_collect}</a>
+				</span>
+			</li>
+			{/foreach}
+{if $cat_rec_sign neq 1}
+		</ul>
+		{if $cat_rec[1]}
+		<p class="updates-wrapper" id="itemBest">
+			<span><a href="javascript:void(0)" onclick="change_tab_style('itemBest', 'span', this);get_cat_recommend(1, 0);">{$lang.all_goods}</a></span>
+			{foreach from=$cat_rec[1] item=rec_data}
+			<span class="h2bg"><a href="javascript:void(0)" onclick="change_tab_style('itemBest', 'span', this);get_cat_recommend(1, {$rec_data.cat_id})">{$rec_data.cat_name}</a></span>
+			{/foreach}
+		</p>
+		{/if}
+	</div>
+	<b class="bt"><b></b></b>
+</div>
+{/if}
+{/if}

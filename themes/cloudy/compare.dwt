@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="Keywords" content="{$keywords}"/>
+<meta name="Description" content="{$description}"/>
+<!-- TemplateBeginEditable name="doctitle" --><title>{$page_title}</title><!-- TemplateEndEditable -->
+{if $auto_redirect}<meta http-equiv="refresh" content="3;URL={$message.href}"/>{/if}
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link href="{$static_path}static/css/style.css" rel="stylesheet" type="text/css"/>
+<!--[if IE]><link href="{$static_path}static/css/ie.css" rel="stylesheet" type="text/css"/><![endif]-->
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
+<script type="text/javascript" src="{$static_path}static/js/jquery.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.json.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/common.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/transport.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/utils.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/effect.js"></script>
+<script language="javascript">
+function remove(id, url)
+{
+	if (document.getCookie("compareItems") != null)
+	{
+		var obj = $.evalJSON(document.getCookie("compareItems"));
+		delete obj[id];
+		var date = new Date();
+		date.setTime(date.getTime() + 99999999);
+		document.setCookie("compareItems", $.toJSON(obj));
+	}
+}
+var compare_no_goods = "{$lang.compare_no_goods}";
+var btn_buy = "{$lang.btn_buy}";
+var is_cancel = "{$lang.is_cancel}";
+var select_spe = "{$lang.select_spe}";
+</script>
+</head>
+<body>
+{include file="/library/page_header.lbi"}
+<div id="content"><div class="container">
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+	<div class="compare box">
+		<b class="tp"><b></b></b>
+		<div class="bd">
+			<table class="data-table">
+				<colgroup>
+					<col width="100"/>
+					{foreach name="goods_list" from=$goods_list item=goods}
+					<col width="{if $smarty.foreach.goods_list.total gt 3}300{else}500{/if}"/>
+					{/foreach}
+				</colgroup>
+				<tbody>
+					<tr>
+						<th>{$lang.goods_name}{$lang.colon}</th>
+						{foreach from=$goods_list item=goods name=goods_list}
+						<td class="{if $smarty.foreach.goods_list.index %2==0}odd{else}even{/if}{if $smarty.foreach.goods_list.last} last{/if} name">{$goods.goods_name}</td>
+						{/foreach}
+					</tr>
+					<tr>
+						<th>&nbsp;</th>
+						{foreach from=$goods_list item=goods name=goods_list}
+						<td class="{if $smarty.foreach.goods_list.index %2==0}odd{else}even{/if}{if $smarty.foreach.goods_list.last} last{/if} center"><a href="{$goods.url}"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name}"/></a></td>
+						{/foreach}
+					</tr>
+					{if $smarty.foreach.goods_list.total gt 2}
+					<tr>
+						<th>&nbsp;</th>
+						{foreach from=$goods_list item=goods name=goods_list}
+						<td class="{if $smarty.foreach.goods_list.index %2==0}odd{else}even{/if}{if $smarty.foreach.goods_list.last} last{/if} center"><a href="compare.php?{$goods.ids}" class="button positive" onclick="return remove({$goods.goods_id});">{$lang.compare_remove}</a></td>
+						{/foreach}
+					</tr>
+					{/if}
+					<tr>
+						<th>{$lang.brand}{$lang.colon}</th>
+						{foreach from=$goods_list item=goods name=goods_list}
+						<td class="{if $smarty.foreach.goods_list.index %2==0}odd{else}even{/if}{if $smarty.foreach.goods_list.last} last{/if}">{$goods.brand_name}</td>
+						{/foreach}
+					</tr>
+					<tr>
+						<th>{$lang.shop_price}</th>
+						{foreach from=$goods_list item=goods name=goods_list}
+						<td class="{if $smarty.foreach.goods_list.index %2==0}odd{else}even{/if}{if $smarty.foreach.goods_list.last} last{/if} price">{$goods.shop_price}</td>
+						{/foreach}
+					</tr>
+					<tr>
+						<th>{$lang.goods_weight}</th>
+						{foreach from=$goods_list item=goods name=goods_list}
+						<td class="{if $smarty.foreach.goods_list.index %2==0}odd{else}even{/if}{if $smarty.foreach.goods_list.last} last{/if}">{$goods.goods_weight}</td>
+						{/foreach}
+					</tr>
+					{foreach key=key from=$attribute item=val}
+					<tr>
+						<th>{$val}{$lang.colon}</th>
+						{foreach from=$goods_list item=goods name=goods_list}
+						<td class="{if $smarty.foreach.goods_list.index %2==0}odd{else}even{/if}{if $smarty.foreach.goods_list.last} last{/if}">
+						{foreach from=$goods.properties item=property key=k}
+						{if $k eq $key}{$property.value}{/if}
+						{/foreach}
+						</td>
+						{/foreach}
+					</tr>
+					{/foreach}
+					<tr>
+						<th>{$lang.brief}</th>
+						{foreach from=$goods_list item=goods name=goods_list}
+						<td class="{if $smarty.foreach.goods_list.index %2==0}odd{else}even{/if}{if $smarty.foreach.goods_list.last} last{/if}"><a href="{$goods.url}" target="_blank">{$goods.goods_brief}</a></td>
+						{/foreach}
+					</tr>
+					<tr>
+						<th>&nbsp;</th>
+						{foreach from=$goods_list item=goods name=goods_list}
+						<td class="{if $smarty.foreach.goods_list.index %2==0}odd{else}even{/if}{if $smarty.foreach.goods_list.last} last{/if} center"><a href="javascript:addToCart({$goods.goods_id})" class="button positive">{$lang.btn_buy}</a><a href="javascript:collect({$goods.goods_id});" class="button">{$lang.btn_collect}</a></td>
+						{/foreach}
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<b class="bt"><b></b></b>
+	</div>
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+</div></div>
+{include file="/library/page_footer.lbi"}
+</body>
+</html>

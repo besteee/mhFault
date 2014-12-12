@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="Keywords" content="{$keywords}"/>
+<meta name="Description" content="{$description}"/>
+<!-- TemplateBeginEditable name="doctitle" --><title>{$page_title}</title><!-- TemplateEndEditable -->
+{if $auto_redirect}<meta http-equiv="refresh" content="3;URL={$message.back_url}"/>{/if}
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link href="{$static_path}static/css/style.css" rel="stylesheet" type="text/css"/>
+<!--[if IE]><link href="{$static_path}static/css/ie.css" rel="stylesheet" type="text/css"/><![endif]-->
+
+<script type="text/javascript" src="{$static_path}static/js/jquery.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.json.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/common.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/effect.js"></script>
+</head>
+<body>
+{include file="/library/page_header.lbi"}
+<div id="content"><div class="container">
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+	<dl class="message">
+		<dt class="title">{$message.content}</dt>
+		<dd>
+			{if $message.url_info}
+			{foreach from=$message.url_info key=info item=url}
+			<p><a href="{$url}">{$info}</a></p>
+			{/foreach}
+			{/if}
+		</dd>
+	</dl>
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+</div></div>
+{include file="/library/page_footer.lbi"}
+</body>
+</html>

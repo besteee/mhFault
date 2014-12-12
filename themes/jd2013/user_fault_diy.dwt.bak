@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link href="base.css" rel="stylesheet" type="text/css">
+<link href="home.css" rel="stylesheet" type="text/css">
+{* 包含脚本文件 *}
+{insert_scripts files='transport.js,common.js,user.js'}
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="clear"></div>
+<div class="block clearfix">
+  <!--left start-->
+<div class="AreaLu">
+<!-- #BeginLibraryItem "/library/user_menu.lbi" --><!-- #EndLibraryItem -->
+</div>
+  <!--left end-->
+  <!--right start-->
+  <div class="AreaRu">
+    <div class="">
+     <div class="uscenterbox">
+      <div class="userCenterBox boxCenterList clearfix" style="_height:1%;">
+		<h5><span>您所提交的定制套餐</span></h5>
+		<table width="100%" bgcolor="#dddddd" border="0" cellpadding="5" cellspacing="1" style="margin-top:10px;">
+          <tbody><tr align="center">
+            <td bgcolor="#ffffff">套餐名称</td>
+            <td bgcolor="#ffffff">提交时间</td>
+            <td bgcolor="#ffffff">回复时间</td>
+            <td bgcolor="#ffffff">金额</td>
+            <td bgcolor="#ffffff">操作</td>
+          </tr>
+	  <!-- {foreach from=$fault_diy item=diy key=key} -->
+	  <tr>
+		<td bgcolor="#fff">{$diy.fault_name}</td>
+		<td bgcolor="#fff">{$diy.fault_name}</td>
+		<td bgcolor="#fff">{$diy.shop_price}</td>
+		<td bgcolor="#fff">{$diy.shop_price}</td>
+		<td bgcolor="#fff"><a href="goods.php?id={$diy.goods_id}">购买</a></td>
+	  </tr>
+	  <!-- {/foreach} -->
+                    </tbody></table>
+      </div>
+     </div>
+    </div>
+  </div>
+  <!--right end-->
+</div>
+<div class="blank"></div>
+<!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+<script type="text/javascript">
+{foreach from=$lang.clips_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+</script>
+</html>
+
+

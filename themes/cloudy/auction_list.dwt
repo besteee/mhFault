@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="Keywords" content="{$keywords}"/>
+<meta name="Description" content="{$description}"/>
+<!-- TemplateBeginEditable name="doctitle" --><title>{$page_title}</title><!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link href="{$static_path}static/css/style.css" rel="stylesheet" type="text/css"/>
+<!--[if IE]><link href="{$static_path}static/css/ie.css" rel="stylesheet" type="text/css"/><![endif]-->
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}"/>
+
+<script type="text/javascript" src="{$static_path}static/js/jquery.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.json.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/common.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/effect.js"></script>
+</head>
+<body>
+{include file="/library/page_header.lbi"}
+<div id="content"><div class="container">
+	{include file="/library/ur_here.lbi"}
+	<div class="col-main">
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+		<div class="group-buy-list box">
+			<b class="tp"><b></b></b>
+			<div class="hd"><h3>{$lang.auction_goods}</h3></div>
+			<div class="bd">
+				{if $auction_list}
+				{foreach from=$auction_list item=auction name=auction_list}
+				<div class="item{if $smarty.foreach.auction_list.first} first{/if}">
+					<p class="photo"><a href="{$auction.url}"><img src="{$auction.goods_thumb}" alt="{$auction.goods_name|escape:html}"/></a></p>
+					<dl class="info table">
+						<dt>{$lang.goods_name}</dt>
+						<dd><a href="{$auction.url}" class="name">{$auction.goods_name|escape:html}</a></dd>
+						<dt>{$lang.act_status}</dt>
+						<dd class="even">{if $auction.status_no eq 0}{$lang.au_pre_start}{elseif $auction.status_no eq 1}{$lang.au_under_way_1}{else}{$lang.au_finished}{/if}</dd>
+						<dt>{$lang.au_start_price}</dt><dd class="price">{$auction.formated_start_price}</dd>
+						{if $auction.end_price gt 0}
+						<dt>{$lang.au_end_price}</dt><dd class="price">{$auction.formated_end_price}</dd>
+						{/if}
+					</dl>
+				</div>
+				{/foreach}
+				{else}
+				<div class="empty">{$lang.no_auction}</div>
+				{/if}
+				{include file="/library/pages.lbi"}
+			</div>
+			<b class="bt"><b></b></b>
+		</div>
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+	</div>
+	<div class="col-sub">
+	<!-- TemplateBeginEditable name="侧栏上方" --><!-- TemplateEndEditable -->
+		<!-- TemplateBeginEditable name="侧栏" -->
+		<!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+		<!-- #BeginLibraryItem "/library/top10.lbi" --><!-- #EndLibraryItem -->
+		<!-- TemplateEndEditable -->
+	<!-- TemplateBeginEditable name="侧栏下方" --><!-- TemplateEndEditable -->
+	</div>
+</div></div>
+{include file="/library/page_footer.lbi"}
+</body>
+</html>

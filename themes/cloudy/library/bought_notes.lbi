@@ -1,0 +1,38 @@
+<div class="bought-box box" id="bought">
+	<b class="tp"><b></b></b>
+	<div class="hd"><h3>{$lang.bought_notes}</h3><span class="more"><em>(</em>{$lang.later_bought_amounts}<em>{$pager.record_count})</em></span></div>
+	<div class="bd">
+{if $notes}
+		<table class="data-table">
+			<colgroup>
+				<col width="100"/>
+				<col width="50"/>
+				<col width="100"/>
+				<col width="50"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<th>{$lang.username}</th>
+					<th>{$lang.number}</th>
+					<th>{$lang.bought_time}</th>
+					<th class="last">{$lang.order_status}</th>
+				</tr>
+			</thead>
+			<tbody>
+				{foreach from=$notes item=note name=notes}
+				<tr class="{cycle values="odd,even"}{if $smarty.foreach.notes.last} last{/if}">
+					<td>{if $note.user_name}{$note.user_name|escape:html}{else}{$lang.anonymous}{/if}</td>
+					<td>{$note.goods_number}</td>
+					<td>{$note.add_time}</td>
+					<td class="last">{if $note.order_status}{$lang.turnover}{else}{$lang.is_cancel}{/if}</td>
+				</tr>
+				{/foreach}
+			</tbody>
+		</table>
+{include file="/library/pages.lbi"}
+{else}
+<span class="empty">{$lang.no_notes}</span>
+{/if}
+	</div>
+	<b class="bt"><b></b></b>
+</div>

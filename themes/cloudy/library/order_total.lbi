@@ -1,0 +1,23 @@
+{if $smarty.session.user_id > 0 and ($config.use_integral or $config.use_bonus)}
+<p>{$lang.complete_acquisition}
+{if $config.use_integral}{$total.will_get_integral}{$points_name}{/if}
+{if $config.use_integral and $config.use_bonus}{$lang.with_price}{/if}
+{if $config.use_bonus}{$total.will_get_bonus}{$lang.de}{$lang.bonus}{/if}</p>
+{/if}
+<p>{$lang.goods_all_price}{$lang.colon}<span class="price">{$total.goods_price_formated}</span>
+{if $total.discount gt 0} - {$lang.discount}{$lang.colon}<span class="price">{$total.discount_formated}</span>{/if}
+{if $total.tax gt 0} + {$lang.tax}{$lang.colon}<span class="price">{$total.tax_formated}</span>{/if}
+{if $total.shipping_fee > 0} + {$lang.shipping_fee}{$lang.colon}<span class="price">{$total.shipping_fee_formated}</span>{/if}
+{if $total.shipping_insure > 0} + {$lang.insure_fee}{$lang.colon}<span class="price">{$total.shipping_insure_formated}</span>{/if}
+{if $total.pay_fee > 0} + {$lang.pay_fee}{$lang.colon}<span class="price">{$total.pay_fee_formated}</span>{/if}
+{if $total.pack_fee > 0} + {$lang.pack_fee}{$lang.colon}<span class="price">{$total.pack_fee_formated}</span>{/if}
+{if $total.card_fee > 0} + {$lang.card_fee}{$lang.colon}<span class="price">{$total.card_fee_formated}</span>{/if}
+{if $total.surplus > 0 or $total.integral > 0 or $total.bonus > 0}
+	{if $total.surplus > 0} - {$lang.use_surplus}{$lang.colon}<span class="price">{$total.surplus_formated}</span>{/if}
+	{if $total.integral > 0} - {$lang.use_integral}{$lang.colon}<span class="price">{$total.integral_formated}</span>{/if}
+	{if $total.bonus > 0} - {$lang.use_bonus}{$lang.colon}<span class="price">{$total.bonus_formated}</span>{/if}
+{/if}</p>
+<p class="total-fee">{$lang.total_fee}{$lang.colon}<span class="price">{$total.amount_formated}</span>
+{if $is_group_buy}<br/>{$lang.notice_gb_order_amount}{/if}
+{if $total.exchange_integral }<br/>{$lang.notice_eg_integral}{$total.exchange_integral}{/if}
+</p>

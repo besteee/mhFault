@@ -1,0 +1,190 @@
+<!-- 用户中心-资金管理页 -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png"/>
+	<title>资金管理 - {$shop_name}</title>
+	<link href="css/reset.css" rel="stylesheet" type="text/css" />
+	<link href="css/head.css" rel="stylesheet" type="text/css" />
+	<link href="css/foot.css" rel="stylesheet" type="text/css" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<script src="js/jquery-1.6.2.min.js" type="text/javascript"></script>
+	<script src="js/jquery.lazyload.js" type="text/javascript"></script>
+	<script src="js/jquery.autocomplete.js" type="text/javascript"></script>
+	<script src="js/jquery.touchScroll.js" type="text/javascript"></script>
+	<script type="text/javascript">
+        document.write('<div id="global_loading" style="width: 100%;height: 100%;position: fixed;top: 0;left: 0;background-color: #eee;z-index:999"><div style="width: 100px;height: 75px;margin:auto;top:50%;position:relative"><span style="display:block;float:left;width:32px;height:32px;background:url(/images/spacer.gif);margin-top:-5px;"></span>&nbsp;&nbsp;加载中...</div></div>');
+    </script>
+</head>
+<body> 
+	<div class="header"><a class="back" href="javascript:history.back();"></a><span class="headline">资金管理</span><a class="search" href="search.php"></a></div>
+	<section>
+	<div class="m_cat">
+		<table width=100% cellspacing=5 cellpadding=5 border=0>
+			<tr>
+				<td bgcolor='#ffffff' height='30' align='center' >
+					<a href="account.php">资金明细</a>  <a href="account.php?act=account_detail">账户明细</a>  <a href="account.php?act=account_deposit"><font class="red">充值</font></a>													
+				</td>
+			</tr>
+		</table>
+       <!-- {if $act eq "account_log"}-->
+ 		<table width=100% cellspacing=5 cellpadding=5 border=1 bordercolor="#eee">		
+			<tr align='left' height='30'>
+				<td bgcolor='#ffffff'>操作时间</td>
+				<td bgcolor='#ffffff'>类型</td>
+				<td bgcolor='#ffffff'>金额</td>
+				<td bgcolor='#ffffff'>状态</td>
+				<td bgcolor='#ffffff'>操作</td>
+			</tr>
+          <!--{foreach from=$account_log item=item}-->
+			<tr align='left' height='30'>
+            <td bgcolor="#ffffff">{$item.add_time}</td>
+            <td bgcolor="#ffffff">{$item.type}</td>
+            <td bgcolor="#ffffff">{$item.amount}</td>
+            <td bgcolor="#ffffff">{$item.pay_status}</td>
+            <td bgcolor="#ffffff">{$item.handle}
+              <!-- {if ($item.is_paid eq 0 && $item.process_type eq 1) || $item.handle} -->
+              <a href="account.php?act=cancel&id={$item.id}" onclick="if (!confirm('确定取消吗？')) return false;">取消</a>
+              <!-- {/if} -->
+            </td>
+          </tr>
+          <!--{foreachelse}-->
+          <tr height='30'>
+            <td align="center" bgcolor="#ffffff" colspan="5" class="red">暂无记录</td>
+          </tr>
+          <!--{/foreach}-->
+		  <tr height='30'>
+			<td bgcolor="#ffffff" align="left" colspan="5">
+			您当前的可用金额为:<font class="f2" color='red'>{$surplus_amount}</font>
+			</td>
+		  </tr>		
+		</table>
+		<!-- {/if} -->
+        <!-- {if $act eq "account_detail"} -->
+ 		<table width=100% cellspacing=5 cellpadding=5 border=1 bordercolor="#eee">		
+          <tr align="left" height='30'>
+            <td bgcolor="#ffffff">操作时间</td>
+            <td bgcolor="#ffffff">类型</td>
+            <td bgcolor="#ffffff">金额</td>
+            <td bgcolor="#ffffff">备注</td>
+          </tr>
+          <!--{foreach from=$account_log item=item}-->
+          <tr align="left" height='30'>
+            <td bgcolor="#ffffff">{$item.change_time}</td>
+            <td bgcolor="#ffffff">{$item.type}</td>
+            <td bgcolor="#ffffff">{$item.amount}</td>
+            <td bgcolor="#ffffff">{$item.short_change_desc}</td>
+          </tr>
+          <!--{foreachelse}-->
+          <tr height='30'>
+            <td align="center" bgcolor="#ffffff" colspan="4" class="red">暂无记录</td>
+          </tr>
+          <!--{/foreach}-->
+          <tr height='30'>
+            <td colspan="4" align="left" bgcolor="#ffffff">您当前的可用金额为:<font class="f2" color='red'>{$surplus_amount}</font></td>
+          </tr>
+        </table>
+        <!-- {/if} -->
+        <!-- {if $act eq "account_deposit"} -->
+        <script type="text/javascript">
+            function submit(obj){
+                obj.submit();
+            }
+            function check(theForm){
+                if(theForm.amount.value==""){
+                    alert("请输入充值金额!");theForm.amount.focus();return false;
+                }else{
+                    var reg = /^[\.0-9]+/;
+                    if ( ! reg.test(theForm.amount.value)){
+                        alert("输入的金额格式不正确!");theForm.amount.focus();return false;
+                    }
+                }
+                var paymentSelected = false;
+                for (i = 0; i < theForm.elements.length; i ++ ){
+                    if (theForm.elements[i].name == 'payment_id' && theForm.elements[i].checked){
+                        paymentSelected = true;
+                    }
+                }
+                var flow_no_payment = "必须选定一个支付方式。";
+                if ( ! paymentSelected){
+                    alert(flow_no_payment);
+                    return false;
+                }
+                theform.submit();
+            }
+        </script>
+        <form name="theForm" method="post" action="account.php" onSubmit="javascript:return check(theForm);">
+ 		<table width=99% align="center" cellspacing=5 cellpadding=5 border=1 bordercolor="#eee">		
+                <tr>
+                    <td align="left" bgcolor="#ffffff" style="padding:15px;">充值金额：<br><input type="text" name="amount" value="{$order.amount|escape}" style="width:100px;border:1px solid #ccc;" /></td>
+                </tr>
+                <tr>
+                    <td align="left" bgcolor="#ffffff" style="padding:15px;">备注：<br><textarea name="user_note" rows="3" style="width:100%;border:1px solid #ccc;">{$order.user_note|escape}</textarea></td>
+                </tr>
+            </table>
+            <table width=99% align="center" cellspacing=5 cellpadding=5 border=1 bordercolor="#eee">
+                <tr align="center">
+                    <td bgcolor="#fff" colspan="2" style="padding:8px 0;font-weight: bold;">支付方式</td>
+                </tr>
+                <tr align="left">
+                    <td bgcolor="#fff" style="padding:15px;">名称</td>
+                    <td bgcolor="#fff" style="padding:15px;">手续费</td>
+                </tr>
+                <!-- {foreach from=$payment item=list} -->
+                <tr align="left">
+                    <td bgcolor="#fff" style="padding:15px;"><input type="radio" name="payment_id" value="{$list.pay_id}" /> {$list.pay_name}</td>
+                    <td bgcolor="#fff" style="padding:15px;">{$list.pay_fee}</td>
+                </tr>
+                <!-- {/foreach} -->
+            </table>
+            <table width=99% align="center" cellspacing=5 cellpadding=5 border=0 bordercolor="#eee">
+                <tr align="center">
+                    <td bgcolor="#fff" style="padding:8px 0;" class="cz_btn">
+                        <input type="hidden" name="surplus_type" value="0" />
+                        <input type="hidden" name="rec_id" value="{$order.id}" />
+                        <input type="hidden" name="act" value="act_account" />
+                        <input type="submit" name="submit" value="提交申请" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <!-- {/if} -->
+        <!--{if $act eq "act_account"}-->
+          <table width=99% align="center" cellspacing=5 cellpadding=5 border=1 bordercolor="#eee">
+             <tr align="left">
+                <td bgcolor="#fff" style="padding:15px;">充值金额：</td>
+                <td bgcolor="#fff" style="padding:15px;">{$amount}</td>
+            	</tr>
+                <tr align="left">
+                <td bgcolor="#fff" style="padding:15px;">支付方式：</td>
+                <td bgcolor="#fff" style="padding:15px;">{$payment.pay_name}</td>
+           		</tr>
+                <tr align="left">
+                <td bgcolor="#fff" style="padding:15px;">手续费：</td>
+                <td bgcolor="#fff" style="padding:15px;">{$pay_fee}</td>
+            	</tr>
+                <tr align="left">
+                <td bgcolor="#fff" style="padding:15px;">描述：</td>
+                <td bgcolor="#fff" style="padding:15px;">{$payment.pay_desc}</td>
+            </tr>
+            <tr align="center">
+                <td bgcolor="#fff" style="padding:8px 0;" colspan="2" class="cz_btn">
+                     {$payment.pay_button}
+                </td>
+            </tr>
+        </table>
+        <!--{/if}-->
+	</div>
+</section>
+{include file='foot.dwt'}
+<script type="text/javascript">
+		var global_loading=document.getElementById("global_loading");
+		global_loading.parentNode.removeChild(global_loading);
+</script>
+</body>
+</html>

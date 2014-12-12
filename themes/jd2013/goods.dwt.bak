@@ -1,0 +1,670 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link href="base.css" rel="stylesheet" type="text/css">
+<link href="MagicZoom.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="js/mzp-packed-me.js"></script>
+<script type="text/javascript" src="js/site.js"></script>
+{* 包含脚本文件 *}
+{insert_scripts files='common.js' }
+<script type="text/javascript">
+function $id(element) {
+  return document.getElementById(element);
+}
+//切屏--是按钮，_v是内容平台，_h是内容库
+function reg(str){
+  var bt=$id(str+"_b").getElementsByTagName("h2");
+  for(var i=0;i<bt.length;i++){
+    bt[i].subj=str;
+    bt[i].pai=i;
+    bt[i].style.cursor="pointer";
+    bt[i].onclick=function(){
+      $id(this.subj+"_v").innerHTML=$id(this.subj+"_h").getElementsByTagName("blockquote")[this.pai].innerHTML;
+      for(var j=0;j<$id(this.subj+"_b").getElementsByTagName("h2").length;j++){
+        var _bt=$id(this.subj+"_b").getElementsByTagName("h2")[j];
+        var ison=j==this.pai;
+        _bt.className=(ison?"":"h2bg");
+      }
+    }
+  }
+  $id(str+"_h").className="none";
+  $id(str+"_v").innerHTML=$id(str+"_h").getElementsByTagName("blockquote")[0].innerHTML;
+}
+</script>
+ <script type="text/javascript">
+function change_img(img_src)
+{
+document.getElementsByName("goods_img")[0].src=img_src;
+}
+</script>
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="clear"></div>
+<div class="block box">
+ <div id="ur_here">
+  <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+ </div>
+</div>
+<!--当前位置 end-->
+<div class="blank5"></div>
+<div class="block clearfix">
+  <!--商品详情start-->
+   <div id="goodsInfo" class="clearfix">
+    <div class="imgInfo">
+     <!-- {if $pictures.0.img_url}-->
+    <a href="{$pictures.0.img_url}" id="Zoomer" class="MagicZoomPlus" rel="selectors-effect:false;zoom-fade:true;background-opacity:70;zoom-width:350;zoom-height:350;caption-source:img:title;thumb-change:mouseover" title="">
+    <img id="img_url" name="goods_img" src="{$pictures.0.img_url}" alt="{$goods.goods_name|escape:html}" class="thumb" />
+    </a>
+    <!-- {else} -->
+    <img id="img_url" name="goods_img" src="{$goods.goods_img}" alt="{$goods.goods_name|escape:html}" class="thumb" />
+    <!-- {/if}-->
+     <div class="blank5"></div>
+     <!--相册 START-->
+     <!-- #BeginLibraryItem "/library/goods_gallery.lbi" --><!-- #EndLibraryItem -->
+     <!--相册 END-->
+         <div class="blank5"></div>
+		<div class="zoompic"><a href="javascript:;" onclick="window.open('gallery.php?id={$goods.goods_id}'); return false;" target="_blank"><img src="images/zoompic.gif" alt="放大图片" /></a></div>
+	 <div class="sharebg">
+<!-- Baidu Button BEGIN -->
+<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+<a class="bds_tsina"></a>
+<a class="bds_qzone"></a>
+<a class="bds_tqq"></a>
+<a class="bds_renren"></a>
+<a class="bds_t163"></a>
+<a class="bds_kaixin001"></a>
+<a class="bds_taobao"></a>
+<span class="bds_more">更多</span>
+<a class="shareCount"></a>
+</div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=748721" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END --></div>
+	 </div>
+     <!--商品图片和相册 end-->
+     <div class="textInfo">
+     <form action="javascript:addToCart({$goods.goods_id})" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY" >
+	 <div class="ntitle">{$goods.goods_style_name} </div>
+	 {if $goods.goods_brief}
+	 <div class="brief">{$goods.goods_brief}</div>
+	 {/if}	  	 
+  <div class="info">
+	  <ul>
+	   <li class="clearfix"> 
+       <!-- {if $cfg.show_goodssn} 显示商品货号-->
+       {$lang.goods_sn}{$goods.goods_sn}
+       <!-- {/if} -->
+      </li>
+	  <li class="clearfix"> 
+       <!--{if $goods.is_promote and $goods.gmt_end_time } 促销-->
+      {insert_scripts files='lefttime.js'}
+      {$lang.promote_price}<font class="shopprice">{$goods.promote_price}</font>
+      {$lang.residual_time}
+      <font class="f4" id="leftTime">{$lang.please_waiting}</font>
+      <!--{else}-->{$lang.shop_price}<font class="shopprice" id="ECS_SHOPPRICE">{$goods.shop_price_formated} </font> <!--{/if}-->
+      </li>
+      
+	   <li class="hpj clearfix">
+       <div class="f_l onpf">{$lang.goods_rank}<img src="images/stars{$goods.comment_rank}.gif" alt="comment rank {$goods.comment_rank}" /> <a href="#pj" style="color:#085C9B;">(已经有{insert name='pl_sum' goods_id=$goods.goods_id}人评价)</a></div>
+ </li> 
+	  
+     <!-- {if $goods.goods_brand neq "" and $cfg.show_brand} 显示商品品牌-->
+       <li class="clearfix">
+      {$lang.goods_brand}<a href="{$goods.goods_brand_url}" >{$goods.goods_brand}</a> 
+      </li> 
+     <!--{/if}-->
+      <!-- {if $rank_prices}-->
+      <li class="clearfix">
+       <!-- {foreach from=$rank_prices item=rank_price key=key} 会员等级对应的价格-->
+       {$rank_price.rank_name}：<font id="ECS_RANKPRICE_{$key}">{$rank_price.price}</font>&nbsp;&nbsp;&nbsp;&nbsp;
+       <!--{/foreach}-->
+      </li>
+      <!-- {/if} --> 
+      <!--{if $volume_price_list } -->
+      <li class="clearfix">
+       <font class="f1">{$lang.volume_price}：</font><br />
+       <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#ccc">
+        <tr>
+          <td align="center" bgcolor="#FFFFFF"><strong>{$lang.number_to}</strong></td>
+          <td align="center" bgcolor="#FFFFFF"><strong>{$lang.preferences_price}</strong></td>
+
+        </tr>
+        <!-- {foreach from=$volume_price_list item=price_list key=price_key} -->
+        <tr>
+        <td align="center" bgcolor="#FFFFFF" class="shop">{$price_list.number}</td>
+        <td align="center" bgcolor="#FFFFFF" class="shop">{$price_list.format_price}</td>
+        </tr>
+        <!-- {/foreach} -->
+       </table>
+      </li>
+      <!--{/if}-->
+
+      
+      <!-- {if $goods.bonus_money} 红包-->
+      <li class="padd loop" style="margin-bottom:5px; border-bottom:1px dashed #ccc;">
+      {$lang.goods_bonus}<font class="shop">{$goods.bonus_money}</font><br />
+      </li>
+      <!-- {/if} -->     
+	   <!-- {if $goods.is_shipping} 为免运费商品则显示-->
+      <li class="clearfix">
+      {$lang.goods_free_shipping}<br />
+      </li>
+      <!-- {/if} -->  
+      
+
+      
+      </ul>
+     </div>
+	   <div class="borderpadd">
+       <!-- {* 开始循环所有可选属性 *} -->
+      <!-- {foreach from=$specification item=spec key=spec_key} -->
+      <div class="clearfix" style="padding-bottom:5px;">
+      <div class="f_l te">{$spec.name}：</div> 
+        <!-- {* 判断属性是复选还是单选 *} -->
+                    <!-- {if $spec.attr_type eq 1} -->
+                      <!-- {if $cfg.goodsattr_style eq 1} -->
+                        <div class="catt">
+                        <ul>
+                       <!-- {foreach from=$spec.values item=value key=key} -->
+                       <li style="border:0px;">
+<a onclick="changeP('spec_{$spec_key}','{$value.id}')" name="sp_url_{$spec_key}" id="url_{$value.id}"  title="{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}" {if $key eq 0}class="selected"{/if}>{if $value.pic_id}<div class="f_l"><img width=30 height=30 title="{$value.label}" src="{$value.img_thumb}" onclick="change_img(this.src)"/></div><div class="f_l" style="padding-left:5px;line-height:30px;">{$value.label}</div>{else}{$value.label}{/if}<input style="display:none" id="spec_value_{$value.id}" type="radio" name="spec_{$spec_key}" value="{$value.id}" {if $key eq 0}checked{/if} /></a>
+                      </li>
+                      <!-- {/foreach} -->
+                      </ul>
+					  </div>
+                        <input type="hidden" name="spec_list" value="{$key}" />
+                        <!-- {else} -->
+                        <select name="spec_{$spec_key}" onchange="changePrice()">
+                          <!-- {foreach from=$spec.values item=value key=key} -->
+                          <option label="{$value.label}" value="{$value.id}">{$value.label} {if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if}{if $value.price neq 0}{$value.format_price}{/if}</option>
+                          <!-- {/foreach} -->
+                        </select>
+                        <input type="hidden" name="spec_list" value="{$key}" />
+                      <!-- {/if} -->
+                    <!-- {else} -->
+                      <!-- {foreach from=$spec.values item=value key=key} -->
+                      <label for="spec_value_{$value.id}">
+                      <input type="checkbox" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" onclick="changePrice()" />
+                      {$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}] </label><br />
+                      <!-- {/foreach} -->
+                      <input type="hidden" name="spec_list" value="{$key}" />
+                    <!-- {/if} -->
+            </div>
+      <!-- {/foreach} -->
+      <!-- {* 结束循环可选属性 *} -->
+
+	  <!--服务站点-->
+	  <script src="js/geo.js"></script>
+	  <div id="serve_location">服务站点：<script type="text/javascript" ></script>
+        <form name="shareip" action="/cgi-bin/feedback" method="post">
+			<select class="select" name="province" id="s1">
+			  <option></option>
+			</select>
+			<select class="select" name="city" id="s2">
+			  <option></option>
+			</select>
+			<select class="select" name="town" id="s3">
+			  <option></option>
+			</select>
+			<input id="address" name="address" type="hidden" value="" />
+        </form>
+<script>
+setup();preselect('省份');promptinfo();
+function promptinfo()
+{
+	var address = document.getElementById('address');
+	var s1 = document.getElementById('s1');
+	var s2 = document.getElementById('s2');
+	var s3 = document.getElementById('s3');
+	address.value = s1.value + s2.value + s3.value;
+}
+
+</script>
+
+</div>
+	  <!--服务站点end-->
+	  <br>
+	  <!--服务套餐-->
+	  <div>
+	  <font>请选择服务套餐：</font><br>
+	  <input type='checkbox' name='VoteOption1' value=1><font style="color:rgb(200,0,0);">空调维修￥9000 质保3年</font><br>
+	  <input type='checkbox' name='VoteOption1' value=2><font style="color:rgb(200,0,0);">空调保养￥1380 质保1年</font><br>
+	  <input type='checkbox' name='VoteOption1' value=3><font style="color:rgb(200,0,0);">电控电子￥800 质保1年</font><br>
+	  <input type='checkbox' name='VoteOption1' value=4><font style="color:rgb(200,0,0);">动力恢复￥12800 质保10万公里</font><br>
+	  <input type='checkbox' name='VoteOption1' value=4><font style="color:rgb(200,0,0);">制动系统￥7600 质保3万公里</font><br>
+      </div>
+	  <!--服务套餐end-->
+      <div class="textInpadd clearfix">
+	    <div class="snum clearfix"><div class="f_l">购买数量：</div> <a href="javascript:void(0);" onclick="goods_cut();changePrice()" class="imgl"></a><input name="number" type="text" id="number" class="inum" value="1" size="4" onblur="changePrice();get_shipping_list(forms['ECS_FORMBUY'],{$goods.goods_id});"/><a href="javascript:void(0);"  onclick="goods_add();changePrice()" class="imgr"></a> &nbsp;&nbsp;商品总价：<font id="ECS_GOODS_AMOUNT" class="shop"></font></div>
+		
+		 <script language="javascript" type="text/javascript">
+			function goods_cut(){
+				var num_val=document.getElementById('number');
+				var new_num=num_val.value;
+				 if(isNaN(new_num)){alert('请输入数字');return false}
+				var Num = parseInt(new_num);
+				if(Num>1)Num=Num-1;
+				num_val.value=Num;
+			}
+			function goods_add(){
+				var num_val=document.getElementById('number');
+				var new_num=num_val.value;
+				 if(isNaN(new_num)){alert('请输入数字');return false}
+				var Num = parseInt(new_num);
+				Num=Num+1;
+				num_val.value=Num;
+			}
+	    </script>
+      </div>
+
+      <div class="textInpadd clearfix"> 
+	  <div class="f_l tmig"><a href="javascript:addToCart({$goods.goods_id})"><img src="images/bnt_cat1.gif" /></a></div><div class="f_l fmig"><a href="javascript:collect({$goods.goods_id})"><img src="images/bnt_colles.gif" /></a></div>
+      </div>
+	  </div>
+      </form>
+	 
+   </div>
+    </div>
+</div>
+
+<div class="blank"></div>
+<div class="block clearfix">
+<div class="AreaL">
+
+<div class="box_1 clearfix">
+   <div class="category_all"><div class="tit">相关分类</div></div>
+  <div class="category_box"> 
+		 <?php
+		 $GLOBALS['smarty']->assign('clild_list', get_clild_list($GLOBALS['smarty']->_var['parent_id']));
+		?> 
+		 <dl>
+		 <!--{foreach from=$clild_list item=childer name=curn}-->
+		 <dd><a href="{$childer.url}">{$childer.name|escape:html}</a></dd>
+		 <!--{/foreach}-->
+		 </dl>
+		 <div class="clear"></div>
+	</div>
+</div>
+
+<div class="blank5"></div>
+ <div class="rank">
+	<div class="category_all"><div class="tit">{$cat_name}热销排行</div></div>
+    <div class="mc">
+      <ul class="tab">
+        <li class="hover" id="one1" onmousemove="setTab('one',1,3)">同类别</li>
+        <li id="one2" onmousemove="setTab('one',2,3)">同品牌</li>
+        <li id="one3" onmousemove="setTab('one',3,3)">同价位</li>
+      </ul>
+      <ul class="tabcon" id="con_one_1">
+        <?php
+		 $GLOBALS['smarty']->assign('hot_goods', get_cat_recommend_goods('hot', get_children($GLOBALS['smarty']->_var['goods']['cat_id']), 8));
+		?>
+        <!--{foreach from=$hot_goods item=goods_item name=cat_item_goods}-->
+        <li 
+        <!-- {if $smarty.foreach.cat_item_goods.iteration eq 1} -->
+        class='fore'
+        <!-- {/if} -->
+        > <span{if $smarty.foreach.cat_item_goods.iteration>3} class="bg1"{/if}>{$smarty.foreach.cat_item_goods.iteration}</span>
+        <div class="p-img"><a href='{$goods_item.url}'><img src="{$goods_item.thumb}" width="50" height="50" onerror="this.src='themes/360buy/images/none_50.gif'"/></a></div>
+        <div class="p-name"><a href='{$goods_item.url}' title='{$goods_item.name|escape:html}'>{$goods_item.short_style_name}</a></div>
+        <div class="p-price"><strong>
+          <!-- {if $goods_item.promote_price neq ""} -->
+          {$goods_item.promote_price}
+          <!-- {else}-->
+          {$goods_item.shop_price}
+          <!--{/if}-->
+          </strong></div>
+        </li>
+        <!--{/foreach}-->
+      </ul>
+      <ul class="tabcon hide" id="con_one_2">
+        <?php
+		 $GLOBALS['smarty']->assign('hot_goods', get_cat_recommend_goods('hot', get_children($GLOBALS['smarty']->_var['goods']['cat_id']), 8, $GLOBALS['smarty']->_var['goods']['brand_id']));
+
+		?>
+        <!--{foreach from=$hot_goods item=goods_item name=cat_item_goods}-->
+        <li 
+        
+        <!-- {if $smarty.foreach.cat_item_goods.iteration eq 1} -->
+        class='fore'
+        <!-- {/if} -->
+        > <span{if $smarty.foreach.cat_item_goods.iteration>3} class="bg1"{/if}>{$smarty.foreach.cat_item_goods.iteration}</span>
+        <div class="p-img"><a href='{$goods_item.url}'><img src="{$goods_item.thumb}" width="50" height="50" onerror="this.src='themes/360buy/images/none_50.gif'"/></a></div>
+        <div class="p-name"><a href='{$goods_item.url}' title='{$goods_item.name|escape:html}'>{$goods_item.short_style_name}</a></div>
+        <div class="p-price"><strong>
+          <!-- {if $goods_item.promote_price neq ""} -->
+          {$goods_item.promote_price}
+          <!-- {else}-->
+          {$goods_item.shop_price}
+          <!--{/if}-->
+          </strong></div>
+        </li>
+        <!--{/foreach}-->
+      </ul>
+      <ul class="tabcon hide" id="con_one_3">
+        <?php
+		 $price_arr = get_goods_min_max_price($GLOBALS['smarty']->_var['goods']['goods_id']);
+		   
+		 $GLOBALS['smarty']->assign('hot_goods', get_cat_recommend_goods('hot', get_children($GLOBALS['smarty']->_var['goods']['cat_id']), 8, 0, $price_arr['min'], $price_arr['max']));
+
+		?>
+        <!--{foreach from=$hot_goods item=goods_item name=cat_item_goods}-->
+        <li 
+        
+        <!-- {if $smarty.foreach.cat_item_goods.iteration eq 1} -->
+        class='fore'
+        <!-- {/if} -->
+        > <span{if $smarty.foreach.cat_item_goods.iteration>3} class="bg1"{/if}>{$smarty.foreach.cat_item_goods.iteration}</span>
+        <div class="p-img"><a href='{$goods_item.url}'><img src="{$goods_item.thumb}" width="50" height="50" onerror="this.src='themes/360buy/images/none_50.gif'"/></a></div>
+        <div class="p-name"><a href='{$goods_item.url}' title='{$goods_item.name|escape:html}'>{$goods_item.short_style_name}</a></div>
+        <div class="p-price"><strong>
+          <!-- {if $goods_item.promote_price neq ""} -->
+          {$goods_item.promote_price}
+          <!-- {else}-->
+          {$goods_item.shop_price}
+          <!--{/if}-->
+          </strong></div>
+        </li>
+        <!--{/foreach}-->
+      </ul>
+    </div>
+  </div>
+  <!--rank end-->
+  <div class="blank5"></div>
+<!-- #BeginLibraryItem "/library/goods_related.lbi" -->
+
+<!-- {if $related_goods} -->
+<div class="box">
+     <div class="box_1">
+      <h3><span>{$lang.releate_goods}</span></h3>
+      <div class="boxCenterList clearfix">
+      <!--{foreach from=$related_goods item=releated_goods_data}-->
+        <ul class="clearfix">
+          <li class="goodsimg"><a href="{$releated_goods_data.url}"><img src="{$releated_goods_data.goods_thumb}" alt="{$releated_goods_data.goods_name}" class="B_blue" /></a></li>
+          <li>
+        <a href="{$releated_goods_data.url}" title="{$releated_goods_data.goods_name}">{$releated_goods_data.short_name}</a><br />
+        <!-- {if $releated_goods_data.promote_price neq 0} -->
+        {$lang.promote_price}<font class="f1">{$releated_goods_data.formated_promote_price}</font>
+        <!-- {else} -->
+        {$lang.shop_price}<font class="f1">{$releated_goods_data.shop_price}</font>
+        <!-- {/if} -->
+          </li>
+        </ul>
+        <!--{/foreach}-->
+      </div>
+     </div>
+    </div>
+<div class="blank5"></div>
+<!-- {/if} -->
+
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/goods_attrlinked.lbi" -->
+
+<!-- 开始循环属性关联的商品 {foreach from=$attribute_linked item=linked}-->
+<!-- {if $linked.goods} -->
+<div class="box">
+ <div class="box_1">
+  <h3><span title="{$linked.title}">{$linked.title|truncate:11:"...":true}</span></h3>
+  <div class="boxCenterList clearfix">
+  <!-- {foreach from=$linked.goods item=linked_goods_data} -->
+  <ul class="clearfix">
+      <li class="goodsimg">
+      <a href="{$linked_goods_data.url}" target="_blank"><img src="{$linked_goods_data.goods_thumb}" alt="{$linked_goods_data.name|escape:html}" class="B_blue" /></a>
+      </li>
+      <li>
+      <a href="{$linked_goods_data.url}" target="_blank" title="{$goods.linked_goods_data_name|escape:html}">{$linked_goods_data.short_name|escape:html}</a><br />
+      {$lang.shop_price}<font class="f1">{$linked_goods_data.shop_price}</font><br />
+      </li>
+    </ul>
+  <!-- {/foreach} -->
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->
+<!-- 结束属性关联的商品 {/foreach}-->
+ <!-- #EndLibraryItem -->
+
+<div class="box_1 clearfix" id='history_div'>
+<div class="boxc">
+  <div class="category_all"><div class="tit">{$lang.view_history}</div></div> 
+  <div class="boxCenterList clearfix" id='history_list'>
+    {insert name='history'}
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<script type="text/javascript">
+if (document.getElementById('history_list').innerHTML.replace(/\s/g,'').length<1)
+{
+    document.getElementById('history_div').style.display='none';
+}
+else
+{
+    document.getElementById('history_div').style.display='block';
+}
+function clear_history()
+{
+Ajax.call('user.php', 'act=clear_history',clear_history_Response, 'GET', 'TEXT',1,1);
+}
+function clear_history_Response(res)
+{
+document.getElementById('history_list').innerHTML = '{$lang.no_history}';
+}
+</script>
+    <!--AD end-->
+  </div>
+  <!--left end-->
+  <!--right start-->
+  <div class="AreaR">
+  <!-- #BeginLibraryItem "/library/e_zh.lbi" --><!-- #EndLibraryItem -->    
+   <!--商品描述，商品属性 START-->
+     <div class="box">
+	 <div id="innergoods">
+	  <div class="h3goods">
+			<div id="com_b" class="history clearfix">
+				<h2>商品介绍</h2>
+				<h2 class="h2bg">规格参数</h2>
+				<h2 class="h2bg">商品评价</h2>
+				<h2 class="h2bg">售后保障</h2>
+				{if $goods_article_list}<h2 class="h2bg">相关文章</h2>{/if}
+				<div class="f_r lirbuy"><a href="javascript:addToCart({$goods.goods_id})"><img src="images/rbuy.gif" /></a></div>
+			</div>
+		</div>
+		</div> 
+		<script type="text/javascript">
+var obj11 = document.getElementById("innergoods");
+var top11 = getTop(obj11);
+var isIE6 = /msie 6/i.test(navigator.userAgent);
+window.onscroll = function(){
+	var bodyScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+	if (bodyScrollTop > top11){
+		obj11.style.position = (isIE6) ? "absolute" : "fixed";
+		obj11.style.top = (isIE6) ? bodyScrollTop + "px" : "0px";
+	} else {
+		obj11.style.position = "static";
+	}
+}
+function getTop(e){
+	var offset = e.offsetTop;
+	if(e.offsetParent != null) offset += getTop(e.offsetParent);
+	return offset;
+}
+</script>
+      <div id="com_v" style="border-top:0;"></div>
+      <div id="com_h">
+       <blockquote>
+	   	<ul class="detail-list">
+					<li title="{$goods.goods_style_name}">商品名称：{$goods.goods_style_name}</li>
+					<li>商品编号：{$goods.goods_sn}</li>
+					<li>品牌：<a href="{$goods.goods_brand_url}" target="_blank">{$goods.goods_brand}</a></li>
+					<li>上架时间：{$goods.add_time}</li>
+					<li>商品毛重：{$goods.goods_weight}</li>
+		 <!-- {foreach from=$properties item=property_group key=key} -->
+        <!-- {foreach from=$property_group item=property name=curn} -->
+		 {if $smarty.foreach.curn.iteration <11} 
+				<li>{$property.name|escape:html}：{$property.value}</li>
+		{/if}			
+ <!-- {/foreach}-->
+        <!-- {/foreach}-->	
+				</ul>
+				<div class="detail-correction">
+					<b></b>如果您发现商品信息不准确，<a href="#" target="_blank">欢迎纠错</a>；如果您发现有比京东价格更低的，<a href="#" target="_blank">欢迎举报</a>
+				</div>
+        {$goods.goods_desc}
+       </blockquote>
+	   
+	    <blockquote>
+ <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#dddddd">
+        <!-- {foreach from=$properties item=property_group key=key} -->
+        <tr>
+          <th colspan="2" bgcolor="#FFFFFF">{$key|escape}</th>
+        </tr>
+        <!-- {foreach from=$property_group item=property} -->
+        <tr>
+          <td bgcolor="#FFFFFF" align="left" width="30%" class="f1">[{$property.name|escape:html}]</td>
+          <td bgcolor="#FFFFFF" align="left" width="70%">{$property.value}</td>
+        </tr>
+        <!-- {/foreach}-->
+        <!-- {/foreach}-->
+      </table>
+       </blockquote> 
+
+     <blockquote>
+	 <div class="blank"></div>
+     <!-- #BeginLibraryItem "/library/comments.lbi" -->
+
+{insert_scripts files='transport.js,utils.js'}
+<div id="ECS_COMMENT"> {* ECSHOP 提醒您：动态载入comments_list.lbi，显示评论列表和评论表单 *}{insert name='comments' type=$type id=$id}</div>
+
+ <!-- #EndLibraryItem -->
+     </blockquote>
+
+     <blockquote>
+      
+     </blockquote>
+     
+	 {if $goods_article_list}
+     <blockquote>
+     <ul class="news2">
+      <!-- {foreach from=$goods_article_list item=article} 相关文章 -->
+      <li> <a href="{$article.url}" title="{$article.title|escape:html}"> {$article.short_title|escape:html}</a></li>
+    <!--{/foreach}-->
+       </ul>
+         <div class="blank5"></div>
+     </blockquote>
+	 {/if}
+	 
+      </div>
+    </div>
+    <script type="text/javascript">
+    <!--
+    reg("com");
+    //-->
+    </script>
+  <div class="blank"></div>
+  <!--商品描述，商品属性 END-->
+<!-- #BeginLibraryItem "/library/bought_note_guide.lbi" -->
+
+{insert_scripts files='transport.js,utils.js'}
+<div id="ECS_BOUGHT">{* ECSHOP 提醒您：动态载入bought_notes.lbi，显示当前商品的购买记录 *}{insert name='bought_notes' id=$id}</div>
+ <!-- #EndLibraryItem -->
+
+ <!-- #BeginLibraryItem "/library/zxcomments.lbi" -->
+
+{insert_scripts files='transport.js,utils.js'}
+<div id="ECS_COMMENT"> {* ECSHOP 提醒您：动态载入comments_list.lbi，显示评论列表和评论表单 *}{insert name='comments' type=$type id=$id}</div>
+
+ <!-- #EndLibraryItem -->
+
+</div>
+</div>
+</div>
+<div class="blank"></div>
+<!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+<script type="text/javascript">
+var goods_id = {$goods_id};
+var goodsattr_style = {$cfg.goodsattr_style|default:1};
+var gmt_end_time = {$promote_end_time|default:0};
+{foreach from=$lang.goods_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+var goodsId = {$goods_id};
+var now_time = {$now_time};
+
+<!-- {literal} -->
+onload = function(){
+  changePrice();
+  fixpng();
+  try { onload_leftTime(); }
+  catch (e) {}
+}
+
+/**
+ * 点选可选属性或改变数量时修改商品价格的函数
+ */
+function changePrice()
+{
+  var attr = getSelectedAttributes(document.forms['ECS_FORMBUY']);
+  var qty = document.forms['ECS_FORMBUY'].elements['number'].value;
+
+  Ajax.call('goods.php', 'act=price&id=' + goodsId + '&attr=' + attr + '&number=' + qty, changePriceResponse, 'GET', 'JSON');
+}
+
+/**
+ * 接收返回的信息
+ */
+function changePriceResponse(res)
+{
+  if (res.err_msg.length > 0)
+  {
+    alert(res.err_msg);
+  }
+  else
+  {
+    document.forms['ECS_FORMBUY'].elements['number'].value = res.qty;
+
+    if (document.getElementById('ECS_GOODS_AMOUNT'))
+      document.getElementById('ECS_GOODS_AMOUNT').innerHTML = res.result;
+  }
+}
+<!-- {/literal} -->
+/*
+*选择信息处理
+*/
+function changeP(b, c) {
+	var frm=document.forms['ECS_FORMBUY'];
+	var cur_id="";
+    document.getElementById('spec_value_' + c).checked=true;
+	document.getElementById('url_' + c).className="selected";
+	for (var i = 0; i < frm.elements[b].length; i++) {
+		cur_id=frm.elements[b][i].id.substr(11);
+        document.getElementById('url_' + cur_id).className="";
+		if (frm.elements[b][i].checked)
+		{
+		   document.getElementById('url_' + c).className="selected";
+		}
+    }
+	changePrice();
+}
+//
+var btn_buy = "购买";
+var is_cancel = "取消";
+var select_spe = "请选择商品属性";
+</script>
+</html>

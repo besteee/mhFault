@@ -1,0 +1,4 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--{foreach from=$new_articles item=article name=topnews}-->
+	<dd><a href="{$article.url}" title="{$article.title|escape:html}">{$article.short_title}</a></dd>
+<!--{/foreach}-->

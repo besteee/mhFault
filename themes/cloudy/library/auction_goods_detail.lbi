@@ -1,0 +1,60 @@
+<div class="goods-intro box">
+	<b class="tp"><b></b></b>
+	<div class="bd">
+		<h1>{$auction_goods.goods_name|escape:html}{if $auction.product_id > 0}<em>({$products_info})</em>{/if}</h1>
+		<div class="info">
+			<form name="theForm" action="auction.php" method="post">
+			{if $auction.status_no eq 0}
+			<div class="error">
+				<p>{$lang.au_pre_start}</p>
+			</div>
+			{elseif $auction.status_no eq 1}
+			<div class="promote-box notice">
+				<p>{$lang.au_under_way}<span class="left-time" id="leftTime">{$lang.please_waiting}</span></p>
+			</div>
+			{else}
+				{if $auction.is_winner}
+				<div class="action">
+					<p>{$lang.au_is_winner}</p>
+					<input name="buy" type="submit" value="{$lang.button_buy}" class="button positive"/>
+					<input name="act" type="hidden" value="buy" />
+					<input name="id" type="hidden" value="{$auction.act_id}" />
+				</div>
+				{else}
+				<div class="notice">
+					<p>{$lang.au_finished}</p>
+				</div>
+				{/if}
+			{/if}
+			<dl class="basic clearfix">
+				<dt class="first">{$lang.au_current_price}{$lang.colon}</dt><dd class="first price">{$auction.formated_current_price}</dd>
+				<dt>{$lang.act_start_time}{$lang.colon}</dt><dd>{$auction.start_time}</dd>
+				<dt>{$lang.act_end_time}{$lang.colon}</dt><dd>{$auction.end_time}</dd>
+				<dt>{$lang.au_start_price}{$lang.colon}</dt><dd class="price">{$auction.formated_start_price}</dd>
+				{if $auction.end_price gt 0}
+				<dt>{$lang.au_end_price}{$lang.colon}</dt><dd class="price">{$auction.formated_end_price}</dd>
+				{/if}
+				<dt>{$lang.au_amplitude}{$lang.colon}</dt><dd class="price">{$auction.formated_amplitude}</dd>
+				{if $auction.deposit gt 0}
+				<dt>{$lang.au_deposit}{$lang.colon}</dt><dd class="price">{$auction.formated_deposit}</dd>
+				{/if}
+			</dl>
+			{if $auction.status_no eq 1}
+			<div class="action">
+				<p><b>{$lang.au_i_want_bid}{$lang.colon}</b><input name="price" type="text"/></b>
+				<input name="bid" type="submit" id="bid" value="{$lang.button_bid}" class="submit btn-hg"/>
+				<input name="act" type="hidden" value="bid"/>
+				<input name="id" type="hidden" value="{$auction.act_id}"/>
+				</p>
+			</div>
+			{/if}
+			</form>
+		</div>
+		<div class="extra">
+			<div class="gallery">
+				<a href="{$auction_goods.url}" class="cover"><img src="{$auction_goods.goods_img}"/></a>
+			</div>
+		</div>
+	</div>
+	<b class="bt"><b></b></b>
+</div>

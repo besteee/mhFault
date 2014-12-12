@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{$article_data.title} - {$shop_name}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="ecdaddy.com">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" type="text/css" href="style/base.css?v=ecdaddy" />
+</head>
+<body>
+<div class="article-box radius w">
+{if $article_data}
+	<h3>{$article_data.title}</h3>
+	{$article_data.content}
+{else}
+	错误地址
+{/if}
+</div>
+{include file='foot.dwt'}
+</body>
+</html>

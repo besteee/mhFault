@@ -1,0 +1,25 @@
+{if $group_buy_goods}
+<div class="group-buy-goods box">
+	<b class="tp"><b></b></b>
+	<div class="hd"><h3>{$lang.group_buy_goods}</h3><a href="group_buy.php" class="more">{$lang.more}</a></div>
+	<div class="bd">
+		<ul class="goods-list">
+			{foreach from=$group_buy_goods item=goods name=group_buy_goods}
+			<li{if $smarty.foreach.group_buy_goods.index %4==0} class="first-child"{/if}>
+				<span class="photo">
+					<a href="{$goods.url}" title="{$goods.name|escape:html}" class="image"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}"/></a>
+				</span>
+				<span class="info">
+					<a href="{$goods.url}" title="{$goods.name|escape:html}" class="name">{$goods.short_style_name}</a>
+					<em class="price">{$goods.last_price}</em>
+				</span>
+				<span class="action">
+					<a href="{$goods.url}" class="detail">{$lang.btn_detail}</a>
+				</span>
+			</li>
+			{/foreach}
+		</ul>
+	</div>
+	<b class="bt"><b></b></b>
+</div>
+{/if}

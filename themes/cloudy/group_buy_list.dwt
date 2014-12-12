@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="Keywords" content="{$keywords}"/>
+<meta name="Description" content="{$description}"/>
+<!-- TemplateBeginEditable name="doctitle" --><title>{$page_title}</title><!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link href="{$static_path}static/css/style.css" rel="stylesheet" type="text/css"/>
+<!--[if IE]><link href="{$static_path}static/css/ie.css" rel="stylesheet" type="text/css"/><![endif]-->
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}"/>
+
+<script type="text/javascript" src="{$static_path}static/js/jquery.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.json.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/common.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/effect.js"></script>
+</head>
+<body>
+{include file="/library/page_header.lbi"}
+<div id="content"><div class="container">
+	{include file="/library/ur_here.lbi"}
+	<div class="col-main">
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+	<!-- #BeginLibraryItem "/library/group_buy_list.lbi" --><!-- #EndLibraryItem -->
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+	</div>
+	<div class="col-sub">
+	<!-- TemplateBeginEditable name="侧栏上方" --><!-- TemplateEndEditable -->
+	<!-- TemplateBeginEditable name="侧栏" -->
+	<!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+	<!-- TemplateEndEditable -->
+	<!-- TemplateBeginEditable name="侧栏下方" --><!-- TemplateEndEditable -->
+	</div>
+</div></div>
+{include file="/library/page_footer.lbi"}
+</body>
+</html>

@@ -1,0 +1,25 @@
+{if $auction_list}
+<div class="auction box">
+	<b class="tp"><b></b></b>
+	<div class="hd"><h3>{$lang.auction_goods}</h3><a href="auction.php" class="more">{$lang.more}</a></div>
+	<div class="bd">	
+		<ul class="goods-list">
+			{foreach from=$auction_list item=auction name=auction_list}
+			<li{if $page eq 'index'}{if $smarty.foreach.auction_list.index %3==0} class="first-child"{/if}{else}{if $smarty.foreach.auction_list.index %4==0} class="first-child"{/if}{/if}>
+				<span class="photo">
+					<a href="{$auction.url}" title="{$auction.goods_name|escape:html}" class="image"><img src="{$auction.thumb}" alt="{$auction.goods_name|escape:html}"/></a>
+				</span>
+				<span class="info">
+					<a href="{$auction.url}" title="{$auction.goods_name|escape:html}" class="name">{$auction.goods_name}</a>
+					<em class="price auction">{$auction.formated_start_price}</em>
+				</span>
+				<span class="action">
+					<a href="{$auction.url}" class="detail">{$lang.btn_detail}</a>
+				</span>
+			</li>
+			{/foreach}
+		</ul>
+	</div>
+	<b class="bt"><b></b></b>
+</div>
+{/if}

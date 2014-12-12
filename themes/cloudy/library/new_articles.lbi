@@ -1,0 +1,12 @@
+<div class="new-articles box">
+	<b class="tp"><b></b></b>
+	<div class="hd"><h3>{$lang.new_article}</h3></div>
+	<div class="bd">	
+		<ul class="text-list">
+			{foreach from=$new_articles item=article name=new_articles}
+			<li{if $smarty.foreach.new_articles.first} class="first"{/if}><a href="{$article.url}" title="{$article.title|escape:html}">{$article.short_title|escape:html}</a></li>
+			{/foreach}
+		</ul>
+	</div>
+	<b class="bt"><b></b></b>
+</div>

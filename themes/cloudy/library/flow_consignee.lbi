@@ -1,0 +1,21 @@
+<script type="text/javascript">
+region.isAdmin = false;
+{foreach from=$lang.flow_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+{literal}onload = function(){if(!document.all){document.forms['theForm'].reset();}}{/literal}
+</script>
+<div class="flow-bar step2"></div>
+<div class="consignee-list box">
+	<b class="tp"><b></b></b>
+	<div class="hd"><h3>{$lang.consignee_info}</h3></div>
+	<div class="bd">
+		{foreach from=$consignee_list item=consignee key=sn name=consignee_list}
+		{if !$consignee.consignee}<h4>{$lang.add_address}{$lang.colon}</h4>{/if}
+		<form action="flow.php" method="post" name="theForm" onsubmit="return checkConsignee(this)"{if $smarty.foreach.consignee_list.first} class="first"{/if}>
+			{include file="/library/consignee.lbi"}
+		</form>
+		{/foreach}
+	</div>
+	<b class="bt"><b></b></b>
+</div>

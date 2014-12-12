@@ -1,0 +1,20 @@
+{if $brand_list}
+<div class="brands box">
+	<b class="tp"><b></b></b>
+	<div class="hd"><h3>{$lang.brands_list}</h3><a href="../brand.php" class="more">{$lang.more}</a></div>
+	<div class="bd">	
+		<ul>
+			{foreach from=$brand_list item=brand name=brand_foreach}
+			{if $smarty.foreach.brand_foreach.index <= 7}
+			{if $brand.brand_logo} 
+			<li class="image{if $smarty.foreach.brand_foreach.last} last{/if}"><a href="{$brand.url}" title="{$brand.brand_name|escape:html}"><img src="data/brandlogo/{$brand.brand_logo}" alt="{$brand.brand_name|escape:html}"/>{$brand.brand_name}</a></li>
+			{else}
+			<li class="text{if $smarty.foreach.brand_foreach.last} last{/if}"><a href="{$brand.url}" title="{$brand.brand_name|escape:html}">{$brand.brand_name}</a></li>
+			{/if}
+			{/if}
+			{/foreach}
+		</ul>
+	</div>
+	<b class="bt"><b></b></b>
+</div>
+{/if}

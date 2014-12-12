@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="Keywords" content="{$keywords}"/>
+<meta name="Description" content="{$description}"/>
+<!-- TemplateBeginEditable name="doctitle" --><title>{$page_title}</title><!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link href="{$static_path}static/css/style.css" rel="stylesheet" type="text/css"/>
+<!--[if IE]><link href="{$static_path}static/css/ie.css" rel="stylesheet" type="text/css"/><![endif]-->
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}"/>
+<script type="text/javascript" src="{$static_path}static/js/jquery.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.json.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/common.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/transport.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/utils.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/lefttime.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/effect.js"></script>
+</head>
+<body>
+{include file="/library/page_header.lbi"}
+<div id="content"><div class="container">
+	{include file="/library/ur_here.lbi"}
+	<div class="col-main">
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+		{if $snatch_goods}
+		<div class="goods-intro box">
+			<b class="tp"><b></b></b>
+			<div class="bd">
+				<h1>{$snatch_goods.snatch_name}</h1>
+				<div class="info">
+					<div class="promote-box success">
+						<p>{$snatch_goods.desc|escape:html|nl2br}</p>
+					</div>
+					<div class="promote-box notice">
+						<p>{$lang.residual_time}<span class="left-time" id="leftTime">{$lang.please_waiting}</span></p>
+					</div>
+					<dl class="basic clearfix">
+						<dt class="first">{$lang.shop_price}</dt><dd class="first">{$snatch_goods.formated_shop_price}</dd>
+						<dt>{$lang.market_price}</dt><dd>{$snatch_goods.formated_market_price}</dd>
+					</dl>
+					<div id="ECS_SNATCH">
+						<!-- #BeginLibraryItem "/Library/snatch.lbi" --><!-- #EndLibraryItem -->
+					</div>
+				</div>
+				<div class="extra">
+					<div class="gallery">
+						<a href="{$snatch_goods.url}"><img src="{$snatch_goods.goods_thumb}" alt="{$snatch_goods.goods_name|escape:html}"/></a>
+					</div>
+				</div>
+			</div>
+			<b class="bt"><b></b></b>
+		</div>
+		<div class="goods-desc box">
+			<b class="tp"><b></b></b>
+			<div class="hd"><h3>{$lang.snatch_desc}</h3></div>
+			<div class="bd">
+				<div class="text">
+					<p class="time">{$snatch_goods.snatch_time}</p>
+					<p>{$lang.price_extent}<em class="price">{$snatch_goods.formated_start_price}</em> - <em class="price">{$snatch_goods.formated_end_price}</em></p>
+					<p>{$lang.user_to_use_up}<em class="price">{$snatch_goods.cost_points}</em>{$points_name}</p>
+					<p>{$lang.snatch_victory_desc}</p>
+					<p>{if $snatch_goods.max_price neq 0}
+					{$lang.price_less_victory}{$snatch_goods.formated_max_price}，{$lang.price_than_victory}{$snatch_goods.formated_max_price}，{$lang.or_can}{$snatch_goods.formated_max_price}{$lang.shopping_product}。
+					{else}
+					{$lang.victory_price_product}
+					{/if}</p>
+				</div>
+			</div>
+			<b class="bt"><b></b></b>
+		</div>
+		{/if}
+		<div id="ECS_PRICE_LIST" class="price-list box">
+			<!-- #BeginLibraryItem "/Library/snatch_price.lbi" --><!-- #EndLibraryItem -->
+		</div>
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+	</div>
+	<div class="col-sub">
+	<!-- TemplateBeginEditable name="侧栏上方" --><!-- TemplateEndEditable -->
+		<div class="snatch-list box">
+			<b class="tp"><b></b></b>
+			<div class="hd"><h3>{$lang.snatch_list}</h3></div>
+			<div class="bd">
+				<ul class="text-list">
+					{foreach from=$snatch_list item=item name=snatch_list}
+					<li{if $smarty.foreach.snatch_list.first} class="first"{/if}><a href="{$item.url}">{$item.snatch_name}</a>{if $item.overtime}<em class="end">{$lang.end}</em>{/if}</li>
+					{/foreach}
+				</ul>
+			</div>
+			<b class="bt"><b></b></b>
+		</div>
+		<!-- #BeginLibraryItem "/library/history.lbi" --><!-- #EndLibraryItem -->
+	<!-- TemplateBeginEditable name="侧栏下方" --><!-- TemplateEndEditable -->
+	</div>
+</div></div>
+{include file="/library/page_footer.lbi"}
+<script type="text/javascript">
+var gmt_end_time = {$snatch_goods.gmt_end_time|default:0};
+var id = {$id};
+{foreach from=$lang.snatch_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+{foreach from=$lang.goods_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+{literal}onload = function(){try{window.setInterval("newPrice(" + id + ")", 8000);onload_leftTime();}catch(e){}}{/literal}
+</script>
+</body>
+</html>

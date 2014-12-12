@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>收货地址 - {$shop_name}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png"/>
+    <link href="css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="css/head.css" rel="stylesheet" type="text/css" />
+    <link href="css/foot.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+	<script src="js/jquery-1.6.2.min.js" type="text/javascript"></script>
+	<script src="/js/jquery.lazyload.js" type="text/javascript"></script>
+	<script src="js/jquery.autocomplete.js" type="text/javascript"></script>
+	<script src="js/jquery.touchScroll.js" type="text/javascript"></script>
+{insert_scripts files="../js/transport.js,../js/region.js"}
+	<script>
+          var util = (function(){
+              var u = navigator.userAgent.toLowerCase();
+              return {
+                  isIphone : function(){return (RegExp("iphone").test(u) || RegExp("ipod touch").test(u))},
+                  isIpad : function(){return RegExp("ipad").test(u)},
+                  isAndroid : function(){return (RegExp("android").test(u) || RegExp("android 2").test(u))},
+                  isMB : function(){return (util.isIphone() || util.isIpad() || util.isAndroid())}
+              };
+          })();
+          window.util = util;
+          (function(){
+              if( !util.isMB() ){
+                  window.location.href = '../index.php';
+              }
+          })();
+    </script>
+	<script type="text/javascript">
+	var _hmt=_hmt||[];(function(){var e=document.createElement("script");
+	var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+	document.write('<div id="global_loading" style="width: 100%;height: 100%;position: fixed;top: 0;left: 0;background-color: #eee;z-index:999"><div style="width: 100px;height: 75px;margin:auto;top:50%;position:relative"><span style="display:block;float:left;width:32px;height:32px;background:url(images/spacer.gif);margin-top:-5px;"></span>&nbsp;&nbsp;加载中...</div></div>');
+	</script>
+	<script type="text/javascript">
+    region.isAdmin=true;
+    </script>
+    <script type="text/javascript">
+    function doValidate() {
+            var mobileReg = /^[1]([3][0-9]{1}|50|53|59|58|56|86|80|89|87|88|85|86|55|51|52|57)[0-9]{8}$/;
+            if(!mobileReg.test(document.theForm.mobile.value)) {
+                alert('请填写正确手机号码!!');
+                document.theForm.mobile.focus();
+                return false;
+            }
+                return true;
+    }
+    </script>
+	<style>
+/*页面自身样式*/
+	section{font: 14px/1.5 微软雅黑;}
+	.form{margin: 0 10px;padding-top:15px;}
+	.frame{margin-bottom: 15px;}
+	.frame p{margin-bottom: 5px;}
+	.frame input{width: 100%;height: 35px;border: 1px solid #c3c3c3;line-height: 35px;}
+	.area select{width: 80px;height: 30px;line-height: 30px;font-size:14px;float: left;display: inline-block;*display: inline;*zoom: 1;height:22px; line-height:18px; padding:2px 0;
+	}
+	.form .submit .btn{background-color: #F7762E;color: #fff;font: 14px/1.5 微软雅黑;font-weight: bold;border: 0;}
+	</style>
+</head>
+<body>
+<!--{if $fun == "list"}-->
+<div class="header"> <a class="back" href="javascript:history.back();"></a> <span class="headline">收货地址</span> <a class="search" href="search.php"></a> </div>
+<section>
+    <div class="addrlist">
+    <ul>
+    <!--{foreach from=$consignee item=consignee name=con}-->
+        <li>
+            <p>联系人：{$consignee.consignee|escape}</p>
+            <p>地址： {$consignee.address|escape}</p>
+            <p>电话：{$consignee.tel}</p>
+            <p>手机：{$consignee.mobile}</p>
+            <p><a href="user.php?act=drop_address&id={$consignee.address_id}" onclick="if (!confirm('确定要删除此条收货地址吗？')) return false;">【删除】</a></p>
+        <div style="clear:both;"></div>
+        </li>
+    <!--{/foreach}-->    
+    </ul>
+    <div class="form clearfix">
+            <div class="frame submit">
+                 <input type="button" class="btn" value="增加收货地址" onclick="window.location.href='user.php?act=add_address'" autocomplete="off" />
+            </div>
+    </div>
+    </div>
+</section>
+<!--{/if}-->
+<!--{if $fun == "add"}-->
+<div class="header"> <a class="back" href="javascript:history.back();"></a> <span class="headline">增加收货地址</span> <a class="search" href="/search"></a> </div>
+<section>
+<form action="{$action}" method="post" name="theForm" id="theForm" onsubmit="return doValidate()">
+    <div class="form clearfix">
+      <div class="frame area">
+      <p>配送区域</p>
+      <div class="clearfix">
+          <select name="country" id="selCountries" onchange="region.changed(this, 1, 'selProvinces')">
+            <option value="0">国家</option>
+            <!-- {foreach from=$country_list item=country} -->
+            <option value="{$country.region_id}" {if $consignee.country == $country.region_id}selected="selected"{/if} >{$country.region_name}</option>
+            <!-- {/foreach} -->
+          </select>
+          <select name="province" id="selProvinces" onchange="region.changed(this, 2, 'selCities')">
+            <option value="0">请选择省</option>
+            <!-- {foreach from=$province_list item=province} -->
+            <option value="{$province.region_id}" {if $consignee.province == $province.region_id}selected="selected"{/if}>{$province.region_name}</option>
+            <!-- {/foreach} -->
+          </select>
+          <select name="city" id="selCities" onchange="region.changed(this, 3, 'selDistricts')">
+            <option value="0">请选择市</option>
+            <!-- {foreach from=$city_list item=city} -->
+            <option value="{$city.region_id}" {if $consignee.city == $city.region_id}selected="selected"{/if}>{$city.region_name}</option>
+            <!-- {/foreach} -->
+          </select>
+          <select name="district" id="selDistricts">
+            <option value="0">请选择区</option>
+            <!-- {foreach from=$district_list item=district} -->
+            <option value="{$district.region_id}" {if $consignee.district == $district.region_id}selected="selected"{/if}>{$district.region_name}</option>
+            <!-- {/foreach} -->
+          </select>
+                </div>
+            </div>
+            <div class="frame street">
+                <p>详细地址</p>
+			<input name="address" type="text" id="address" />
+            </div>
+            <div class="frame street">
+                <p>收货人姓名</p>
+			<input name="consignee" type="text" id="consignee" />
+            </div>
+            <div class="frame street">
+                <p>联系电话</p>
+			<input name="tel" type="text" id="tel" />
+            </div>
+            <div class="frame street">
+                <p>手机号码</p>
+			<input name="mobile" type="text" id="mobile" />
+            </div>
+            <div class="frame street">
+                <p>电子邮箱</p>
+			<input name="email" type="text" id="email" />
+            </div>
+            <div class="frame street">
+                <p>送货时间</p>
+      			<div class="clearfix">
+            <select name="best_time" id="best_time" size="1">
+            <option value="" selected>请选择送货时间</option>
+            <option value="工作日（周一至周五）">工作日（周一至周五）</option>
+            <option value="双休日（周六至周日）">双休日（周六至周日）</option>
+            <option value="随时都可以">随时都可以</option>
+            </select>　
+                </div>
+            </div>
+            <div class="frame submit">
+			<input type="submit" name="Submit" class="btn" value="增加收货地址" />
+    		<input name="address_id" type="hidden" value="" />
+            </div>
+    </div>
+</form>
+</section>
+<!--{/if}-->
+{include file='foot.dwt'}
+<script type="text/javascript">
+		var global_loading=document.getElementById("global_loading");
+		global_loading.parentNode.removeChild(global_loading);
+</script>
+</body>
+</html>

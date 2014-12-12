@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="Keywords" content="{$keywords}"/>
+<meta name="Description" content="{$description}"/>
+<!-- TemplateBeginEditable name="doctitle" --><title>{$page_title}</title><!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link href="{$static_path}static/css/style.css" rel="stylesheet" type="text/css"/>
+<!--[if IE]><link href="{$static_path}static/css/ie.css" rel="stylesheet" type="text/css"/><![endif]-->
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}"/>
+
+<script type="text/javascript" src="{$static_path}static/js/jquery.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.json.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/common.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/effect.js"></script>
+</head>
+<body>
+{include file="/library/page_header.lbi"}
+<div id="content"><div class="container">
+	{include file="/library/ur_here.lbi"}
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+	<div class="activity-list box">
+		<b class="tp"><b></b></b>
+		<div class="bd">
+			{foreach from=$list item=val name=list}
+			<div class="item{if $smarty.foreach.list.first} first{/if}" id="{$val.act_id}">
+				<dl class="table">
+					<dt>{$lang.package_name}{$lang.colon}</dt><dd class="name even">{$val.act_name}</dd>
+					<dt>{$lang.start_time}{$lang.colon}</dt><dd>{$val.start_time}</dd>
+					<dt>{$lang.end_time}{$lang.colon}</dt><dd class="even">{$val.end_time}</dd>
+					<dt>{$lang.orgtotal}{$lang.colon}</dt><dd class="price">{$val.subtotal}</dd>
+					<dt>{$lang.package_price}{$lang.colon}</dt><dd class="price even">{$val.package_price}</dd>
+					<dt>{$lang.saving}{$lang.colon}</dt><dd>{$val.saving}</dd>
+					<dt>{$lang.package_goods}{$lang.colon}</dt>
+					<dd class="even">
+						<ul class="goods-list display-list">
+							{foreach from=$val.goods_list item=goods name=val_goods_list}
+							<li{if $smarty.foreach.val_goods_list.index %4==0} class="first-child"{/if}>
+								<span class="photo">
+									<a href="goods.php?id={$goods.goods_id}" title="{$goods.goods_name|escape:html}" class="image"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name|escape:html}"/></a>
+								</span>
+								<span class="info">
+									<a href="goods.php?id={$goods.goods_id}" title="{$goods.goods_name|escape:html}" class="name">{$goods.goods_name}</a>
+									<em class="number">{$goods.goods_number}</em>
+								</span>
+								<span class="action">
+									<a href="goods.php?id={$goods.goods_id}">{$lang.btn_detail}</a>
+								</span>
+							</li>
+							{/foreach}
+						</ul>
+					</dd>
+					<dt>{$lang.desc}</dt><dd>{$val.act_desc}</dd>
+					<dt>{$lang.heart_buy}{$lang.colon}</dt><dd class="even"><a href="javascript:addPackageToCart({$val.act_id})" class="btn-sm"><span>{$lang.add_to_cart}</span></a></dd>
+				</dl>
+			</div>
+			{/foreach}
+		</div>
+		<b class="bt"><b></b></b>
+	</div>
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+</div></div>
+{include file="/library/page_footer.lbi"}
+</body>
+</html>

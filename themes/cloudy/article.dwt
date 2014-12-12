@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="Keywords" content="{$keywords}"/>
+<meta name="Description" content="{$description}"/>
+<!-- TemplateBeginEditable name="doctitle" --><title>{$page_title}</title><!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link href="{$static_path}static/css/style.css" rel="stylesheet" type="text/css"/>
+<!--[if IE]><link href="{$static_path}static/css/ie.css" rel="stylesheet" type="text/css"/><![endif]-->
+<script type="text/javascript" src="{$static_path}static/js/jquery.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.json.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/common.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/transport.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/utils.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/effect.js"></script>
+</head>
+<body>
+{include file="/library/page_header.lbi"}
+<div id="content"><div class="container">
+	{include file="/library/ur_here.lbi"}
+	<div class="col-main">
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+		<div class="article box">
+			<b class="tp"><b></b></b>
+			<div class="bd">
+				<h1>{$article.title|escape:html}</h1>
+				<span class="author">{$article.author|escape:html}&nbsp;{$article.add_time}</span>
+				<span class="text">{if $article.content }{$article.content}{/if}</span>
+				{if $article.open_type eq 2 or $article.open_type eq 1}
+				<a href="{$article.file_url}" class="download">{$lang.relative_file}</a>
+				{/if}
+				<p class="nearby">{if $prev_article}<a href="{$prev_article.url}" class="prev">&laquo;{$lang.prev_article}{$lang.colon}{$prev_article.title}</a>{/if}
+				{if $next_article}<a href="{$next_article.url}" class="next">{$lang.next_article}{$lang.colon}{$next_article.title}&raquo;</a>{/if}
+				</p>
+			</div>
+			<b class="bt"><b></b></b>
+		</div>
+		<div class="comment-box box">
+			<b class="tp"><b></b></b>
+			<div class="hd"><h3>{$lang.article_comment}</h3></div>
+			<div class="bd">
+				<div id="ECS_COMMENT">
+					{insert name='comments' type=$type id=$id}
+				</div>
+			</div>
+			<b class="bt"><b></b></b>
+		</div>
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+	</div>
+	<div class="col-sub">
+	<!-- TemplateBeginEditable name="侧栏上方" --><!-- TemplateEndEditable -->
+	<!-- TemplateBeginEditable name="侧栏" -->
+	<!-- #BeginLibraryItem "/library/article_category_tree.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/auction.lbi" --><!-- #EndLibraryItem -->
+	<!-- TemplateEndEditable -->
+	<!-- TemplateBeginEditable name="侧栏下方" --><!-- TemplateEndEditable -->
+	</div>
+</div></div>
+{include file="/library/page_footer.lbi"}
+</body>
+</html>

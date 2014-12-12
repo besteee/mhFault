@@ -1,0 +1,6 @@
+{if $user_info}
+<em>{$lang.hello}&nbsp;{$user_info.username}</em>
+<a href="user.php">{$lang.edit_user_info}</a>{$lang.or}<a href="user.php?act=logout">{$lang.user_logout}</a>
+{else}
+<em>{$lang.hello}</em><a href="user.php?act=login">{$lang.btn_login}</a>{$lang.or}<a href="user.php?act=register">{$lang.btn_register}</a>
+{/if}

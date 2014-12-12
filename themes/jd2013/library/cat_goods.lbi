@@ -1,0 +1,11 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->

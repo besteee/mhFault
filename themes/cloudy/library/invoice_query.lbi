@@ -1,0 +1,12 @@
+{if $invoice_list}
+<div class="invoice-list box">
+	<b class="tp"><b></b></b>
+	<div class="hd"><h3>{$lang.invoice_list}</h3></div>
+	<div class="bd">
+		{foreach from=$invoice_list item=invoice name=invoice_list}
+		<div class="list {cycle values="odd,even"}{if $smarty.foreach.invoice_list.last} last{/if}"><em class="title">{$lang.order_number}</em><span class="data">{$invoice.order_sn}</span><em class="title">{$lang.consignment}</em><span class="data">{$invoice.invoice_no}</span></div>
+		{/foreach}
+	</div>
+	<b class="bt"><b></b></b>
+</div>
+{/if}

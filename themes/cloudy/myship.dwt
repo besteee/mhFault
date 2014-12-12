@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="Keywords" content="{$keywords}"/>
+<meta name="Description" content="{$description}"/>
+<!-- TemplateBeginEditable name="doctitle" --><title>{$page_title}</title><!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link href="{$static_path}static/css/style.css" rel="stylesheet" type="text/css"/>
+<!--[if IE]><link href="{$static_path}static/css/ie.css" rel="stylesheet" type="text/css"/><![endif]-->
+<script type="text/javascript" src="{$static_path}static/js/jquery.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.json.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/common.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/transport.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/utils.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/region.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/effect.js"></script>
+</head>
+<body>
+{include file="/library/page_header.lbi"}
+<div id="content"><div class="container">
+	{include file="/library/ur_here.lbi"}
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+	<div class="myship box">
+		<b class="tp"><b></b></b>
+		<div class="hd"><h3>{$lang.myship}</h3></div>
+		<div class="bd">
+			<form action="myship.php" method="post" name="theForm" id="theForm" onsubmit="return checkForm(this)">
+				<span>{$lang.country_province}:</span>
+				<select name="country" id="selCountries_{$sn}" onchange="region.changed(this, 1, 'selProvinces_{$sn}')">
+					<option value="0">{$lang.please_select}</option>
+					{foreach from=$country_list item=country}
+					<option value="{$country.region_id}" {if $choose.country eq $country.region_id}selected{/if}>{$country.region_name}</option>
+					{/foreach}
+				</select>
+				<select name="province" id="selProvinces_{$sn}" onchange="region.changed(this, 2, 'selCities_{$sn}')">
+					<option value="0">{$lang.please_select}</option>
+					{foreach from=$province_list.$sn item=province}
+					<option value="{$province.region_id}" {if $choose.province eq $province.region_id}selected{/if}>{$province.region_name}</option>
+					{/foreach}
+				</select>
+				<select name="city" id="selCities_{$sn}" onchange="region.changed(this, 3, 'selDistricts_{$sn}')">
+					<option value="0">{$lang.please_select}</option>
+					{foreach from=$city_list.$sn item=city}
+					<option value="{$city.region_id}" {if $choose.city eq $city.region_id}selected{/if}>{$city.region_name}</option>
+					{/foreach}
+				</select>
+				<select name="district" id="selDistricts_{$sn}" {if !$district_list.$sn}style="display:none"{/if}>
+					<option value="0">{$lang.please_select}</option>
+					{foreach from=$district_list.$sn item=district}
+					<option value="{$district.region_id}" {if $choose.district eq $district.region_id}selected{/if}>{$district.region_name}</option>
+					{/foreach}
+				</select>
+				<input type="submit" name="Submit" value="{$lang.search_ship}" class="button positive"/>
+				<input type="hidden" name="act" value="viewship" />
+			</form>
+
+			<table class="myship-list">
+				<tr>
+					<th width="15%">{$lang.name}</th>
+					<th>{$lang.describe}</th>
+					<th width="8%" class="center">{$lang.fee}</th>
+					<th width="12%" class="center">{$lang.insure_fee}</th>
+				</tr>
+				{foreach from=$shipping_list item=shipping}
+				<tr>
+					<td valign="top" class="name">{$shipping.shipping_name}</td>
+					<td valign="top">{$shipping.shipping_desc}</td>
+					<td valign="top" class="center price">{$shipping.fee}</td>
+					<td valign="top" class="center">{if $shipping.insure neq 0}{$shipping.insure_formated}{else}{$lang.not_support_insure}{/if}</td>
+				</tr>
+				{/foreach}
+			</table>
+		</div>
+		<b class="bt"><b></b></b>
+	</div>
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+</div></div>
+{include file="/library/page_footer.lbi"}
+<script type="text/javascript">
+region.isAdmin = false;
+{foreach from=$lang.flow_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+{literal}
+onload = function(){if (!document.all){document.forms['theForm'].reset();}}
+function checkForm(frm)
+{
+var msg = new Array();
+var err = false;
+if (frm.elements['country'].value == 0)
+{
+	msg.push(country_not_null);
+	err = true;
+}
+if (frm.elements['province'].value == 0 && frm.elements['province'].length > 1)
+{
+	err = true;
+	msg.push(province_not_null);
+}
+if (frm.elements['city'].value == 0 && frm.elements['city'].length > 1)
+{
+	err = true;
+	msg.push(city_not_null);
+}
+if (frm.elements['district'].length > 1)
+{
+	if (frm.elements['district'].value == 0)
+	{
+		err = true;
+		msg.push(district_not_null);
+	}
+}
+if (err)
+{
+	message = msg.join("\n");
+	alert(message);
+}
+return ! err;
+}
+{/literal}
+</script>
+</body>
+</html>

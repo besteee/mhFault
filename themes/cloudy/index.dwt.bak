@@ -1,0 +1,84 @@
+<?php $this->assign('page', 'index');?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="Keywords" content="{$keywords}"/>
+<meta name="Description" content="{$description}"/>
+<!-- TemplateBeginEditable name="doctitle" --><title>{$page_title}</title><!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link href="{$static_path}static/css/style.css" rel="stylesheet" type="text/css"/>
+<!--[if IE]><link href="{$static_path}static/css/ie.css" rel="stylesheet" type="text/css"/><![endif]-->
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}"/>
+<script type="text/javascript" src="{$static_path}static/js/jquery.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.json.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/common.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/transport.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/utils.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/index.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/effect.js"></script>
+</head>
+<body id="hp">
+{include file="/library/page_header.lbi"}
+<div id="content"><div class="container">
+	<div class="col-main">
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+	<!-- #BeginLibraryItem "/library/index_ad.lbi" --><!-- #EndLibraryItem -->
+	<!-- TemplateBeginEditable name="主栏" -->
+	<!-- #BeginLibraryItem "/library/recommend_new.lbi" --><!-- #EndLibraryItem -->
+	
+<!-- #BeginLibraryItem "/library/recommend_best.lbi" -->
+<!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/recommend_hot.lbi" --><!-- #EndLibraryItem -->
+	
+<!-- TemplateEndEditable -->
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+	</div>
+	<div class="col-sub">
+	<!-- TemplateBeginEditable name="侧栏上方" --><!-- TemplateEndEditable -->
+	<!-- TemplateBeginEditable name="侧栏" -->
+	<!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/recommend_promotion.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/promotion_info.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/invoice_query.lbi" -->
+<!-- #EndLibraryItem -->
+	
+<!-- #BeginLibraryItem "/library/order_query.lbi" --><!-- #EndLibraryItem -->
+	
+<!-- TemplateEndEditable -->
+	<!-- TemplateBeginEditable name="侧栏下方" --><!-- TemplateEndEditable -->
+	</div>
+	<div class="col-extra">
+		{if $shop_notice}
+		<div class="shop-notice box">
+			<b class="tp"><b></b></b>
+			<div class="hd"><h3>{$lang.shop_notice}</h3></div>
+			<div class="bd">
+				{$shop_notice}
+			</div>
+			<b class="bt"><b></b></b>
+		</div>
+		{/if}
+	<!-- TemplateBeginEditable name="侧栏二" -->
+	<!-- #BeginLibraryItem "/library/brands.lbi" -->
+<!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/top10.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/new_articles.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/vote_list.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/email_list.lbi" -->
+<!-- #EndLibraryItem -->
+	<!-- TemplateEndEditable -->
+	</div>
+</div></div>
+<div id="xxxx">k1</div>
+<script>
+alert($("#xxxx").text());
+</script>
+{include file="/library/page_footer.lbi"}
+</body>
+<script type="text/javascript">
+var btn_buy = "{$lang.btn_buy}";
+var is_cancel = "{$lang.is_cancel}";
+var select_spe = "{$lang.select_spe}";
+</script>
+</html>

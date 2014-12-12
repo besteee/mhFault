@@ -1,0 +1,6 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--{foreach from=get_cat_brands(1) item=brandnav name=brand_foreach}-->
+ {if $smarty.foreach.brand_foreach.iteration<11}
+  <li><a href="{$brandnav.url}"><img src="data/brandlogo/{$brandnav.brand_logo}" height="35" width="98"></a></li>
+  {/if}
+ <!-- {/foreach} -->	

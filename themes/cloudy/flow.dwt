@@ -1,0 +1,62 @@
+<?php $this->assign('page', 'flow');?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="Keywords" content="{$keywords}"/>
+<meta name="Description" content="{$description}"/>
+<!-- TemplateBeginEditable name="doctitle" --><title>{$page_title}</title><!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link href="{$static_path}static/css/style.css" rel="stylesheet" type="text/css"/>
+<!--[if IE]><link href="{$static_path}static/css/ie.css" rel="stylesheet" type="text/css"/><![endif]-->
+<script type="text/javascript" src="{$static_path}static/js/jquery.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.json.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/common.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/transport.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/utils.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/region.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/user.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/shopping_flow.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/showdiv.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/effect.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("a.view").fancybox({
+		'transitionIn'	: 'elastic',
+		'transitionOut'	: 'elastic'
+	});
+});
+</script>
+<script type="text/javascript">
+{foreach from=$lang.password_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+</script>
+</head>
+<body>
+{include file="/library/page_header.lbi"}
+<div id="content"{if $step neq "login"} class="flow-wrap"{/if}>
+	<div class="container">
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+		{if $step eq "cart"}{include file="/library/flow_cart.lbi"}{/if}
+		{if $step eq "consignee"}{include file="/library/flow_consignee.lbi"}{/if}
+		{if $step eq "checkout"}{include file="/library/flow_checkout.lbi"}{/if}
+		{if $step eq "done"}{include file="/library/flow_done.lbi"}{/if}
+		{if $step eq "login"}{include file="/library/flow_login.lbi"}{/if}
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+	</div>
+</div></div>
+{include file="/library/page_footer.lbi"}
+</body>
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+{foreach from=$lang.passport_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+var username_exist = "{$lang.username_exist}";
+var btn_buy = "{$lang.btn_buy}";
+var is_cancel = "{$lang.is_cancel}";
+var select_spe = "{$lang.select_spe}";
+</script>
+</html>

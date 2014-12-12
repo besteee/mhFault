@@ -1,0 +1,56 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $promotion_goods} -->
+<script type="text/javascript">
+var Tday = new Array();
+var daysms = 24 * 60 * 60 * 1000
+var hoursms = 60 * 60 * 1000
+var Secondms = 60 * 1000
+var microsecond = 1000
+var DifferHour = -1
+var DifferMinute = -1
+var DifferSecond = -1
+function clock(key)
+  {
+   var time = new Date()
+   var hour = time.getHours()
+   var minute = time.getMinutes()
+   var second = time.getSeconds()
+   var timevalue = ""+((hour > 12) ? hour-12:hour)
+   timevalue +=((minute < 10) ? ":0":":")+minute
+   timevalue +=((second < 10) ? ":0":":")+second
+   timevalue +=((hour >12 ) ? " PM":" AM")
+   var convertHour = DifferHour
+   var convertMinute = DifferMinute
+   var convertSecond = DifferSecond
+   var Diffms = Tday[key].getTime() - time.getTime()
+   DifferHour = Math.floor(Diffms / daysms)
+   Diffms -= DifferHour * daysms
+   DifferMinute = Math.floor(Diffms / hoursms)
+   Diffms -= DifferMinute * hoursms
+   DifferSecond = Math.floor(Diffms / Secondms)
+   Diffms -= DifferSecond * Secondms
+   var dSecs = Math.floor(Diffms / microsecond)
+   
+   if(convertHour != DifferHour) a="<b>"+DifferHour+"</b>天";
+   if(convertMinute != DifferMinute) b="<b>"+DifferMinute+"</b>时";
+   if(convertSecond != DifferSecond) c="<b>"+DifferSecond+"</b>分"
+     d="<b>"+dSecs+"秒"
+     if (DifferHour>0) {a=a} 
+     else {a=''}
+   document.getElementById("leftTime"+key).innerHTML = a + b + c + d; //显示倒计时信息
+  
+  }
+</script>
+<!-- 促销商品-->
+  <!--{foreach from=$promotion_goods key=key item=goods name="promotion_foreach"}-->
+<li class="fore{$smarty.foreach.promotion_foreach.iteration}"><div class="countdown" id="leftTime{$smarty.foreach.promotion_foreach.index}"></div>            
+ <div class="p-img ld"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank"><b class="pi pix1" id="icon36"><span>{$goods.dz_price}</span><br>折 </b><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="130" width="130"></a></div> 
+ <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+ <div class="p-price"><span>抢购价：</span><strong>{$goods.promote_price}</strong></div> </li>
+    <script>
+	Tday[{$key}] = new Date("{$goods.gmt_end_time}");   
+	window.setInterval(function()     
+	{clock({$key});}, 1000);     
+	</script> 
+ <!--{/foreach}-->	
+<!-- {/if} -->

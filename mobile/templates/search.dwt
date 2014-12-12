@@ -1,0 +1,141 @@
+<!--搜索页-->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>{if $keywords}{$keywords}{else}搜索{/if} - {$shop_name}</title>
+	<link href="css/reset.css" rel="stylesheet" type="text/css" />
+	<link href="css/search_new.css" rel="stylesheet" type="text/css" />
+	<link href="css/foot.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+	<script type="text/javascript" src="js/iscroll.js"></script>
+	<meta content="telephone=no" name="format-detection" />
+	<link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+	<script>
+          var util = (function(){
+              var u = navigator.userAgent.toLowerCase();
+              return {
+                  isIphone : function(){return (RegExp("iphone").test(u) || RegExp("ipod touch").test(u))},
+                  isIpad : function(){return RegExp("ipad").test(u)},
+                  isAndroid : function(){return (RegExp("android").test(u) || RegExp("android 2").test(u))},
+                  isMB : function(){return (util.isIphone() || util.isIpad() || util.isAndroid())}
+              };
+          })();
+          window.util = util;
+          (function(){
+              if( !util.isMB() ){
+                  window.location.href = '../index.php';
+              }
+          })();
+    </script>
+<script type="text/javascript">
+	document.write('<div id="global_loading" style="width: 100%;height: 100%;position: fixed;top: 0;left: 0;background-color: #eee;z-index:999"><div style="width: 100px;height: 75px;margin:auto;top:50%;position:relative"><span style="display:block;float:left;width:32px;height:32px;background:url(/images/spacer.gif);margin-top:-5px;"></span>&nbsp;&nbsp;加载中...</div></div>');
+</script>
+<body>
+	<div class="search">
+		<!--页面上方搜索框区域begin-->
+<div class="seo clearfix">
+<form action="search.php" method="get" name="searchForm" >
+	<div class="search-area clearfix s-area">
+		<div class="search_l"><a class="back" href="javascript:history.back();"></a></div>
+        <input type="hidden" name="category" value="{$c_id}">
+        <div class="search_c"><input type="text" name="keywords" value="{$keywords}" id="keywords" class="key-word"></div> 
+		<div class="search_r"><INPUT class="search-icon" type="submit" id='btn_search' /></div>
+	</div>
+</form>
+</div> 
+<script type="text/javascript">
+function readSN(){
+	window.wst.readSN();
+}
+var searchInput = document.getElementById('keywords');
+searchInput.onfocus = function () {
+    if (searchInput.value == '请输入关键词')
+        searchInput.value = '';
+};
+searchInput.onblur = function () {
+    if (searchInput.value == '')
+        searchInput.value = '请输入关键词';
+}
+function chkSearch() {
+    if (searchInput.value == "请输入关键词") {
+        alert('请输入关键词');
+        searchInput.onfocus();
+        return false;
+    }
+}
+</script>		<div class="cover"></div>
+		<!--页面上方搜索框区域end-->
+		<!--锚点-->
+		<!--页面中部 begin-->
+<!-- 排序begin -->
+	<script language="javascript">
+	function form_order(order){
+		listform.sort.value = order;
+		listform.order.value = "{if $pager.search.order == 'DESC'}ASC{else}DESC{/if}";
+		listform.submit();
+	}
+	</script>
+	<form action="search.php" method="post" name="listform" style="display:none">
+    <input type="hidden" name="page" value="{$pager.page}" />
+    {foreach from=$pager.search key=key item=item}
+
+      {if $key eq 'keywords'}
+        <input type="hidden" name="{$key}" value="{$item|escape:decode_url}" />
+      {else}
+        <input type="hidden" name="{$key}" value="{$item}" />
+      {/if}
+
+    {/foreach}
+  </form>
+<div class="paixu">
+<div class="tab">
+<a class="time {if $pager.search.sort == 'goods_id'}on{/if}" href="javascript:form_order('goods_id');">上市{if $pager.search.sort == 'goods_id'}{if $pager.search.order == 'DESC'}↓{else}↑{/if}{/if}</a>
+<a class="price {if $pager.search.sort == 'shop_price'}on{/if}" href="javascript:form_order('shop_price');">价格{if $pager.search.sort == 'shop_price'}{if $pager.search.order == 'DESC'}↓{else}↑{/if}{/if}</a>
+<a class="click {if $pager.search.sort == 'click_count'}on{/if}" href="javascript:form_order('click_count');">人气{if $pager.search.sort == 'click_count'}{if $pager.search.order == 'DESC'}↓{else}↑{/if}{/if}</a>
+</div>
+</div>
+<!-- 排序end -->
+		<div class="tab clearfix">
+<div class="productlist clearfix">
+{foreach from=$goods_data item=goods name=goods}
+<div class="srp j_autoResponsive_container m-ks-autoResponsive-container m-animation album" style="opacity: 1;{if fmod($smarty.foreach.goods.iteration,2) <> 0}margin-right:2%;{/if}">
+<div data-id="36511624513" class="product">
+     <div class="pro-inner">
+              <div class="proImg-wrap">
+                <a  href="goods.php?id={$goods.goods_id}"><img src="../{$goods.goods_img}"></a>
+              </div>
+              <div class="proInfo-wrap">
+              <div class="proTitle">
+                <a href="goods.php?id={$goods.goods_id}">{$goods.goods_name}</a>
+              </div>
+              <div class="proPrice">
+              <em>{$goods.shop_price}</em>
+              </div>
+              </div>
+    </div>
+</div>
+</div>
+{foreachelse}
+<div class="noshop">
+没有搜索到相关商品！
+</div>
+{/foreach}
+</div>
+{if $pagebar}
+{$pagebar}
+{/if}
+		</div>
+		<!--页面中部 end-->
+	</div>
+{include file='foot.dwt'}
+<script type="text/javascript">
+		var global_loading=document.getElementById("global_loading");
+		global_loading.parentNode.removeChild(global_loading);
+</script>
+</body>
+</html>

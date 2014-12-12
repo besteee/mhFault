@@ -1,0 +1,41 @@
+
+<div id="footer">
+	<div class="container">
+		<div class="search-bottom box box-gbg">
+			<b class="tp"><b></b></b>
+			<div class="bd"><div class="body">
+				<form method="get" action="search.php">
+					<span>{$lang.search_goods}{$lang.colon}</span>
+					<select name="category">
+						<option value="0" selected="selected">{$lang.all_category_select}</option>
+						{$category_list}
+					</select>
+					<input type="text" name="keywords" value="{$search_keywords|escape}" class="keyword"/>
+					<input type="submit" value="{$lang.btn_search}" class="submit"/>
+					<a href="search.php?act=advanced_search">{$lang.advanced_search}</a>
+				</form>
+			</div></div>
+			<b class="bt"><b></b></b>
+		</div>
+		{if $helps && ($cfg.help_open eq 0)}
+		<div class="help box">
+			<b class="tp"><b></b></b>
+			<div class="bd">
+				{foreach from=$helps item=help_cat name=helps}
+				{if $smarty.foreach.helps.index < 5}
+				<dl{if $smarty.foreach.helps.first} class="first"{/if}>
+					<dt><a href="{$help_cat.cat_id}">{$help_cat.cat_name}</a></dt>
+					{foreach from=$help_cat.article item=item name=help_list}
+					<dd><a href="{$item.url}" title="{$item.title|escape:html}">{$item.short_title}</a></dd>
+					{/foreach}
+				</dl>
+				{/if}
+				{/foreach}
+			</div>
+			<b class="bt"><b></b></b>
+		</div>
+		{/if}
+		<p class="nav-bottom">{if $navigator_list.bottom}{foreach from=$navigator_list.bottom item=nav name=nav_bottom_list}<a href="{$nav.url}"{if $nav.opennew eq 1} rel="external"{/if}{if $smarty.foreach.nav_bottom_list.first} class="first"{/if}>{$nav.name}</a>{/foreach}{/if}</p>
+		<p class="copyright">{$copyright}{if $icp_number}<a href="http://www.miibeian.gov.cn/" rel="external">{$icp_number}</a>{/if}{if $stats_code}<br />{$stats_code}{/if}</p>
+	</div>
+</div>

@@ -1,0 +1,86 @@
+<div class="box" id="goods-list">
+	<b class="tp"><b></b></b>
+	<div class="hd">
+		<h3>{$lang.goods_list}</h3>
+		<div class="mode">
+			<p class="display">
+			<em>{$lang.display}{$lang.colon}</em>
+			<a href="category.php?id={$category}&brand={$brand_id}&price_min={$price_min}&price_max={$price_max}&filter_attr={$filter_attr}&page={$pager.page}&sort={$pager.sort}&order={$pager.order}&display=list#goods-list" title="{$lang.display_list}" class="dp-list{if $pager.display eq 'list'} current{/if}">{$lang.display_list}</a>
+			<a href="category.php?id={$category}&brand={$brand_id}&price_min={$price_min}&price_max={$price_max}&filter_attr={$filter_attr}&page={$pager.page}&sort={$pager.sort}&order={$pager.order}&display=grid#goods-list" title="{$lang.display_grid}" class="dp-grid{if $pager.display eq 'grid'} current{/if}">{$lang.display_grid}</a>
+			</p>
+			<p class="order">
+			<em>{$lang.order_by}{$lang.colon}</em>
+			<a href="category.php?id={$category}&brand={$brand_id}&price_min={$price_min}&price_max={$price_max}&filter_attr={$filter_attr}&page={$pager.page}&sort=goods_id&order=DESC&display={$pager.display}#goods-list" title="{$lang.order_by_time_desc}" class="od-time-d{if ($pager.sort eq 'goods_id') and ($pager.order eq 'DESC')} current{/if}"><span>{$lang.order_by_time_desc}</span></a>
+			<a href="category.php?id={$category}&brand={$brand_id}&price_min={$price_min}&price_max={$price_max}&filter_attr={$filter_attr}&page={$pager.page}&sort=goods_id&order=ASC&display={$pager.display}#goods-list" title="{$lang.order_by_time_asc}" class="od-time-a{if ($pager.sort eq 'goods_id') and ($pager.order eq 'ASC')} current{/if}"><span>{$lang.order_by_time_asc}</span></a>
+			<a href="category.php?id={$category}&brand={$brand_id}&price_min={$price_min}&price_max={$price_max}&filter_attr={$filter_attr}&page={$pager.page}&sort=shop_price&order=DESC&display={$pager.display}#goods-list" title="{$lang.order_by_price_desc}" class="od-price-d{if ($pager.sort eq 'shop_price') and ($pager.order eq 'DESC')} current{/if}"><span>{$lang.order_by_price_desc}</span></a>
+			<a href="category.php?id={$category}&brand={$brand_id}&price_min={$price_min}&price_max={$price_max}&filter_attr={$filter_attr}&page={$pager.page}&sort=shop_price&order=ASC&display={$pager.display}#goods-list" title="{$lang.order_by_price_asc}" class="od-price-a{if ($pager.sort eq 'shop_price') and ($pager.order eq 'ASC')} current{/if}"><span>{$lang.order_by_price_asc}</span></a>
+			</p>
+		</div>
+	</div>
+	<div class="bd">
+		{if $pager.display == 'list'}
+		<ul class="goods-list">
+			{foreach from=$goods_list item=goods name=goods_list}
+			<li{if $smarty.foreach.goods_list.index %4==0} class="first-child"{/if}>
+				<span class="photo">
+					<a href="{$goods.url}" title="{$goods.goods_name|escape:html}" class="image"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name|escape:html}"/></a>
+				</span>
+				<span class="info">
+					<a href="{$goods.url}" title="{$goods.goods_name|escape:html}" class="name">{$goods.goods_name}</a>
+					<em class="price{if $goods.promote_price} promote{/if}">{if $goods.promote_price}{$goods.promote_price}{else}{$goods.shop_price}{/if}</em>
+				</span>
+				<span class="action">
+					<a href="{$goods.url}" class="detail">{$lang.btn_detail}</a>
+					<a href="javascript:addToCart({$goods.goods_id})" class="buy">{$lang.btn_buy}</a>
+					<a href="javascript:collect({$goods.goods_id});" class="collect">{$lang.btn_collect}</a>
+				</span>
+			</li>
+			{/foreach}
+		</ul>
+		{elseif $pager.display == 'grid'}
+		<ul class="goods-list display-grid">
+			{foreach from=$goods_list item=goods name=goods_list}
+			{if $goods.goods_id}
+			<li{if $smarty.foreach.goods_list.index %3==0} class="first-child"{/if}>
+				<span class="photo">
+					<a href="{$goods.url}" title="{$goods.goods_name|escape:html}" class="image"><img src="{$goods.goods_img}" alt="{$goods.goods_name|escape:html}"/></a>
+				</span>
+				<span class="info">
+					<a href="{$goods.url}" title="{$goods.goods_name|escape:html}" class="name">{$goods.goods_name}</a>
+					<em class="price{if $goods.promote_price} promote{/if}">{if $goods.promote_price}{$goods.promote_price}{else}{$goods.shop_price}{/if}</em>
+				</span>
+				<span class="action">
+					<a href="{$goods.url}" class="detail">{$lang.btn_detail}</a>
+					<a href="javascript:addToCart({$goods.goods_id})" class="buy">{$lang.btn_buy}</a>
+					<a href="javascript:collect({$goods.goods_id});" class="collect">{$lang.btn_collect}</a>
+				</span>
+			</li>
+			{/if}
+			{/foreach}
+		</ul>
+		{elseif $pager.display == 'text'}
+		<ul class="goods-list display-text">
+			{foreach from=$goods_list item=goods name=goods_list}
+			{if $goods.goods_id}
+			<li{if $smarty.foreach.goods_list.first} class="first"{/if}>
+				<a href="{$goods.url}" title="{$goods.goods_name|escape:html}" class="name">{$goods.goods_name}</a>
+				<em class="price{if $goods.promote_price} promote{/if}">{if $goods.promote_price}{$goods.promote_price}{else}{$goods.shop_price}{/if}</em>
+				<span class="action">
+					<a href="{$goods.url}" class="detail">{$lang.btn_detail}</a>
+					<a href="javascript:addToCart({$goods.goods_id})" class="buy">{$lang.btn_buy}</a>
+					<a href="javascript:collect({$goods.goods_id});" class="collect">{$lang.btn_collect}</a>
+				</span>
+			</li>
+			{/if}
+			{/foreach}
+		</ul>
+		{/if}
+		{include file="/library/pages.lbi"}
+	</div>
+	<b class="bt"><b></b></b>
+</div>
+<script type="text/javascript">
+var btn_buy = "{$lang.btn_buy}";
+var is_cancel = "{$lang.is_cancel}";
+var select_spe = "{$lang.select_spe}";
+</script>

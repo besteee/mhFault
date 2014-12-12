@@ -1,0 +1,5 @@
+{insert name='siy_history'}
+<script type="text/javascript">
+function clear_history(){Ajax.call('user.php', 'act=clear_history',clear_history_Response, 'GET', 'TEXT',1,1);}
+function clear_history_Response(res){document.getElementById('history').style.display = 'none';}
+</script>

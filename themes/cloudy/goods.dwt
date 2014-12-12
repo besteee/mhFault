@@ -1,0 +1,140 @@
+<?php $this->assign('page', 'goods');?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="Keywords" content="{$keywords}"/>
+<meta name="Description" content="{$description}"/>
+<!-- TemplateBeginEditable name="doctitle" --><title>{$page_title}</title><!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link href="{$static_path}static/css/style.css" rel="stylesheet" type="text/css"/>
+<!--[if IE]><link href="{$static_path}static/css/ie.css" rel="stylesheet" type="text/css"/><![endif]-->
+<script type="text/javascript" src="{$static_path}static/js/jquery.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.json.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/common.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/transport.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/utils.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/effect.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("a[rel=gallery]").fancybox({
+		'transitionIn'	: 'elastic',
+		'transitionOut'	: 'elastic'
+	});
+});
+</script>
+</script>
+</head>
+<body>
+{include file="/library/page_header.lbi"}
+<div id="content"><div class="container">
+	{include file="/library/ur_here.lbi"}
+	<div class="col-main">
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+		<!-- #BeginLibraryItem "/library/goods_detail.lbi" --><!-- #EndLibraryItem -->
+		{if $package_goods_list}
+		<div class="package-goods box">
+			<b class="tp"><b></b></b>
+			<div class="hd"><h3>{$lang.remark_package}</h3></div>
+			<div class="bd">
+				{foreach from=$package_goods_list item=package_goods name=package_goods_list}
+				<dl{if $smarty.foreach.package_goods_list.first} class="first"{/if}>
+					<dt>{$package_goods.act_name}</dt>
+					<dd class="item-area">
+						{foreach from=$package_goods.goods_list item=goods_list}
+						<span><a href="goods.php?id={$goods_list.goods_id}">{$goods_list.goods_name}{$goods_list.goods_attr_str}</a><em>X{$goods_list.goods_number}</em></span>
+						{/foreach}
+					</dd>
+					<dd class="price-area">
+						<span>{$lang.old_price}<em class="price market">{$package_goods.subtotal}</em></span>
+						<span>{$lang.package_price}<em class="price shop">{$package_goods.package_price}</em></span>
+						<span>{$lang.then_old_price}<em class="price">{$package_goods.saving}</em></span>
+					</dd>
+					<dd class="action"><a href="javascript:addPackageToCart({$package_goods.act_id})" class="btn-sm"><span>{$lang.add_to_cart}</span></a></dd>
+				</dl>
+				{/foreach}
+			</div>
+			<b class="bt"><b></b></b>
+		</div>
+		{/if}
+		{if $properties or $goods.goods_desc}
+		<div class="goods-desc box">
+			<b class="tp"><b></b></b>
+			<div class="hd"><h3>{$lang.goods_info}</h3></div>
+			<div class="bd">
+				{if $properties}
+				<dl class="table">
+					<dt class="title">{$goods.goods_name}{$lang.attr_for}</dt>
+					<dt class="head">{$lang.attr_name}</dt>
+					<dd class="head">{$lang.attr_value}</dd>
+					{foreach from=$properties item=property_group key=key}
+					{foreach from=$property_group item=property}
+					<dt>{$property.name|escape:html}</dt>
+					<dd class="{cycle values="odd,even"}">{$property.value}</dd>
+					{/foreach}
+					{/foreach}
+				</dl>
+				{/if}
+				{if $goods.goods_desc}
+				<div class="text{if $properties} secondly{/if}">{$goods.goods_desc}</div>
+				{/if}
+			</div>
+			<b class="bt"><b></b></b>
+		</div>
+		{/if}
+	<!-- TemplateBeginEditable name="侧栏" -->
+		<!-- #BeginLibraryItem "/library/bought_note_guide.lbi" --><!-- #EndLibraryItem -->
+	<!-- TemplateEndEditable -->
+		<div class="comment-box box">
+			<b class="tp"><b></b></b>
+			<div class="hd"><h3>{$lang.goods_comment}</h3></div>
+			<div class="bd">
+				<div id="ECS_COMMENT">
+					{insert name='comments' type=$type id=$id}
+				</div>
+			</div>
+			<b class="bt"><b></b></b>
+		</div>
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+	</div>
+	<div class="col-sub">
+	<!-- TemplateBeginEditable name="侧栏上方" --><!-- TemplateEndEditable -->
+	<!-- TemplateBeginEditable name="侧栏" -->
+		<!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+		<!-- #BeginLibraryItem "/library/goods_attrlinked.lbi" --><!-- #EndLibraryItem -->
+		<!-- #BeginLibraryItem "/library/goods_related.lbi" --><!-- #EndLibraryItem -->
+		<!-- #BeginLibraryItem "/library/bought_goods.lbi" --><!-- #EndLibraryItem -->
+		<!-- #BeginLibraryItem "/library/goods_article.lbi" --><!-- #EndLibraryItem -->
+		<!-- #BeginLibraryItem "/library/history.lbi" --><!-- #EndLibraryItem -->
+	<!-- TemplateEndEditable -->
+	<!-- TemplateBeginEditable name="侧栏下方" --><!-- TemplateEndEditable -->
+	</div>
+</div></div>
+{include file="/library/page_footer.lbi"}
+<script type="text/javascript">
+var goods_id = {$goods_id};
+var goodsattr_style = {$cfg.goodsattr_style|default:1};
+var gmt_end_time = {$promote_end_time|default:0};
+{foreach from=$lang.goods_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+var goodsId = {$goods_id};
+{literal}
+onload = function(){changePrice();fixpng();try{onload_leftTime();}catch(e){}}
+function changePrice()
+{
+var attr = getSelectedAttributes(document.forms['ECS_FORMBUY']);
+var qty = document.forms['ECS_FORMBUY'].elements['number'].value;
+Ajax.call('goods.php', 'act=price&id=' + goodsId + '&attr=' + attr + '&number=' + qty, changePriceResponse, 'GET', 'JSON');
+}
+function changePriceResponse(res)
+{
+if (res.err_msg.length > 0){alert(res.err_msg);}
+else{document.forms['ECS_FORMBUY'].elements['number'].value = res.qty;
+if (document.getElementById('ECS_GOODS_AMOUNT'))document.getElementById('ECS_GOODS_AMOUNT').innerHTML = res.result;
+}
+}
+{/literal}
+</script>
+</body>
+</html>

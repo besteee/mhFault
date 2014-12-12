@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link href="base.css" rel="stylesheet" type="text/css">
+<link href="home.css" rel="stylesheet" type="text/css">
+<link href="group.css" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,lefttime.js'}
+<script type="text/javascript">
+  {foreach from=$lang.js_languages item=item key=key}
+    var {$key} = "{$item}";
+  {/foreach}
+</script>
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="blank"></div>
+<div class="block">
+<div class="tuan_detail_sider">  
+	<div class="tuan_detail_side">
+	<h2>热门团购</h2>
+	<ul>
+	<!--{foreach from=$gb_list_hot item=group_buy name=hotcun} -->
+	{if $smarty.foreach.hotcun.iteration<6}
+	<li>
+	<p><a href="{$group_buy.url}" class="hotbuy"><img class="thumb" src="{$group_buy.group_img}" /></a></p>
+	<p class="name"><a href="{$group_buy.url}">{if $group_buy.group_title}{$group_buy.group_title}{else}{$group_buy.act_name}{/if}</a></p>
+	<p><strong class="price"><!-- {foreach from=$group_buy.price_ladder item=item name=foo} --><!-- {if $smarty.foreach.foo.last} -->{$item.price}<!-- {/if} --><!-- {/foreach} -->元</strong></p>
+	<p><strong>{if $group_buy.isg_rs eq 1}{$group_buy.group_rs}{else}{$group_buy.cur_amount}{/if}</strong>件已购买</p>
+	<a href="{$group_buy.url}" class="qkk"></a>
+	</li>
+	{/if}
+	<!--{/foreach}-->
+	</ul>
+	</div>
+</div>
+<div class="tuan_detail_info">
+ <div class="wgoods">
+	<h2>{if $group_buy.group_title}{$group_buy.group_title}{else}{$group_buy.act_name}{/if}</h2> 
+	 <form action="group_buy.php?act=buy" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY">
+	<div class="tuan_detail_buy">
+	<div class="tuan_detail_buy_l">
+	<p class="price"><span>¥</span> {$group_buy.formated_cur_price}</p>
+	<ul>
+	<li>原价<del id="marketPrice">{$group_buy.market_price}</del></li>
+	<li>折扣<span id="rebate">{$group_buy.t_discount}折</span></li>
+	<li>节省<span id="economize">{$group_buy.formated_rebate_price}</span></li>
+	</ul>
+	<div class="ptdiv">购买数量：<input name="number" type="text" class="timenum" id="number" value="1" size="4" /></div>
+	<p>
+	 <!-- {if $group_buy.status eq 0} 未开始 -->
+      <button class="swks"></button>
+      <!-- {elseif $group_buy.status eq 1} 进行中 -->
+      <input type="hidden" name="group_buy_id" value="{$group_buy.group_buy_id}" />
+	   <button type="submit" class="buy_now">立即抢购</button>
+      <!-- {elseif $group_buy.status eq 2} 已结束 -->
+      <button class="yjs"></button>
+      <!-- {elseif $group_buy.status eq 3} 团购成功 -->
+      <button class="ysw"></button>
+      <!-- {elseif $group_buy.status eq 4} 团购失败 -->
+      <button class="jjkq"></button>
+      <!-- {/if} -->
+	  
+	</p>
+	<p><strong class="total_buy">{if $group_buy.isg_rs eq 1}{$group_buy.group_rs}{else}{if $group_buy.isg_rs eq 1}{$group_buy.group_rs}{else}{$group_buy.valid_goods}{/if}{/if}</strong>人已购买</p>
+	   <!-- {if $group_buy.status eq 0} 未开始 -->
+      {$lang.gbs_pre_start}
+      <!-- {elseif $group_buy.status eq 1} 进行中 -->
+      <p id="leftTime" class="timecolor">
+	   正在载入中...
+	   </p>
+      <!-- {elseif $group_buy.status eq 2} 已结束 -->
+      <p>{$lang.gbs_finished} {$lang.gb_cur_price} {$group_buy.formated_cur_price} <br />{$lang.gb_valid_goods} {if $group_buy.isg_rs eq 1}{$group_buy.group_rs}{else}{$group_buy.valid_goods}{/if}</p>
+      <!-- {elseif $group_buy.status eq 3} 团购成功 -->
+      <p>{$lang.gbs_succeed}
+      {$lang.gb_final_price} {$group_buy.formated_trans_price}<br />
+      {$lang.gb_final_amount} {$group_buy.trans_amount}</p>
+      <!-- {elseif $group_buy.status eq 4} 团购失败 -->
+      <p>{$lang.gbs_fail}</p>
+      <!-- {/if} -->
+	
+		<!--{if $group_buy.succeed_time gt '0'}-->
+		<div class="ptdiv">{$group_buy.succeed_time_date}达到最低团购人数：{$group_buy.lower_orders|default:0} 人</div>
+		<!--{/if}-->
+		<!-- {foreach from=$specification item=spec key=spec_key} 循环规格开始 -->
+         <div class="ptdiv">{$spec.name}：<!-- {if $cfg.goodsattr_style eq 1} 规格显示方式：单选按钮 -->
+                                <!-- {foreach from=$spec.values item=value key=key} -->
+                                <label for="spec_value_{$value.id}"><input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" {if $key eq 0}checked{/if} />{$value.label}</label>
+                                <!-- {/foreach} -->
+                              <!-- {else} 规格显示方式：下拉列表 -->
+                                <select name="spec_{$spec_key}">
+                                <!-- {foreach from=$spec.values item=value key=key} -->
+                                <option label="{$value.label}" value="{$value.id}">{$value.label} </option>
+                                <!-- {/foreach} -->
+                                </select>
+                              <!-- {/if} 规格显示方式 -->
+                           </div>
+                          <!-- {/foreach} 循环规格结束 -->
+		<!-- {if $group_buy.deposit > 0} 保证金额-->
+       <div class="ptdiv">{$lang.gb_deposit} {$group_buy.formated_deposit}</div>
+      <!--{/if}-->
+
+      <!--{if $group_buy.restrict_amount > 0} 限购数量-->
+     <div class="ptdiv">{$lang.gb_restrict_amount} {$group_buy.restrict_amount}</div>
+      <!--{/if}-->
+	</div>
+	<p class="pbig">
+	<img width="540" height="360" src="{$group_buy.group_img}" alt="{$group_buy.act_name|escape:html}" /><br />
+   </p>
+		<div class="tuan_detail_otherinfo">
+		   <div class="share_to f_l"><!-- Baidu Button BEGIN -->
+	<div id="bdshare" class="bdshare_b" style="line-height: 12px;">
+	<img src="http://bdimg.share.baidu.com/static/images/type-button-1.jpg?cdnversion=20120831" />
+	</div>
+	<script type="text/javascript" id="bdshare_js" data="type=button&amp;uid=0" ></script>
+	<script type="text/javascript" id="bdshell_js"></script>
+	<script type="text/javascript">
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000);
+	</script>
+	<!-- Baidu Button END --></div>
+			 <div class="buyname f_r">{$gb_goods.goods_name|escape:html}</div>
+		</div>
+	</div>
+	</form> 
+	 </div>
+	<div class="blank"></div>
+    <div class="aboutthis" style="margin-bottom:10px;overflow:hidden;">
+	<h2 class="aboutthish2">关于本单</h2>
+	<div class="abouttips">团购详情</div>
+	<div class="seporator"></div>
+		<p class="tipstxt">
+		{$group_buy.group_buy_desc}
+		</p>
+		     <!-- #BeginLibraryItem "/library/comments.lbi" -->
+
+{insert_scripts files='transport.js,utils.js'}
+<div id="ECS_COMMENT"> {* ECSHOP 提醒您：动态载入comments_list.lbi，显示评论列表和评论表单 *}{insert name='comments' type=$type id=$id}</div>
+
+ <!-- #EndLibraryItem -->
+	</div>
+</div>
+</div>
+<div class="blank"></div>
+<!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+<script type="text/javascript">
+var gmt_end_time = "{$group_buy.gmt_end_date|default:0}";
+{foreach from=$lang.goods_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+var now_time = {$now_time};
+<!-- {literal} -->
+
+onload = function()
+{
+  try
+  {
+    onload_leftTime();
+  }
+  catch (e)
+  {}
+}
+<!-- {/literal} -->
+</script>
+</html>

@@ -1,0 +1,31 @@
+{include file="mhFaultpageheader.htm"}
+
+
+<table id="mhFaultAll" >
+	<tr>
+		<th class="mhFaultD_title">id</th>
+		<th class="mhFaultD_title">客户编号</th>
+		<td class="mhFaultD_title">客户名称</td>
+		<td class="mhFaultD_title">车型</td>
+		<td class="mhFaultD_title">故障</td>
+		<td class="mhFaultD_title">故障id</td>
+	</tr>
+{foreach from=$fault_diy item=diy key=key}
+	<tr>
+		<td class="mhFaultD_text">{$diy.id}</td>
+		<td class="mhFaultD_text">{$diy.user_id}</td>
+		<td class="mhFaultD_text">{$diy.name}</td>
+		<td class="mhFaultD_text">{$diy.cartype}</td>
+		<td class="mhFaultD_text">{$diy.need}</td>
+		<td class="mhFaultD_text"><a href="/admin/mhFault.php?act=detail&fault_id={$diy.fault_id}&fault_name={$diy.cartype} {$diy.need}&diyId={$diy.id}">生成套餐包</a></td>
+	</tr>
+{/foreach}
+</table>
+
+
+
+
+<script type="text/javascript">
+
+</script>
+{include file="pagefooter.htm"}

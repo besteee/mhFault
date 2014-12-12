@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link href="base.css" rel="stylesheet" type="text/css">
+<link href="home.css" rel="stylesheet" type="text/css">
+{* 包含脚本文件 *}
+{insert_scripts files='jquery-1.11.0.min.js'}
+<!--script type="text/javascript" src="js/MSClass.js"></script>
+<script type="text/javascript" src="js/scrollpic.js"></script>
+<script type="text/javascript" src="js/site.js"></script-->
+</head>
+<body>
+<script type="text/javascript">
+var isWidescreen=screen.width>=1280;
+if (isWidescreen){document.getElementsByTagName("body")[0].className="w1210";}
+</script>
+<!-- #BeginLibraryItem "/library/index_header.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/index_bestSlid.lbi" --><!-- #EndLibraryItem -->
+<div id="floatText">
+	<div style="font-size:16px;font-weight:bold; line-height:32px;"> 快速询价 产品套餐定制 </div>
+	<!-- {foreach from=$mhBrand item=brand key=key} -->
+	<div class="carSys">
+		<div class="carSysTitle">{$brand.site_carCountry}</div>
+		<ul>
+		<!-- {foreach from=$brand.carSys item=carSys key=key} -->
+			<li><a href='brand.php?id={$carSys.id}'>{$carSys.name}</a></li>
+		<!-- {/foreach} -->
+		</ul>
+		<div class="clear"></div>
+	</div>
+	<!-- {/foreach} -->
+
+	<div class="clear"></div>
+</div>
+
+<div class="w" style="text-align:center;"><img src="themes/jd2013/images/flowImg.jpg"></div>
+
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

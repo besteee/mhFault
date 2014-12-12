@@ -1,0 +1,25 @@
+{if $fittings}
+<div class="goods-fittings box">
+	<b class="tp"><b></b></b>
+	<div class="hd"><h3>{$lang.fittings}</h3></div>
+	<div class="bd">	
+		<ul class="goods-list">
+			{foreach from=$fittings item=goods name=fittings}
+			<li{if $smarty.foreach.fittings.index %4==0} class="first-child"{/if}>
+				<span class="photo">
+					<a href="{$goods.url}" title="{$goods.goods_name|escape:html}" class="image"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name|escape:html}"/></a>
+				</span>
+				<span class="info">
+					<a href="{$goods.url}" title="{$goods.goods_name|escape:html}" class="name">{$goods.goods_name}</a>
+					<em class="price fittings">{$goods.fittings_price}</em>
+				</span>
+				<span class="action">
+					<a href="{$goods.url}" class="detail">{$lang.btn_detail}</a>
+				</span>
+			</li>
+			{/foreach}
+		</ul>
+	</div>
+	<b class="bt"><b></b></b>
+</div>
+{/if}

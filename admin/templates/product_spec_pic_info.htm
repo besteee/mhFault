@@ -1,0 +1,85 @@
+<!-- $Id: articlecat_info.htm 16752 2009-10-20 09:59:38Z wangleisvn $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="../js/jscolor/jscolor.js"}
+<div class="main-div">
+<form method="post" action="product_spec_pic.php" enctype="multipart/form-data" name="theForm"  onsubmit="return validate()">
+<table cellspacing="1" cellpadding="3" width="100%">
+  <tr>
+    <td width="10%" class="label">{$lang.goods_name}</td>
+    <td width="90%">{$goods_name}</td>
+  </tr>
+
+  <tr>
+    <td class="label">{$attribute_info.attr_name}:</td>
+    <td>
+     {$attribute_info.attr_value}    </td>
+  </tr>
+
+  <tr>
+    <td class="label">{$lang.hex_color}:</td>
+    <td>
+     <input class="color {adjust:false}" autocomplete="off" name="hex_color" value="{$attribute_info.hex_color}">{$lang.hex_color_tips}
+     
+     </td>
+  </tr>
+  
+  <tr>
+      <td class="label">上传属性图片：</td>
+      <td>
+        <input type="file" name="goods_img" size="35" />
+      </td>
+  </tr>
+  <tr id="auto_thumb_1">
+            <td class="label">上传属性缩略图：</td>
+            <td id="auto_thumb_3">
+              <input type="file" name="goods_thumb" size="35" />
+              <br /><label for="auto_thumb"><input type="checkbox" id="auto_thumb" name="auto_thumb" checked="true" value="1" onclick="handleAutoThumb(this.checked)" />自动生成商品属性缩略图</label>
+            </td>
+  </tr>
+  
+  <tr>
+    <td colspan="2" align="center"><br />
+      <input type="submit" class="button" value="{$lang.button_submit}" />
+      <input type="reset" class="button" value="{$lang.button_reset}" />
+      <input type="hidden" name="act" value="act_edit_specification_pic" />
+      <input type="hidden" name="goods_id" value="{$goods_id}" />
+	  <input type="hidden" name="goods_attr_id" value="{$attribute_info.goods_attr_id}" />
+  </tr>
+</table>
+</form>
+</div>
+{insert_scripts files="../js/utils.js,validator.js"}
+{literal}
+<script language="JavaScript">
+<!--
+/**
+ * 检查表单输入的数据
+ */
+function validate()
+{
+    validator = new Validator("theForm");
+    return validator.passed();
+}
+
+window.onload = function()
+{
+     
+	  if (document.forms['theForm'].elements['auto_thumb'])
+      {
+          handleAutoThumb(document.forms['theForm'].elements['auto_thumb'].checked);
+      }
+	 
+      // 检查新订单
+      startCheckOrder();
+      document.forms['theForm'].reset();
+}
+
+function handleAutoThumb(checked)
+{
+	document.forms['theForm'].elements['goods_thumb'].disabled = checked;
+}
+
+//-->
+</script>
+{/literal}
+{include file="pagefooter.htm"}

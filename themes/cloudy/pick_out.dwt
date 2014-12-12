@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="Keywords" content="{$keywords}"/>
+<meta name="Description" content="{$description}"/>
+<!-- TemplateBeginEditable name="doctitle" --><title>{$page_title}</title><!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link href="{$static_path}static/css/style.css" rel="stylesheet" type="text/css"/>
+<!--[if IE]><link href="{$static_path}static/css/ie.css" rel="stylesheet" type="text/css"/><![endif]-->
+
+<script type="text/javascript" src="{$static_path}static/js/jquery.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.json.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/common.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/effect.js"></script>
+</head>
+<body>
+{include file="/library/page_header.lbi"}
+<div id="content"><div class="container">
+	{include file="/library/ur_here.lbi"}
+	<div class="col-main">
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+		<div class="pick-out box">
+			<b class="tp"><b></b></b>
+			<div class="hd"><h3>{$lang.pick_out}</h3></div>
+			<div class="bd">
+				{foreach from=$condition item=caption}
+				<dl class="table">
+					<dt class="title">{$caption.name}</dt>
+					<dt class="head">{$lang.attr_name}</dt>
+					<dd class="head">{$lang.attr_value}</dd>
+					{foreach from=$caption.cat item=cat}
+					<dt>{$cat.cat_name}</dt>
+					<dd class="{cycle values="odd,even"}">{foreach from = $cat.list item=list}<a href="{$list.url}">{$list.name}</a>{/foreach}</dd>
+					{/foreach}
+				</dl>
+				{/foreach}
+			</div>
+			<b class="bt"><b></b></b>
+		</div>
+		<div class="box">
+			<b class="tp"><b></b></b>
+			<div class="hd"><h3>{$lang.search_result}({$count})</h3>{if $count > 4}<a href="{$url}" class="more">{$lang.more}</a>{/if}</div>
+			<div class="bd">
+				<ul class="goods-list">
+					{foreach from=$pickout_goods item=goods name=pickout_goods}
+					<li{if $smarty.foreach.pickout_goods.index %4==0} class="first-child"{/if}>
+						<span class="photo">
+							<a href="{$goods.url}" title="{$goods.name|escape:html}" class="image"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}"/></a>
+						</span>
+						<span class="info">
+							<a href="{$goods.url}" title="{$goods.name|escape:html}" class="name">{$goods.name}</a>
+							<em class="price{if $goods.promote_price} promote{/if}">{if $goods.promote_price}{$goods.promote_price}{else}{$goods.shop_price}{/if}</em>
+						</span>
+						<span class="action">
+							<a href="{$goods.url}" class="detail">{$lang.btn_detail}</a>
+							<a href="javascript:addToCart({$goods.id})" class="buy">{$lang.btn_buy}</a>
+							<a href="javascript:collect({$goods.id});" class="collect">{$lang.btn_collect}</a>
+						</span>
+					</li>
+					{/foreach}
+				</ul>
+			</div>
+			<b class="bt"><b></b></b>
+		</div>
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+	</div>
+	<div class="col-sub">
+	<!-- TemplateBeginEditable name="侧栏上方" --><!-- TemplateEndEditable -->
+		<div class="your-choose box">
+			<b class="tp"><b></b></b>
+			<div class="hd"><h3>{$lang.your_choose}</h3></div>
+			<div class="bd">
+					{foreach from=$picks item=pick name=picks}
+					<p{if $smarty.foreach.picks.first} class="first"{/if}><a href="{$pick.url}">{$pick.name}</a></p>
+					{/foreach}
+			</div>
+			<b class="bt"><b></b></b>
+		</div>
+		{if $cat_list}
+		<div class="category box">
+			<b class="tp"><b></b></b>
+			<div class="hd"><h3>{$lang.goods_category}</h3></div>
+			<div class="bd">
+				{foreach from=$cat_list item=cat name=cat_list}
+				<dl{if $smarty.foreach.cat_list.last} class="last"{/if}>
+					<dt><a href="{$cat.url}">{$cat.cat_name|escape:html}{if $cat.goods_num}（{$cat.goods_num}）{/if}</a></dt>
+				</dl>
+				{/foreach}
+			</div>
+			<b class="bt"><b></b></b>
+		</div>
+		{/if}
+		{if $brand_list}
+		<div class="brands box">
+			<b class="tp"><b></b></b>
+			<div class="hd"><h3>{$lang.brands_list}</h3></div>
+			<div class="bd">			
+				<ul>
+					{foreach from=$brand_list item=brand name=brand_foreach}
+					{if $brand.brand_logo} 
+					<li class="image{if $smarty.foreach.brand_foreach.last} last{/if}"><a href="{$brand.url}" title="{$brand.brand_name|escape:html}"><img src="data/brandlogo/{$brand.brand_logo}" alt="{$brand.brand_name|escape:html}"/>{$brand.brand_name}</a></li>
+					{else}
+					<li class="text{if $smarty.foreach.brand_foreach.last} last{/if}"><a href="{$brand.url}" title="{$brand.brand_name|escape:html}">{$brand.brand_name}</a></li>
+					{/if}
+					{/foreach}
+				</ul>
+			</div>
+			<b class="bt"><b></b></b>
+		</div>
+		{/if}
+	<!-- TemplateBeginEditable name="侧栏下方" --><!-- TemplateEndEditable -->
+	</div>
+</div></div>
+{include file="/library/page_footer.lbi"}
+</body>
+<script type="text/javascript">
+var gmt_end_time = "{$group_buy.gmt_end_date|default:0}";
+{foreach from=$lang.goods_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+var btn_buy = "{$lang.btn_buy}";
+var is_cancel = "{$lang.is_cancel}";
+var select_spe = "{$lang.select_spe}";
+{literal}
+onload = function(){try{onload_leftTime();}catch (e){}}
+{/literal}
+</script>
+</html>

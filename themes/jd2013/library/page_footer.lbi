@@ -1,0 +1,60 @@
+﻿<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="w" >
+	<div id="service-2013" class="clearfix">
+	   <!-- {foreach from=$helps item=help_cat name=curn} -->
+		<dl class="fore{$smarty.foreach.curn.iteration}">
+			<dt><b></b><strong>{$help_cat.cat_name}</strong></dt>
+			<dd>
+                      <!-- {foreach from=$help_cat.article item=item} -->
+                       <div><a href="{$item.url}" title="{$item.title|escape:html}">{$item.short_title}</a></div>
+                     <!-- {/foreach} -->
+			</dd>
+		</dl>
+        <!-- {/foreach} -->
+		<dl class="fore4" style="width:200px;">
+			<dt><b></b><strong>联系我们</strong></dt>
+			<dd>
+                                             <div><p style="font-size:20px;font-weight:bold; line-height:30px;">400-886-0577
+					          <p>(售后专线：023-61978128)<br>
+						  <p style="font-size:12px;">服务时间：周一到周日09:00-22:00  </div>
+                     			</dd>
+		</dl>
+
+		<div class="fr"><div class="sm" id="branch-office">
+	<div class="smt">
+		<h3>猛虎自营覆盖区县</h3>
+	</div>
+	<div class="smc">
+		<p>猛虎已向全国1000个区县提供自营配送服务，支持货到付款、POS机刷卡和售后上门服务。</p>
+		<p class="ar"><a href="#" target="_blank">查看详情&nbsp;></a></p>
+	</div>
+</div>
+</div>
+		<span class="clr"></span>
+	</div>
+</div><!-- service end --><!-- service home end -->
+<div class="w" style="text-align:center;"><img src="themes/jd2013/images/foot_ourAdvantage.jpg"></div>
+<div class="w">
+	<div id="footer-2013">
+		<div class="links">  <!-- {if $navigator_list.bottom} -->
+               <!-- {foreach name=nav_bottom_list from=$navigator_list.bottom item=nav} -->
+                   <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
+                    <!-- {if !$smarty.foreach.nav_bottom_list.last} -->
+                       |
+                    <!-- {/if} -->
+                  <!-- {/foreach} -->
+              <!-- {/if} --></div>
+		<div class="copyright"> {$copyright}<br />
+ {$shop_address} {$shop_postcode}
+ <!-- 客服电话{if $service_phone} -->
+      Tel: {$service_phone}
+ <!-- 结束客服电话{/if} -->
+ <!-- 邮件{if $service_email} -->
+      E-mail: {$service_email}<br />
+ <!-- 结束邮件{/if} --> <!-- ICP 证书{if $icp_number} -->
+		        <a href="http://www.miibeian.gov.cn/" target="_blank">{$icp_number}</a>
+                <!-- 结束ICP 证书{/if} --> {if $stats_code}{$stats_code}{/if}</div>
+		 <div class="authentication"><a href="#" target="_blank"><img src="images/footer_1.gif"></a> <a href="#" target="_blank"><img src="images/footer_2.jpg"></a> <a href="#" target="_blank"><img src="images/footer_3.jpg"></a> <a href="#" target="_blank"><img src="images/footer_4.gif"></a></div>
+	</div>
+</div><!-- footer end -->
+<!-- footer end -->

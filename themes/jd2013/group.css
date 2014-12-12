@@ -1,0 +1,216 @@
+/* 团购页 */
+.tuanad{padding-bottom:5px;border-bottom:2px solid #cc0000;}
+.tuan {
+	margin-top:10px;
+}
+.tuan_list {
+	margin-right:-17px;
+	overflow:hidden;
+}
+.tuan_list li {
+	float:left;
+	width:294px;
+	margin:0 17px;
+	padding-bottom:25px;
+
+}
+.tuan_list li div {
+	padding:12px 0px 0;
+	border:1px solid #FFC198;
+	background:#fff;
+}
+.tuan_list .cur div{
+	border:1px solid #FA3442;
+}
+.tuan_list li a img {
+	display:block;
+	margin-top:12px;
+	text-align:center;
+}
+.tuan_list li h3 {
+	height:36px;
+	text-align:left;
+	background:none;
+	border:0;
+	overflow:hidden;
+	line-height:18px;
+	font-weight:normal;
+	padding:0 10px;
+}
+.tuan_list li h3 a {
+	font-size:14px;
+	font-weight:bold;
+	color:#666;
+}
+.tuan_list li p.buy {
+	position:relative;
+	width:268px;
+	background:url(images/group/groupbuy.gif) 0 no-repeat;
+	height:45px;
+	margin:0 auto;
+	font-weight:bold;
+	font-size:30px;
+	color:#fff;
+	line-height:45px;
+	padding-left:10px;
+	margin-bottom:10px;
+	margin-left:8px;
+	margin-top:1px;
+}
+.tuan_list li p.buy.ppt {
+	font:bold 20px "Microsoft Yahei";
+	line-height:45px;
+}
+.tuan_list li p.buy s {
+	font-size:20px;
+	text-decoration:none;
+}
+.tuan_list li p.buy a {
+	position:absolute;
+	top:2px;
+	right:2px;
+	width:100px;
+	height:40px;
+	overflow:hidden;
+	text-indent:-9999px;
+}
+.tuan_list li p.buy.aboutToStart {
+	background:#18a5e7;
+}
+.tuan_list li p.buy.aboutToStart a {
+	background-position:-75px -92px;
+	cursor:default;
+}
+.tuan_list li p.buy.sellOut {
+	background:#ababab;
+}
+.tuan_list li p.buy.sellOut a {
+	background-position:-150px -62px;
+	cursor:default;
+}
+.tuan_list li p.buy.end a {
+	background-position:-150px -92px;
+	cursor:default;
+}
+.w1210 .tuan_list li{width:296px;margin:0px 3px;}
+.w1210 .tuan_list li a img {width:277px; height:185px; text-align:center;}
+.w1210 .tuan_list li p.buy {width:280px;background:url(images/group/groupbuy.gif) 0 no-repeat;}
+.w1210 .buy_info span {width:95px;}
+.w1210 .tuan_detail_info{float:left;width:975px;}
+.w1210 .aboutthis {width: 953px;}
+.w1210 .tuan_detail_buy{width:963px;_zoom:1;}
+.w1210 .tuan_detail_buy .pbig{float:left;width:730px;border:2px solid #AE0909; text-align:center;margin:0 auto;}
+.buy_info {
+	height:40px;
+	margin:0px auto 0px;
+	overflow:hidden;
+	background:#f2f2f2;
+	color:#333;
+	line-height:40px;
+}
+.buy_info span {
+	float:left;
+	width:95px;
+	border-left:1px solid #fff;
+	border-right:1px solid #d4d4d4;
+	text-align:center;
+}
+.buy_info span.first {
+	border-left:0;
+}
+.buy_info span.last {
+	border-right:0;
+}
+.buy_info span b {
+	font-size:12px;
+}
+.buy_info span strong {
+	color:#c00;
+}
+.buy_info.ppt {
+	font:bold 18px "Microsoft Yahei";
+	color:#666;
+}
+.buy_info.ppt span {
+	width:48%;
+	line-height:40px;
+}
+/*详情页*/
+.tuan_detail{margin:10px auto 0;width:980px;}
+.tuan_detail_info{float:left;width:765px;}
+.tuan_detail_info h2{margin:15px 10px;font:bold 28px/40px "Microsoft YaHei";color:#333;}
+.tuan_detail_buy{width:763px;_zoom:1;}
+
+.tuan_detail_buy .pbig{float:left;border:2px solid #c00;}
+.tuan_detail_buy .pbig.qg{border-color:#c2c2c2;}
+.tuan_detail_buy .pbig.kt{border-color:#18A5E7;}
+.buyname{font-weight:bold;font-size:14px;line-height:25px;}
+
+.tuan_detail_buy_l{position:relative;float:left;padding-top:70px;width:219px;}
+.tuan_detail_buy_l p{margin:20px 0;text-align:center;font-size:14px;color:#333;}
+.tuan_detail_buy_l .price{position:absolute;top:0;left:-65px;margin:0;padding-left:68px;width:231px;height:77px;background:url(images/group/tuan_spritebg.png) no-repeat;font:bold 40px/70px "Microsoft YaHei";text-align:left;color:#fff;}
+.w1210 .tuan_detail_buy_l .price{padding-left:55px;}
+.tuan_detail_buy_l .price.qg{background-position:left -521px;}
+.tuan_detail_buy_l .price.kt{background-position:left bottom;}
+.tuan_detail_buy_l .price span{font-size:30px;}
+.tuan_detail_buy_l ul{padding:18px 0;background:#ffc;overflow:hidden;_zoom:1;}
+.tuan_detail_buy_l ul li{float:left;margin-left:-1px;border-left:1px solid #fad683;border-right:1px solid #fff;line-height:19px;font-size:14px;font-family:Arial, Helvetica, sans-serif;color:#333;text-align: center;    width: 72px}
+.tuan_detail_buy_l ul li del,.tuan_detail_buy_l ul li span{display:block;font-weight:bold;}
+.tuan_detail_buy_l ul li del,.tuan_detail_buy_l strong{color:#c00;}
+.tuan_detail_buy_l button{display:block;margin:0 auto;border:0;width:137px;height:52px;background:url(images/group/tuan_spritebg.png) no-repeat;text-indent:-999em;}
+.tuan_detail_buy_l button.buy_now{background-position:0 -77px;cursor:pointer;border:0;}
+.tuan_detail_buy_l button.jjkq{background-position:0 -192px;}
+.tuan_detail_buy_l button.swks{background-position:0 -244px;}
+.tuan_detail_buy_l button.yjs{background-position:0 -296px;}
+.tuan_detail_buy_l button.ysw{background-position:0 -348px;}
+.tuan_detail_buy_l .total_buy{font:bold 30px Arial;}
+.tuan_detail_buy_l .ptdiv{margin:3px 0;text-align:center;font-size:12px;color:#333;}
+.tuan_detail_buy_l .timecolor{color:#CC0000}
+.tuan_detail_buy_l .timenum{width:25px;height:15px;line-height:15px;text-align:center}
+
+.tuan_detail_otherinfo{clear:both;padding:15px 20px;overflow:hidden;_zoom:1;}
+.tuan_detail_otherinfo a{color:#06c;}
+.tuan_detail_otherinfo .zixun{display:inline-block;margin-left:15px;padding-left:30px;width:60px;height:25px;line-height:25px; background:url(images/group/tuan_spritebg.png) no-repeat 0 -131px;color:#333;}
+.tuan_detail_sider{float:right;width:213px;border:1px solid #d4d4d4;overflow:hidden}
+.w1210 .tuan_detail_sider{width:223px;}
+.tuan_detail_side{padding:10px 5px;}
+.tuan_detail_side h2{font-size:14px;color:#333;}
+.tuan_detail_side li{position:relative;line-height:20px;margin:15px 0;}
+.tuan_detail_side li .hotbuy a{display:block;color:#333; height:140px;overflow: hidden;}
+.tuan_detail_side li img{display:block;}
+.tuan_detail_side .thumb{width:190px;height:127px;}
+.tuan_detail_side li a:hover .zhekou{text-decoration:none;}
+.tuan_detail_side li .zhekou{position:absolute;top:0;right:0;width:41px;height:41px;background:url(images/group/tuan_spritebg.png) no-repeat right -137px;}
+.tuan_detail_side li .zhekou sup,.tuan_detail_side li .zhekou sub{position:absolute;right:2px;font-size:12px;font-weight:bold;color:#fff;}
+.tuan_detail_side li .zhekou sub{top:12px;}
+.tuan_detail_side li strong{color:#c00;}
+.tuan_detail_side li .price{font-size:14px;}
+.tuan_detail_side li a.qkk{position:absolute;bottom:0;right:0;display:block;border:0;width:75px;height:30px;background:url(images/group/tuan_spritebg.png) no-repeat;background-position:-138px -77px;text-indent:-999em; bottom:0px;}
+.tuan_detail_side .name{height:40px;line-height:20px;overflow:hidden}
+
+.w1210 .tuan_detail_side{width:222px;}
+.w1210 .tuan_detail_side li{position:relative;line-height:20px;margin:15px 0;width:210px;}
+.w1210 .tuan_detail_side .thumb{width:200px;height:133px;}
+.aboutthis {
+    background: url("images/group/sprites.jpg") repeat-x scroll 0 -494px #FFFFFF;
+    border: 1px solid #CCCCCC;
+    color: #666666;
+    height: auto;
+    padding: 7px 10px 20px;
+    width: 743px;
+    overflow:hidden;
+}
+.aboutthish2 {
+    color: #333333;
+    font: bold 14px '宋体',Arial,Helvetica,sans-serif;
+}
+.abouttips {
+    background: url("images/group/sprites.jpg") no-repeat scroll -181px -257px #EFEFEF;
+    color: #333333;
+    font-weight: bold;
+    height: 24px;
+    line-height: 26px;
+    margin-top: 8px;
+    padding-left: 23px;
+}
+.wgoods{border:1px solid #d4d4d4}

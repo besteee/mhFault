@@ -1,0 +1,649 @@
+{if $act eq 'qq_bind_user'}
+<style>
+html, body, div, span, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, address, big, cite, code, del, em, font, img, ins, small, strong, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
+    margin: 0;
+    padding: 0;
+}
+body{margin:0 auto;}
+.w{width:990px;padding:0;margin:0 auto;zoom:1;}
+/*logo*/
+.logo{margin:10px 0}
+.sno_begin{margin-bottom:10px}
+.sno_begin .mt{background: url("tit_regist.jpg") repeat-x scroll 0 -34px #D1D1D1;height: 33px;}
+.sno_begin .mt h2{ background: url("tit_regist.jpg") no-repeat scroll 0 0 transparent;float: left;height: 33px;line-height: 33px;padding-left: 15px;}
+.sno_begin .mt b{ background: url("tit_regist.jpg") no-repeat scroll 0 -68px transparent;float: right;height: 33px;width: 10px;}
+.sno_begin .content{border:1px solid #d1d1d1; padding:20px; border-top:none}
+.content{zoom:1;}
+.content_left{width:220px; float:left; margin-right:20px;text-align:center;}
+.name{font-size:14px; font-weight:bold; text-align:center; margin:10px 0}
+.content_img{ background:url(personal_left.gif) no-repeat; width:206px; height:206px; padding:7px;}
+.content_name{margin:10px 0; text-align:center; font-size:14px; color:#999}
+.content_name a:link,.content_name a:visited,.content_name a:active{color:#000; text-decoration:none; font-weight:bold}
+.content_name a:hover{color:#cc0000; text-decoration:underline; font-weight:bold}
+.content_right{border-left:1px solid #e9e9e9; width:670px; float:left; padding-left:25px;}
+.content_right h3{border:1px solid #EDD28B; background:#FFFDEE; line-height:45px; font-size:14px; padding:0 15px}
+.content_right h3 span{float:right; width:60px; height:25px; line-height:25px; border:1px solid #DE952F; text-align:center; background:#ff9933; margin-top:8px;}
+.content_right h3 span a:link{text-decoration:none; font-size:12px; color:#fff; font-weight:normal}
+.content_right h3 span a:visited{text-decoration:none; font-size:12px; color:#fff; font-weight:normal}
+.content_right h3 span a:hover{text-decoration:none; font-size:12px; color:#fff; font-weight:normal}
+.content_right h3 span a:active{text-decoration:none; font-size:12px; color:#fff; font-weight:normal}
+
+.btn-regist{width:108px;height:33px;background:url(i/sno_icon.jpg) no-repeat 0 0;font-size:14px;font-weight:bold;color:#fff;}
+.ac_1{color:#999; font-size:14px; margin:25px 0; padding-left:20px;}
+.link{width:300px;text-align:left;font-size:14px;}
+#item a:link,#regist a:visited,#regist a:active{text-decoration:none; font-size:12px; color:#22689C; font-weight:normal}
+#item a:hover{color:#cc0000; text-decoration:underline; font-size:12px; font-weight:normal}
+
+/*regist*/
+#regist .item{padding-top:5px;height:50px;line-height:26px;}
+#regist .label{width:100px;text-align:right;font-size:14px;}
+#regist .text{width:240px;height:26px;padding:4px 3px;border:1px solid #bbb;font-size:14px;font-family:arial,"宋体";}
+#regist .blank{width:16px;height:16px;margin:2px 5px 0;}
+#regist .mar{margin-right:10px;}
+#regist .checkbox{margin-top:6px;*margin-top:2px;}
+#regist .succeed{background:url(i/pwdstrength.gif) no-repeat -105px 0;}
+#regist .focus{color:#999;line-height:22px;*line-height:20px;}
+#regist .null,#regist .error{color:red;line-height:22px;*line-height:20px;}
+#regist .highlight1{border:1px solid #EFA100;outline:2px solid #FFDC97;*border:2px solid #ffcc66;*padding:3px 2px;}
+#regist .highlight2{border:1px solid #f00;outline:1px solid #FFC1C1;color:#f00;}
+#pwdstrength{color:#999;line-height:22px;padding-right:10px;}
+#pwdstrength b{float:left;width:104px;height:13px;overflow:hidden;margin-top:5px;*margin-top:3px;}
+.strengthA b{background:url(i/pwdstrength.gif) no-repeat 0 0;}
+.strengthB b{background:url(i/pwdstrength.gif) no-repeat 0 -13px;}
+.strengthC b{background:url(i/pwdstrength.gif) no-repeat 0 -26px;}
+.btn-img{cursor:pointer;overflow:hidden;margin:0;padding:0;border:0;text-align:center;}
+body .fl{float:left}
+#regist .text-1{width:100px}
+#regist .img img{height:26px; margin:0 5px}
+.ftx23, .flk23 a:link, .flk23 a:visited, a.flk23:link, a.flk23:visited{color:#999}
+.left_img_t{background:url(i/personal_left_r1_c1.gif) no-repeat; width:220px; height:7px}
+.left_img_m{background:url(i/personal_left_r3_c1.gif) repeat-y; width:206px; padding:2px 7px; _margin-top:-7px }
+.left_img img{display:inline; text-align:center}
+.left_img_b{background:url(i/personal_left_r5_c1.gif) no-repeat; width:220px; height:12px}
+/*model-login*/
+#model-login {padding:10px 15px;margin:0 40px 20px;border:1px solid #EDD28B;background:#FFFDEE;font-family:"宋体";line-height:30px;}
+#model-login dt{font-size:18px;font-family:"微软雅黑";font-weight:bolder}
+#model-login dd{color:#999}
+/*model-success*/
+#model-success {width:400px;padding:20px 0;margin:0 auto;line-height:22px;}
+#model-success .con {position:relative;padding:0 20px 0 80px;}
+#model-success h3 {font-size:16px;color:#390;}
+#model-success b {display:block;position:absolute;top:5px;left:10px;width:48px;height:39px;background:url(i/bg_regist.jpg) no-repeat -196px -24px;}
+#model-success .i-con {padding:20px 0 10px;}
+#model-success strong {color:#C60000;}
+#model-success .btn-entry {display:block;width:244px;height:35px;background:url(i/btn_regist_qq.jpg) no-repeat 0 0;font-size:14px;font-weight:bold;color:#fff;text-align:center;line-height:33px;text-decoration:none;}
+
+#regist .label {float:left;}
+#regist .pwdbg {background:#FFF8EB;}
+#regist .btn-regist {width:89px;height:30px;background:url(btn_submit.jpg) no-repeat;font-size:14px;font-weight:bold;color:#fff;}
+
+/*-moz-*/
+@-moz-document url-prefix(){#regist .btn-regist{padding-bottom:5px;}}
+@-moz-document url-prefix(){#regist .checkbox{margin-top:7px;}}
+/*o-item*/
+.o-item{overflow:hidden;padding-left:80px;}
+.o-item .u-img{width:180px;height:180px;padding:5px;border:1px solid #d5d2d3;float:left;margin-right:10px;}
+.o-item .u-info{float:left;}
+.o-item .ignore{padding-left:10px;color:#005ea7;}
+</style>
+<div class="w" id="regist">
+	<div class="logo"><a href="{$site_url}"><img src="{$site_url}/themes/{$template_dir}/images/logo.gif"></a></div>
+	<div class="sno_begin">
+		<div class="mt">
+			<h2>完善账户信息</h2>
+			<b></b>
+		</div>
+		<div class="content">
+			<div id="model-login" class="model-prompt">
+			    <dl>
+					<dt>{$shop_name}欢迎您！<span>{$smarty.session.user_name}</span> 接下来只要简单完善下您的账户信息就OK了！</dt>
+					<dd>完善信息后可用您定义的账户名直接访问商城，随时随地享受愉快的购物之旅！</dd>
+				</dl>
+
+		    </div>
+			<div class="o-item">
+            <table border="0" cellpadding="0" cellspacing="0" width="95%">
+            <tr>
+            <td align="center" valign="middle" width="120">
+            <div class="u-img">
+					<img src="{if $smarty.cookies.ECS.qq_figureurl_2}{$smarty.cookies.ECS.qq_figureurl_2}{else}{$smarty.cookies.ECS.qq_figureurl_1}{/if}" id="infoimg" width="180" height="180" />
+				</div>
+                </td>
+            <td align="left">
+            
+            <form action="" method="post" name="formUser" onsubmit="return chekck_by_reg();">
+					<div class="form">
+						<div class="item">
+            				<span class="label">用户名：</span>
+            				<div class="fl">
+            					<input type="text" id="username" name="username"  onblur="is_registered(this.value);" class="text" value="" tabindex="1"/><span id="username_notice" style="color:#FF0000"> *</span>
+            				</div>
+            			</div>
+						
+						<div class="item">
+            				<span class="label">邮箱：</span>
+            				<div class="fl">
+																	<input type="text" id="email" name="email" class="text" tabindex="2" value=""  onblur="checkEmail(this.value);" /><span id="email_notice" style="color:#FF0000"> *</span>
+            				</div>
+            			</div>
+						
+						<div id="o-password">
+            				<div class="item">
+            					<span class="label">密码：</span>
+            					<div class="fl">
+            
+            						<input name="password" type="password" id="password1" class="text" tabindex="3" onblur="check_password(this.value);" onkeyup="checkIntensity(this.value)"/><span style="color:#FF0000" id="password_notice"> *</span>
+            					</div>
+            
+            				</div>
+                            <div class="item">
+            					<span class="label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            					<div class="fl">
+                                <table width="145" border="0" cellspacing="0" cellpadding="1">
+              <tr align="center">
+                <td width="33%" id="pwd_lower">{$lang.pwd_lower}</td>
+                <td width="33%" id="pwd_middle">{$lang.pwd_middle}</td>
+                <td width="33%" id="pwd_high">{$lang.pwd_high}</td>
+              </tr>
+            </table>
+                                </div>
+            
+            				</div>
+                           
+            				<div class="item">
+            					<span class="label">确认密码：</span>
+            					<div class="fl">
+            						<input name="confirm_password" type="password" id="conform_password" onblur="check_conform_password(this.value);" class="text" tabindex="4"/><span style="color:#FF0000" id="conform_password_notice"> *</span>
+            					</div>
+            				</div>
+            			</div>
+    					
+						<div class="item">
+            			    <span class="label">验证码：</span>
+            			    <div class="fl">
+            				    <input type="text" id="authcode" name="authcode" class="text text-1" tabindex="6" autocomplete="off" MaxLength="6" />
+            				    <label class="img">
+                                  <img style="cursor:pointer;width:100px;height:26px;" src="{$site_url}/captcha.php?{$rand}" onclick="this.src='{$site_url}/captcha.php?'+Math.random()"> </label>
+            		  		</div>
+            			</div>
+						
+						<div class="item">
+							<span class="label">&nbsp;</span>
+							<input type="submit" name="by_reg" class="btn-img btn-regist" id="perfectsubmit" value="提交" tabindex="8"/>
+							<a href="{$site_url}" class="ignore">以后再说，立即去购物！</a>
+						</div>
+					</div>
+				</form>
+            </td>
+            </tr>
+            </table>
+				
+				
+			</div>
+		
+		</div>
+		
+		
+	</div>
+
+	<!--[if !ie]>mc end<![endif]-->
+
+</div>
+<script type="text/javascript" src="{$site_url}/js/transport.js"></script>
+<script type="text/javascript" src="{$site_url}/js/utils.js"></script>
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+{foreach from=$lang.passport_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+var username_exist = "{$lang.username_exist}";
+function is_registered( username )
+{
+    var submit_disabled = false;
+	var unlen = username.replace(/[^\x00-\xff]/g, "**").length;
+
+    if ( username == '' )
+    {
+        document.getElementById('username_notice').innerHTML = msg_un_blank;
+        var submit_disabled = true;
+    }
+
+    if ( !chkstr( username ) )
+    {
+        document.getElementById('username_notice').innerHTML = msg_un_format;
+        var submit_disabled = true;
+    }
+    if ( unlen < 3 )
+    { 
+        document.getElementById('username_notice').innerHTML = username_shorter;
+        var submit_disabled = true;
+    }
+    if ( unlen > 14 )
+    {
+        document.getElementById('username_notice').innerHTML = msg_un_length;
+        var submit_disabled = true;
+    }
+    if ( submit_disabled )
+    {
+        document.forms['formUser'].elements['Submit'].disabled = 'disabled';
+        return false;
+    }
+    Ajax.call( '{$site_url}/user.php?act=is_registered', 'username=' + username, registed_callback , 'GET', 'TEXT', true, true );
+}
+
+
+
+function registed_callback(result)
+{
+  if ( result == "true" )
+  {
+    document.getElementById('username_notice').innerHTML = msg_can_rg;
+    document.forms['formUser'].elements['Submit'].disabled = '';
+  }
+  else
+  {
+    document.getElementById('username_notice').innerHTML = msg_un_registered;
+    document.forms['formUser'].elements['Submit'].disabled = 'disabled';
+  }
+}
+function checkEmail(email)
+{
+  var submit_disabled = false;
+  
+  if (email == '')
+  {
+    document.getElementById('email_notice').innerHTML = msg_email_blank;
+    submit_disabled = true;
+  }
+  else if (!Utils.isEmail(email))
+  {
+    document.getElementById('email_notice').innerHTML = msg_email_format;
+    submit_disabled = true;
+  }
+ 
+  if( submit_disabled )
+  {
+    document.forms['formUser'].elements['Submit'].disabled = 'disabled';
+    return false;
+  }
+  Ajax.call( '{$site_url}/user.php?act=check_email', 'email=' + email, check_email_callback , 'GET', 'TEXT', true, true );
+}
+
+function check_email_callback(result)
+{
+  if ( result == 'ok' )
+  {
+    document.getElementById('email_notice').innerHTML = msg_can_rg;
+    document.forms['formUser'].elements['Submit'].disabled = '';
+  }
+  else
+  {
+    document.getElementById('email_notice').innerHTML = msg_email_registered;
+    document.forms['formUser'].elements['Submit'].disabled = 'disabled';
+  }
+}
+
+function check_password( password )
+{
+    if ( password.length < 6 )
+    {
+        document.getElementById('password_notice').innerHTML = password_shorter;
+    }
+    else
+    {
+        document.getElementById('password_notice').innerHTML = msg_can_rg;
+    }
+}
+
+function check_conform_password( conform_password )
+{
+    password = document.getElementById('password1').value;
+    
+    if ( conform_password.length < 6 )
+    {
+        document.getElementById('conform_password_notice').innerHTML = password_shorter;
+        return false;
+    }
+    if ( conform_password != password )
+    {
+        document.getElementById('conform_password_notice').innerHTML = confirm_password_invalid;
+    }
+    else
+    {
+        document.getElementById('conform_password_notice').innerHTML = msg_can_rg;
+    }
+}
+function chkstr(str)
+{
+  for (var i = 0; i < str.length; i++)
+  {
+    if (str.charCodeAt(i) < 127 && !str.substr(i,1).match(/^\w+$/ig))
+    {
+      return false;
+    }
+  }
+  return true;
+}
+
+/* *
+ * 处理注册用户
+ */
+function chekck_by_reg()
+{
+  var frm  = document.forms['formUser'];
+  var username  = Utils.trim(frm.elements['username'].value);
+  var email  = frm.elements['email'].value;
+  var password  = Utils.trim(frm.elements['password'].value);
+  var confirm_password = Utils.trim(frm.elements['confirm_password'].value);
+  
+  var msg = "";
+  // 检查输入
+  var msg = '';
+  if (username.length == 0)
+  {
+    msg += username_empty + '\n';
+  }
+  else if (username.match(/^\s*$|^c:\\con\\con$|[%,\'\*\"\s\t\<\>\&\\]/))
+  {
+    msg += username_invalid + '\n';
+  }
+  else if (username.length < 3)
+  {
+    //msg += username_shorter + '\n';
+  }
+
+  if (email.length == 0)
+  {
+    msg += email_empty + '\n';
+  }
+  else
+  {
+    if ( ! (Utils.isEmail(email)))
+    {
+      msg += email_invalid + '\n';
+    }
+  }
+  if (password.length == 0)
+  {
+    msg += password_empty + '\n';
+  }
+  else if (password.length < 6)
+  {
+    msg += password_shorter + '\n';
+  }
+  if (/ /.test(password) == true)
+  {
+	msg += passwd_balnk + '\n';
+  }
+  if (confirm_password != password )
+  {
+    msg += confirm_password_invalid + '\n';
+  }
+    
+  if (msg.length > 0)
+  {
+    alert(msg);
+    return false;
+  }
+  else
+  {
+    return true;
+  }
+}
+
+/* *
+ * 检测密码强度
+ * @param       string     pwd     密码
+ */
+function checkIntensity(pwd)
+{
+  var Mcolor = "#FFF",Lcolor = "#FFF",Hcolor = "#FFF";
+  var m=0;
+
+  var Modes = 0;
+  for (i=0; i<pwd.length; i++)
+  {
+    var charType = 0;
+    var t = pwd.charCodeAt(i);
+    if (t>=48 && t <=57)
+    {
+      charType = 1;
+    }
+    else if (t>=65 && t <=90)
+    {
+      charType = 2;
+    }
+    else if (t>=97 && t <=122)
+      charType = 4;
+    else
+      charType = 4;
+    Modes |= charType;
+  }
+
+  for (i=0;i<4;i++)
+  {
+    if (Modes & 1) m++;
+      Modes>>>=1;
+  }
+
+  if (pwd.length<=4)
+  {
+    m = 1;
+  }
+
+  switch(m)
+  {
+    case 1 :
+      Lcolor = "2px solid red";
+      Mcolor = Hcolor = "2px solid #DADADA";
+    break;
+    case 2 :
+      Mcolor = "2px solid #f90";
+      Lcolor = Hcolor = "2px solid #DADADA";
+    break;
+    case 3 :
+      Hcolor = "2px solid #3c0";
+      Lcolor = Mcolor = "2px solid #DADADA";
+    break;
+    case 4 :
+      Hcolor = "2px solid #3c0";
+      Lcolor = Mcolor = "2px solid #DADADA";
+    break;
+    default :
+      Hcolor = Mcolor = Lcolor = "";
+    break;
+  }
+  if (document.getElementById("pwd_lower"))
+  {
+    document.getElementById("pwd_lower").style.borderBottom  = Lcolor;
+    document.getElementById("pwd_middle").style.borderBottom = Mcolor;
+    document.getElementById("pwd_high").style.borderBottom   = Hcolor;
+  }
+
+
+}
+
+</script>
+
+
+{/if}
+{if $act eq 'config'}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>配置QQ帐号登录ecshop网店系统</title>
+</head>
+<body>
+<form method="post" action="" name='theForm'>
+  <table cellspacing="0" cellpadding="0" style="margin-top: 20px" align="center" width="80%">
+  <tr>
+    <td align="center"> 
+    
+    <img src="api_logo.jpg" border="0" />   
+    <h1>配置QQ帐号登录ecshop网店系统接口参数</h1>
+<br />
+
+    </td>
+  </tr>
+  <tr>
+  
+    <td style="padding-left: 50px">
+      <table>
+      <tr>
+        <td align="right">申请到的腾讯社区开放平台的appid　　</td>
+        <td><input type="text" name="qq_appid" value="{$api_config.qq_appid}"/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#F00;">*申请到的腾讯社区开放平台的appid</span></td>
+      </tr>
+      <tr>
+        <td align="right">&nbsp;</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td align="right">申请到的appkey:　　</td>
+        <td><input type="text" name="qq_appkey" value="{$api_config.qq_appkey}"/><span style="color:#F00;">*申请到的appkey</span></td>
+      </tr>     
+      <tr>
+        <td align="right">&nbsp;</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td align="right">开启QQ注册/绑定/登录服务:</td>
+        <td><input type="radio" onclick='document.getElementById("qq_connect_setting").style.display = "";' {if $api_config.qqconnect_allow}checked{/if} value="1" name="qqconnect_allow" class="radio">是<input type="radio" onclick='document.getElementById("qq_connect_setting").style.display = "none";' {if $api_config.qqconnect_allow eq 0}checked{/if}  value="0" name="qqconnect_allow">否</td>
+      </tr>
+       <tr id="qq_connect_setting" {if $api_config.qqconnect_allow eq 0}style="display:none;"{/if}>
+        <td  colspan="2">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+        <td align="right">&nbsp;</td>
+        <td></td>
+      </tr>
+  <tr>
+    <td align="right">帐号绑定方式:</td>
+    <td><input name="qq_bind_type" type="radio" value="1" {if $api_config.qq_bind_type eq 1}checked{/if}/>登录成功后必须绑定到已有帐号或绑定到新注册帐号<br />
+<input name="qq_bind_type" type="radio" value="2" {if $api_config.qq_bind_type eq 2}checked{/if}/>登录成功后关联到随机生成的帐号</td>
+  </tr>
+  <tr>
+        <td align="right">&nbsp;</td>
+        <td></td>
+      </tr>
+  <tr>
+    <td align="right">初始用户组:</td>
+    <td>
+    <select name="qq_user_rank">
+      <option value="0">请选择...</option>
+      {html_options options=$user_ranks selected=$api_config.qq_user_rank}
+    </select>
+    </td>
+  </tr>
+  <tr>
+        <td align="right">&nbsp;</td>
+        <td></td>
+      </tr>
+  <tr>
+    <td align="right">开启购物后同步推送到腾讯微博:</td>
+    <td>
+    <input name="qq_allow_weibo" type="radio" {if $api_config.qq_allow_weibo}checked{/if} value="1">是&nbsp;&nbsp;&nbsp;&nbsp;<input name="qq_allow_weibo" type="radio" {if $api_config.qq_allow_weibo eq 0}checked{/if}  value="0" >否
+    </td>
+  </tr>
+  <tr>
+        <td align="right">&nbsp;</td>
+        <td></td>
+      </tr>
+  <tr>
+    <td align="right">开启购物后同步推送到QQ空间动态:</td>
+    <td>
+    <input name="qq_allow_space" type="radio" {if $api_config.qq_allow_space}checked{/if} value="1">是&nbsp;&nbsp;&nbsp;&nbsp;<input name="qq_allow_space" type="radio" {if $api_config.qq_allow_space eq 0}checked{/if}  value="0" >否
+    </td>
+  </tr>
+  <tr>
+        <td align="right">&nbsp;</td>
+        <td></td>
+      </tr>
+</table>
+
+        
+        </td>
+      </tr>
+      
+      <tr><td>&nbsp;</td><td><input type="submit" name="submit" value="保存配置的接口参数" class="button" /><input type="reset" value="重置" class="button" /></td></tr>
+      </table>
+    </td>
+  </tr>
+  </table>
+  <input type="hidden" name="act" value="config" />
+</form>
+</body>
+</html>
+{elseif $act eq 'login'}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ecshop-qq接口配置登录</title>
+</head>
+<body>
+<form method="post" action="" name='theForm' onSubmit="return validate()">
+  <table cellspacing="0" cellpadding="0" style="margin-top: 100px" align="center">
+  <tr>
+    <td align="center">
+    <img src="api_logo.jpg" border="0" /><br />
+<br />
+
+    <h1 style="font-size:16px;">插件名称:ecshop-qq登入接口</h1>
+    </td>
+    <td style="padding-left: 50px">
+      <table>
+      <tr>
+        <td>后台管理员帐号</td>
+        <td><input type="text" name="username" /></td>
+      </tr>
+      <tr>
+        <td>后台管理员密码</td>
+        <td><input type="password" name="password" /></td>
+      </tr>
+      {if $gd_version > 0}
+      <tr>
+        <td>验证码</td>
+        <td><input type="text" name="captcha" class="capital" /></td>
+      </tr>
+      <tr>
+      <td colspan="2" align="right"><img src="{$site_url}/captcha.php?{$random}" width="145" height="20" alt="CAPTCHA" border="1" onclick= this.src="{$site_url}/captcha.php&"+Math.random() style="cursor: pointer;" title="{$lang.click_for_another}" />
+      </td>
+      </tr>
+      {/if}
+      <tr><td  colspan="2"><br />
+<input type="submit" value="登录进入配置qq接口参数" class="button" /></td></tr>
+      </table>
+    </td>
+  </tr>
+  </table>
+  <input type="hidden" name="act" value="act_login" />
+</form>
+</body>
+</html>
+{elseif $act eq 'message'}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+{if $auto_redirect}
+<meta http-equiv="refresh" content="3;URL={$message.back_url}" />
+{/if}
+<title>{$page_title}</title>
+</head>
+<body>
+<div align="center">
+      <h3><span>{$lang.system_info}</span></h3>
+        <div style="margin:20px auto;">
+          <p style="font-size: 14px; font-weight:bold; color: red;">{$message.content}</p>
+          <div class="blank"></div>
+          <!-- {if $message.url_info} --> 
+          <!--{foreach from=$message.url_info key=info item=url}-->
+          <p><a href="{$url}">{$info}</a></p>
+          <!--{/foreach}--> 
+          <!--{/if}--> 
+        </div>
+    </div>
+</body>
+</html>
+{/if}

@@ -1,0 +1,27 @@
+<!-- {if $promotion_goods} -->
+<div class="promotion-goods box">
+	<b class="tp"><b></b></b>
+	<div class="hd"><h3>{$lang.promotion_goods}</h3><a href="../search.php?intro=promotion" class="more">{$lang.more}</a></div>
+	<div class="bd">
+		<ul class="goods-list">
+			<!--{foreach from=$promotion_goods item=goods name=promotion_goods}-->
+			<li{if $smarty.foreach.promotion_goods.index %4==0} class="first-child"{/if}>
+				<span class="photo">
+					<a href="{$goods.url}" title="{$goods.name|escape:html}" class="image"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}"/></a>
+				</span>
+				<span class="info">
+					<a href="{$goods.url}" title="{$goods.name|escape:html}" class="name">{$goods.name}</a>
+					<em class="price{if $goods.promote_price} promote{/if}"><!--{if $goods.promote_price} -->{$goods.promote_price}<!--{else}-->{$goods.shop_price}<!--{/if}--></em>
+				</span>
+				<span class="action">
+					<a href="{$goods.url}" class="detail">{$lang.btn_detail}</a>
+					<a href="javascript:addToCart({$goods.id})" class="buy">{$lang.btn_buy}</a>
+					<a href="javascript:collect({$goods.id});" class="collect">{$lang.btn_collect}</a>
+				</span>
+			</li>
+			<!--{/foreach}-->
+		</ul>
+	</div>
+	<b class="bt"><b></b></b>
+</div>
+<!-- {/if} -->

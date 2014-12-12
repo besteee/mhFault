@@ -1,0 +1,21 @@
+{if $img_links or $txt_links }
+<div class="brands box">
+	<b class="tp"><b></b></b>
+	<div class="hd"><h3>{$lang.link}</h3></div>
+	<div class="bd">	
+		<ul>
+			{if $img_links}
+			{foreach from=$img_links item=link name=img_links}
+			<li class="image{if !$txt_links}{if $smarty.foreach.img_links.last} last{/if}{/if}"><a href="{$link.url}" target="_blank" title="{$link.name}"><img src="{$link.logo}" alt="{$link.name}"/>{$link.name}</a></li>
+			{/foreach}
+			{/if}
+			{if $txt_links}
+			{foreach from=$txt_links item=link name=txt_links}
+			<li class="text{if $smarty.foreach.txt_links.last} last{/if}"><a href="{$link.url}" target="_blank" title="{$link.name}">{$link.name}</a></li>
+			{/foreach}
+			{/if}
+		</ul>
+	</div>
+	<b class="bt"><b></b></b>
+</div>
+{/if}

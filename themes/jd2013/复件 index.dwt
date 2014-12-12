@@ -1,0 +1,2085 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" /> 
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link href="base.css" rel="stylesheet" type="text/css">
+<link href="home.css" rel="stylesheet" type="text/css">
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,index.js'}
+<script type="text/javascript" src="js/MSClass.js"></script>
+<script type="text/javascript" src="js/scrollpic.js"></script>
+<script type="text/javascript" src="js/site.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+var isWidescreen=screen.width>=1280;
+if (isWidescreen){document.getElementsByTagName("body")[0].className="w1210";}
+</script>
+<!-- #BeginLibraryItem "/library/index_header.lbi" --><!-- #EndLibraryItem -->
+ <?php $this->assign('playerdb', get_flash_xml());?>
+<div class="w">
+		<div id="o-slide">
+		<div class="slide" id="slide">
+		<div id="MSClassBox" style="margin:0 auto;">
+		<ul class="slide-items" id="ContentID">
+		<?php $this->assign('playerdb', get_flash_xml());?>
+       <script language=javascript>if (screen.width >= 1280){ document.write('{foreach from=$playerdb item=item key=key name=fnum}{if $smarty.foreach.fnum.iteration<7}<li><a href="{$item.url}" target="_blank"><img src="{$item.src}" alt="{$item.text}" /></a></li>{/if}{/foreach}') }   else {document.write('{foreach from=$playerdb item=item key=key name=fnum}{if $smarty.foreach.fnum.iteration>6}<li><a href="{$item.url}" target="_blank"><img src="{$item.src}" alt="{$item.text}" /></a></li>{/if}{/foreach}')}</script>
+		  </ul>
+		  </div>
+		  <div class="slide-controls">           
+		    <ul id="TabID">
+			 <li class="">1</li>            
+			 <li class="">2</li>            
+			 <li class="">3</li>            
+			 <li class="">4</li>           
+			 <li class="">5</li>           
+			  <li class="">6</li>
+			  </ul>
+			 </div>		
+		  </div><!--slide end-->  
+ <script type="text/javascript">
+ if (screen.width >= 1280){
+	 new Marquee(
+	{
+		MSClassID : "MSClassBox",
+		ContentID : "ContentID",
+		TabID	  : "TabID",
+		Direction : 2,
+		Step	  : 0.3,
+		Width	  : 670,
+		Height	  : 240,
+		Timer	  : 20,
+		DelayTime : 2000,
+		WaitTime  : 0,
+		ScrollStep: 1,
+		SwitchType: 2,
+		AutoStart : 1
+	})
+ } 
+ else {
+ new Marquee(
+{
+	MSClassID : "MSClassBox",
+	ContentID : "ContentID",
+	TabID	  : "TabID",
+	Direction : 2,
+	Step	  : 0.3,
+	Width	  : 550,
+	Height	  : 240,
+	Timer	  : 20,
+	DelayTime : 2000,
+	WaitTime  : 0,
+	ScrollStep: 1,
+	SwitchType: 2,
+	AutoStart : 1
+})
+
+}
+</script>
+		<div class="jscroll" id="mscroll">
+			<div class="ctrl" id="mscroll-ctrl-prev"><b></b></div>
+			<div class="ctrl" id="mscroll-ctrl-next"><b></b></div>
+			<div class="o-list">
+				<div class="list" id="rollphoto1">
+				   <ul>   
+				    {insert name='ads' id=3 num=30}
+					</ul>
+				</div>
+			</div>
+		</div>
+		<SCRIPT language=javascript type=text/javascript>
+							var scrollPic_01 = new ScrollPic();
+							scrollPic_01.scrollContId   = "rollphoto1"; //内容容器ID
+							scrollPic_01.arrLeftId      = "mscroll-ctrl-prev";//左箭头ID
+							scrollPic_01.arrRightId     = "mscroll-ctrl-next"; //右箭头ID
+							if (screen.width >= 1280){scrollPic_01.frameWidth     = 609;}else{scrollPic_01.frameWidth     = 488;}
+							if (screen.width >= 1280){scrollPic_01.pageWidth      = 609;}else{scrollPic_01.pageWidth      = 488;}
+							scrollPic_01.speed          = 10; //移动速度(单位毫秒，越小越快)
+							scrollPic_01.space          = 10; //每次移动像素(单位px，越大越快)
+							scrollPic_01.autoPlay       = true; //自动播放
+							scrollPic_01.autoPlayTime   = 3; //自动播放间隔时间(秒)
+							scrollPic_01.initialize(); //初始化
+            </SCRIPT>
+
+		</div>
+
+  	<div class="m fr da0x70">
+		<script language=javascript>if (screen.width >= 1280){ document.write('{insert name="ads" id=4 num=1}') }   else {document.write('{insert name="ads" id=5 num=1}')}</script>
+	</div>
+	<div id="jdnews" class="m m1">
+		<div class="mt">
+			<h2>新闻快报</h2>
+			<div class="extra"><a href="#" target="_blank">更多快报&nbsp;&gt;</a></div>
+		</div>
+		<div class="mc">
+			<ul>
+			<!-- TemplateBeginEditable name="首页_新闻快报" -->
+<!-- #BeginLibraryItem "/library/cat_articles.lbi" -->
+
+<!--{foreach from=$articles item=article_item name=curnew}-->
+<li><a href="{$article_item.url}" title="{$article_item.title|escape:html}" target="_blank">{$article_item.short_title}</a></li>
+<!--{/foreach}-->
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+	  	</ul>
+		</div>
+	</div><!--jdnews-->
+
+	<div id="virtuals">
+	  <div class="utab clearfix">
+			<ul>
+					<li class="hover" id="one1" onmousemove="setTab('one',1,4)">订单</a></li>
+					<li id="one2" onmousemove="setTab('one',2,4)">发货</li>
+					<li id="one3" onmousemove="setTab('one',3,4)">热卖</li>
+					<li id="one4" onmousemove="setTab('one',4,4)">促销</li>
+			</ul>
+		</div>
+				
+			<div class="mc" id="con_one_1" style="display:block">
+				 <!-- #BeginLibraryItem "/library/order_query.lbi" --><!-- #EndLibraryItem -->
+			</div>
+		
+	
+			<div class="mc" id="con_one_2">
+				<!-- #BeginLibraryItem "/library/invoice_query.lbi" --><!-- #EndLibraryItem -->
+			</div>
+		
+			<div class="mc" id="con_one_3">
+			<div class="primg">
+<!-- TemplateBeginEditable name="首页_今日促销" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+</div>
+</div>		
+			<div class="mc" id="con_one_4">
+			<div class="primg">
+	<!-- TemplateBeginEditable name="首页_今日热点" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+</div>		
+	</div>
+	<span class="clr"></span>
+</div>
+
+<div class="w">
+	<div id="hot">
+	<div class="utab clearfix">
+			<ul>
+					<li class="hover" id="two1" onmousemove="setTab('two',1,5)">疯狂抢购</a></li>
+					<li id="two2" onmousemove="setTab('two',2,5)">猜您喜欢</li>
+					<li id="two3" onmousemove="setTab('two',3,5)">热卖商品</li>
+					<li id="two4" onmousemove="setTab('two',4,5)">热评商品</li>
+					<li id="two5" onmousemove="setTab('two',5,5)">新品上架</li>
+			</ul>
+		</div>
+	
+	
+  <div class="mc" id="con_two_1" style="display:block">
+	    <ul class="lh">
+		<!--{foreach from=$best_goods item=goods name=goodsnum}-->
+    <li>
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank"><b class="pi pix1">直降</b><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="130" height="130" data-img="1"></a>  </div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$lang.promote_price}<strong>{$goods.promote_price}</strong><!-- {else}-->{$lang.shop_price}<strong>{$goods.shop_price}</strong><!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+    </ul>
+</div>
+
+  <div class="mc" id="con_two_2">
+   <ul class="lh">
+		<!--{foreach from=$promotion_goods item=goods name=goodsnum}-->
+    <li>
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank"><b class="pi pix1">降价</b><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="130" height="130" data-img="1"></a>  </div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$lang.promote_price}<strong>{$goods.promote_price}</strong><!-- {else}-->{$lang.shop_price}<strong>{$goods.shop_price}</strong><!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+   </ul>
+	  </div>
+
+
+  <div class="mc" id="con_two_3">
+	    <ul class="lh">
+   <!--{foreach from=$hot_goods item=goods name=goodsnum}-->
+    <li>
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank"><b class="pi pix1">热卖</b><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="130" height="130" data-img="1"></a>  </div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$lang.promote_price}<strong>{$goods.promote_price}</strong><!-- {else}-->{$lang.shop_price}<strong>{$goods.shop_price}</strong><!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+    </ul>
+	  </div>
+
+
+  <div class="mc" id="con_two_4">
+	    <ul class="lh">
+   <?php $this->assign('get_index_comment',index_comments(5));?>
+       <!--{foreach from=$get_index_comment item=goods name=comm_num}-->
+    <li>
+    <div class="p-img ld"><b class="pi pix1">热评</b><a href="{$goods.url}" title="{$goods.goods_name|escape:html}" target="_blank"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name|escape:html}" width="130" height="130"></a> </div>
+    <div class="p-name"><a href="{$goods.url}" title="{$goods.goods_name|escape:html}" target="_blank">{$goods.goods_name|escape:html}</a></div>
+    <div class="p-price">{$lang.shop_price}<strong>{$goods.shop_price}</strong></div>
+   </li>
+   <!--{/foreach}-->
+    </ul>
+</div>
+
+  <div class="mc" id="con_two_5">
+	    <ul class="lh">
+   <!--{foreach from=$new_goods item=goods name=goodsnum}-->
+    <li>
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank"><b class="pi pix1">新品</b><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="130" height="130" data-img="1"></a>  </div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$lang.promote_price}<strong>{$goods.promote_price}</strong><!-- {else}-->{$lang.shop_price}<strong>{$goods.shop_price}</strong><!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+    </ul>
+</div>
+		
+	</div><!--hot end-->
+
+
+	<div id="first" class="m m1">
+		<div class="mt">
+			<h2>新品首发</h2>
+			<div class="extra"></div>
+		</div>
+		<div class="mc">
+		 <!--{foreach from=$new_goods item=goods name=goodsnum}-->
+		 {if $smarty.foreach.goodsnum.iteration <3} 
+    <div class="item fore{$smarty.foreach.goodsnum.iteration}">
+<div class="p-img"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="100" height="100"></a></div>
+<div class="p-name"><span>首发</span><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+<div class="p-detail">{$goods.brief}</div>
+</div>
+{/if}
+<!--{/foreach}-->
+		</div>
+	</div><!--first-->
+	<span class="clr"></span>
+</div>
+<!-- 单品促销 栏 end -->
+
+
+<div class="w ">
+	<div class="m m1" id="timed">
+		<div class="mt">
+			<h2>限时抢购</h2>
+			<div class="extra"></div>
+		</div>
+		<div class="mc">
+			<ul class="lh">
+			   <!-- #BeginLibraryItem "/library/recommend_promotion.lbi" --><!-- #EndLibraryItem -->
+			</ul>
+		</div>
+	</div><!--timed end-->
+
+	<div class="m m1" id="group">
+		<div class="mt">
+			<h2>今日团购</h2>
+			<div class="extra"><a href="group_buy.php" target="_blank">更多团购&nbsp;&gt;</a></div>
+		</div>
+		<div class="jscroll mc" id="gscroll">
+			<div class="ctrl" id="gscroll-ctrl-prev"></div>
+			<div class="ctrl" id="gscroll-ctrl-next"></div>
+		<div class="o-list">
+				<div style="position: relative; width: 292px; height: 155px; overflow: hidden;" class="list" id="rollphoto2">
+				<ul class="lh">    
+				 <li class="item">  
+				 <a href="<?php echo get_advurl('首页_今日团购',1);?>" target="_blank"><img src="<?php echo get_advimg('首页_今日团购',1);?>" style="background:url(<?php echo get_advimg('首页_今日团购',1);?>) no-repeat 0 0;" class="thumb"></a>  <div class="p-detail">  <a target="_blank" class="btn-tuan" href="<?php echo get_advurl('首页_今日团购',1);?>">参团</a>                <span>团购价：</span><strong><?php echo get_advtit('首页_今日团购',1);?></strong>    </div> 
+				 </li>     
+				 <li class="item">  
+				 <a href="<?php echo get_advurl('首页_今日团购',2);?>" target="_blank"><img src="<?php echo get_advimg('首页_今日团购',2);?>" style="background:url(<?php echo get_advimg('首页_今日团购',2);?>) no-repeat 0 0;" class="thumb"></a>  <div class="p-detail">  <a target="_blank" class="btn-tuan" href="<?php echo get_advurl('首页_今日团购',2);?>">参团</a>                <span>团购价：</span><strong><?php echo get_advtit('首页_今日团购',2);?></strong>    </div> 
+				 </li>     
+				 <li class="item">  
+				 <a href="<?php echo get_advurl('首页_今日团购',3);?>" target="_blank"><img src="<?php echo get_advimg('首页_今日团购',3);?>" style="background:url(<?php echo get_advimg('首页_今日团购',3);?>) no-repeat 0 0;" class="thumb"></a>  <div class="p-detail">  <a target="_blank" class="btn-tuan" href="<?php echo get_advurl('首页_今日团购',3);?>">参团</a>                <span>团购价：</span><strong><?php echo get_advtit('首页_今日团购',3);?></strong>    </div> 
+				 </li>   
+				 <li class="item">  
+				 <a href="<?php echo get_advurl('首页_今日团购',4);?>" target="_blank"><img src="<?php echo get_advimg('首页_今日团购',4);?>" style="background:url(<?php echo get_advimg('首页_今日团购',4);?>) no-repeat 0 0;" class="thumb"></a>  <div class="p-detail">  <a target="_blank" class="btn-tuan" href="<?php echo get_advurl('首页_今日团购',3);?>">参团</a>                <span>团购价：</span><strong><?php echo get_advtit('首页_今日团购',4);?></strong>    </div> 
+				 </li>    
+				 </ul></div>
+			</div>
+		</div>
+	</div>
+	
+		<SCRIPT language=javascript type=text/javascript>
+					var scrollPic_02 = new ScrollPic();
+					scrollPic_02.scrollContId   = "rollphoto2"; //内容容器ID
+					scrollPic_02.arrLeftId      = "gscroll-ctrl-prev";//左箭头ID
+					scrollPic_02.arrRightId     = "gscroll-ctrl-next"; //右箭头ID
+					if (screen.width >= 1280){scrollPic_02.frameWidth     = 292;}else{scrollPic_02.frameWidth     = 192;}
+					if (screen.width >= 1280){scrollPic_02.pageWidth      = 292;}else{scrollPic_02.pageWidth      = 192;}
+					scrollPic_02.speed          = 10; //移动速度(单位毫秒，越小越快)
+					scrollPic_02.space          = 10; //每次移动像素(单位px，越大越快)
+					scrollPic_02.autoPlay       = true; //自动播放
+					scrollPic_02.autoPlayTime   = 3; //自动播放间隔时间(秒)
+					scrollPic_02.initialize(); //初始化
+		</SCRIPT>
+		<div class="m fr da0x100">
+		<script language=javascript>if (screen.width >= 1280){ document.write('{insert name="ads" id=8 num=1}') }   else {document.write('{insert name="ads" id=9 num=1}')}</script>
+	    </div>
+	</div>
+	<span class="clr"></span>
+</div>
+<!-- 限时抢购 栏 end -->
+
+<div class="w w1" id="electronics">
+	<div class="m m1 catalogue">
+        <div class="mt ld">
+			<div class="floor"><b class="fixpng b b1"></b><b style="height:34px;display: block;" class="fixpng b b2"></b><b class="b b3">1F</b><b class="fixpng b4"></b></div>
+			<h2>家电通讯</h2>
+		</div>
+		<div class="mc">
+			<div class="style1">
+				<ul class="lh">
+				<!-- #BeginLibraryItem "/library/icat1.lbi" --><!-- #EndLibraryItem -->
+				</ul>
+				<span>
+					<!-- TemplateBeginEditable name="首页_1F左图" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+</span>
+			</div>
+		</div>
+	</div>
+	
+	<div class="m plist">
+		<div class="utab clearfix">
+			<ul>
+					<li class="hover" id="three1" onmousemove="setTab('three',1,5)">特价商品</a></li>
+					<li id="three2" onmousemove="setTab('three',2,5)">大家电</li>
+					<li id="three3" onmousemove="setTab('three',3,5)">小家电</li>
+					<li id="three4" onmousemove="setTab('three',4,5)">手机通讯</li>
+					<li id="three5" onmousemove="setTab('three',5,5)">汽车五金</li>
+			</ul>
+		</div>
+	
+			<div class="smc" id="con_three_1" style="display:block">
+     
+				<div class="slide">
+				<div id="MSClassBox1" style="margin: 0px auto;">
+				 <ul class="slide-items" id="contentf1">
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第1f分类',1);?></li>
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第1f分类',2);?></li>
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第1f分类',3);?></li>
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第1f分类',4);?></li>
+				 </ul>
+				 </div>          
+				 <div class="slide-controlsl">           
+				<ul id="myTab_btns1">
+				 <li></li>            
+				 <li></li>            
+				 <li></li>            
+				 <li></li>   
+				 </ul>        
+			   </div>
+			   </div>		   
+<script type="text/javascript">
+new Marquee(
+{
+	MSClassID : "MSClassBox1",
+	ContentID : "contentf1",
+	TabID	  : "myTab_btns1",
+	TabTimeout : 150,
+	Direction : 5,
+	Step	  : 0.3,
+	Width	  : 473,
+	Height	  : 180,
+	Timer	  : 20,
+	DelayTime : 2,
+	WaitTime  : 2,
+	ScrollStep: 473,
+	SwitchType: 0,
+	AutoStart : 1
+})
+</script>
+
+        <!-- ad end -->
+				<ul class="lh style1">
+			<!-- TemplateBeginEditable name="首页_1F产品分类1" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->   
+				</ul>
+			</div>
+		
+   
+  <div class="smc" id="con_three_2">
+    <ul class="lh style3">         
+	<!-- TemplateBeginEditable name="首页_1F产品分类2" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->    
+	 </ul>
+  </div>
+
+  <div class="smc" id="con_three_3">
+   <ul class="lh style3">   
+   	<!-- TemplateBeginEditable name="首页_1F产品分类3" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+
+  <div class="smc" id="con_three_4">
+   <ul class="lh style3">   
+   	<!-- TemplateBeginEditable name="首页_1F产品分类4" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+
+  <div class="smc" id="con_three_5">
+   <ul class="lh style3">   
+    	<!-- TemplateBeginEditable name="首页_1F产品分类5" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+</div>	
+	</div>
+
+  <!-- ad start -->
+	<div class="sm sm1 brands">
+		<div class="smt">
+			<h3>品牌旗舰店</h3>
+			<div class="extra"><a href="#" target="_blank">合约计划说明<b></b></a><a href="#" target="_blank">大家电配送<b></b></a></div>
+		</div>
+		<div class="smc">
+			<ul class="lh">
+			<!-- #BeginLibraryItem "/library/ibeand1.lbi" --><!-- #EndLibraryItem -->
+			</ul>
+			</div>
+	</div>
+	<div class="fr da209x180">
+		<div class="slide">
+				<div id="MSClassBoxr1" style="margin: 0px auto;">
+				 <ul class="slide-items" id="contentfr1">
+				 <li><?php echo get_adv('首页_右边分类幻灯图_1f分类',1);?></li>
+				 <li><?php echo get_adv('首页_右边分类幻灯图_1f分类',2);?></li>
+				 </ul>
+				 </div>          
+				 <div class="slide-controlsr">           
+				<ul id="myTab_btnsr1">
+				 <li></li>            
+				 <li></li>            
+				 </ul>        
+			   </div>
+			   </div>		   
+<script type="text/javascript">
+new Marquee(
+{
+	MSClassID : "MSClassBoxr1",
+	ContentID : "contentfr1",
+	TabID	  : "myTab_btnsr1",
+	TabTimeout : 150,
+	Direction : 5,
+	Step	  : 0.3,
+	Width	  : 209,
+	Height	  : 180,
+	Timer	  : 20,
+	DelayTime : 2,
+	WaitTime  : 2,
+	ScrollStep: 0,
+	SwitchType: 0,
+	AutoStart : 1
+})
+</script>
+	</div>
+	
+	<span class="clr"></span>
+</div>
+<!-- 家电通讯楼层 end-->
+
+<div class="w w1" id="digitals">
+	<div class="m m1 catalogue">
+      <div class="mt ld">
+			<div class="floor"><b class="fixpng b b1"></b><b style="height: 34px; display: block;" class="fixpng b b2"></b><b class="b b3">2F</b><b class="fixpng b4"></b></div>
+			<h2>电脑数码</h2>
+		</div>
+		<div class="mc">
+			<div class="style1">
+			<ul class="lh">
+				<!-- #BeginLibraryItem "/library/icat2.lbi" --><!-- #EndLibraryItem -->
+				</ul>
+				<span>
+					<!-- TemplateBeginEditable name="首页_2F左图" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+</span>
+			</div>
+		</div>
+	</div>
+<div class="m plist">
+
+		<div class="utab clearfix">
+			<ul>
+					<li class="hover" id="four1" onmousemove="setTab('four',1,5)">特价商品</a></li>
+					<li id="four2" onmousemove="setTab('four',2,5)">大家电</li>
+					<li id="four3" onmousemove="setTab('four',3,5)">小家电</li>
+					<li id="four4" onmousemove="setTab('four',4,5)">手机通讯</li>
+					<li id="four5" onmousemove="setTab('four',5,5)">汽车五金</li>
+			</ul>
+		</div>
+
+			<div class="smc" id="con_four_1" style="display:block">
+        <!-- ad start -->
+				<div class="slide">
+				<div id="MSClassBox2" style="margin: 0px auto;">
+				 <ul class="slide-items" id="contentf2">
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第2f分类',1);?></li>
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第2f分类',2);?></li>
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第2f分类',3);?></li>
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第2f分类',4);?></li>
+				 </ul>
+				 </div>          
+				 <div class="slide-controlsl">           
+				<ul id="myTab_btns2">
+				 <li></li>            
+				 <li></li>            
+				 <li></li>            
+				 <li></li>   
+				 </ul>        
+			   </div>
+			   </div>		   
+<script type="text/javascript">
+new Marquee(
+{
+	MSClassID : "MSClassBox2",
+	ContentID : "contentf2",
+	TabID	  : "myTab_btns2",
+	TabTimeout : 150,
+	Direction : 5,
+	Step	  : 0.3,
+	Width	  : 473,
+	Height	  : 180,
+	Timer	  : 20,
+	DelayTime : 2,
+	WaitTime  : 2,
+	ScrollStep: 473,
+	SwitchType: 0,
+	AutoStart : 1
+})
+</script>
+
+        <!-- ad end -->
+				<ul class="lh style1">
+      <!-- TemplateBeginEditable name="首页_2F产品分类1" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+				</ul>
+			</div>
+
+  <div class="smc" id="con_four_2">
+     <ul class="lh style3">   
+    	<!-- TemplateBeginEditable name="首页_2F产品分类2" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+
+  <div class="smc" id="con_four_3">
+      <ul class="lh style3">   
+    	<!-- TemplateBeginEditable name="首页_2F产品分类3" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+
+  <div class="smc" id="con_four_4">
+      <ul class="lh style3">   
+    	<!-- TemplateBeginEditable name="首页_2F产品分类4" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+
+  <div class="smc" id="con_four_5">
+      <ul class="lh style3">   
+    	<!-- TemplateBeginEditable name="首页_2F产品分类5" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+</div>	
+</div>
+
+  <!-- ad start -->
+	<div class="sm sm1 brands" id="digitals-brands">
+		<div class="smt">
+			<h3>品牌旗舰店</h3>
+			<div class="extra"><a href="#" target="_blank">办公直通车<b></b></a><a href="#" target="_blank">DIY装机大师<b></b></a></div>
+		</div>
+		<div class="smc">
+			<ul class="lh">
+			<!-- #BeginLibraryItem "/library/ibeand2.lbi" --><!-- #EndLibraryItem -->
+			</ul>
+		</div>
+	</div>
+	<div class="fr da209x180">
+			<div class="slide">
+				<div id="MSClassBoxr2" style="margin: 0px auto;">
+				 <ul class="slide-items" id="contentfr2">
+				 <li><?php echo get_adv('首页_右边分类幻灯图_2f分类',1);?></li>
+				 <li><?php echo get_adv('首页_右边分类幻灯图_2f分类',2);?></li>
+				 </ul>
+				 </div>          
+				 <div class="slide-controlsr">           
+				<ul id="myTab_btnsr2">
+				 <li></li>            
+				 <li></li>            
+				 </ul>        
+			   </div>
+			   </div>		   
+<script type="text/javascript">
+new Marquee(
+{
+	MSClassID : "MSClassBoxr2",
+	ContentID : "contentfr2",
+	TabID	  : "myTab_btnsr2",
+	TabTimeout : 150,
+	Direction : 5,
+	Step	  : 0.3,
+	Width	  : 209,
+	Height	  : 180,
+	Timer	  : 20,
+	DelayTime : 2,
+	WaitTime  : 2,
+	ScrollStep: 0,
+	SwitchType: 0,
+	AutoStart : 1
+})
+</script>
+	</div>
+	
+	
+  <!-- ad end -->
+	<span class="clr"></span>
+</div>
+<!-- It数码楼层 end-->
+
+<div class="w w1" id="clothing">
+	<div class="m m1 catalogue" data-lazyload="1">
+      <div class="mt ld">
+			<div class="floor"><b class="fixpng b b1"></b><b style="height: 34px; display: block;" class="fixpng b b2"></b><b class="b b3">3F</b><b class="fixpng b4"></b></div>
+			<h2>服饰鞋包</h2>
+		</div>
+		<div class="mc">
+			<div class="style2">
+				<ul>
+        			<!-- #BeginLibraryItem "/library/icat3.lbi" --><!-- #EndLibraryItem -->
+				</ul>
+				<span>
+					<!-- TemplateBeginEditable name="首页_3F左图" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->	</span>
+			</div>
+		</div>
+	</div>
+	<div class="m plist">
+			<div class="utab clearfix">
+			<ul>
+					<li class="hover" id="five1" onmousemove="setTab('five',1,5)">特价商品</a></li>
+					<li id="five2" onmousemove="setTab('five',2,5)">大家电</li>
+					<li id="five3" onmousemove="setTab('five',3,5)">小家电</li>
+					<li id="five4" onmousemove="setTab('five',4,5)">手机通讯</li>
+					<li id="five5" onmousemove="setTab('five',5,5)">汽车五金</li>
+			</ul>
+		</div>
+		
+			<div class="smc accordion" id="con_five_1" style="display:block">
+				<div class="lh">
+        			<div style="width: 190px; display: block;" class="item">
+					<?php echo get_adv('首页_3F中间图区1',1);?>
+			        <?php echo get_adv('首页_3F中间图区1',2);?>					</div>
+					<div style="width: 150px; display: block;" class="item"><?php echo get_adv('首页_3F中间图区2',1);?></div>
+					<div style="width: 150px; display: block;" class="item">
+					<?php echo get_adv('首页_3F中间图区3',1);?>
+			        <?php echo get_adv('首页_3F中间图区3',2);?>					</div>
+					<div style="width: 150px; display: block;" class="item"><?php echo get_adv('首页_3F中间图区4',1);?></div>
+					<div style="width: 150px; display: block;" class="item">
+					<?php echo get_adv('首页_3F中间图区5',1);?>
+			        <?php echo get_adv('首页_3F中间图区5',2);?>					</div>
+				</div>
+		</div>
+  <div class="smc" id="con_five_2">
+    <ul class="lh style3">   
+    	<!-- TemplateBeginEditable name="首页_3F产品分类1" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+  <div class="smc" id="con_five_3">
+    <ul class="lh style3">   
+    	<!-- TemplateBeginEditable name="首页_3F产品分类2" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+  <div class="smc" id="con_five_4">
+    <ul class="lh style3">   
+    	<!-- TemplateBeginEditable name="首页_3F产品分类3" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+
+  <div class="smc" id="con_five_5">
+    <ul class="lh style3">   
+    	<!-- TemplateBeginEditable name="首页_3F产品分类4" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+</div>	
+	</div>
+
+  <!-- ad start -->
+	<div class="sm sm1 brands">
+		<div class="smt">
+			<h3>品牌旗舰店</h3>
+		</div>
+		<div class="smc">
+			<ul class="lh">
+			<!-- #BeginLibraryItem "/library/ibeand3.lbi" --><!-- #EndLibraryItem -->
+			</ul>
+			</div>
+	</div><!--brands end-->
+	<div class="fr da209x180">
+			<div class="slide">
+				<div id="MSClassBoxr3" style="margin: 0px auto;">
+				 <ul class="slide-items" id="contentfr3">
+				 <li><?php echo get_adv('首页_右边分类幻灯图_3f分类',1);?></li>
+				 <li><?php echo get_adv('首页_右边分类幻灯图_3f分类',2);?></li>
+				 </ul>
+				 </div>          
+				 <div class="slide-controlsr">           
+				<ul id="myTab_btnsr3">
+				 <li></li>            
+				 <li></li>            
+				 </ul>        
+			   </div>
+			   </div>		   
+<script type="text/javascript">
+new Marquee(
+{
+	MSClassID : "MSClassBoxr3",
+	ContentID : "contentfr3",
+	TabID	  : "myTab_btnsr3",
+	TabTimeout : 150,
+	Direction : 5,
+	Step	  : 0.3,
+	Width	  : 209,
+	Height	  : 180,
+	Timer	  : 20,
+	DelayTime : 2,
+	WaitTime  : 2,
+	ScrollStep: 0,
+	SwitchType: 0,
+	AutoStart : 1
+})
+</script>
+	</div>
+	<span class="clr"></span> 
+</div>
+<!-- 服装鞋帽 end-->
+
+<div class="w w1" id="jewellery">
+	<div class="m m1 catalogue" data-lazyload="1">
+		<div class="mt ld">
+			<div class="floor"><b class="fixpng b b1"></b><b style="height: 34px; display: block;" class="fixpng b b2"></b><b class="b b3">4F</b><b class="fixpng b4"></b></div>
+			<h2>美容珠宝</h2>
+		</div>
+		<div class="mc">
+			<div class="style1">
+			  <ul class="lh">
+        			<!-- #BeginLibraryItem "/library/icat4.lbi" --><!-- #EndLibraryItem -->
+				</ul>
+				<span>
+					<!-- TemplateBeginEditable name="首页_4F左图" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+</span>
+			</div>
+		</div>
+	</div>
+	<div class="m plist">
+			<div class="utab clearfix">
+			<ul>
+					<li class="hover" id="six1" onmousemove="setTab('six',1,5)">特价商品</a></li>
+					<li id="six2" onmousemove="setTab('six',2,5)">大家电</li>
+					<li id="six3" onmousemove="setTab('six',3,5)">小家电</li>
+					<li id="six4" onmousemove="setTab('six',4,5)">手机通讯</li>
+					<li id="six5" onmousemove="setTab('six',5,5)">汽车五金</li>
+			</ul>
+		</div>
+			<div class="smc" id="con_six_1" style="display:block">
+        <!-- ad start -->
+		<div class="slide">
+				<div id="MSClassBox3" style="margin: 0px auto;">
+				 <ul class="slide-items" id="contentf3">
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第4f分类',1);?></li>
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第4f分类',2);?></li>
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第4f分类',3);?></li>
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第4f分类',4);?></li>
+				 </ul>
+				 </div>          
+				 <div class="slide-controlsl">           
+				<ul id="myTab_btns3">
+				 <li></li>            
+				 <li></li>            
+				 <li></li>            
+				 <li></li>   
+				 </ul>        
+			   </div>
+			   </div>		   
+<script type="text/javascript">
+new Marquee(
+{
+	MSClassID : "MSClassBox3",
+	ContentID : "contentf3",
+	TabID	  : "myTab_btns3",
+	TabTimeout : 150,
+	Direction : 5,
+	Step	  : 0.3,
+	Width	  : 473,
+	Height	  : 180,
+	Timer	  : 20,
+	DelayTime : 2,
+	WaitTime  : 2,
+	ScrollStep: 473,
+	SwitchType: 0,
+	AutoStart : 1
+})
+</script>
+        <!-- ad end -->
+				<ul class="lh style1">
+        			<!-- TemplateBeginEditable name="首页_4F产品分类1" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+				</ul>
+			</div>
+		
+  <div class="smc" id="con_six_2">
+     <ul class="lh style3">   
+    	<!-- TemplateBeginEditable name="首页_4F产品分类2" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+
+  <div class="smc" id="con_six_3">
+  <ul class="lh style3">   
+    	<!-- TemplateBeginEditable name="首页_4F产品分类3" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+
+  <div class="smc" id="con_six_4">
+ <ul class="lh style3">   
+    	<!-- TemplateBeginEditable name="首页_4F产品分类4" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+  
+  <div class="smc" id="con_six_5">
+ <ul class="lh style3">   
+    	<!-- TemplateBeginEditable name="首页_4F产品分类5" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+</div>	
+	</div>
+
+  <!-- ad start -->
+	<div class="sm sm1 brands">
+		<div class="smt">
+			<h3>品牌旗舰店</h3>
+		</div>
+		<div class="smc">
+			<ul class="lh"><!-- #BeginLibraryItem "/library/ibeand4.lbi" --><!-- #EndLibraryItem --></ul>		
+			</div>
+	</div>
+	<div class="fr da209x180">
+			<div class="slide">
+				<div id="MSClassBoxr4" style="margin: 0px auto;">
+				 <ul class="slide-items" id="contentfr4">
+				 <li><?php echo get_adv('首页_右边分类幻灯图_4f分类',1);?></li>
+				 <li><?php echo get_adv('首页_右边分类幻灯图_4f分类',2);?></li>
+				 </ul>
+				 </div>          
+				 <div class="slide-controlsr">           
+				<ul id="myTab_btnsr4">
+				 <li></li>            
+				 <li></li>            
+				 </ul>        
+			   </div>
+			   </div>		   
+<script type="text/javascript">
+new Marquee(
+{
+	MSClassID : "MSClassBoxr4",
+	ContentID : "contentfr4",
+	TabID	  : "myTab_btnsr4",
+	TabTimeout : 150,
+	Direction : 5,
+	Step	  : 0.3,
+	Width	  : 209,
+	Height	  : 180,
+	Timer	  : 20,
+	DelayTime : 2,
+	WaitTime  : 2,
+	ScrollStep: 0,
+	SwitchType: 0,
+	AutoStart : 1
+})
+</script>
+	</div>
+	<span class="clr"></span> 
+</div>
+<!-- 美容珠宝楼层 end-->
+
+<div class="w w1" id="life">
+	<div class="m m1 catalogue">
+		<div class="mt ld">
+			<div class="floor"><b class="fixpng b b1"></b><b style="height: 34px; display: block;" class="fixpng b b2"></b><b class="b b3">5F</b><b class="fixpng b4"></b></div>
+			<h2>居家生活</h2>
+		</div>
+		<div class="mc">
+			<div class="style1">
+			  <ul class="lh">
+        			<!-- #BeginLibraryItem "/library/icat5.lbi" --><!-- #EndLibraryItem -->
+				</ul>
+				<span>
+					<!-- TemplateBeginEditable name="首页_5F左图" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+</span>
+			</div>
+		</div>
+	</div>
+	<div class="m plist">
+		<div class="utab clearfix">
+			<ul>
+					<li class="hover" id="seven1" onmousemove="setTab('seven',1,5)">特价商品</a></li>
+					<li id="seven2" onmousemove="setTab('seven',2,5)">大家电</li>
+					<li id="seven3" onmousemove="setTab('seven',3,5)">小家电</li>
+					<li id="seven4" onmousemove="setTab('seven',4,5)">手机通讯</li>
+					<li id="seven5" onmousemove="setTab('seven',5,5)">汽车五金</li>
+			</ul>
+		</div>
+		
+			<div class="smc" id="con_seven_1" style="display:block">
+        <!-- ad start -->
+				<div class="slide">
+				<div id="MSClassBox4" style="margin: 0px auto;">
+				 <ul class="slide-items" id="contentf4">
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第5f分类',1);?></li>
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第5f分类',2);?></li>
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第5f分类',3);?></li>
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第5f分类',4);?></li>
+				 </ul>
+				 </div>          
+				 <div class="slide-controlsl">           
+				<ul id="myTab_btns4">
+				 <li></li>            
+				 <li></li>            
+				 <li></li>            
+				 <li></li>   
+				 </ul>        
+			   </div>
+			   </div>		   
+<script type="text/javascript">
+new Marquee(
+{
+	MSClassID : "MSClassBox4",
+	ContentID : "contentf4",
+	TabID	  : "myTab_btns4",
+	TabTimeout : 150,
+	Direction : 5,
+	Step	  : 0.3,
+	Width	  : 473,
+	Height	  : 180,
+	Timer	  : 20,
+	DelayTime : 2,
+	WaitTime  : 2,
+	ScrollStep: 473,
+	SwitchType: 0,
+	AutoStart : 1
+})
+</script>
+        <!-- ad end -->
+				<ul class="lh style1">
+        			<!-- TemplateBeginEditable name="首页_5F产品分类1" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+				</ul>
+			</div>
+		
+  <div class="smc" id="con_seven_2">
+  <ul class="lh style3">   
+    	<!-- TemplateBeginEditable name="首页_5F产品分类2" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+
+  <div class="smc" id="con_seven_3">
+ <ul class="lh style3">   
+    	<!-- TemplateBeginEditable name="首页_5F产品分类3" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+
+  <div class="smc" id="con_seven_4">
+ <ul class="lh style3">   
+    	<!-- TemplateBeginEditable name="首页_5F产品分类4" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+  <div class="smc" id="con_seven_5">
+ <ul class="lh style3">   
+    	<!-- TemplateBeginEditable name="首页_5F产品分类5" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+</div>	
+	</div>
+
+  <!-- ad start -->
+	<div class="sm sm1 brands">
+		<div class="smt">
+			<h3>品牌旗舰店</h3>
+		</div>
+		<div class="smc">
+			<ul class="lh"><!-- #BeginLibraryItem "/library/ibeand5.lbi" --><!-- #EndLibraryItem --></ul>	</div>
+	</div>
+	<div class="fr da209x180">
+				<div class="slide">
+				<div id="MSClassBoxr5" style="margin: 0px auto;">
+				 <ul class="slide-items" id="contentfr5">
+				 <li><?php echo get_adv('首页_右边分类幻灯图_5f分类',1);?></li>
+				 <li><?php echo get_adv('首页_右边分类幻灯图_5f分类',2);?></li>
+				 </ul>
+				 </div>          
+				 <div class="slide-controlsr">           
+				<ul id="myTab_btnsr5">
+				 <li></li>            
+				 <li></li>            
+				 </ul>        
+			   </div>
+			   </div>		   
+<script type="text/javascript">
+new Marquee(
+{
+	MSClassID : "MSClassBoxr5",
+	ContentID : "contentfr5",
+	TabID	  : "myTab_btnsr5",
+	TabTimeout : 150,
+	Direction : 5,
+	Step	  : 0.3,
+	Width	  : 209,
+	Height	  : 180,
+	Timer	  : 20,
+	DelayTime : 2,
+	WaitTime  : 2,
+	ScrollStep: 0,
+	SwitchType: 0,
+	AutoStart : 1
+})
+</script>
+	</div>
+	<span class="clr"></span> 
+</div>
+<!-- 居家生活楼层 end-->
+
+<div class="w w1" id="baby">
+	<div class="m m1 catalogue" data-lazyload="1">
+		<div class="mt ld">
+			<div class="floor"><b class="fixpng b b1"></b><b style="height: 34px; display: block;" class="fixpng b b2"></b><b class="b b3">6F</b><b class="fixpng b4"></b></div>
+			<h2>母婴玩具</h2>
+		</div>
+		<div class="mc">
+			<div class="style1">
+			  <ul class="lh">
+        			<!-- #BeginLibraryItem "/library/icat6.lbi" --><!-- #EndLibraryItem -->
+				</ul>
+				<span>
+					<!-- TemplateBeginEditable name="首页_6F左图" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+</span>
+			</div>
+		</div>
+	</div>
+	<div class="m plist">
+			<div class="utab clearfix">
+			<ul>
+					<li class="hover" id="eight1" onmousemove="setTab('eight',1,5)">特价商品</a></li>
+					<li id="eight2" onmousemove="setTab('eight',2,5)">大家电</li>
+					<li id="eight3" onmousemove="setTab('eight',3,5)">小家电</li>
+					<li id="eight4" onmousemove="setTab('eight',4,5)">手机通讯</li>
+					<li id="eight5" onmousemove="setTab('eight',5,5)">汽车五金</li>
+			</ul>
+		</div>
+		
+			<div class="smc" id="con_eight_1" style="display:block">
+        <!-- ad start -->
+<div class="slide">
+				<div id="MSClassBox5" style="margin: 0px auto;">
+				 <ul class="slide-items" id="contentf5">
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第6f分类',1);?></li>
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第6f分类',2);?></li>
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第6f分类',3);?></li>
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第6f分类',4);?></li>
+				 </ul>
+				 </div>          
+				 <div class="slide-controlsl">           
+				<ul id="myTab_btns5">
+				 <li></li>            
+				 <li></li>            
+				 <li></li>            
+				 <li></li>   
+				 </ul>        
+			   </div>
+			   </div>		   
+<script type="text/javascript">
+new Marquee(
+{
+	MSClassID : "MSClassBox5",
+	ContentID : "contentf5",
+	TabID	  : "myTab_btns5",
+	TabTimeout : 150,
+	Direction : 5,
+	Step	  : 0.3,
+	Width	  : 473,
+	Height	  : 180,
+	Timer	  : 20,
+	DelayTime : 2,
+	WaitTime  : 2,
+	ScrollStep: 473,
+	SwitchType: 0,
+	AutoStart : 1
+})
+</script>        <!-- ad end -->
+				<ul class="lh style2">
+<!-- TemplateBeginEditable name="首页_6F产品分类1" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+				</ul>
+			</div>
+		
+  <div class="smc" id="con_eight_2">
+ <ul class="lh style4">   
+    	<!-- TemplateBeginEditable name="首页_6F产品分类2" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+  <div class="smc" id="con_eight_3">
+ <ul class="lh style4">     
+    	<!-- TemplateBeginEditable name="首页_6F产品分类3" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+
+  <div class="smc" id="con_eight_4">
+ <ul class="lh style4">   
+    	<!-- TemplateBeginEditable name="首页_6F产品分类4" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+
+  <div class="smc" id="con_eight_5">
+ <ul class="lh style4">    
+    	<!-- TemplateBeginEditable name="首页_6F产品分类5" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+</div>	
+	</div>
+
+
+  <div class="sm sm1 brands">
+    <div class="smt">
+      <h3>品牌旗舰店</h3>
+    </div>
+    <div class="smc">
+    	<ul class="lh"><!-- #BeginLibraryItem "/library/ibeand6.lbi" --><!-- #EndLibraryItem --></ul>  </div>
+  </div>
+
+ 	<div class="sm sm1 infomation">
+		<div class="smc">
+			<ul>
+			    	<!-- TemplateBeginEditable name="首页_6F新闻分类" -->
+<!-- #BeginLibraryItem "/library/cat_articles.lbi" -->
+
+<!--{foreach from=$articles item=article_item name=curnew}-->
+<li><a href="{$article_item.url}" title="{$article_item.title|escape:html}" target="_blank">{$article_item.short_title}</a></li>
+<!--{/foreach}-->
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+			</ul>
+		</div>
+	</div>
+
+	<span class="clr"></span>
+</div>
+<!-- 食品母婴楼层 end-->
+
+
+<div class="w w1" id="food">
+	<div class="m m1 catalogue" data-lazyload="1">
+		<div class="mt ld">
+			<div class="floor"><b class="fixpng b b1"></b><b style="height: 34px; display: block;" class="fixpng b b2"></b><b class="b b3">7F</b><b class="fixpng b4"></b></div>
+			<h2>食品保健</h2>
+		</div>
+		<div class="mc">
+			<div class="style1">
+				 <ul class="lh">
+        			<!-- #BeginLibraryItem "/library/icat7.lbi" --><!-- #EndLibraryItem -->
+				</ul>
+				<span>
+					<!-- TemplateBeginEditable name="首页_7F左图" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+</span>
+			</div>
+		</div>
+	</div>
+	<div class="m plist">
+		<div class="utab clearfix">
+			<ul>
+					<li class="hover" id="nine1" onmousemove="setTab('nine',1,5)">特价商品</a></li>
+					<li id="nine2" onmousemove="setTab('nine',2,5)">大家电</li>
+					<li id="nine3" onmousemove="setTab('nine',3,5)">小家电</li>
+					<li id="nine4" onmousemove="setTab('nine',4,5)">手机通讯</li>
+					<li id="nine5" onmousemove="setTab('nine',5,5)">汽车五金</li>
+			</ul>
+		</div>
+		
+			<div class="smc" id="con_nine_1" style="display:block">
+        <!-- ad start -->
+			<div class="slide">
+				<div id="MSClassBox6" style="margin: 0px auto;">
+				 <ul class="slide-items" id="contentf6">
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第7f分类',1);?></li>
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第7f分类',2);?></li>
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第7f分类',3);?></li>
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第7f分类',4);?></li>
+				 </ul>
+				 </div>          
+				 <div class="slide-controlsl">           
+				<ul id="myTab_btns6">
+				 <li></li>            
+				 <li></li>            
+				 <li></li>            
+				 <li></li>   
+				 </ul>        
+			   </div>
+			   </div>		   
+<script type="text/javascript">
+new Marquee(
+{
+	MSClassID : "MSClassBox6",
+	ContentID : "contentf6",
+	TabID	  : "myTab_btns6",
+	TabTimeout : 150,
+	Direction : 5,
+	Step	  : 0.3,
+	Width	  : 473,
+	Height	  : 180,
+	Timer	  : 20,
+	DelayTime : 2,
+	WaitTime  : 2,
+	ScrollStep: 473,
+	SwitchType: 0,
+	AutoStart : 1
+})
+</script>        <!-- ad end -->
+
+				<ul class="lh style2">
+	<!-- TemplateBeginEditable name="首页_7F产品分类1" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+				</ul>
+			</div>
+	
+  <div class="smc" id="con_nine_2">
+<ul class="lh style4">   
+    	<!-- TemplateBeginEditable name="首页_7F产品分类2" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+
+  <div class="smc" id="con_nine_3">
+ <ul class="lh style4">    
+    	<!-- TemplateBeginEditable name="首页_7F产品分类3" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+  <div class="smc" id="con_nine_4">
+ <ul class="lh style4">   
+    	<!-- TemplateBeginEditable name="首页_7F产品分类4" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+
+  <div class="smc" id="con_nine_5">
+<ul class="lh style4">   
+    	<!-- TemplateBeginEditable name="首页_7F产品分类5" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+</div>	
+	</div>
+
+	<div class="sm sm1 brands">
+	<div class="smt">
+		<h3>品牌旗舰店</h3>
+	</div>
+	<div class="smc">
+		<ul class="lh"><!-- #BeginLibraryItem "/library/ibeand7.lbi" --><!-- #EndLibraryItem --></ul> 	</div>
+</div>
+	<div class="sm sm1 infomation">
+		<div class="smc">
+			<ul>
+				<!-- TemplateBeginEditable name="首页_7F新闻分类" -->
+<!-- #BeginLibraryItem "/library/cat_articles.lbi" -->
+
+<!--{foreach from=$articles item=article_item name=curnew}-->
+<li><a href="{$article_item.url}" title="{$article_item.title|escape:html}" target="_blank">{$article_item.short_title}</a></li>
+<!--{/foreach}-->
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+			</ul>
+		</div>
+	</div>
+	<span class="clr"></span>
+</div>
+<!-- 食品保健  楼层 end-->
+<div class="w w1" id="book">
+	<div class="m m1 catalogue">
+		<div class="mt ld">
+			<div class="floor"><b class="fixpng b b1"></b><b style="height: 34px; display: block;" class="fixpng b b2"></b><b class="b b3">8F</b><b class="fixpng b4"></b></div>
+			<h2>图书音像</h2>
+		</div>
+		<div class="mc">
+			<div class="style1">
+				<ul class="lh">
+        			<!-- #BeginLibraryItem "/library/icat8.lbi" --><!-- #EndLibraryItem -->
+				</ul>
+				<span>
+					<!-- TemplateBeginEditable name="首页_8F左图" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+</span>
+			</div>
+		</div>
+	</div>
+	<div class="m plist">
+			<div class="utab clearfix">
+			<ul>
+					<li class="hover" id="ten1" onmousemove="setTab('ten',1,5)">特价商品</a></li>
+					<li id="ten2" onmousemove="setTab('ten',2,5)">大家电</li>
+					<li id="ten3" onmousemove="setTab('ten',3,5)">小家电</li>
+					<li id="ten4" onmousemove="setTab('ten',4,5)">手机通讯</li>
+					<li id="ten5" onmousemove="setTab('ten',5,5)">汽车五金</li>
+			</ul>
+		</div>
+		
+			<div class="smc" id="con_ten_1" style="display:block">
+        <!-- ad start -->
+				<div class="slide">
+				<div id="MSClassBox7" style="margin: 0px auto;">
+				 <ul class="slide-items" id="contentf7">
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第8f分类',1);?></li>
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第8f分类',2);?></li>
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第8f分类',3);?></li>
+				 <li><?php echo get_adv('首页_中间分类幻灯图_第8f分类',4);?></li>
+				 </ul>
+				 </div>          
+				 <div class="slide-controlsl">           
+				<ul id="myTab_btns7">
+				 <li></li>            
+				 <li></li>            
+				 <li></li>            
+				 <li></li>   
+				 </ul>        
+			   </div>
+			   </div>		   
+<script type="text/javascript">
+new Marquee(
+{
+	MSClassID : "MSClassBox7",
+	ContentID : "contentf7",
+	TabID	  : "myTab_btns7",
+	TabTimeout : 150,
+	Direction : 5,
+	Step	  : 0.3,
+	Width	  : 473,
+	Height	  : 180,
+	Timer	  : 20,
+	DelayTime : 2,
+	WaitTime  : 2,
+	ScrollStep: 473,
+	SwitchType: 0,
+	AutoStart : 1
+})
+</script>      
+        <!-- ad end -->
+				<ul class="lh style1">
+    	<!-- TemplateBeginEditable name="首页_8F产品分类1" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable --> 
+				</ul>
+			</div>
+		
+  <div class="smc" id="con_ten_2">
+ <ul class="lh style3">   
+    	<!-- TemplateBeginEditable name="首页_8F产品分类2" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+
+<div class="smc" id="con_ten_3">
+ <ul class="lh style3">   
+    	<!-- TemplateBeginEditable name="首页_8F产品分类3" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+  
+<div class="smc" id="con_ten_4">
+ <ul class="lh style3">   
+    	<!-- TemplateBeginEditable name="首页_8F产品分类4" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+  </div>
+
+<div class="smc" id="con_ten_5">
+ <ul class="lh style3">   
+    	<!-- TemplateBeginEditable name="首页_8F产品分类5" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods name=curn}-->
+  <li class="fore{$smarty.foreach.curn.iteration}"> 
+  <div class="p-img ld">
+        <a href="{$goods.url}" title="{$goods.name|escape:html}" class="litpic" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="100" width="100"></a></div>
+  <div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></div>
+  <div class="p-price">
+  <!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}-->
+  </div>
+</li>
+   <!--{/foreach}-->
+ <!-- #EndLibraryItem --><!-- TemplateEndEditable -->  
+</ul>
+</div>	
+	</div>
+
+<!-- #BeginLibraryItem "/library/8fr.lbi" --><!-- #EndLibraryItem -->
+	
+</div>
+<!--9f end-->
+
+<div class="w">
+	<div class="m m3 club" id="share">
+		<div class="mt">
+			<h2>热门晒单</h2>
+			<div class="extra"></div>
+		</div>
+		<div class="mc" id="demo" style="overflow:hidden; height: 161px;">
+        <div id="demo1">
+      <ul>
+      <?php $this->assign('get_index_comment',index_comments(15));?>
+       <!--{foreach from=$get_index_comment item=comments name=comm_num}-->
+            <li style="height: 60px; display: list-item;">
+            <div class="p-img ld">
+            <a href="{$comments.url}" target="_blank" title="{$comments.goods_name}"><img src="{$comments.goods_thumb}" alt="{$comments.goods_name}" width="50" height="50"><b class="ci cix1"></b></a>  
+            </div>
+          <div class="p-name"><a href="{$comments.url}" target="_blank" title="{$comments.goods_name}">{$comments.goods_name}</a></div>
+          <div class="p-detail"><a href="{$comments.url}" target="_blank">{$comments.content}</a></div>
+             </li>
+          <!--{/foreach}-->
+      </ul>
+      </div>
+          <div id="demo2"></div>
+		</div>
+        <script type="text/javascript">
+			var speed=40;
+			var demo2=document.getElementById("demo2");
+			var demo1=document.getElementById("demo1");
+			var demo=document.getElementById("demo");
+			demo2.innerHTML=demo1.innerHTML
+			function Marquee(){
+			if(demo2.offsetTop-demo.scrollTop<=0)
+			demo.scrollTop-=demo1.offsetHeight;
+			else{
+			demo.scrollTop++;
+			}
+			}
+			var MyMar=setInterval(Marquee,speed);
+			demo.onmouseover=function() {clearInterval(MyMar)}
+			demo.onmouseout=function() {MyMar=setInterval(Marquee,speed)}
+         </script>
+
+	</div>
+	<div class="m m3 club" id="comment">
+		<div class="mt">
+			<h2>热门商品</h2>
+			<div class="extra"></div>
+		</div>
+				<div class="mc" id="demoa">  
+		<div id="demo3">
+      <ul>
+	   <!-- {if $hot_goods} -->
+      <!--{foreach from=$hot_goods item=goods name=goodsnum}-->
+<li style="height: 60px; display: list-item;">
+  <div class="p-img ld">
+            <a href="{$goods.url}" target="_blank" title="{$goods.name|escape:html}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="50" height="50"><b class="ci cix2"></b></a>  
+            </div>
+          <div class="p-name"><a href="{$goods.url}" target="_blank" title="{$goods.name|escape:html}">{$goods.name|escape:html}</a></div>
+          <div class="p-detail"><a href="{$goods.url}" target="_blank">{$goods.brief}</a></div>
+		  </li>
+  <!--{/foreach}-->
+      <!-- {/if} -->
+	  </ul>
+      </div>
+          <div id="demo4"></div>
+		</div>
+        <script type="text/javascript">
+			var speed=40;
+			var demo4=document.getElementById("demo4");
+			var demo3=document.getElementById("demo3");
+			var demoa=document.getElementById("demoa");
+			demo4.innerHTML=demo1.innerHTML
+			function Marquee(){
+			if(demo4.offsetTop-demoa.scrollTop<=0)
+			demoa.scrollTop-=demo3.offsetHeight;
+			else{
+			demoa.scrollTop++;
+			}
+			}
+			var MyMar=setInterval(Marquee,speed);
+			demoa.onmouseover=function() {clearInterval(MyMar)}
+			demoa.onmouseout=function() {MyMar=setInterval(Marquee,speed)}
+         </script>
+	</div>
+	<div class="m m3" id="reading">
+		<div class="mt">
+			<h2>新闻中心</h2>
+			<div class="extra"><a href="#" target="_blank">更多&nbsp;&gt;</a></div>
+		</div>
+		<div class="mc">
+    <div class="p-img">
+<!-- TemplateBeginEditable name="首页_底部新闻中心图" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable --></div>
+<ul>
+	<!-- TemplateBeginEditable name="首页_底部新闻分类" -->
+<!-- #BeginLibraryItem "/library/cat_articles.lbi" -->
+
+<!--{foreach from=$articles item=article_item name=curnew}-->
+<li><a href="{$article_item.url}" title="{$article_item.title|escape:html}" target="_blank">{$article_item.short_title}</a></li>
+<!--{/foreach}-->
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+</ul>
+		</div>
+	</div>
+	<div class="m" id="subscription">
+		<div class="mt">
+			<h2>订阅促销信息</h2>
+		</div>
+		<div class="mc">
+			<div class="form">
+				<!-- #BeginLibraryItem "/library/email_list.lbi" --><!-- #EndLibraryItem -->
+			</div>
+		</div>
+	</div>
+	<span class="clr"></span>
+</div>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

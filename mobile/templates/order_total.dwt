@@ -1,0 +1,59 @@
+		<div id="ECS_ORDERTOTAL">
+			<table width="100%" border="0" cellpadding="5" cellspacing="1">
+				<!-- {if $smarty.session.user_id > 0 and ($config.use_integral or $config.use_bonus)} -->
+				<tr>
+					<td> 该订单完成后，您将获得
+						<!-- {if $config.use_integral} 是否使用积分-->
+						<font class="f4_b">{$total.will_get_integral}</font> {$points_name}
+						<!-- {/if} -->
+						<!-- {if $config.use_integral and $config.use_bonus} 是否同时使用积分红包-->
+						，以及价值
+						<!-- {/if} -->
+						<!-- {if $config.use_bonus} 是否使用红包-->
+						<font class="f4_b">{$total.will_get_bonus}</font>{$lang.de}{$lang.bonus}。
+						<!-- {/if} --></td>
+				</tr>
+				<!-- {/if} -->
+				<tr>
+					<td> 商品总价: <font class="f4_b">{$total.goods_price_formated}</font>
+						<!-- {if $total.discount gt 0} 折扣 -->
+						- 折扣: <font class="f4_b">{$total.discount_formated}</font>
+						<!-- {/if} -->
+						<!-- {if $total.tax gt 0} 税 -->
+						+ 发票税额: <font class="f4_b">{$total.tax_formated}</font>
+						<!-- {/if} -->
+						<!-- {if $total.shipping_fee > 0} 配送费用 -->
+						+ 配送费用: <font class="f4_b">{$total.shipping_fee_formated}</font>
+						<!-- {/if} -->
+						<!-- {if $total.shipping_insure > 0} 保价费用 -->
+						+ 保价费用: <font class="f4_b">{$total.shipping_insure_formated}</font>
+						<!-- {/if} -->
+						<!-- {if $total.pay_fee > 0} 支付费用 -->
+						+ 支付手续费: <font class="f4_b">{$total.pay_fee_formated}</font>
+						<!-- {/if} -->
+						<!-- {if $total.pack_fee > 0} 包装费用-->
+						+ 包装费用: <font class="f4_b">{$total.pack_fee_formated}</font>
+						<!-- {/if} -->
+						<!-- {if $total.card_fee > 0} 贺卡费用-->
+						+ 贺卡费用: <font class="f4_b">{$total.card_fee_formated}</font>
+						<!-- {/if} -->
+                        </td>
+				</tr>
+				<!-- {if $total.surplus > 0 or $total.integral > 0 or $total.bonus > 0} 使用余额或积分或红包 -->
+				<tr>
+					<td><!-- {if $total.surplus > 0} 使用余额 -->
+						- 使用余额: <font class="f4_b">{$total.surplus_formated}</font>
+						<!-- {/if} -->
+						<!-- {if $total.integral > 0} 使用积分 -->
+						- 使用积分: <font class="f4_b">{$total.integral_formated}</font>
+						<!-- {/if} -->
+						<!-- {if $total.bonus > 0} 使用红包 -->
+						- 使用红包: <font class="f4_b">{$total.bonus_formated}</font>
+						<!-- {/if} --></td>
+				</tr>
+				<!-- {/if} 使用余额或积分或红包 -->
+				<tr>
+					<td> 应付款金额: <font class="f4_b">{$total.amount_formated}</font></td>
+				</tr>
+			</table>
+		</div>

@@ -1,0 +1,52 @@
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+</script>
+<div id="header">
+	<div class="container">
+		<a href="./" id="logo"><img src="{$static_path}static/img/logo.gif" alt="{$shop_name}"/></a>
+		<p class="nav-top">{foreach from=$navigator_list.top item=nav name=nav_top_list}<a href="{$nav.url}"{if $smarty.foreach.nav_top_list.first} class="first"{/if}>{$nav.name}</a>{/foreach}</p>
+		<div class="top-bar">
+			<div class="nav">
+				<ul>
+					<li{if $navigator_list.config.index eq 1} class="current"{/if}><a href="../index.php"><span>{$lang.home}</span></a></li>
+					{foreach from=$navigator_list.middle item=nav name=nav_middle_list}{if $smarty.foreach.nav_middle_list.index <= 6}
+					<li{if $nav.active eq 1} class="current"{/if}><a href="{$nav.url}"{if $nav.opennew eq 1} rel="external"{/if}><span>{$nav.name}</span></a></li>
+					{/if}{/foreach}
+				</ul>
+			</div>
+			<span class="left">&nbsp;</span>
+			<span class="right">&nbsp;</span>
+			<form method="get" action="search.php" onSubmit="return checkSearchForm()" id="search">
+				<span>{$lang.search_goods}{$lang.colon}</span>
+				<select name="category" id="category">
+					<option value="0" selected="selected">{$lang.all_category_select}</option>
+					{$category_list}
+				</select>
+				<input type="text" name="keywords" value="{$search_keywords|escape}" tabindex="1" id="keyword"/>
+				<input type="submit" value="{$lang.btn_search}" class="submit"/>
+				<a href="search.php?act=advanced_search">{$lang.advanced_search}</a>
+			</form>
+			<p class="member" id="ECS_MEMBERZONE">{insert name='member_info'}</p>
+			<p class="hot-keyword"><em>{$lang.hot_search}</em>{foreach from=$searchkeywords item=val}<a href="search.php?keywords={$val|escape}">{$val}</a>{/foreach}</p>
+			<p class="cart" id="ECS_CARTINFO">{insert name='cart_info'}</p>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+{literal}
+<!--
+function checkSearchForm()
+{
+	if(document.getElementById('keyword').value)
+	{
+		return true;
+	}
+	else
+	{
+		alert("{$lang.no_keywords}");
+		return false;
+	}
+}
+-->
+{/literal}
+</script>

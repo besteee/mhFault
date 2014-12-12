@@ -1,0 +1,33 @@
+<?php
+define('IN_ECS', true);
+require(dirname(__FILE__) . '/includes/init.php');
+
+addGoods();
+
+function addGoods(){
+
+		$goods_name=$_POST['goods_nameP'];
+		$fault_id=$_POST['fault_idP'];
+		$shop_price=$_POST['shop_priceP'];
+		$matePrice=$_POST['matePriceP'];
+		$timePrice=$_POST['timePriceP'];
+		$materialsPrice=$_POST['materialsPriceP'];
+		$matePriceNum=$_POST['matePriceNumP'];
+		$timePriceNum=$_POST['timePriceNumP'];
+		$materialsPriceNum=$_POST['materialsPriceNumP'];
+		$diyId=$_POST['diyIdP'];
+
+		$sql="INSERT INTO".$GLOBALS['ecs']->table('goods')."(goods_name,shop_price,matePrice,timePrice,materialsPrice,matePriceNum,timePriceNum,materialsPriceNum,fault_id)value('$goods_name','$shop_price','$matePrice','$timePrice','$materialsPrice','$matePriceNum','$timePriceNum','$materialsPriceNum','$fault_id')";
+		$result=$GLOBALS['db']->query($sql);
+		$goods_id=$GLOBALS['db']->insert_id();
+		$sql="UPDATE".$GLOBALS['ecs']->table('goods')."SET goods_sn='ECS000$goods_id' WHERE goods_id='$goods_id'";
+		$result2=$GLOBALS['db']->query($sql);
+		$sql="UPDATE".$GLOBALS['ecs']->table('fault_diy')."SET handle=1,goods_id='$goods_id' WHERE id='$diyId'";
+		$result3=$GLOBALS['db']->query($sql);
+		if($result&&$result2&&$result3){
+			echo '您的需求已提交，工作人员将马上与您联系！'.$goods_id;
+		}
+
+
+}
+?>

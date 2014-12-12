@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<!-- TemplateBeginEditable name="doctitle" --><title>{$page_title}</title><!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link href="{$static_path}static/css/style.css" rel="stylesheet" type="text/css"/>
+<!--[if IE]><link href="{$static_path}static/css/ie.css" rel="stylesheet" type="text/css"/><![endif]-->
+<script type="text/javascript" src="{$static_path}static/js/jquery.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.json.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/common.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/transport.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/utils.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/user.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/effect.js"></script>
+</head>
+<body>
+{include file="/library/page_header.lbi"}
+<div id="content"><div class="container">
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+	<div class="user-form clearfix">
+			{if $action eq 'login'}
+			<form action="user.php" method="post" name="formLogin" onSubmit="return userLogin()">
+				<h1>{$lang.login_title}</h1>
+				<div class="req"><b>*</b>{$lang.required_indicates}</div>
+				<label for="username"><b><span class="req">*</span>{$lang.label_username}{$lang.colon}</b>
+					<input type="text" name="username" value="" tabindex="1" id="username"/>
+				</label>
+				<label for="password"><b><span class="req">*</span>{$lang.label_password}{$lang.colon}</b>
+					<input type="password" name="password" value="" tabindex="2" id="password"/><em><a href="user.php?act=get_password">{$lang.forgot_password}</a></em>
+				</label>
+				{if $enabled_captcha}
+				<label for="captcha"><b><span class="req">*</span>{$lang.comment_captcha}{$lang.colon}</b>
+					<input type="text" name="captcha" maxlength="4" size="6" tabindex="3" class="captcha" id="captcha"/><img src="captcha.php?is_login=1&{$rand}" alt="{$lang.comment_captcha}" class="captcha" onClick="this.src='captcha.php?is_login=1&'+Math.random()">
+				</label>
+				{/if}
+				<fieldset class="checkbox-wrap label"><b>&nbsp;</b>
+					<fieldset>
+					<label for="remember"><input type="checkbox" name="remember" value="1" tabindex="3" class="checkbox" id="remember"/>{$lang.remember}</label>
+					</fieldset>
+				</fieldset>
+				<div class="submit-wrap">
+					<input type="submit" value="{$lang.btn_login}" tabindex="4" class="submit btn-md"/>
+					<input type="hidden" name="act" value="act_login"/>
+					<input type="hidden" name="back_act" value="{$back_act}"/>
+				</div>
+			</form>
+			<div class="extra">
+				<h2>{$lang.new_account}</h2>
+				<p>{$lang.register_text}</p>
+				<p><a href="user.php?act=register" class="btn-sm"><span>{$lang.register_now}</span></a></p>
+			</div>
+			{/if}
+			{if $action eq 'register'}
+			{if $shop_reg_closed eq 1}
+			<span class="closed">{$lang.shop_register_closed}</span>
+			{else}
+			<form name="formUser" action="user.php" method="post" onsubmit="return register();">
+				<h1>{$lang.register_title}</h1>
+				<div class="req"><b>*</b>{$lang.required_indicates}</div>
+				<label for="username"><b><span class="req">*</span>{$lang.label_username}{$lang.colon}</b>
+					<input type="text" name="username" tabindex="1" id="username" onblur="is_registered(this.value);"/>
+					<em id="username_notice" class="status">&nbsp;</em>
+				</label>
+				<label for="email"><b><span class="req">*</span>{$lang.label_email}{$lang.colon}</b>
+					<input type="text" name="email" tabindex="2" id="email" onblur="checkEmail(this.value);"/>
+					<em id="email_notice" class="status">&nbsp;</em>
+				</label>
+				<label for="password"><b><span class="req">*</span>{$lang.label_password}{$lang.colon}</b>
+					<input type="password" name="password" tabindex="3" id="password1" onblur="check_password(this.value);" onkeyup="checkIntensity(this.value)"/>
+					<em id="password_notice" class="status">&nbsp;</em>
+				</label>
+				<label for="confirm_password"><b><span class="req">*</span>{$lang.label_confirm_password}{$lang.colon}</b>
+					<input type="password" name="confirm_password" tabindex="4" id="confirm_password" onblur="check_conform_password(this.value);"/>
+					<em id="conform_password_notice" class="status">&nbsp;</em>
+				</label>
+				{foreach from=$extend_info_list item=field}
+				{if $field.id eq 6}
+				<label for="sel_question"><b>{if $field.is_need}<span class="req">*</span>{/if}{$lang.passwd_question}{$lang.colon}</b>
+					<select name="sel_question" tabindex="10" id="sel_question">
+						<option value="0">{$lang.sel_question}</option>
+						{html_options options=$passwd_questions selected=$profile.passwd_question}
+					</select>
+				</label>
+				<label for="passwd_answer"{if $field.is_need} id="passwd_quesetion"{/if}><b>{if $field.is_need}<span class="req">*</span>{/if}{$lang.passwd_answer}{$lang.colon}</b>
+					<input type="text" name="passwd_answer" value="{$profile.passwd_answer}" maxlength="20" tabindex="10" id="passwd_answer"/>
+				</label>
+				{else}
+				<label for="extend_field_{$field.id}"><b>{if $field.is_need}<span class="req">*</span>{/if}{$field.reg_field_name}{$lang.colon}</b>
+					<input type="text" name="extend_field{$field.id}" value="{$field.content}" tabindex="10" id="extend_field_{$field.id}"/>
+				</label>
+				{/if}
+				{/foreach}
+				{if $enabled_captcha}
+				<label for="captcha"><b><span class="req">*</span>{$lang.comment_captcha}{$lang.colon}</b>
+					<input type="text" name="captcha" maxlength="4" size="6" tabindex="11" class="captcha" id="captcha"/><img src="captcha.php?{$rand}" alt="{$lang.comment_captcha}" class="captcha" onClick="this.src='captcha.php?'+Math.random()">
+				</label>
+				{/if}
+				<label for="agreement"><b>&nbsp;</b>
+					<input type="checkbox" name="agreement" tabindex="12" value="1" checked="checked" id="agreement"/>
+					<em>{$lang.agreement_siy}</em>
+				</label>
+				<div class="submit-wrap">
+					<input type="submit" value="{$lang.btn_register}" tabindex="14" class="submit btn-md"/>
+					<input type="hidden" name="act" value="act_register"/>
+					<input type="hidden" name="back_act" value="{$back_act}"/>
+				</div>
+			</form>
+			{/if}
+			<div class="extra">
+				<h2>{$lang.login_now}</h2>
+				<p>{$lang.login_text}</p>
+				<p><a href="user.php?act=login" class="btn-sm"><span>{$lang.login_now}</span></a></p>
+			</div>
+			{/if}
+			{if $action eq 'get_password'}
+			<script type="text/javascript">
+			{foreach from=$lang.password_js item=item key=key}
+			var {$key} = "{$item}";
+			{/foreach}
+			</script>
+			<form name="getPassword" action="user.php" method="post" onSubmit="return submitPwdInfo()">
+				<h1>{$lang.get_password}</h1>
+				<div class="req"><b>*</b>{$lang.required_indicates}</div>
+				<label for="user_name"><b><span class="req">*</span>{$lang.label_username}{$lang.colon}</b>
+					<input type="text" name="user_name" tabindex="1" id="user_name"/>
+				</label>
+				<label for="email"><b><span class="req">*</span>{$lang.email}{$lang.colon}</b>
+					<input type="text" name="email" tabindex="2" id="email"/>
+				</label>
+				<div class="submit-wrap">
+					<input type="submit" value="{$lang.submit}" tabindex="4" class="submit btn-md"/>
+					<input type="hidden" name="act" value="send_pwd_email"/>
+				</div>
+			</form>
+			<div class="extra">
+				<h2>{$lang.get_password_tip}</h2>
+				<p>{$lang.get_password_tip_text}</p>
+				<p><a href="user.php?act=qpassword_name" class="btn-sm"><span>{$lang.get_password_by_question}</span></a></p>
+			</div>
+			{/if}
+			{if $action eq 'qpassword_name'}
+			<form action="user.php" method="post">
+				<h1>{$lang.get_question_username}</h1>
+				<label for="user_name"><b>{$lang.label_username}{$lang.colon}</b>
+					<input type="text" name="user_name" tabindex="1" id="user_name"/>
+				</label>
+				<div class="submit-wrap">
+					<input type="submit" value="{$lang.submit}" tabindex="4" class="submit btn-md"/>
+					<input type="hidden" name="act" value="get_passwd_question"/>
+				</div>
+			</form>
+			<div class="extra">
+				<h2>{$lang.get_password_tip}</h2>
+				<p>{$lang.get_password_tip_text2}</p>
+				<p><a href="user.php?act=get_password" class="btn-sm"><span>{$lang.get_password_by_mail}</span></a></p>
+			</div>
+			{/if}
+			{if $action eq 'get_passwd_question'}
+			<form action="user.php" method="post">
+				<h1>{$lang.input_answer}</h1>
+				<div class="req"><b>*</b>{$lang.required_indicates}</div>
+				<p class="label"><b>{$lang.passwd_question}{$lang.colon}</b>
+					<em>{$passwd_question}</em>
+				</p>
+				<label for="passwd_answer"><b><span class="req">*</span>{$lang.passwd_answer}{$lang.colon}</b>
+					<input type="text" name="passwd_answer" tabindex="2" id="passwd_answer"/>
+				</label>
+				{if $enabled_captcha}
+				<label for="captcha"><b><span class="req">*</span>{$lang.comment_captcha}{$lang.colon}</b>
+					<input type="text" name="captcha" maxlength="4" size="6" tabindex="3" class="captcha" id="captcha"/><img src="captcha.php?is_login=1&{$rand}" alt="{$lang.comment_captcha}" class="captcha" onClick="this.src='captcha.php?is_login=1&'+Math.random()">
+				</label>
+				{/if}
+				<div class="submit-wrap">
+					<input type="submit" value="{$lang.submit}" tabindex="4" class="submit btn-md"/>
+					<input type="hidden" name="act" value="check_answer"/>
+				</div>
+			</form>
+			<div class="extra">
+				<h2>{$lang.get_password_tip}</h2>
+				<p>{$lang.get_password_tip_text2}</p>
+				<p><a href="user.php?act=get_password" class="btn-sm"><span>{$lang.get_password_by_mail}</span></a></p>
+			</div>
+			{/if}
+			{if $action eq 'reset_password'}
+			<script type="text/javascript">
+			{foreach from=$lang.password_js item=item key=key}
+			var {$key} = "{$item}";
+			{/foreach}
+			</script>
+			<form name="getPassword2" action="user.php" method="post" onSubmit="return submitPwd()">
+				<h1>{$lang.reset_password}</h1>
+				<div class="req"><b>*</b>{$lang.required_indicates}</div>
+				<label for="new_password"><b><span class="req">*</span>{$lang.new_password}{$lang.colon}</b>
+					<input type="password" name="new_password" tabindex="1" value="" id="new_password"/>
+				</label>
+				<label for="confirm_password"><b><span class="req">*</span>{$lang.confirm_password}{$lang.colon}</b>
+					<input type="password" name="confirm_password" tabindex="2" value="" id="confirm_password"/>
+				</label>
+				<div class="submit-wrap">
+					<input type="submit" value="{$lang.confirm_submit}" tabindex="4" class="submit btn-md"/>
+					<input type="hidden" name="act" value="act_edit_password"/>
+					<input type="hidden" name="uid" value="{$uid}"/>
+					<input type="hidden" name="code" value="{$code}"/>
+				</div>
+			</form>
+			<div class="extra">
+				<h2>{$lang.get_password_tip}</h2>
+				<p>{$lang.get_password_tip_text3}</p>
+			</div>
+			{/if}
+		</div>
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+	</div>
+</div></div>
+{include file="/library/page_footer.lbi"}
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+{foreach from=$lang.passport_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+var username_exist = "{$lang.username_exist}";
+</script>
+</body>
+</html>

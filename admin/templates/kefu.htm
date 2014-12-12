@@ -1,0 +1,214 @@
+<!-- $Id: captcha_manage.htm 14868 2008-09-11 09:51:13Z dolphin $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+<script language="javascript">
+function   set(v){
+// g_value   =   v;   //set   global   value   if   needed
+location.href="kefu.php?act=css&skin="+v;
+} 
+</script>
+<style>
+.list-div td div{padding:5px 0;}
+.scfx span{margin:5px;white-space: nowrap;display:block;width:100px;float:left;}
+.scfx span img{vertical-align:middle;margin-right:3px;}
+.kfsrk{line-height:20px;height:25px;border:#CCC solid 1px;padding:0 5px;}
+.skinimg a{padding:3px;border:#CCC solid 1px;display:block;float:left;margin:0 3px;}
+.skinimg img{border:0;}
+.yborder{background:#FF0000;}
+.wborder{background:none;}
+.ysxz img{vertical-align:middle;}
+</style>
+<div class="list-div">
+<form method="post" action="kefu.php" name="theForm" onsubmit="return validate()" >
+<table cellpadding='3' cellspacing='1'>
+<tr>
+  <th colspan="2">{$lang.kefu}</th>
+</tr>
+<tr>
+  <td>
+  <strong>是否显示</strong><br />
+  </td>
+  <td width="89%"><input type="radio" name="kefushow" value="1" {$captcha.kefushowyes} />是<input type="radio"  name="kefushow" value="0" {$captcha.kefushowno} />否</td>
+</tr>
+<tr>
+  <td width="11%" >
+  <strong>皮肤更换</strong><br />
+  </td>
+  <td class="skinimg">
+    <a   href= "javascript:set(1) " {if $skin eq 1}class="yborder"{else}class="wborder"{/if}><img src="../OKQQ/qqimg/1.jpg"></a>
+    <a   href= "javascript:set(2) " {if $skin eq 2}class="yborder"{else}class="wborder"{/if}><img src="../OKQQ/qqimg/2.jpg"></a>
+    <a   href= "javascript:set(3) " {if $skin eq 3}class="yborder"{else}class="wborder"{/if}><img src="../OKQQ/qqimg/3.jpg"></a>
+    <a   href= "javascript:set(4) " {if $skin eq 4}class="yborder"{else}class="wborder"{/if}><img src="../OKQQ/qqimg/4.jpg"></a>
+    <a   href= "javascript:set(5) " {if $skin eq 5}class="yborder"{else}class="wborder"{/if}><img src="../OKQQ/qqimg/5.jpg"></a>
+    <a   href= "javascript:set(6) " {if $skin eq 6}class="yborder"{else}class="wborder"{/if}><img src="../OKQQ/qqimg/6.jpg"></a>
+    <a   href= "javascript:set(7) " {if $skin eq 7}class="yborder"{else}class="wborder"{/if}><img src="../OKQQ/qqimg/7.jpg"></a>
+    <a   href= "javascript:set(8) " {if $skin eq 8}class="yborder"{else}class="wborder"{/if}><img src="../OKQQ/qqimg/8.jpg"></a>
+    <a   href= "javascript:set(9) " {if $skin eq 9}class="yborder"{else}class="wborder"{/if}><img src="../OKQQ/qqimg/9.jpg"></a>
+    <a   href= "javascript:set(10) " {if $skin eq 10}class="yborder"{else}class="wborder"{/if}><img src="../OKQQ/qqimg/10.jpg"></a>
+    <a   href= "javascript:set(11) " {if $skin eq 11}class="yborder"{else}class="wborder"{/if}><img src="../OKQQ/qqimg/11.jpg"></a>
+    <a   href= "javascript:set(12) " {if $skin eq 12}class="yborder"{else}class="wborder"{/if}><img src="../OKQQ/qqimg/12.jpg"></a>
+    <a   href= "javascript:set(13) " {if $skin eq 13}class="yborder"{else}class="wborder"{/if}><img src="../OKQQ/qqimg/13.jpg"></a>
+    <a   href= "javascript:set(14) " {if $skin eq 14}class="yborder"{else}class="wborder"{/if}><img src="../OKQQ/qqimg/14.jpg"></a>
+    <a   href= "javascript:set(15) " {if $skin eq 15}class="yborder"{else}class="wborder"{/if}><img src="../OKQQ/qqimg/15.jpg"></a>
+    <a   href= "javascript:set(16) " {if $skin eq 16}class="yborder"{else}class="wborder"{/if}><img src="../OKQQ/qqimg/16.jpg"></a>
+  
+  </td>
+</tr>
+<tr>
+  <td>
+  <strong>显示区域</strong><br />
+  </td>
+  <td>
+  		<div><input type="radio" name="show" value="0" {$captcha.showleft} />左侧显示--顶部距离<input class="kfsrk" type="text" name="showlefttop" value="{$showlefttop}" size="5"/> 左侧距离<input class="kfsrk" type="text" name="showleft" value="{$showleft}" size="5"/></div>
+  		<div><input type="radio"  name="show" value="1" {$captcha.showright} />右侧显示--顶部距离<input class="kfsrk" type="text" name="showrighttop" value="{$showrighttop}" size="5"/>  右侧距离<input class="kfsrk" type="text" name="showright" value="{$showright}" size="5"/></div>
+  </td>
+</tr>
+
+<tr>
+  <td>
+  <strong>显示方式</strong><br />
+  </td>
+  <td><input  name="fs_show" type="radio" value="1" checked="checked" {$captcha.fs_showno} />收缩 <input type="radio" name="fs_show" value="0" {$captcha.fs_showyes} />展开</td>
+</tr>
+
+<tr>
+  <td>
+  <strong>售前客服号码</strong><br />
+  </td>
+  <td>
+  		<div><input class="kfsrk" type="text" name="typeone" value="{$typeone}" /></div>
+  		<div>腾讯客服:<input class="kfsrk" type="text" name="kfqq" value="{$kfqq}" size="50"/></div>
+  		<div>旺旺客服:<input class="kfsrk" type="text" name="im" value="{$im}" size="50"/></div>
+  		<div>填写示例："张三:25872435,李四:49335350 "姓名和号码之间请用半角冒号（:）,如果您有多个客服的QQ号码，请在每个号码之间使用半角逗号（,）分隔。</div>
+  
+  </td>
+</tr>
+<tr>
+  <td>
+  <strong>售后客服号码</strong><br />
+  </td>
+  <td>
+  		<div><input class="kfsrk" type="text" name="typetwo" value="{$typetwo}" /></div>
+  		<div>腾讯客服:<input name="kfqqtwo" class="kfsrk" type="text" value="{$kfqqtwo}" size="50" /></div>
+  		<div>旺旺客服:<input name="imtwo" class="kfsrk" type="text" value="{$imtwo}" size="50" /></div>
+  		<div>填写示例："张三:25872435,李四:49335350 "姓名和号码之间请用半角冒号（:）,如果您有多个客服的QQ号码，请在每个号码之间使用半角逗号（,）分隔。</div>
+  </td>
+</tr>
+
+<tr>
+  <td>
+  <strong>QQ样式选择</strong><br />
+  </td>
+  <td class="ysxz">
+  样式一：<input type="radio" name="qqcss" value="0" {$captcha.qqcss0} /><img src="../OKQQ/cssimg/qqon1.gif" style="margin-right:15px;">
+  样式二：<input type="radio" name="qqcss" value="1" {$captcha.qqcss1} /><img src="../OKQQ/cssimg/qqon2.gif" style="margin-right:15px;">
+  样式三：<input type="radio" name="qqcss" value="2" {$captcha.qqcss2} /><img src="../OKQQ/cssimg/qq.png" style="margin-right:15px;">
+  
+  </td>
+</tr>
+
+<tr>
+  <td>
+  <strong>旺旺样式选择</strong><br />
+  </td>
+  <td class="ysxz">
+  样式一：<input type="radio" name="wwcss" value="0" {$captcha.wwcss0} /><img src="../OKQQ/cssimg/wwon1.gif" style="margin-right:15px;">
+  样式二：<input type="radio" name="wwcss" value="1" {$captcha.wwcss1} /><img src="../OKQQ/cssimg/wwon2.gif" style="margin-right:15px;">
+  样式三：<input type="radio" name="wwcss" value="2" {$captcha.wwcss2} /><img src="../OKQQ/cssimg/ww.png" style="margin-right:15px;">
+  
+  </td>
+</tr>
+
+<tr>
+  <td>
+  <strong>分享显示选择</strong><br />
+  </td>
+  <td class="scfx">
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_qzone"/ {$captcha.fx1}><img src="../OKQQ/icon/1.gif">qq空间</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_tsina" {$captcha.fx2}/><img src="../OKQQ/icon/2.gif" >新浪微博</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_baidu" {$captcha.fx3}/><img src="../OKQQ/icon/3.gif">百度搜藏</span>
+    
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_renren" {$captcha.fx4}/><img src="../OKQQ/icon/4.gif">人人网</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_tqq" {$captcha.fx5}/><img src="../OKQQ/icon/5.gif" >腾讯微博</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_kaixin001" {$captcha.fx6}/><img src="../OKQQ/icon/6.gif">开心网</span>
+   
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_tqf" {$captcha.fx7}/><img src="../OKQQ/icon/7.gif">腾讯朋友</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_hi" {$captcha.fx8}/><img src="../OKQQ/icon/8.gif" >百度空间</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_douban" {$captcha.fx9}/><img src="../OKQQ/icon/9.gif">豆瓣网</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_tsohu" {$captcha.fx10}/><img src="../OKQQ/icon/10.gif">搜狐微博</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_msn" {$captcha.fx11}/><img src="../OKQQ/icon/11.gif" >MSN</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_qq" {$captcha.fx12}/><img src="../OKQQ/icon/12.gif">QQ收藏</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_taobao" {$captcha.fx13}/><img src="../OKQQ/icon/13.gif">淘江湖</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_tieba" {$captcha.fx14}/><img src="../OKQQ/icon/14.gif" >百度贴吧</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_sohu" {$captcha.fx15}/><img src="../OKQQ/icon/15.gif">搜狐白社</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_t163" {$captcha.fx16}/><img src="../OKQQ/icon/16.gif">网易微博</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_qy" {$captcha.fx17}/><img src="../OKQQ/icon/17.gif" >奇艺奇谈</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_tfh" {$captcha.fx18}/><img src="../OKQQ/icon/18.gif">凤凰微博</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_hx" {$captcha.fx19}/><img src="../OKQQ/icon/19.gif">和讯</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_fx" {$captcha.fx20}/><img src="../OKQQ/icon/20.gif" >飞信</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_ff" {$captcha.fx21}/><img src="../OKQQ/icon/21.gif">饭否</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_xg" {$captcha.fx22}/><img src="../OKQQ/icon/22.gif">鲜果</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_ty" {$captcha.fx23}/><img src="../OKQQ/icon/23.gif" >天涯社区</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_fbook" {$captcha.fx24}/><img src="../OKQQ/icon/24.gif">Facebook</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_twi" {$captcha.fx25}/><img src="../OKQQ/icon/25.gif">Twitter</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_ms" {$captcha.fx26}/><img src="../OKQQ/icon/26.gif" >Myspace</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_deli" {$captcha.fx27}/><img src="../OKQQ/icon/27.gif">delicious</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_s139" {$captcha.fx28}/><img src="../OKQQ/icon/28.gif">139说客</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_s51" {$captcha.fx29}/><img src="../OKQQ/icon/29.gif" >51社区</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_zx" {$captcha.fx30}/><img src="../OKQQ/icon/30.gif">抓虾</span>
+   <span><input name="fenxiang[]" type="checkbox" id="checkbox" value="bds_linkedin" {$captcha.fx31}/><img src="../OKQQ/icon/31.gif" >Linkedin</span>
+
+  
+  </td>
+</tr>
+
+
+<tr>
+  <td>
+  <strong>qq群号码</strong><br />
+  </td>
+  <td><input class="kfsrk" type="text" name="qqqun" value="{$qqqun}" />
+如果您有多个客服的QQ群，请在每个号码之间使用半角逗号（,）分隔，不填写前台不显示。</td>
+</tr>
+<tr>
+  <td>
+  <strong>旺旺群号码</strong><br />
+  </td>
+  <td><input class="kfsrk" type="text" name="wwqun" value="{$wwqun}" />
+如果您有多个客服的淘宝旺旺群，请在每个号码之间使用半角逗号（,）分隔，不填写前台不显示。
+  </td>
+</tr>
+
+<tr>
+  <td>
+  <strong>53客服号</strong><br />
+  </td>
+  <td><input class="kfsrk" type="text" name="kf53" value="{$kf53}" />
+如果您有多个客服号，请在每个号码之间使用半角逗号（,）分隔，不填写前台不显示。
+  </td>
+</tr>
+
+<tr>
+  <td>
+  <strong>客服电话</strong><br />
+  </td>
+  <td><input class="kfsrk" type="text" name="kftel" value="{$kftel}" />
+  </td>
+</tr>
+
+<tr>
+  <td>
+  <strong>营业时间</strong><br />
+  </td>
+  <td><input class="kfsrk" type="text" name="shijian" value="{$shijian}" />
+  </td>
+</tr>
+
+
+<tr>
+  <td colspan="2" align="center"><input type="hidden" name="act" value="save_config" /><input type="submit" value="保存设置" class="button" /></td>
+</tr>
+</table>
+</form>
+</div>
+{include file="pagefooter.htm"}

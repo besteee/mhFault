@@ -1,0 +1,83 @@
+{if $vote}
+<div class="vote box">
+	<b class="tp"><b></b></b>
+	<div class="hd"><h3>{$lang.vote}</h3></div>
+	<div class="bd">
+		<div id="ECS_VOTE">
+		<form name="ECS_VOTEFORM" method="post" action="javascript:submit_vote()">
+			<fieldset>
+				{foreach from=$vote item=title}
+				<h4>{$title.vote_name}</h4>
+				<span>({$lang.vote_times}:{$title.vote_count})</span>
+				{/foreach}
+				{foreach from=$vote item=title}
+				{foreach from=$title.options item=item}
+				{if $title.can_multi eq 0}
+				<label for="option_id_{$item.option_id}"><input type="checkbox" name="option_id" value="{$item.option_id}" id="option_id_{$item.option_id}"/>{$item.option_name}&nbsp;({$item.percent}%)</label>
+				{else}
+				<label for="option_id_{$item.option_id}"><input type="radio" name="option_id" value="{$item.option_id}" id="option_id_{$item.option_id}"/>{$item.option_name}&nbsp;({$item.percent}%)</label>
+				{/if}
+				{/foreach}
+				<input type="hidden" name="type" value="{$title.can_multi}" />
+				{/foreach}
+				<input type="hidden" name="id" value="{$vote_id}" />
+				<div class="action"><input type="submit" name="submit" value="{$lang.submit_vote}" class="btn-xs"/>
+				<input type="reset" value="{$lang.submit_reset}" class="btn-xs"/></div>
+			</fieldset>
+		</form>
+		</div>
+	</div>
+	<b class="bt"><b></b></b>
+</div>
+<script type="text/javascript">
+{literal}
+function submit_vote()
+{
+  var frm     = document.forms['ECS_VOTEFORM'];
+  var type    = frm.elements['type'].value;
+  var vote_id = frm.elements['id'].value;
+  var option_id = 0;
+
+  if (frm.elements['option_id'].checked)
+  {
+    option_id = frm.elements['option_id'].value;
+  }
+  else
+  {
+    for (i=0; i<frm.elements['option_id'].length; i++ )
+    {
+      if (frm.elements['option_id'][i].checked)
+      {
+        option_id = (type == 0) ? option_id + "," + frm.elements['option_id'][i].value : frm.elements['option_id'][i].value;
+      }
+    }
+  }
+
+  if (option_id == 0)
+  {
+    return;
+  }
+  else
+  {
+    Ajax.call('vote.php', 'vote=' + vote_id + '&options=' + option_id + "&type=" + type, voteResponse, 'POST', 'JSON');
+  }
+}
+function voteResponse(result)
+{
+  if (result.message.length > 0)
+  {
+    alert(result.message);
+  }
+  if (result.error == 0)
+  {
+    var layer = document.getElementById('ECS_VOTE');
+
+    if (layer)
+    {
+      layer.innerHTML = result.content;
+    }
+  }
+}
+{/literal}
+</script>
+{/if}

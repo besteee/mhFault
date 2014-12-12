@@ -1,0 +1,3 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+{insert_scripts files='utils.js'}
+<div id="ECS_COMMENTZX"> {* ECSHOP 提醒您：动态载入zxcomments_list.lbi，显示评论列表和评论表单 *}{insert name='zxcomments' type=$type id=$id}</div>

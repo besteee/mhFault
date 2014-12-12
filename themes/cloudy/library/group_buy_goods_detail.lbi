@@ -1,0 +1,105 @@
+<div class="goods-intro box">
+	<b class="tp"><b></b></b>
+	<div class="bd">
+		<h1>{$gb_goods.goods_name|escape:html}<em>({$lang.gb_goods_name})</em></h1>
+		<div class="info">
+			{if $group_buy.status eq 0}
+			<div class="error">
+				<p>{$lang.gbs_pre_start}</p>
+			</div>
+			{elseif $group_buy.status eq 1}
+			<div class="promote-box notice">
+				<p>{$lang.gb_cur_price}<span class="price">{$group_buy.formated_cur_price}</span></p>
+				<p>{$lang.gb_valid_goods}<em>{$group_buy.valid_goods}</em></p>
+				<p>{$lang.gbs_under_way}<span class="left-time" id="leftTime">{$lang.please_waiting}</span></p>
+			</div>
+			{elseif $group_buy.status eq 2}
+			<div class="promote-box notice">
+				<p>{$lang.gbs_finished}</p>
+				<p>{$lang.gb_cur_price}<span class="price">{$group_buy.formated_cur_price}</span></p>
+				<p>{$lang.gb_valid_goods}<span class="price">{$group_buy.valid_goods}</span></p>
+			</div>
+			{elseif $group_buy.status eq 3}
+			<div class="promote-box success">
+				<p>{$lang.gbs_succeed}</p>
+				<p>{$lang.gb_final_price}<span class="price">{$group_buy.formated_trans_price}</span></p>
+				<p>{$lang.gb_final_amount}<em>{$group_buy.trans_amount}</em></p>
+			</div>
+			{elseif $group_buy.status eq 4}
+			<div class="error">
+				<p>{$lang.gbs_fail}</p>
+			</div>
+			{/if}
+			<dl class="basic clearfix">
+				<dt class="first">{$lang.gb_start_date}</dt><dd class="first">{$group_buy.formated_start_date}</dd>
+				<dt>{$lang.gb_end_date}</dt><dd>{$group_buy.formated_end_date}</dd>
+				{if $group_buy.deposit > 0}
+				<dt>{$lang.gb_deposit}</dt><dd>{$group_buy.formated_deposit}</dd>
+				{/if}
+				{if $group_buy.restrict_amount > 0}
+				<dt>{$lang.gb_restrict_amount}</dt><dd>{$group_buy.restrict_amount}</dd>
+				{/if}
+				{if $group_buy.gift_integral > 0}
+				<dt>{$lang.gb_gift_integral}</dt><dd>{$group_buy.gift_integral}</dd>
+				{/if}
+			</dl>
+			<dl class="volume-price table">
+				<dt class="title">{$lang.gb_price_ladder}</dt>
+				<dt class="head">{$lang.gb_ladder_amount}</dt>
+				<dd class="head">{$lang.gb_ladder_price}</dd>
+				{foreach from=$group_buy.price_ladder item=item}
+				<dt>{$item.amount}</dt>
+				<dd class="price {cycle values="odd,even"}">{$item.formated_price}</dd>
+				{/foreach}
+			</dl>
+			{if $group_buy.status eq 1}
+			<form action="group_buy.php?act=buy" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY">
+				{if $specification}
+				<dl class="spec table">
+					{foreach from=$specification item=spec key=spec_key name=specification}
+					<dt{if $smarty.foreach.specification.first} class="first"{/if}>{$spec.name}{$lang.colon}</dt>
+					{if $spec.attr_type eq 1}
+						{if $cfg.goodsattr_style eq 1}
+							{foreach from=$spec.values item=value key=key}
+							<dd class="{cycle values="odd,even"}"><label for="spec_value_{$value.id}">
+							<input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" {if $key eq 0}checked{/if} onclick="changePrice()" hidefocus="true"/>
+							{$value.label}{if $value.price gt 0} [{$lang.plus}{$value.format_price|abs}] {elseif $value.price lt 0} [{$lang.minus}{$value.format_price|abs}] {/if}</label></dd>
+							{/foreach}
+						{else}
+							<dd class="{cycle values="odd,even"}"><select name="spec_{$spec_key}" onChange="changePrice()">
+							{foreach from=$spec.values item=value key=key}
+							<dd class="{cycle values="odd,even"}"><option label="{$value.label} {if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if}{if $value.price neq 0}{$value.format_price}{/if}" value="{$value.id}">{$value.label} {if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if}{if $value.price neq 0}{$value.format_price}{/if}</option>
+							{/foreach}
+							</select></dd>
+						{/if}
+					{else}
+						{foreach from=$spec.values item=value key=key}
+						<dd class="{cycle values="odd,even"}"><label for="spec_value_{$value.id}">
+						<input type="checkbox" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" onclick="changePrice()" />
+						{$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}] </label></dd>
+						{/foreach}
+					{/if}
+					<input type="hidden" name="spec_list" value="{$key}" />
+					{/foreach}
+				</dl>
+				{/if}
+				<div class="action">
+					{if $smarty.session.user_id > 0}
+					<p><b>{$lang.number}{$lang.colon}</b><input name="number" type="text" value="1" size="4" id="number" />{$goods.measure_unit}</p>
+					<input type="submit" value="{$lang.btn_buy}" class="submit btn-hg"/>
+					<input type="hidden" name="group_buy_id" value="{$group_buy.group_buy_id}"/>
+					{else}
+					<p class="needful">{$lang.gb_notice_login}</p>
+					{/if}
+				</div>
+			</form>
+			{/if}
+		</div>
+		<div class="extra">
+			<div class="gallery">
+				<a href="{$gb_goods.url}" class="cover"><img src="{$gb_goods.goods_img}"/></a>
+			</div>
+		</div>
+	</div>
+	<b class="bt"><b></b></b>
+</div>

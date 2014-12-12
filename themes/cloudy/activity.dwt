@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="Keywords" content="{$keywords}"/>
+<meta name="Description" content="{$description}"/>
+<!-- TemplateBeginEditable name="doctitle" --><title>{$page_title}</title><!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link href="{$static_path}static/css/style.css" rel="stylesheet" type="text/css"/>
+<!--[if IE]><link href="{$static_path}static/css/ie.css" rel="stylesheet" type="text/css"/><![endif]-->
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}"/>
+<script type="text/javascript" src="{$static_path}static/js/jquery.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.json.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/common.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/effect.js"></script>
+</head>
+<body>
+{include file="/library/page_header.lbi"}
+<div id="content"><div class="container">
+	{include file="/library/ur_here.lbi"}
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+	<div class="activity-list box">
+		<b class="tp"><b></b></b>
+		<div class="bd">
+			{foreach from=$list item=val name=list}
+			<div class="item{if $smarty.foreach.list.first} first{/if}">
+				<dl class="table">
+					<dt>{$lang.label_act_name}</dt><dd class="name even">{$val.act_name}</dd>
+					<dt>{$lang.label_start_time}</dt><dd>{$val.start_time}</dd>
+					<dt>{$lang.label_end_time}</dt><dd class="even">{$val.end_time}</dd>
+					<dt>{$lang.label_max_amount}</dt><dd class="price">{if $val.max_amount > 0}{$val.max_amount}{else}{$lang.unlimited}{/if}</dd>
+					<dt>{$lang.label_min_amount}</dt><dd class="price even">{$val.min_amount}</dd>
+					<dt>{$lang.label_user_rank}</dt><dd class="user-rank">{foreach from=$val.user_rank item=user}<em>{$user}</em>{/foreach}</dd>
+					<dt>{$lang.label_act_range}</dt>
+					<dd class="even">
+						{$val.act_range}{if $val.act_range ne $lang.far_all}
+						{foreach from=$val.act_range_ext item=ext}
+						<a href="{$val.program}{$ext.id}" taget="_blank">{$ext.name}</a>
+						{/foreach}
+						{/if}
+					</dd>
+					<dt>{$lang.label_act_type}</dt><dd>{$val.act_type}{if $val.act_type ne $lang.fat_goods}{$val.act_type_ext}{/if}</dd>
+					{if $val.gift}
+					<dt>{$lang.goods_list}{$lang.colon}</dt>
+					<dd class="even">
+						<ul class="goods-list display-list clearfix">
+							{foreach from=$val.gift item=goods name=val_gift}
+							<li{if $smarty.foreach.val_gift.index %4==0} class="first-child"{/if}>
+								<span class="photo">
+									<a href="goods.php?id={$goods.id}" title="{$goods.name|escape:html}" class="image"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}"/></a>
+								</span>
+								<span class="info">
+									<a href="goods.php?id={$goods.id}" title="{$goods.name|escape:html}" class="name">{$goods.name}</a>
+									<em class="price">{if $goods.price > 0}{$goods.price}{$lang.unit_yuan}{else}{$lang.for_free}{/if}</em>
+								</span>
+								<span class="action">
+									<a href="goods.php?id={$goods.id}" class="detail">{$lang.btn_detail}</a>
+								</span>
+							</li>
+							{/foreach}
+						</ul>
+					</dd>
+					{/if}
+				</dl>
+			</div>
+			{/foreach}
+		</div>
+		<b class="bt"><b></b></b>
+	</div>
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+</div></div>
+{include file="/library/page_footer.lbi"}
+</body>
+</html>

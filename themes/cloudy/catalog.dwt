@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="Keywords" content="{$keywords}"/>
+<meta name="Description" content="{$description}"/>
+<!-- TemplateBeginEditable name="doctitle" --><title>{$page_title}</title><!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link href="{$static_path}static/css/style.css" rel="stylesheet" type="text/css"/>
+<!--[if IE]><link href="{$static_path}static/css/ie.css" rel="stylesheet" type="text/css"/><![endif]-->
+
+<script type="text/javascript" src="{$static_path}static/js/jquery.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.json.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/common.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/effect.js"></script>
+</head>
+<body>
+{include file="/library/page_header.lbi"}
+<div id="content"><div class="container">
+	{include file="/library/ur_here.lbi"}
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+	<div class="cat-list box">
+		<b class="tp"><b></b></b>
+		<div class="hd"><h3>{$lang.catalog}</h3></div>
+		<div class="bd">
+			<dl>
+				{foreach from=$cat_list item=cat}
+				{if $cat.level gt 0}
+				<dd{if $cat.has_children neq 0} class="mother"{/if}><a href="{$cat.url}" title="{$cat.cat_name}">{$cat.cat_name}({$cat.goods_num})</a></dd>
+				{else}					
+				<dt{if $cat.has_children neq 0} class="mother"{/if}><a href="{$cat.url}" title="{$cat.cat_name}">{$cat.cat_name}</a></dt>
+				{/if}
+				{/foreach}
+			</dl>
+		</div>
+		<b class="bt"><b></b></b>
+	</div>
+	<div class="brand-list box">
+		<b class="tp"><b></b></b>
+		<div class="hd"><h3>{$lang.all_brand}</h3></div>
+		<div class="bd">
+			<ul>
+				{foreach from=$brand_list item=brand}
+				<li>{if $brand.brand_logo}<a href="{$brand.url}" class="logo"><img src="data/brandlogo/{$brand.brand_logo}" alt="{$brand.brand_name}({$brand.goods_num})"/></a><a href="{$brand.url}" class="name">{$brand.brand_name}</a>{else}<a href="{$brand.url}" class="logo">{$brand.brand_name}</a>{/if}</li>
+				{/foreach}
+			</ul>
+		</div>
+		<b class="bt"><b></b></b>
+	</div>
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+</div></div>
+{include file="/library/page_footer.lbi"}
+</body>
+</html>

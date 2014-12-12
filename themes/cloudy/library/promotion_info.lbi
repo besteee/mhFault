@@ -1,0 +1,14 @@
+{if $promotion_info}
+<div class="box">
+	<b class="tp"><b></b></b>
+	<div class="hd"><h3>{$lang.promotion_info}</h3></div>
+	<div class="bd">	
+		<ul class="text-list">
+			{foreach from=$promotion_info item=item key=key name=promotion_info}
+			<li{if $smarty.foreach.promotion_info.first} class="first"{/if}><em class="type">{if $item.type eq "snatch"}<a href="snatch.php">{$lang.snatch_promotion}</a>{elseif $item.type eq "group_buy"}<a href="group_buy.php">{$lang.group_promotion}</a>{elseif $item.type eq "auction"}<a href="auction.php">{$lang.auction_promotion}</a>{elseif $item.type eq "favourable"}<a href="activity.php">{$lang.favourable_promotion}</a>{elseif $item.type eq "package"}<a href="package.php">{$lang.package_promotion}</a>{/if}</em><a href="{$item.url}">{$item.act_name}</a></li>
+			{/foreach}
+		</ul>
+	</div>
+	<b class="bt"><b></b></b>
+</div>
+{/if}

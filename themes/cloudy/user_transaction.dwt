@@ -1,0 +1,1189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="Keywords" content="{$keywords}"/>
+<meta name="Description" content="{$description}"/>
+<!-- TemplateBeginEditable name="doctitle" --><title>{if $action eq 'default'}{$lang.label_welcome}
+{elseif $action eq 'profile'}{$lang.label_profile}
+{elseif $action eq 'order_list' or $action eq 'order_detail'}{$lang.label_order}
+{elseif $action eq 'address_list'}{$lang.label_address}
+{elseif $action eq 'collection_list'}{$lang.label_collection}
+{elseif $action eq 'message_list'}{$lang.label_message}
+{elseif $action eq 'tag_list'}{$lang.label_tag}
+{elseif $action eq 'booking_list'}{$lang.label_booking}
+{elseif $action eq 'add_booking'}{$lang.label_booking}
+{elseif $action eq 'bonus'}{$lang.label_bonus}
+{elseif $action eq 'affiliate'}{$lang.label_affiliate}
+{elseif $action eq 'comment_list'}{$lang.label_comment}
+{elseif $action eq 'track_packages'}{$lang.label_track_packages}
+{elseif $action eq 'account_log' or $action eq 'account_deposit' or $action eq 'account_raply' or $action eq 'account_detail' or $action eq 'act_account' or $action eq 'pay'}{$lang.label_user_surplus}
+{elseif $action eq 'transform_points'}{$lang.label_transform_points}{/if}_{$page_title}</title><!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link href="{$static_path}static/css/style.css" rel="stylesheet" type="text/css"/>
+<!--[if IE]><link href="{$static_path}static/css/ie.css" rel="stylesheet" type="text/css"/><![endif]-->
+<script type="text/javascript" src="{$static_path}static/js/jquery.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.json.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/common.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/transport.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/utils.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/region.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/user.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/shopping_flow.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/effect.js"></script>
+</head>
+<body>
+{include file="/library/page_header.lbi"}
+<div id="content"><div class="container">
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+	<div class="user clearfix">
+		<h1>{$lang.user_center}</h1>
+		<ul class="menu">
+			<li{if $action eq 'default'} class="current"{/if}><a href="user.php">{$lang.label_welcome}</a></li>
+			<li{if $action eq 'profile'} class="current"{/if}><a href="user.php?act=profile">{$lang.label_profile}</a></li>
+			<li{if $action eq 'order_list' or $action eq 'order_detail'} class="current"{/if}><a href="user.php?act=order_list">{$lang.label_order}</a></li>
+			<li{if $action eq 'address_list'} class="current"{/if}><a href="user.php?act=address_list">{$lang.label_address}</a></li>
+			<li{if $action eq 'collection_list'} class="current"{/if}><a href="user.php?act=collection_list">{$lang.label_collection}</a></li>
+			<li{if $action eq 'message_list'} class="current"{/if}><a href="user.php?act=message_list">{$lang.label_message}</a></li>
+			<li{if $action eq 'tag_list'} class="current"{/if}><a href="user.php?act=tag_list">{$lang.label_tag}</a></li>
+			<li{if $action eq 'booking_list'} class="current"{/if}><a href="user.php?act=booking_list">{$lang.label_booking}</a></li>
+			{if $action eq 'add_booking'}<li class="current"><a href="user.php?act=booking_list">{$lang.label_booking}</a></li>{/if}
+			<li{if $action eq 'bonus'} class="current"{/if}><a href="user.php?act=bonus">{$lang.label_bonus}</a></li>
+			{if $affiliate.on eq 1}<li{if $action eq 'affiliate'} class="current"{/if}><a href="user.php?act=affiliate">{$lang.label_affiliate}</a></li>{/if}
+			<li{if $action eq 'comment_list'} class="current"{/if}><a href="user.php?act=comment_list">{$lang.label_comment}</a></li>
+			<li{if $action eq 'track_packages'} class="current"{/if}><a href="user.php?act=track_packages">{$lang.label_track_packages}</a></li>
+			<li{if $action eq 'account_log' or $action eq 'account_deposit' or $action eq 'account_raply' or $action eq 'account_detail' or $action eq 'act_account' or $action eq 'pay'} class="current"{/if}><a href="user.php?act=account_log">{$lang.label_user_surplus}</a></li>
+			{if $show_transform_points}<li{if $action eq 'transform_points'} class="current"{/if}><a href="user.php?act=transform_points">{$lang.label_transform_points}</a></li>{/if}
+		</ul>
+		<div class="main-wrap">
+			<b class="top"></b><b class="bottom"></b>
+			<div class="body clearfix">
+{if $action eq 'profile'}
+<script type="text/javascript" src="{$static_path}static/js/utils.js"></script>
+<script type="text/javascript">
+{foreach from=$lang.profile_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+</script>
+			<div class="box">
+				<b class="tp"><b></b></b>
+				<div class="hd"><h3>{$lang.label_profile}</h3></div>
+				<div class="bd">
+					<form action="user.php" method="post" name="formEdit" onSubmit="return userEdit()" class="form">
+						<div class="req"><b>*</b>{$lang.required_indicates}</div>
+						<fieldset>
+							<h4>{$lang.profile_form_title}</h4>
+							<label><b>{$lang.birthday}{$lang.colon}</b>
+								{html_select_date field_order=YMD prefix=birthday start_year=-60 end_year=+1 display_days=true month_format=%m day_value_format=%02d time=$profile.birthday}
+							</label>
+							<fieldset class="radio-wrap label"><b>{$lang.sex}{$lang.colon}</b>
+								<fieldset>
+								<label for="sex0"><input type="radio" name="sex" value="0"{if $profile.sex==0} checked="checked"{/if} tabindex="2" class="radio" id="sex0"/>{$lang.secrecy}</label>
+								<label for="sex1"><input type="radio" name="sex" value="1"{if $profile.sex==1} checked="checked"{/if} tabindex="3" class="radio" id="sex1"/>{$lang.male}</label>
+								<label for="sex2"><input type="radio" name="sex" value="2"{if $profile.sex==2} checked="checked"{/if} tabindex="4" class="radio" id="sex2"/>{$lang.female}</label>
+								</fieldset>
+							</fieldset>
+							<label for="email"><b><span class="req">*</span>{$lang.email}{$lang.colon}</b>
+								<input type="text" name="email" value="{$profile.email}" tabindex="5" id="email"/>
+							</label>
+							{foreach from=$extend_info_list item=field}
+							{if $field.id eq 6}
+							<label for="sel_question"><b>{if $field.is_need}<span class="req">*</span>{/if}{$lang.passwd_question}{$lang.colon}</b>
+								<select name="sel_question" tabindex="10" id="sel_question">
+									<option value="0">{$lang.sel_question}</option>
+									{html_options options=$passwd_questions selected=$profile.passwd_question}
+								</select>
+							</label>
+							<label for="passwd_answer"{if $field.is_need} id="passwd_quesetion"{/if}><b>{if $field.is_need}<span class="req">*</span>{/if}{$lang.passwd_answer}{$lang.colon}</b>
+								<input type="text" name="passwd_answer" value="{$profile.passwd_answer}" maxlength="20" tabindex="10" id="passwd_answer"/>
+							</label>
+							{else}
+							<label for="extend_field_{$field.id}"><b>{if $field.is_need}<span class="req">*</span>{/if}{$field.reg_field_name}{$lang.colon}</b>
+								<input type="text" name="extend_field{$field.id}" value="{$field.content}" tabindex="10" id="extend_field_{$field.id}"/>
+							</label>
+							{/if}
+							{/foreach}
+							<div class="submit-wrap">
+								<input type="submit" value="{$lang.confirm_edit}" tabindex="12" class="submit btn-sm"/>
+								<input type="hidden" name="act" value="act_edit_profile"/>
+							</div>
+						</fieldset>
+					</form>
+					<form name="formPassword" action="user.php" method="post" onSubmit="return editPassword()" class="form edit-password">
+						<div class="req"><b>!</b>{$lang.edit_password_indicates}</div>
+						<fieldset>
+							<h4>{$lang.edit_password_form_title}</h4>
+							<label for="password"><b>{$lang.old_password}{$lang.colon}</b>
+								<input type="password" name="old_password" tabindex="15" id="password"/>
+							</label>
+							<label for="new_password"><b>{$lang.new_password}{$lang.colon}</b>
+								<input type="password" name="new_password" tabindex="16" id="new_password"/>
+							</label>
+							<label for="comfirm_password"><b>{$lang.confirm_password}{$lang.colon}</b>
+								<input type="password" name="comfirm_password" tabindex="17" id="comfirm_password"/>
+							</label>
+							<div class="submit-wrap">
+								<input type="submit" value="{$lang.confirm_edit}" tabindex="18" class="submit btn-sm"/>
+								<input type="hidden" name="act" value="act_edit_password"/>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+				<b class="bt"><b></b></b>
+			</div>
+{/if}
+{if $action eq 'bonus'}
+<script type="text/javascript">
+{foreach from=$lang.profile_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+</script>
+			<div class="box">
+				<b class="tp"><b></b></b>
+				<div class="hd"><h3>{$lang.label_bonus}</h3></div>
+				<div class="bd">
+					{if $bonus}
+					<table class="data-table">
+						<colgroup>
+							<col width="140"/>
+							<col width="200"/>
+							<col width="80"/>
+							<col width="100"/>
+							<col width="100"/>
+							<col width="80"/>
+						</colgroup>
+						<thead>
+							<tr>
+								<th>{$lang.bonus_sn}</th>
+								<th>{$lang.bonus_name}</th>
+								<th>{$lang.bonus_amount}</th>
+								<th>{$lang.min_goods_amount}</th>
+								<th>{$lang.bonus_end_date}</th>
+								<th class="last">{$lang.bonus_status}</th>
+							</tr>
+						</thead>
+						<tbody>
+							{foreach from=$bonus item=item name=bonus}
+							<tr class="{cycle values="odd,even"}{if $smarty.foreach.bonus.last} last{/if}">
+								<td>{$item.bonus_sn|default:N/A}</td>
+								<td>{$item.type_name}</td>
+								<td>{$item.type_money}</td>
+								<td>{$item.min_goods_amount}</td>
+								<td>{$item.use_enddate}</td>
+								<td class="last">{$item.status}</td>
+							</tr>
+							{/foreach}
+						</tbody>
+					</table>
+					{else}
+					<span class="empty">{$lang.user_bonus_empty}</span>
+					{/if}
+					{if $bonus}{include file="/library/pages.lbi"}{/if}
+				</div>
+				<b class="bt"><b></b></b>
+			</div>
+			<div id="add_bonus" class="box">
+				<b class="tp"><b></b></b>
+				<div class="hd"><h3>{$lang.add_bonus}</h3></div>
+				<div class="bd">
+					<form name="addBouns" action="user.php" method="post" onSubmit="return addBonus()" class="add-bonus">
+							<label for="bonus_sn">{$lang.bonus_number}{$lang.colon}<input type="text" name="bonus_sn" size="20" id="bonus_sn"/></label>
+							<input type="submit" value="{$lang.add_user_bonus}" class="btn-sm"/>
+							<input type="hidden" name="act" value="act_add_bonus"/>
+					</form>
+				</div>
+				<b class="bt"><b></b></b>
+			</div>
+{/if}
+{if $action eq 'order_list'}
+			<div class="box">
+				<b class="tp"><b></b></b>
+				<div class="hd"><h3>{$lang.label_order}</h3></div>
+				<div class="bd">
+					{if $orders}
+					<table class="data-table">
+						<colgroup>
+							<col width="160"/>
+							<col width="140"/>
+							<col width="120"/>
+							<col width="160"/>
+							<col width="80"/>
+						</colgroup>
+						<thead>
+							<tr>
+								<th>{$lang.order_number}</th>
+								<th>{$lang.order_addtime}</th>
+								<th>{$lang.order_money}</th>
+								<th>{$lang.order_status}</th>
+								<th class="last">{$lang.handle}</th>
+							</tr>
+						</thead>
+						<tbody>
+							{foreach from=$orders item=item name=orders}
+							<tr class="{cycle values="odd,even"}{if $smarty.foreach.orders.last} last{/if}">
+								<td><a href="user.php?act=order_detail&order_id={$item.order_id}" class="order-sn">{$item.order_sn}</a></td>
+								<td>{$item.order_time}</td>
+								<td>{$item.total_fee}</td>
+								<td>{$item.order_status}</td>
+								<td class="last">{$item.handler}</td>
+							</tr>
+							{/foreach}
+						</tbody>
+					</table>
+					{else}
+					<span class="empty">{$lang.order_empty}</span>
+					{/if}
+					{if $orders}{include file="/library/pages.lbi"}{/if}
+				</div>
+				<b class="bt"><b></b></b>
+			</div>
+<script type="text/javascript">
+{foreach from=$lang.merge_order_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+</script>
+			<div class="box">
+				<b class="tp"><b></b></b>
+				<div class="hd"><h3>{$lang.merge_order}</h3></div>
+				<div class="bd">
+					<form action="user.php" method="post" name="formOrder" onsubmit="return mergeOrder()" class="merge-order">
+						{$lang.first_order}{$lang.colon}<select name="to_order"><option value="0">{$lang.select}</option>{html_options options=$merge}</select>
+						{$lang.second_order}{$lang.colon}<select name="from_order"><option value="0">{$lang.select}</option>{html_options options=$merge}</select>
+						<input type="submit" name="Submit" value="{$lang.merge_order}" class="btn-sm"/>
+						<input type="hidden" name="act" value="merge_order"/>
+						<p>{$lang.merge_order_notice}</p>
+					</form>
+				</div>
+				<b class="bt"><b></b></b>
+			</div>
+{/if}
+{if $action eq 'track_packages'}
+			<div class="box">
+				<b class="tp"><b></b></b>
+				<div class="hd"><h3>{$lang.label_track_packages}</h3></div>
+				<div class="bd">
+					{if $orders}
+					<table class="data-table" id="order_table">
+						<colgroup>
+							<col width="50"/>
+							<col width="50"/>
+						</colgroup>
+						<thead>
+							<tr>
+								<th>{$lang.order_number}</th>
+								<th class="last">{$lang.handle}</th>
+							</tr>
+						</thead>
+						<tbody>
+							{foreach from=$orders item=item name=orders}
+							<tr class="{cycle values="odd,even"}{if $smarty.foreach.orders.last} last{/if}">
+								<td><a href="user.php?act=order_detail&order_id={$item.order_id}">{$item.order_sn}</a></td>
+								<td class="last">{$item.query_link}</td>
+							</tr>
+							{/foreach}
+						</tbody>
+					</table>
+					{else}
+					<span class="empty">{$lang.track_packages_empty}</span>
+					{/if}
+					{if $orders}{include file="/library/pages.lbi"}{/if}
+				</div>
+				<b class="bt"><b></b></b>
+			</div>
+<script>
+var query_status = '{$lang.query_status}';
+var ot = document.getElementById('order_table');
+for (var i = 1; i < ot.rows.length; i++)
+{
+var row = ot.rows[i];
+var cel = row.cells[1];
+cel.getElementsByTagName('a').item(0).innerHTML = query_status;
+}
+</script>
+{/if}
+{if $action eq order_detail}
+			<div class="box">
+				<b class="tp"><b></b></b>
+				<div class="hd"><h3>{$lang.order_status}</h3></div>
+				<div class="bd">
+					<table class="data-table">
+						<colgroup>
+							<col width="100"/>
+							<col width="700"/>
+						</colgroup>
+						<tbody>
+							<tr class="odd">
+								<th>{$lang.detail_order_sn}{$lang.colon}</th>
+								<td class="last">{$order.order_sn}
+								{if $order.extension_code eq "group_buy"}<a href="./group_buy.php?act=view&id={$order.extension_id}">{$lang.order_is_group_buy}</a>
+								{elseif $order.extension_code eq "exchange_goods"}<a href="./exchange.php?act=view&id={$order.extension_id}">{$lang.order_is_exchange}</a>
+								{/if}<a href="user.php?act=message_list&order_id={$order.order_id}">[{$lang.business_message}]</a></td>
+							</tr>
+							<tr class="even">
+								<th>{$lang.detail_order_status}{$lang.colon}</th>
+								<td class="last">{$order.order_status}<span class="time">{$order.confirm_time}</span></td>
+							</tr>
+							<tr class="odd">
+								<th>{$lang.detail_pay_status}{$lang.colon}</th>
+								<td class="last">{$order.pay_status}{if $order.order_amount gt 0}{$order.pay_online}{/if}<span class="time">{$order.pay_time}</span></td>
+							</tr>
+							<tr class="even{if !$order.invoice_no and !$order.to_buyer and !$virtual_card} last{/if}">
+								<th>{$lang.detail_shipping_status}{$lang.colon}</th>
+								<td class="last">{$order.shipping_status}<span>{$order.shipping_time}</span></td>
+							</tr>
+							{if $order.invoice_no}
+							<tr class="odd{if !$order.to_buyer and !$virtual_card} last{/if}">
+								<th>{$lang.consignment}{$lang.colon}</th>
+								<td class="last">{$order.invoice_no}</td>
+							</tr>
+							{/if}
+							{if $order.to_buyer}
+							<tr class="{if $order.invoice_no}even{else}odd{/if}{if !$virtual_card} last{/if}">
+								<th>{$lang.detail_to_buyer}{$lang.colon}</th>
+								<td class="last">{$order.to_buyer}</td>
+							</tr>
+							{/if}
+							{if $virtual_card}
+							<tr class="{if $order.invoice_no and $order.to_buyer}odd{else}even{/if} last">
+								<th>{$lang.virtual_card_info}{$lang.colon}</th>
+								<td class="last">
+									{foreach from=$virtual_card item=vgoods name=virtual_card}
+									<dl class="table{if $smarty.foreach.virtual_card.first} first{/if}">
+										<dt class="title">{$vgoods.goods_name}</dt>
+										{foreach from=$vgoods.info item=card name=vgoods_info}
+										{if $card.card_sn}<dt>{$lang.card_sn}{$lang.colon}</dt><dd class="odd"><em>{$card.card_sn}</em></dd>{/if}
+										{if $card.card_password}<dt>{$lang.card_password}{$lang.colon}</dt><dd class="even"><em>{$card.card_password}</em></dd>{/if}
+										{if $card.end_date}<dt>{$lang.end_date}{$lang.colon}</dt><dd class="odd">{$card.end_date}</dd>{/if}
+										{if !$smarty.foreach.vgoods_info.last}<hr />{/if}
+										{/foreach}
+									</dl>
+									{/foreach}
+								</td>
+							</tr>
+							{/if}
+						</tbody>
+					</table>
+				</div>
+				<b class="bt"><b></b></b>
+			</div>
+			<div class="box">
+				<b class="tp"><b></b></b>
+				<div class="hd"><h3>{$lang.goods_list}</h3>{if $allow_to_cart}<a href="javascript:;" onclick="returnToCart({$order.order_id})" class="more">{$lang.return_to_cart}</a>{/if}</div>
+				<div class="bd">
+					<table class="data-table">
+						<colgroup>
+							<col width="200"/>
+							<col width="160"/>
+							<col width="80"/>
+							<col width="80"/>
+							<col width="80"/>
+						</colgroup>
+						<thead>
+							<tr>
+								<th>{$lang.goods_name}</th>
+								<th>{$lang.goods_attr}</th>
+								<th>{$lang.goods_price}{if $order.extension_code eq "group_buy"}{$lang.gb_deposit}{/if}</th>
+								<th>{$lang.number}</th>
+								<th class="last">{$lang.subtotal}</th>
+							</tr>
+						</thead>
+						<tbody>
+							{foreach from=$goods_list item=goods name=goods_list}
+							<tr class="{cycle values="odd,even"}{if $smarty.foreach.goods_list.last} last{/if}">
+								<td>
+									{if $goods.goods_id gt 0 && $goods.extension_code neq 'package_buy'}
+									<a href="goods.php?id={$goods.goods_id}" target="_blank">{$goods.goods_name}</a>
+										{if $goods.parent_id > 0} -->
+										<span>（{$lang.accessories}）</span>
+										{elseif $goods.is_gift}
+										<span>（{$lang.largess}）</span>
+										{/if}
+									{elseif $goods.goods_id gt 0 && $goods.extension_code eq 'package_buy'}
+									<a href="javascript:void(0)" onclick="setSuitShow({$goods.goods_id})">{$goods.goods_name}<span>{$lang.package}</span></a>
+									<div id="suit_{$goods.goods_id}" style="display:none">
+										{foreach from=$goods.package_goods_list item=package_goods_list}
+										<a href="goods.php?id={$package_goods_list.goods_id}" target="_blank">{$package_goods_list.goods_name}</a><br />
+										{/foreach}
+									</div>
+									{/if}
+								</td>
+								<td>{$goods.goods_attr|nl2br}</td>
+								<td>{$goods.goods_price}</td>
+								<td>{$goods.goods_number}</td>
+								<td class="last">{$goods.subtotal}</td>
+							</tr>
+							{/foreach}
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="5" class="last">
+									<p>{$lang.goods_all_price}
+									{if $order.extension_code eq "group_buy"}{$lang.gb_deposit}{/if}{$lang.colon}<span class="price">{$order.formated_goods_amount}</span>
+									{if $order.discount gt 0}
+									- {$lang.discount}{$lang.colon}<span class="price">{$order.formated_discount}</span>
+									{/if}
+									{if $order.tax gt 0}
+									+ {$lang.tax}{$lang.colon}<span class="price">{$order.formated_tax}</span>
+									{/if}
+									{if $order.shipping_fee > 0}
+									+ {$lang.shipping_fee}{$lang.colon}<span class="price">{$order.formated_shipping_fee}</span>
+									{/if}
+									{if $order.insure_fee > 0}
+									+ {$lang.insure_fee}{$lang.colon}<span class="price">{$order.formated_insure_fee}</span>
+									{/if}
+									{if $order.pay_fee > 0}
+									+ {$lang.pay_fee}{$lang.colon}<span class="price">{$order.formated_pay_fee}</span>
+									{/if}
+									{if $order.pack_fee > 0}
+									+ {$lang.pack_fee}{$lang.colon}<span class="price">{$order.formated_pack_fee}</span>
+									{/if}
+									{if $order.card_fee > 0}
+									+ {$lang.card_fee}{$lang.colon}<span class="price">{$order.formated_card_fee}</span>
+									{/if}
+									{if $order.money_paid > 0} - {$lang.order_money_paid}{$lang.colon}<span class="price">{$order.formated_money_paid}</span>{/if}
+									{if $order.surplus > 0} - {$lang.use_surplus}{$lang.colon}<span class="price">{$order.formated_surplus}</span>{/if}
+									{if $order.integral_money > 0} - {$lang.use_integral}{$lang.colon}<span class="price">{$order.formated_integral_money}</span>{/if}
+									{if $order.bonus > 0} - {$lang.use_bonus}{$lang.colon}<span class="price">{$order.formated_bonus}</span>{/if}</p>
+									<p>{$lang.order_amount}{$lang.colon}<span class="price">{$order.formated_order_amount}</span>{if $order.extension_code eq "group_buy"}{$lang.notice_gb_order_amount}{/if}</p>
+									{if $allow_edit_surplus}
+									<p>
+										<form action="user.php" method="post" name="formFee" id="formFee">{$lang.use_more_surplus}:
+											<input type="text" name="surplus" size="8" value="0"/>{$max_surplus}
+											<input type="submit" name="Submit" value="{$lang.button_submit}" class="button positive"/>
+											<input type="hidden" name="act" value="act_edit_surplus"/>
+											<input type="hidden" name="order_id" value="{$smarty.get.order_id}"/>
+										</form>
+									</p>
+									{/if}
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				<b class="bt"><b></b></b>
+			</div>
+			<div class="box">
+				<b class="tp"><b></b></b>
+				<div class="hd"><h3>{$lang.consignee_info}</h3></div>
+				<div class="bd">
+					{if $order.allow_update_address gt 0}
+					<form action="user.php" method="post" name="formAddress">
+						<table class="data-table">
+							<colgroup>
+								<col width="100"/>
+								<col width="250"/>
+								<col width="100"/>
+								<col width="250"/>
+							</colgroup>
+							<tbody>
+								<tr class="odd">
+									<th>{$lang.consignee_name}{$lang.colon}</th>
+									<td><input type="text" name="consignee" value="{$order.consignee|escape}" size="10"></td>
+									<th>{$lang.email_address}{$lang.colon}</th>
+									<td class="last"><input type="text" name="email" value="{$order.email|escape}" size="22"/></td>
+								</tr>
+								{if $order.exist_real_goods}
+								<tr class="even">
+									<th>{$lang.detailed_address}{$lang.colon}</th>
+									<td><input type="text" name="address" value="{$order.address|escape}" size="30"/></td>
+									<th>{$lang.postalcode}{$lang.colon}</th>
+									<td class="last"><input type="text"name="zipcode" value="{$order.zipcode|escape}" size="10"/></td>
+								</tr>
+								{/if}
+								<tr class="{if $order.exist_real_goods}odd{else}even last{/if}">
+									<th>{$lang.phone}{$lang.colon}</th>
+									<td><input type="text" name="tel" value="{$order.tel|escape}" size="18"/></td>
+									<th>{$lang.backup_phone}{$lang.colon}</th>
+									<td class="last"><input type="text" name="mobile" value="{$order.mobile|escape}" size="18"/></td>
+								</tr>
+								{if $order.exist_real_goods}
+								<tr class="even last">
+									<th>{$lang.sign_building}{$lang.colon}</th>
+									<td><input type="text" name="sign_building" value="{$order.sign_building|escape}" size="25"/></td>
+									<th>{$lang.deliver_goods_time}{$lang.colon}</th>
+									<td class="last"><input type="text" name="best_time" value="{$order.best_time|escape}" size="25"/></td>
+								</tr>
+								{/if}
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="4" class="center last">
+										<input type="submit" value="{$lang.update_address}" class="button positive"/>
+										<input type="hidden" name="act" value="save_order_address"/>
+										<input type="hidden" name="order_id" value="{$order.order_id}"/>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</form>
+					{else}
+					<table class="data-table">
+						<colgroup>
+							<col width="100"/>
+							<col width="250"/>
+							<col width="100"/>
+							<col width="250"/>
+						</colgroup>
+						<tbody>
+							<tr class="odd">
+								<th>{$lang.consignee_name}{$lang.colon}</th>
+								<td>{$order.consignee}</td>
+								<th>{$lang.email_address}{$lang.colon}</th>
+								<td class="last">{$order.email}</td>
+							</tr>
+							{if $order.exist_real_goods}
+							<tr class="even">
+								<th>{$lang.detailed_address}{$lang.colon}</th>
+								<td colspan="3" class="last">{$order.address}{if $order.zipcode}[{$lang.postalcode}{$lang.colon}{$order.zipcode}]{/if}</td>
+							</tr>
+							{/if}
+							<tr class="{if $order.exist_real_goods}odd{else}even last{/if}">
+								<th>{$lang.phone}{$lang.colon}</th>
+								<td>{$order.tel}</td>
+								<th>{$lang.backup_phone}{$lang.colon}</th>
+								<td class="last">{$order.mobile}</td>
+							</tr>
+							{if $order.exist_real_goods}
+							<tr class="even last">
+								<th>{$lang.sign_building}{$lang.colon}</th>
+								<td>{$order.sign_building}</td>
+								<th>{$lang.deliver_goods_time}{$lang.colon}</th>
+								<td class="last">{$order.best_time}</td>
+							</tr>
+							{/if}
+						</tbody>
+					</table>
+					{/if}
+				</div>
+				<b class="bt"><b></b></b>
+			</div>
+			<div class="box">
+				<b class="tp"><b></b></b>
+				<div class="hd"><h3>{$lang.pay}</h3></div>
+				<div class="bd">
+					<div class="notice">
+						<p>{$lang.select_payment}{$lang.colon}{$order.pay_name}</p>
+						<p>{$lang.order_amount}{$lang.colon}<span class="price">{$order.formated_order_amount}</span></p>
+						<p>{$order.pay_desc}</p>
+					</div>
+					{if $payment_list}
+					<div class="other-payment">
+						<form name="payment" method="post" action="user.php">
+							{$lang.change_payment}{$lang.colon}
+							<select name="pay_id">
+							{foreach from=$payment_list item=payment}
+							<option value="{$payment.pay_id}">
+							{$payment.pay_name}({$lang.pay_fee}:{$payment.format_pay_fee})
+							</option>
+							{/foreach}
+							</select>
+							<input type="submit" name="Submit" value="{$lang.button_submit}" class="button positive"/>
+							<input type="hidden" name="act" value="act_edit_payment"/>
+							<input type="hidden" name="order_id" value="{$order.order_id}"/>
+						</form>
+					</div>
+					{/if}
+				</div>
+				<b class="bt"><b></b></b>
+			</div>
+			<div class="box">
+				<b class="tp"><b></b></b>
+				<div class="hd"><h3>{$lang.other_info}</h3></div>
+				<div class="bd">
+					<dl class="text-list">
+						{if $order.shipping_id > 0}<dt>{$lang.shipping}{$lang.colon}</dt><dd class="first">{$order.shipping_name}</dd>{/if}
+						{if $order.pay_name}<dt>{$lang.payment}{$lang.colon}</dt><dd{if $order.shipping_id <= 0} class="first"{/if}>{$order.pay_name}</dd>{/if}
+						{if $order.pack_name}<dt>{$lang.use_pack}{$lang.colon}</dt><dd>{$order.pack_name}</dd>{/if}
+						{if $order.card_name}<dt>{$lang.use_card}{$lang.colon}</dt><dd>{$order.card_name}</dd>{/if}
+						{if $order.card_message}<dt>{$lang.bless_note}{$lang.colon}</dt><dd>{$order.card_message}</dd>{/if}
+						{if $order.integral > 0}<dt>{$lang.use_integral}{$lang.colon}</dt><dd>{$order.integral}</dd>{/if}
+						{if $order.inv_payee && $order.inv_content}
+							<dt>{$lang.invoice_title}{$lang.colon}</dt><dd>{$order.inv_payee}</dd>
+							<dt>{$lang.invoice_content}{$lang.colon}</dt><dd>{$order.inv_content}</dd>
+						{/if}
+						{if $order.postscript}<dt>{$lang.order_postscript}{$lang.colon}</dt><dd{if !$order.pay_name} class="first"{/if}>{$order.postscript}</dd>{/if}
+						{if $order.how_oos_name}<dt>{$lang.booking_process}{$lang.colon}</dt><dd>{$order.how_oos_name}</dd>{/if}
+					</dl>
+				</div>
+				<b class="bt"><b></b></b>
+			</div>
+{/if}
+{if $action eq "account_raply" || $action eq "account_log" || $action eq "act_account" || $action eq "account_deposit" || $action eq "account_detail"}
+<script type="text/javascript">
+{foreach from=$lang.account_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+</script>
+			<div class="box">
+				<b class="tp"><b></b></b>
+				<div class="hd"><h3>{$lang.label_user_surplus}</h3></div>
+				<div class="funds bd">
+					<p class="act">
+						<a href="user.php?act=account_detail" class="view">{$lang.add_surplus_log}</a>
+						<a href="user.php?act=account_log" class="view">{$lang.view_application}</a>
+						<a href="user.php?act=account_deposit" class="btn-sm"><span>{$lang.surplus_type_0}</span></a>
+						<a href="user.php?act=account_raply" class="btn-sm"><span>{$lang.surplus_type_1}</span></a>
+					</p>
+					{if $action eq "account_raply"}
+					<form name="formSurplus" method="post" action="user.php" onSubmit="return submitSurplus()">
+						<table class="data-table">
+							<colgroup>
+								<col width="100"/>
+								<col width="700"/>
+							</colgroup>
+							<tbody>
+								<tr class="odd">
+									<th>{$lang.repay_money}{$lang.colon}</th>
+									<td class="last"><input type="text" name="amount" value="{$order.amount|escape}"/></td>
+								</tr>
+								<tr class="even last">
+									<th>{$lang.process_notic}{$lang.colon}</th>
+									<td class="last"><textarea name="user_note" cols="55" rows="6">{$order.user_note|escape}</textarea></td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td class="last">&nbsp;</td>
+									<td class="last">
+										<input type="submit" name="submit" value="{$lang.submit_request}" class="btn-sm"/>
+										<input type="hidden" name="surplus_type" value="1"/>
+										<input type="hidden" name="act" value="act_account"/>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</form>
+					{/if}
+					{if $action eq "account_deposit"}
+					<form name="formSurplus" method="post" action="user.php" onSubmit="return submitSurplus()">
+						<table class="data-table">
+							<colgroup>
+								<col width="100"/>
+								<col width="700"/>
+							</colgroup>
+							<tbody>
+								<tr class="odd">
+									<th>{$lang.deposit_money}{$lang.colon}</th>
+									<td class="last"><input type="text" name="amount" value="{$order.amount|escape}"/></td>
+								</tr>
+								<tr class="even">
+									<th>{$lang.process_notic}{$lang.colon}</th>
+									<td class="last"><textarea name="user_note" cols="55" rows="6">{$order.user_note|escape}</textarea></td>
+								</tr>
+								<tr class="odd last">
+									<th>{$lang.payment}{$lang.colon}</th>
+									<td class="last">
+										<table class="data-table">
+											<colgroup>
+												<col width="10"/>
+												<col width="60"/>
+												<col width="250"/>
+												<col width="10"/>
+											</colgroup>
+											<thead>
+												<tr>
+													<th>&nbsp;</th>
+													<th>{$lang.pay_name}</th>
+													<th>{$lang.pay_desc}</th>
+													<th class="last">{$lang.pay_fee}</th>
+												</tr>
+											</thead>
+											<tbody>
+												{foreach from=$payment item=list name=payment}
+												<tr class="{cycle values="odd,even"}{if $smarty.foreach.payment.last} last{/if}">
+													<td><input type="radio" name="payment_id" value="{$list.pay_id}"/></td>
+													<td>{$list.pay_name}</td>
+													<td>{$list.pay_desc}</td>
+													<td class="price last">{$list.pay_fee}</td>
+												</tr>
+												{/foreach}
+											<tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td class="last">&nbsp;</td>
+									<td class="last">
+										<input type="submit" name="submit" value="{$lang.submit_request}" class="btn-sm"/>
+										<input type="hidden" name="surplus_type" value="0"/>
+										<input type="hidden" name="rec_id" value="{$order.id}"/>
+										<input type="hidden" name="act" value="act_account"/>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</form>
+					{/if}
+					{if $action eq "act_account"}
+					<table class="data-table">
+						<colgroup>
+							<col width="100"/>
+							<col width="500"/>
+						</colgroup>
+						<tbody>
+							<tr class="odd">
+								<th>{$lang.surplus_amount}</th>
+								<td class="last">{$amount}</td>
+							</tr>
+							<tr class="even">
+								<th>{$lang.payment_name}</th>
+								<td class="last">{$payment.pay_name}</td>
+							</tr>
+							<tr class="odd">
+								<th>{$lang.payment_fee}</th>
+								<td class="last">{$pay_fee}</td>
+							</tr>
+							<tr class="even last">
+								<th>{$lang.payment_desc}</th>
+								<td class="last">{$payment.pay_desc}</td>
+							</tr>
+						</tbody>
+						{if $payment.pay_button}
+						<tfoot>
+							<tr class="odd last">
+								<td class="last">&nbsp;</td>
+								<td class="last">{$payment.pay_button}</td>
+							</tr>
+						</tfoot>
+						{/if}
+					</table>
+					{/if}
+					{if $action eq "account_detail"}
+					{if $account_log}
+					<table class="data-table">
+						<colgroup>
+							<col width="100"/>
+							<col width="80"/>
+							<col width="120"/>
+							<col width="560"/>
+						</colgroup>
+						<thead>
+							<tr>
+								<th>{$lang.process_time}</th>
+								<th>{$lang.surplus_pro_type}</th>
+								<th>{$lang.money}</th>
+								<th class="last">{$lang.change_desc}</th>
+							</tr>
+						</thead>
+						<tbody>
+							{foreach from=$account_log item=item name=account_log}
+							<tr class="{cycle values="odd,even"}{if $smarty.foreach.account_log.last} last{/if}">
+								<td>{$item.change_time}</td>
+								<td>{$item.type}</div></td>
+								<td class="price">{$item.amount}</td>
+								<td class="last">{$item.change_desc}</td>
+							</tr>
+							{/foreach}
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="10" class="last">{$lang.current_surplus}<span class="price">{$surplus_amount}</span></td>
+							</tr>
+						</tfoot>
+					</table>
+					{else}
+					<span class="empty">{$lang.account_log_empty}</span>
+					{/if}
+					{/if}
+					{if $action eq "account_log"}
+					{if $account_log}
+					<table class="data-table">
+						<colgroup>
+							<col width="100"/>
+							<col width="60"/>
+							<col width="120"/>
+							<col width="200"/>
+							<col width="200"/>
+							<col width="80"/>
+							<col width="100"/>
+						</colgroup>
+						<thead>
+							<tr>
+								<th>{$lang.process_time}</th>
+								<th>{$lang.surplus_pro_type}</th>
+								<th>{$lang.money}</th>
+								<th>{$lang.process_notic}</th>
+								<th>{$lang.admin_notic}</th>
+								<th>{$lang.is_paid}</th>
+								<th class="last">{$lang.handle}</th>
+							</tr>
+						</thead>
+						<tbody>
+							{foreach from=$account_log item=item name=account_log}
+							<tr class="{cycle values="odd,even"}{if $smarty.foreach.account_log.last} last{/if}">
+								<td>{$item.add_time}</td>
+								<td>{$item.type}</td>
+								<td class="price">{$item.amount}</td>
+								<td>{$item.user_note}</td>
+								<td>{$item.admin_note}</td>
+								<td>{$item.pay_status}</td>
+								<td class="last">{$item.handle}{if ($item.is_paid eq 0 && $item.process_type eq 1) || $item.handle}&nbsp;<a href="user.php?act=cancel&id={$item.id}" onclick="if (!confirm('{$lang.confirm_remove_account}')) return false;">{$lang.is_cancel}</a>{/if}</td>
+							</tr>
+							{/foreach}
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="10" class="last">{$lang.current_surplus}<span class="price">{$surplus_amount}</span></td>
+							</tr>
+						</tfoot>
+					</table>
+					{else}
+					<span class="empty">{$lang.account_log_empty}</span>
+					{/if}
+					{/if}
+					{if $account_log}{include file="/library/pages.lbi"}{/if}
+				</div>
+				<b class="bt"><b></b></b>
+			</div>
+{/if}
+{if $action eq 'address_list'}
+<script type="text/javascript">
+region.isAdmin = false;
+{foreach from=$lang.flow_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+{literal}
+onload = function() {
+if (!document.all)
+{
+document.forms['theForm'].reset();
+}
+}
+{/literal}
+</script>
+			<div class="consignee-list box">
+				<b class="tp"><b></b></b>
+				<div class="hd"><h3>{$lang.label_address}</h3></div>
+				<div class="bd">
+					{foreach from=$consignee_list item=consignee key=sn name=consignee_list}
+					{if !$consignee.consignee}<h4>{$lang.add_address}{$lang.colon}</h4>{/if}
+					<form action="user.php" method="post" name="theForm" onsubmit="return checkConsignee(this)"{if $smarty.foreach.consignee_list.first} class="first"{/if}>
+						<table class="data-table">
+							<colgroup>
+								<col width="100"/>
+								<col width="300"/>
+								<col width="100"/>
+								<col width="300"/>
+							</colgroup>
+							<tbody>
+								<tr class="odd">
+									<th>{$lang.country_province}{$lang.colon}</th>
+									<td colspan="3" class="last">
+										<select name="country" id="selCountries_{$sn}" onchange="region.changed(this, 1, 'selProvinces_{$sn}')">
+											<option value="0">{$lang.please_select}{$name_of_region[0]}</option>
+											{foreach from=$country_list item=country}
+											<option value="{$country.region_id}" {if $consignee.country eq $country.region_id}selected{/if}>{$country.region_name}</option>
+											{/foreach}
+											</select>
+											<select name="province" id="selProvinces_{$sn}" onchange="region.changed(this, 2, 'selCities_{$sn}')">
+											<option value="0">{$lang.please_select}{$name_of_region[1]}</option>
+											{foreach from=$province_list.$sn item=province}
+											<option value="{$province.region_id}" {if $consignee.province eq $province.region_id}selected{/if}>{$province.region_name}</option>
+											{/foreach}
+										</select>
+										<select name="city" id="selCities_{$sn}" onchange="region.changed(this, 3, 'selDistricts_{$sn}')">
+											<option value="0">{$lang.please_select}{$name_of_region[2]}</option>
+											{foreach from=$city_list.$sn item=city}
+											<option value="{$city.region_id}" {if $consignee.city eq $city.region_id}selected{/if}>{$city.region_name}</option>
+											{/foreach}
+											</select>
+											<select name="district" id="selDistricts_{$sn}" {if !$district_list.$sn}style="display:none"{/if}>
+											<option value="0">{$lang.please_select}{$name_of_region[3]}</option>
+											{foreach from=$district_list.$sn item=district}
+											<option value="{$district.region_id}" {if $consignee.district eq $district.region_id}selected{/if}>{$district.region_name}</option>
+											{/foreach}
+										</select>
+										{$lang.require_field}
+									</td>
+								</tr>
+								<tr class="even">
+									<th>{$lang.consignee_name}{$lang.colon}</th>
+									<td><input type="text" name="consignee" value="{$consignee.consignee|escape}" id="consignee_{$sn}"/>{$lang.require_field}</td>
+									<th>{$lang.email_address}{$lang.colon}</th>
+									<td class="last"><input name="email" type="text" value="{$consignee.email|escape}" id="email_{$sn}"/>{$lang.require_field}</td>
+								</tr>
+								<tr class="odd">
+									<th>{$lang.detailed_address}{$lang.colon}</th>
+									<td><input type="text" name="address" value="{$consignee.address|escape}" id="address_{$sn}"/>{$lang.require_field}</td>
+									<th>{$lang.postalcode}{$lang.colon}</th>
+									<td class="last"><input type="text" name="zipcode" value="{$consignee.zipcode|escape}" id="zipcode_{$sn}"/></td>
+								</tr>
+								<tr class="even">
+									<th>{$lang.phone}{$lang.colon}</th>
+									<td><input type="text" name="tel" value="{$consignee.tel|escape}" id="tel_{$sn}"/>{$lang.require_field}</td>
+									<th>{$lang.backup_phone}{$lang.colon}</th>
+									<td class="last"><input name="mobile" type="text" value="{$consignee.mobile|escape}" id="mobile_{$sn}"/></td>
+								</tr>
+								<tr class="odd last">
+									<th>{$lang.sign_building}{$lang.colon}</th>
+									<td><input type="text" name="sign_building" value="{$consignee.sign_building|escape}" id="sign_building_{$sn}"/></td>
+									<th>{$lang.deliver_goods_time}{$lang.colon}</th>
+									<td class="last"><input type="text" name="best_time" value="{$consignee.best_time|escape}" id="best_time_{$sn}"/></td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td class="last">&nbsp;</td>
+									<td colspan="3" class="last">
+										{if $consignee.consignee && $consignee.email}
+										<input type="submit" name="submit" value="{$lang.confirm_edit}" class="btn-sm"/>
+										<a href="#" onclick="if (confirm('{$lang.confirm_drop_address}'))location.href='user.php?act=drop_consignee&id={$consignee.address_id}'" class="btn-rt"/>{$lang.drop}</a>
+										{else}
+										<input type="submit" name="submit" value="{$lang.add_address}" class="btn-sm"/>
+										{/if}
+										<input type="hidden" name="act" value="act_edit_address" />
+										<input type="hidden" name="address_id" value="{$consignee.address_id}" />
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</form>
+					{/foreach}
+				</div>
+				<b class="bt"><b></b></b>
+			</div>
+{/if}
+{if $action eq 'transform_points'}
+			<div class="box">
+				<b class="tp"><b></b></b>
+				<div class="hd"><h3>{$lang.transform_points}</h3></div>
+				<div class="bd">
+{if $exchange_type eq 'ucenter'}
+					<form action="user.php" method="post" name="transForm" onsubmit="return calcredit();">
+						<table class="data-table">
+							<colgroup>
+								<col width="100"/>
+								<col width="500"/>
+							</colgroup>
+							<tbody>
+								<tr class="odd">
+									<th>{$lang.cur_points}{$lang.colon}</th>
+									<td class="last">
+										<label for="pay_points">{$lang.exchange_points.1}{$lang.colon}</label><input type="text" name="pay_points" value="{$shop_points.pay_points}" size="15" id="pay_points" style="border:0;border-bottom:1px solid #DADADA;" readonly="readonly"/><br />
+										<label for="rank_points">{$lang.exchange_points.0}{$lang.colon}</label><input type="text" name="rank_points" value="{$shop_points.rank_points}" size="15" id="rank_points" style="border:0;border-bottom:1px solid #DADADA;" readonly="readonly"/>
+									</td>
+								</tr>
+								<tr class="even">
+									<th><label for="amount">{$lang.exchange_amount}{$lang.colon}</label></th>
+									<td class="last">
+										<input type="text" name="amount" value="0" size="15" id="amount" onkeyup="calcredit();"  />
+										<select name="fromcredits" id="fromcredits" onchange="calcredit();">
+										{html_options options=$lang.exchange_points selected=$selected_org}
+										</select>
+									</td>
+								</tr>
+								<tr class="odd">
+									<th><label for="desamount">{$lang.exchange_desamount}{$lang.colon}</label></th>
+									<td class="last">
+										<input type="text" name="desamount" id="desamount" disabled="disabled" value="0" size="15" />
+										<select name="tocredits" id="tocredits" onchange="calcredit();">
+										{html_options options=$to_credits_options selected=$selected_dst}
+										</select>
+									</td>
+								</tr>
+								<tr class="even last">
+									<th>{$lang.exchange_ratio}{$lang.colon}</th>
+									<td class="last">1 <span id="orgcreditunit">{$orgcreditunit}</span> <span id="orgcredittitle">{$orgcredittitle}</span> {$lang.exchange_action} <span id="descreditamount">{$descreditamount}</span> <span id="descreditunit">{$descreditunit}</span> <span id="descredittitle">{$descredittitle}</span></td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td class="last">&nbsp;</td>
+									<td class="last">
+										<input type="submit" name="transfrom" value="{$lang.transform}" class="button positive"/>
+										<input type="hidden" name="act" value="act_transform_ucenter_points"/>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</form>
+<script type="text/javascript">
+{foreach from=$lang.exchange_js item=lang_js key=key}
+var {$key} = '{$lang_js}';
+{/foreach}
+var out_exchange_allow = new Array();
+{foreach from=$out_exchange_allow item=ratio key=key}
+out_exchange_allow['{$key}'] = '{$ratio}';
+{/foreach}
+function calcredit()
+{
+var frm = document.forms['transForm'];
+var src_credit = frm.fromcredits.value;
+var dest_credit = frm.tocredits.value;
+var in_credit = frm.amount.value;
+var org_title = frm.fromcredits[frm.fromcredits.selectedIndex].innerHTML;
+var dst_title = frm.tocredits[frm.tocredits.selectedIndex].innerHTML;
+var radio = 0;
+var shop_points = ['rank_points', 'pay_points'];
+if (parseFloat(in_credit) > parseFloat(document.getElementById(shop_points[src_credit]).value))
+{
+	alert(balance.replace('{%s}', org_title));
+	frm.amount.value = frm.desamount.value = 0;
+	return false;
+}
+if (typeof(out_exchange_allow[dest_credit+'|'+src_credit]) == 'string')
+{
+	radio = (1 / parseFloat(out_exchange_allow[dest_credit+'|'+src_credit])).toFixed(2);
+}
+document.getElementById('orgcredittitle').innerHTML = org_title;
+document.getElementById('descreditamount').innerHTML = radio;
+document.getElementById('descredittitle').innerHTML = dst_title;
+if (in_credit > 0)
+{
+	if (typeof(out_exchange_allow[dest_credit+'|'+src_credit]) == 'string')
+	{
+		frm.desamount.value = Math.floor(parseFloat(in_credit) / parseFloat(out_exchange_allow[dest_credit+'|'+src_credit]));
+		frm.transfrom.disabled = false;
+		return true;
+	}
+	else
+	{
+		frm.desamount.value = deny;
+		frm.transfrom.disabled = true;
+		return false;
+	}
+}
+else
+{
+	return false;
+}
+}
+</script>
+{else}
+					<h4>{$lang.cur_points}{$lang.colon}</h4>
+					<table class="data-table">
+						<colgroup>
+							<col width="300"/>
+							<col width="300"/>
+						</colgroup>
+						<tbody>
+							<tr class="last">
+								<td>
+									<table class="data-table">
+										<colgroup>
+											<col width="100"/>
+											<col width="300"/>
+										</colgroup>
+										<tbody>
+											{foreach from=$bbs_points item=points name=bbs_points}
+											<tr class="{cycle values="odd,even"}{if $smarty.foreach.bbs_points.last} last{/if}">
+												<th>{$points.title}{$lang.colon}</th>
+												<td class="last">{$points.value}</td>
+											</tr>
+											{/foreach}
+										</tbody>
+									</table>
+								</td>
+								<td class="last">
+									<table class="data-table">
+										<colgroup>
+											<col width="100"/>
+											<col width="300"/>
+										</colgroup>
+										<tbody>
+											<tr class="odd">
+												<th>{$lang.pay_points}{$lang.colon}</th>
+												<td class="last">{$shop_points.pay_points}</td>
+											</tr>
+											<tr class="even last">
+												<th>{$lang.rank_points}{$lang.colon}</th>
+												<td class="last">{$shop_points.rank_points}</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<h4>{$lang.rule_list}{$lang.colon}</h4>
+					<ul class="text-list">
+						{foreach from=$rule_list item=rule name=rule_list}
+						<li{if $smarty.foreach.rule_list.first} class="first"{/if}>"{$rule.from}" {$lang.transform} "{$rule.to}" {$lang.rate_is} {$rule.rate}</li>
+						{/foreach}
+					</ul>
+					<form action="user.php" method="post" name="theForm">
+						<table class="data-table">
+							<colgroup>
+								<col width="200"/>
+								<col width="200"/>
+								<col width="200"/>
+							</colgroup>
+							<thead>
+								<tr>
+									<th>{$lang.rule}</th>
+									<th>{$lang.transform_num}</th>
+									<th class="last">{$lang.transform_result}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="last">
+									<td><select name="rule_index" onchange="changeRule()">
+									{foreach from=$rule_list item=rule key=key}
+									<option value="{$key}">{$rule.from}->{$rule.to}</option>
+									{/foreach}
+									</select></td>
+									<td><input type="text" name="num" value="0" onkeyup="calPoints()"/></td>
+									<td class="last"><span id="ECS_RESULT">0</span></td>
+								</tr>
+							</tbody>
+							<tfoot>
+							<tr>
+								<td colspan="3" class="center last">
+									<input type="submit" value="{$lang.transform}" class="button positive"/>
+									<input type="hidden" name="act" value="act_transform_points"/>
+								</td>
+							</tr>
+							</tfoot>
+						</table>
+					</form>
+				</div>
+				<b class="bt"><b></b></b>
+			</div>
+<script type="text/javascript">
+//<![CDATA[
+var rule_list = new Object();
+var invalid_input = '{$lang.invalid_input}';
+{foreach from=$rule_list item=rule key=key}
+rule_list['{$key}'] = '{$rule.rate}';
+{/foreach}
+function calPoints()
+{
+var frm = document.forms['theForm'];
+var rule_index = frm.elements['rule_index'].value;
+var num = parseInt(frm.elements['num'].value);
+var rate = rule_list[rule_index];
+if (isNaN(num) || num < 0 || num != frm.elements['num'].value)
+{
+	document.getElementById('ECS_RESULT').innerHTML = invalid_input;
+	rerutn;
+}
+var arr = rate.split(':');
+var from = parseInt(arr[0]);
+var to = parseInt(arr[1]);
+if (from <=0 || to <=0)
+{
+	from = 1;
+	to = 0;
+}
+document.getElementById('ECS_RESULT').innerHTML = parseInt(num * to / from);
+}
+function changeRule()
+{
+document.forms['theForm'].elements['num'].value = 0;
+document.getElementById('ECS_RESULT').innerHTML = 0;
+}
+//]]>
+</script>
+{/if}
+{/if}
+			</div>
+		</div>
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+	</div>
+</div></div>
+{include file="/library/page_footer.lbi"}
+</body>
+</html>

@@ -1,0 +1,93 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<div class="m ranking">
+			<div class="utab clearfix">
+			<ul>
+					<li class="hover" id="catb1" onmousemove="setTab('catb',1,5)">图书</a></li>
+					<li id="catb2" onmousemove="setTab('catb',2,5)">音乐</li>
+					<li id="catb3" onmousemove="setTab('catb',3,5)">影视</li>
+					<li id="catb4" onmousemove="setTab('catb',4,5)">教育</li>
+					<li id="catb5" onmousemove="setTab('catb',5,5)">电子书</li>
+			</ul>
+		</div>
+		
+  <div class="smc" id="con_catb_1" style="display:block">
+    <ul>
+	   <?php
+             $children1 = get_children(28);
+             $this->assign('cat1_hot_goods', get_category_recommend_goods('best',$children1,10)); 
+          ?>
+		<!--{foreach from=$cat1_hot_goods item=goods name=gcurn}--> 
+		<li class="fore{$smarty.foreach.gcurn.iteration}">
+		  <span>{$smarty.foreach.gcurn.iteration}</span>
+		  <div class="p-name"><a href="{$goods.url}" target="_blank">{$goods.name}</a></div>
+		  <div class="p-price"><strong><!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}--></strong></div>
+		</li>
+		<!--{/foreach}-->	
+    </ul>
+  </div>
+
+  <div class="smc" id="con_catb_2">
+    <ul>
+   	   <?php
+             $children1 = get_children(6);
+             $this->assign('cat1_hot_goods', get_category_recommend_goods('best',$children1,10)); 
+          ?>
+		<!--{foreach from=$cat1_hot_goods item=goods name=gcurn}--> 
+		<li class="fore{$smarty.foreach.gcurn.iteration}">
+		  <span>{$smarty.foreach.gcurn.iteration}</span>
+		  <div class="p-name"><a href="{$goods.url}" target="_blank">{$goods.name}</a></div>
+		  <div class="p-price"><strong><!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}--></strong></div>
+		</li>
+		<!--{/foreach}-->	
+    </ul>
+  </div>
+  <div class="smc" id="con_catb_3">
+    <ul>
+    	   <?php
+             $children1 = get_children(1);
+             $this->assign('cat1_hot_goods', get_category_recommend_goods('best',$children1,10)); 
+          ?>
+		<!--{foreach from=$cat1_hot_goods item=goods name=gcurn}--> 
+		<li class="fore{$smarty.foreach.gcurn.iteration}">
+		  <span>{$smarty.foreach.gcurn.iteration}</span>
+		  <div class="p-name"><a href="{$goods.url}" target="_blank">{$goods.name}</a></div>
+		  <div class="p-price"><strong><!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}--></strong></div>
+		</li>
+		<!--{/foreach}-->	
+    </ul>
+  </div>
+
+  <div class="smc" id="con_catb_4">
+    <ul>
+   	   <?php
+             $children1 = get_children(6);
+             $this->assign('cat1_hot_goods', get_category_recommend_goods('best',$children1,10)); 
+          ?>
+		<!--{foreach from=$cat1_hot_goods item=goods name=gcurn}--> 
+		<li class="fore{$smarty.foreach.gcurn.iteration}">
+		  <span>{$smarty.foreach.gcurn.iteration}</span>
+		  <div class="p-name"><a href="{$goods.url}" target="_blank">{$goods.name}</a></div>
+		  <div class="p-price"><strong><!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}--></strong></div>
+		</li>
+		<!--{/foreach}-->	
+    </ul>
+  </div>
+
+  <div class="smc" id="con_catb_5">
+    <ul>
+   	   <?php
+             $children1 = get_children(1);
+             $this->assign('cat1_hot_goods', get_category_recommend_goods('best',$children1,10)); 
+          ?>
+		<!--{foreach from=$cat1_hot_goods item=goods name=gcurn}--> 
+		<li class="fore{$smarty.foreach.gcurn.iteration}">
+		  <span>{$smarty.foreach.gcurn.iteration}</span>
+		  <div class="p-name"><a href="{$goods.url}" target="_blank">{$goods.name}</a></div>
+		  <div class="p-price"><strong><!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}--></strong></div>
+		</li>
+		<!--{/foreach}-->	
+    </ul>
+  </div>
+	</div>
+	
+	<span class="clr"></span>

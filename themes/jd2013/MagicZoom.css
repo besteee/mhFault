@@ -1,0 +1,84 @@
+﻿/* Copyright 2008 MagicToolBox.com. To use this code on your own site, visit http://magictoolbox.com */
+
+/* CSS class for zoomed area */
+.MagicZoomBigImageCont {
+	border:			1px solid #eee;margin-left:-8px;
+}
+
+/* Header look and feel CSS class */
+/* header is shown if "title" attribute is present in the <A> tag */
+.MagicZoomHeader {
+	font:			12px Tahoma, Verdana, Arial, sans-serif;
+	color:			#fff;
+	text-align:     center !important;
+	background-color: #999999;border:1px red solid;
+}
+
+
+/* CSS class for small looking glass square under mouse */
+.MagicZoomPup {
+/*   z-index                 : 10;
+   visibility              : hidden;
+   position                : absolute;
+   cursor:crosshair;
+   width:150px!important;
+   height:150px!important;
+   width: 150px;
+   height: 150px;
+   _width: 150px;
+   _height: 150px;
+   border: 1px solid #aaa;
+   background: #ffffff;
+   opacity: 0.5;
+   -moz-opacity: 0.5;
+   -khtml-opacity: 0.5;
+   filter: alpha(Opacity=50);*/
+   	border: 		1px solid #F0A09B;
+	background: 	#ffffff;
+	cursor:			crosshair;
+}
+
+/* CSS style for loading animation box */
+.MagicZoomLoading {
+	text-align:		center;
+	background: 	#ffffff;
+	color:			#444;
+	border: 		1px solid #ccc;
+	opacity:		0.8;
+	padding:		3px 3px 3px 3px;
+	display: 		none; /* do not edit this line please */
+}
+
+/* CSS style for gif image in the loading animation box */
+.MagicZoomLoading img {
+	padding-top:	3px !important;
+}
+#show_pic a.MagicZoom{
+	cursor:crosshair;
+}
+
+/*--------------颜色选择器CSS添加-------------*/
+.cattlist { clear:both;}
+.te{line-height:50px;}
+.catt { float:left;height:auto;}
+.catt  ul{ border:0px;}
+.catt LI {
+    PADDING-BOTTOM: 1px; LINE-HEIGHT: 25px; BACKGROUND-COLOR:; MARGIN: 0px 4px 4px 0px; PADDING-LEFT: 1px; PADDING-RIGHT: 1px; FLOAT: left; VERTICAL-ALIGN: middle; PADDING-TOP: 1px;padding-left:0px; cursor: pointer; 
+}
+.catt LI A {
+    BORDER: #c8c9cd 1px solid;  TEXT-ALIGN: center; BACKGROUND-COLOR: #fff; margin-left:2px;margin-top:3px;PADDING-LEFT: 6px;PADDING-RIGHT: 6px;DISPLAY: block; WHITE-SPACE: nowrap; COLOR: #000; TEXT-DECORATION: none; FLOAT: left;_margin-right:1px;
+}
+.catt LI A:hover {
+    BORDER: #CC0000 2px solid; MARGIN: -1px; margin-left:1px;margin-top:2px; /*margin-right:0px;*/
+}
+.catt LI A:focus {
+    OUTLINE-STYLE: none
+}
+.catt LI A.selected {
+    BORDER: #CC0000 2px solid; MARGIN: -1px;BACKGROUND: url("images/select.gif")
+no-repeat bottom right; margin-left:1px;margin-top:2px;_margin-right:1px; background-color:#FFFFFF;
+}
+.catt LI.selected A:hover {
+   BORDER: #CC0000 2px solid;  MARGIN: -1px;BACKGROUND: url("images/select.gif")
+no-repeat bottom right;
+}

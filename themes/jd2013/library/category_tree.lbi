@@ -1,0 +1,29 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<?php $this->assign('categories', get_categories_tree());?>
+<div id="sortlist">  
+<div class="mt"><h2>商品分类</h2></div>
+	<div class="mc">
+       <!--{foreach from=$categories item=cat name=childnum}--> 
+	<div id="subitem{$smarty.foreach.childnum.iteration}" class="item"><h3 onclick="showmenu({$smarty.foreach.childnum.iteration})"><b></b>{$cat.name|escape:html}</h3>
+	<ul>
+	<!--{foreach from=$cat.cat_id item=child}-->   
+	   <li><a href="{$child.url}">{$child.name|escape:html}</a></li>
+	<!--{/foreach}--> 
+	</ul>
+	</div>
+	  <!--{/foreach}-->  
+	</div>
+</div>
+<script language="javascript">
+function showmenu(sid)
+{
+var subitem=document.getElementById("subitem"+sid);
+if(subitem.className=='item'){
+subitem.className='item current';
+}
+else{
+subitem.className='item';
+}
+}
+</script>
+<div class="blank"></div>

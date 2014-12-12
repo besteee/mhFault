@@ -1,0 +1,41 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<dt class="ld"><s></s><span class="shopping"><span id="shopping-amount">{$str_num}</span></span><a href="flow.php" id="settleup-url">去购物车结算</a> <b></b> </dt>
+			      <!-- {if $goods} -->
+		 <span id="ECS_CARTINFO">	<dd><div id="settleup-content"><div class="smt"><h4 class="fl">最新加入的商品</h4></div>
+				<div class="smc">
+				<ul id="mcart-sigle">
+				</ul>
+				<ul id="mcart-gift"> 
+				  {foreach from=$goods item=goods name=goods} 
+				<li>      
+				 <div class="p-img fl"><a target="_blank" href="{$goods.url}"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name|escape:html}" height="50" width="50"></a></div>        <div class="p-name fl"><a href="{$goods.url}">{$goods.goods_name}</a></div>        <div class="p-detail fr ar"> <span class="p-price"><strong>{$goods.goods_price}</strong>×{$goods.goods_number}</span>  <br>   <a class="delete" href="javascript:" onClick="deleteCartGoods({$goods.rec_id})">删除</a> </div>    
+				  </li>
+				  {/foreach}
+				</ul>
+				</div><div class="smb ar">共<b>{$str_num}</b>件商品　共计<strong>{$str_price}</strong><br><a href="flow.php" title="去购物车结算" id="btn-payforgoods">去购物车结算</a></div></div></dd></span>
+        <!-- {else} -->
+       <dd><div class="prompt"><div class="nogoods"><b></b>购物车中还没有商品，赶紧选购吧！</div></div></dd>
+        <!-- {/if} -->
+
+<script type="text/javascript">
+function deleteCartGoods(rec_id)
+{
+Ajax.call('delete_cart_goods.php', 'id='+rec_id, deleteCartGoodsResponse, 'POST', 'JSON');
+}
+
+/**
+ * 接收返回的信息
+ */
+function deleteCartGoodsResponse(res)
+{
+  if (res.error)
+  {
+    alert(res.err_msg);
+  }
+  else
+  {
+      document.getElementById('ECS_CARTINFO').innerHTML = res.content;
+  }
+}
+</script>
+

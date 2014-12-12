@@ -1,0 +1,12 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ <?php
+	$GLOBALS['smarty']->assign('child_cat',get_hot_cat_tree(39, 3));
+?>
+ <!--{foreach from=$child_cat item=cat1 name=catspan1}--> 
+      <!-- {if $cat1.name} -->
+		  <li><a href="{$cat1.url}" title="{$cat1.name|escape:html}">{$cat1.name|escape:html}</a></li>
+		<!-- {/if} -->  
+       <!--{foreach from=$cat1.child item=cat_child1 name=catspan2}-->
+		  <li><a href="{$cat_child1.url}" title="{$cat_child1.name|escape:html}">{$cat_child1.name|escape:html}</a></li>
+        <!--{/foreach}-->	
+ <!--{/foreach}-->

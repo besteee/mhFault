@@ -1,0 +1,40 @@
+<!-- 提交订单返回页面 -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png"/>
+	<title>提交订单 - {$shop_name}</title>
+	<link href="css/reset.css" rel="stylesheet" type="text/css" />
+	<link href="css/head.css" rel="stylesheet" type="text/css" />
+	<link href="css/foot.css" rel="stylesheet" type="text/css" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<script src="js/jquery-1.6.2.min.js" type="text/javascript"></script>
+	<script src="js/jquery.lazyload.js" type="text/javascript"></script>
+	<script src="js/jquery.autocomplete.js" type="text/javascript"></script>
+	<script src="js/jquery.touchScroll.js" type="text/javascript"></script>
+	<script type="text/javascript">
+        document.write('<div id="global_loading" style="width: 100%;height: 100%;position: fixed;top: 0;left: 0;background-color: #eee;z-index:999"><div style="width: 100px;height: 75px;margin:auto;top:50%;position:relative"><span style="display:block;float:left;width:32px;height:32px;background:url(/images/spacer.gif);margin-top:-5px;"></span>&nbsp;&nbsp;加载中...</div></div>');
+    </script>
+</head>
+<body> 
+	<div class="header"><a class="back" href="javascript:history.back();"></a><span class="headline">提交订单</span><a class="search" href="search.php"></a></div>
+	<section>
+	<div class="m_cat">
+		<table width=99% cellspacing=5 cellpadding=5 border=0>
+            <tr><td class="red" height="50" align="center" valign="middle">{$tips}</td></tr>
+            <tr><td height="50" align="center" valign="middle" class="onlinepay">{$pay_online}</td></tr>
+        </table>
+	</div>
+	</section>
+{include file='foot.dwt'}
+<script type="text/javascript">
+		var global_loading=document.getElementById("global_loading");
+		global_loading.parentNode.removeChild(global_loading);
+</script>
+</body>
+</html>

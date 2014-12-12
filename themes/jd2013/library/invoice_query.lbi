@@ -1,0 +1,40 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--{if $invoice_list}-->
+    <div id="brtup" style="overflow:hidden; height: 134px;margin-top:10px;">
+         <div id="brtup1"> 
+                 <ul id="brtup1ul"> 
+                 <!-- 发货单查询{foreach from=$invoice_list item=invoice name=curn} -->
+                  <li style="padding-top:6px;">
+                   <table width="100%" cellpadding="0" cellspacing="0" border="0"> <tr> <td width="60" align="left">&nbsp;{$lang.order_number}:&nbsp;</td> <td>{$invoice.order_sn}</td> </tr> <tr > <td align="left">&nbsp;{$lang.consignment}:&nbsp;</td> <td >{$invoice.invoice_no}</td> </tr> </table> 
+                   {if !$smarty.foreach.curn.last}<div style="height:10px; border-bottom:1px dashed #ccc; width:250px;"></div>{/if}
+                   </li> 
+                   <!-- 结束发货单查询{/foreach}-->
+                  <div style="height:10px; border-bottom:1px dashed #ccc; width:300px;"></div> 
+                  </li> 
+                  </ul> 
+          </div> 
+          <div id="brtup2"> </div> 
+      </div>
+<script type="text/javascript">
+var speed=30;
+var brtup=document.getElementById('brtup');
+var brtup1=document.getElementById('brtup1');
+var brtup2=document.getElementById('brtup2');
+var brtup1ul=document.getElementById('brtup1ul');
+var result = "";
+for(var i=0; i<25; i++) result += brtup1ul.innerHTML;
+brtup1ul.innerHTML=result
+brtup2.innerHTML=brtup1.innerHTML
+function Marquee1(){
+if(brtup2.offsetHeight-brtup.scrollTop<=0)
+brtup.scrollTop-=brtup1.offsetHeight
+else{
+brtup.scrollTop++
+}
+}
+var MyMar1=setInterval(Marquee1,speed)
+brtup.onmouseover=function() {clearInterval(MyMar1)}
+brtup.onmouseout=function() {MyMar1=setInterval(Marquee1,speed)}
+</script>
+<!-- {/if} -->
+                

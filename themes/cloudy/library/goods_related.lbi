@@ -1,0 +1,27 @@
+{if $related_goods}
+<div class="goods-related box">
+	<b class="tp"><b></b></b>
+	<div class="hd"><h3>{$lang.related_goods}</h3></div>
+	<div class="bd">	
+		<ul class="goods-list">
+			{foreach from=$related_goods item=releated_goods_data name=related_goods}
+			<li{if $smarty.foreach.related_goods.index %4==0} class="first-child"{/if}>
+				<span class="photo">
+					<a href="{$releated_goods_data.url}" title="{$releated_goods_data.goods_name|escape:html}" class="image"><img src="{$releated_goods_data.goods_thumb}" alt="{$releated_goods_data.goods_name|escape:html}"/></a>
+				</span>
+				<span class="info">
+					<a href="{$releated_goods_data.url}" title="{$releated_goods_data.goods_name|escape:html}" class="name">{$releated_goods_data.goods_name}</a>
+					<em class="price{if $releated_goods_data.promote_price} promote{/if}">{if $releated_goods_data.promote_price}{$releated_goods_data.promote_price}{else}{$releated_goods_data.shop_price}{/if}</em>
+				</span>
+				<span class="action">
+					<a href="{$goods.url}" class="detail">{$lang.btn_detail}</a>
+					<a href="javascript:addToCart({$goods.goods_id})" class="buy">{$lang.btn_buy}</a>
+					<a href="javascript:collect({$goods.goods_id});" class="collect">{$lang.btn_collect}</a>
+				</span>
+			</li>
+			{/foreach}
+		</ul>
+	</div>
+	<b class="bt"><b></b></b>
+</div>
+{/if}

@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>{$wxch_lang.cp_home}{if $wxch_lang.ur_here} - {$wxch_lang.ur_here} {/if}</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="styles/general.css" rel="stylesheet" type="text/css" />
+    <link href="styles/main.css" rel="stylesheet" type="text/css" />
+    {insert_scripts files="../js/transport_old.js,common.js"}
+    <script language="JavaScript">
+        <!--
+        // 这里把JS用到的所有语言都赋值到这里
+        {foreach from=$lang.js_languages key=key item=item}
+        var {$key} = "{$item}";
+        {/foreach}
+        //-->
+    </script>
+</head>
+<body>
+
+<h1>
+    {if $action_link}
+    <span class="action-span"><a href="{$action_link.href}">{$action_link.text}</a></span>
+    {/if}
+    {if $action_link2}
+    <span class="action-span"><a href="{$action_link2.href}">{$action_link2.text}</a>&nbsp;&nbsp;</span>
+    {/if}
+    <span class="action-span1"><a href="index.php?act=main">{$wxch_lang.cp_home}</a> </span><span id="search_id" class="action-span1"> - {$wxch_lang.ur_here}</span>
+    <div style="clear:both"></div>
+</h1>
+
+{insert_scripts files="../js/utils.js,selectzone.js,colorselector.js"}
+<script type="text/javascript" src="../js/calendar.php?lang={$cfg_lang}"></script>
+<link href="../js/calendar/calendar.css" rel="stylesheet" type="text/css" />
+
+{if $warning}
+<ul style="padding:0; margin: 0; list-style-type:none; color: #CC0000;">
+    <li style="border: 1px solid #CC0000; background: #FFFFCC; padding: 10px; margin-bottom: 5px;" >{$warning}</li>
+</ul>
+{/if}
+
+<!-- start goods form -->
+<div class="tab-div">
+<!-- tab bar -->
+<div id="tabbar-div">
+    <p>
+        <span class="tab-front" id="general-tab">设置</span>
+    </p>
+</div>
+
+<!-- tab body -->
+<div id="tabbody-div">
+<form action="" method="post" name="form1" >
+<!-- 通用信息 -->
+<table width="90%" id="general-table" align="center">
+    <tr>
+        <td class="label">选择红包类型：</td>
+        <td>
+            <select name="bonus">
+                <option {if $type_id eq 0}selected{/if}>请选择...</option>
+                {foreach from=$w_data item=bonus}
+                <option name="type_id" value="{$bonus.type_id}" {if $type_id eq $bonus.type_id}selected{/if}>{$bonus.type_name}=>金额：{$bonus.type_money}</option>
+                {/foreach}
+            </select>
+        </td>
+    </tr>
+</table>
+
+
+
+<div class="button-div">
+    <input type="submit" value="{$lang.button_submit}" class="button" />
+    <input type="reset" value="{$lang.button_reset}" class="button" />
+</div>
+<input type="hidden" name="act" value="{$form_act}" />
+</form>
+</div>
+</div>
+<!-- end goods form -->
+{insert_scripts files="validator.js,tab.js"}
+
+{include file="wxch_pagefooter.htm"}

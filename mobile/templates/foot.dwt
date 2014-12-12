@@ -1,0 +1,18 @@
+﻿<!--页面底部-->
+		<div class="viewport">
+			<div id="footer" class="footer">
+				<div class="row g_1">
+					<a href="index.php">首页</a>
+					{if $user_name}<a href="user.php?act=user_center">用户中心</a>{else}<a href='user.php?act=login'>会员登录</a>{/if}
+					<a href="cart.php">购物车</a>
+				</div>
+				<div class="row g_2">
+					<a href="javascript:window.scrollTo(0,0);">返回顶部</a>
+				</div>
+				<div class="row g_3">
+					<p>©2014 {$shop_name}</p>
+					技术支持：<a href="http://www.besteee.com">besteee.com 最优网络</a>
+				</div>
+			</div>
+		</div>
+<!--页面底部-->

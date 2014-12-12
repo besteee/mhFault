@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link href="base.css" rel="stylesheet" type="text/css">
+<link href="home.css" rel="stylesheet" type="text/css">
+<link href="flow.css" rel="stylesheet" type="text/css">
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,global.js,compare.js'}
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+	<div class="w">
+		<ul class="tab" id="tab-link">
+			<li><a href="catalog.php">全部商品分类</a></li>
+			<li class="curr"><a href="brand.php">全部品牌</a></li>
+			<li><a href="search.php">全部商品</a></li>
+		</ul><!--tab end-->
+	</div>
+    
+<div class="block clearfix">
+  <div class="Sort_Listpp">
+    <h2></h2>
+    <ul class="brand_all_list clearfix">
+      <!-- {foreach from=$brand_list name="brand_list_foreach" item=brand_data} -->
+      <li>
+        <!-- {if $brand_data.brand_logo} -->
+        <div class="brand_all_list_a">
+          <a href="{$brand_data.url}"><img src="data/brandlogo/{$brand_data.brand_logo}" alt="{$brand_data.brand_name|escape:html} ({$brand_data.goods_num})" /></a>
+        </div>
+        <h5> {$brand_data.brand_name}({$brand_data.goods_num})</h5>
+        <!-- {/if} -->
+      </li>
+      <!-- {/foreach} -->
+    </ul>
+  </div>
+</div>
+
+<!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

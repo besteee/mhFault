@@ -1,0 +1,8 @@
+<div class="online box">
+	<b class="tp"><b></b></b>
+	<div class="bd">
+		<p>{$info}</p>
+		{if $member}<p>{foreach from=$member item=val}<em>{$val.user_name}</em>{/foreach}</p>{/if}
+	</div>
+	<b class="bt"><b></b></b>
+</div>

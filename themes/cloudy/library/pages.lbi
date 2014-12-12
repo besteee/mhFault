@@ -1,0 +1,38 @@
+{if $pager.styleid eq 0 }
+<form name="selectPageForm" action="{$smarty.server.PHP_SELF}" method="get">
+<p class="pagination">
+	<span class="total">{$lang.pager_1}{$pager.record_count}{$lang.pager_2}{$lang.pager_3}{$pager.page_count}{$lang.pager_4}</span>
+	<a href="{$pager.page_first}" class="first">{$lang.page_first}</a>
+	<a href="{$pager.page_prev}" class="prev">{$lang.page_prev}</a>
+	{if $comments or $notes}{else}
+	<select name="page" id="page" onchange="selectPage(this)">
+	{html_options options=$pager.array selected=$pager.page}
+	</select>{/if}
+	<a href="{$pager.page_next}" class="next">{$lang.page_next}</a>
+	<a href="{$pager.page_last}" class="last">{$lang.page_last}</a>
+	{foreach from=$pager.search key=key item=item}
+	{if $key eq 'keywords'}
+	<input type="hidden" name="{$key}" value="{$item|escape:decode_url}" />
+	{else}
+	<input type="hidden" name="{$key}" value="{$item}" />
+	{/if}
+	{/foreach}
+</p>
+</form>
+<script type="Text/Javascript" language="JavaScript">
+{literal}function selectPage(sel){sel.form.submit();}{/literal}
+</script>
+{else}
+<p class="pagination">
+	<span class="total">{$pager.page}/{$pager.page_count}</span>
+	{if $pager.page_first}<a href="{$pager.page_first}{if $category}#goods-list{/if}" class="first">{$lang.page_first}</a><span class="gap">...</span>{/if}
+	{if $pager.page_prev}<a href="{$pager.page_prev}{if $category}#goods-list{/if}" class="prev">{$lang.page_prev}</a>{/if}
+	{if $pager.page_count neq 1}
+	{foreach from=$pager.page_number key=key item=item}
+	<a href="{$item}{if $category}#goods-list{/if}"{if $pager.page eq $key} class="current"{/if}>{$key}</a>
+	{/foreach}
+	{/if}
+	{if $pager.page_next}<a href="{$pager.page_next}{if $category}#goods-list{/if}" class="next">{$lang.page_next}</a>{/if}
+	{if $pager.page_last}<span class="gap">...</span><a href="{$pager.page_last}{if $category}#goods-list{/if}" class="last">{$lang.page_last}</a>{/if}
+</p>
+{/if}

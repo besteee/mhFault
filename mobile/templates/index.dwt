@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>{$shop_name}触屏版首页</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
+	<link href="css/home.css" rel="stylesheet" type="text/css" />
+	<link href="css/foot.css" rel="stylesheet" type="text/css" />
+    <link href="css/flexslider.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+	<script type="text/javascript" src="js/jquery.lazyload.js"></script>
+	<script>
+          var util = (function(){
+              var u = navigator.userAgent.toLowerCase();
+              return {
+                  isIphone : function(){return (RegExp("iphone").test(u) || RegExp("ipod touch").test(u))},
+                  isIpad : function(){return RegExp("ipad").test(u)},
+                  isAndroid : function(){return (RegExp("android").test(u) || RegExp("android 2").test(u))},
+                  isMB : function(){return (util.isIphone() || util.isIpad() || util.isAndroid())}
+              };
+          })();
+          window.util = util;
+          (function(){
+              if( !util.isMB() ){
+                  window.location.href = '../index.php';
+              }
+          })();
+    </script>
+	<script type="text/javascript">
+    jQuery(document).ready(
+    function($){
+		$(".row_list img").lazyload({
+         placeholder : "images/img_bg4.png",
+         effect      : "fadeIn"
+    });
+    });
+    </script>
+</head>
+<body style="">
+		<header>
+			<div id="header" class="header">
+				<div class="cart">
+					<a href="cart.php">购物车</a>
+				</div>
+				<div class="back">
+					<a href="index.php">{$shop_name}</a>
+				</div>
+			</div>
+		</header>
+
+		<div id="viewport" class="viewport">
+			<div class="row row_swiper mt20">
+				<div class="swiper-container" id="swiper" style="visibility: visible;">				
+                    <div class="flexslider">
+                    <ul class="slides">
+                       {foreach from=get_advlist_position_name('wap首页banner轮播',0,3) item=ad name=index_image}
+                       <li back=''><a href="{$ad.url}" title="{$ad.name}" target="_blank"><img name="ad_img" src="{$ad.image}" alt="{$ad.name}" /></a></li>
+                       {/foreach}
+                    </ul>
+                    </div>
+                    <script type="text/javascript">
+                            $(function() {
+                                $('.flexslider').flexslider({
+                                     animation: "slide",
+                                     slideDirection: "horizontal"
+                                 });
+                            });
+                        
+                    </script>
+				</div>
+			</div><!-- @end div.row_swiper -->
+
+			<div class="row row_category">
+				<ul class="h_box">
+					<li><a href="goods_list.php?type=new"><img src="images/icon_indexn_01.png"></a><p>新品上市</p></li>
+					<li><a href="goods_list.php?type=promote"><img src="images/icon_indexn_02.png"></a><p>促销活动</p></li>
+					<li><a href="favorites.php"><img src="images/icon_indexn_03.png"></a><p>我的收藏</p></li>
+					<li><a href="brands.php"><img src="images/icon_indexn_04.png"></a><p>品牌馆</p></li>
+				</ul>
+				<ul class="h_box">
+					<li><a href="category.php"><img src="images/icon_indexn_05.png"></a><p>全部分类</p></li>
+					<li><a href="cart.php"><img src="images/icon_indexn_06.png"></a><p>购物车</p></li>
+					<li><a href="user.php?act=user_center"><img src="images/icon_indexn_07.png"></a><p>会员中心</p></li>
+					<li><a href="kefu.php"><img src="images/icon_indexn_08.png"></a><p>联系客服</p></li>
+				</ul>
+			</div>
+            <!-- @end div.row_category -->
+			<div class="row row_list">
+			<div id="list">
+				<ul>
+                	{foreach from=$best_goods item=goods name=goods}
+                    {if $smarty.foreach.goods.index <= 7}
+					<li>
+						<div class="type_ad">
+							<a href="goods.php?id={$goods.id}">
+								<div class="imgurl">
+									<img src="./../{$goods.original_img}">
+								</div>
+								<div class="info">
+									<div class="product_name">
+										<span class="price">{if $goods.promote_price neq ""}{$goods.promote_price}{else}{$goods.shop_price}{/if}</span>
+										<span class="name">{$goods.name}</span>
+									</div>
+									<div class="product_detail"><span class="detail">{$goods.brief}</span></div>
+								</div>
+							</a>
+						</div>
+					</li>
+                    {/if}
+                    {/foreach}
+				</ul>
+			</div>
+			</div>
+            <!-- @end div.row_list -->
+		</div>
+{include file='foot.dwt'}
+</body></html>

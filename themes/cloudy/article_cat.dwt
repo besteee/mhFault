@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="Keywords" content="{$keywords}"/>
+<meta name="Description" content="{$description}"/>
+<!-- TemplateBeginEditable name="doctitle" --><title>{$page_title}</title><!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link href="{$static_path}static/css/style.css" rel="stylesheet" type="text/css"/>
+<!--[if IE]><link href="{$static_path}static/css/ie.css" rel="stylesheet" type="text/css"/><![endif]-->
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}"/>
+
+<script type="text/javascript" src="{$static_path}static/js/jquery.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.json.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/common.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/effect.js"></script>
+</head>
+<body>
+{include file="/library/page_header.lbi"}
+<div id="content"><div class="container">
+	{include file="/library/ur_here.lbi"}
+	<div class="col-main">
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+		<div class="box">
+			<b class="tp"><b></b></b>
+			<div class="hd"><h3>{$lang.article_list}</h3></div>
+			<div class="bd">
+				<form action="{$search_url}" name="search_form" method="post" class="article-search">
+					<input type="text" name="keywords" value="{$search_value}"/>
+					<input type="submit" value="{$lang.button_search}" class="button positive"/>
+					<input type="hidden" name="id" value="{$cat_id}"/>
+				</form>
+				<ul class="articles-list">
+					<li class="head"><span class="title">{$lang.article_title}</span><span class="author">{$lang.article_author}</span><span class="time">{$lang.article_add_time}</span></li>
+					{foreach from=$artciles_list item=article name=artciles_list}
+					<li class="{cycle values="odd,even"}{if $smarty.foreach.artciles_list.first} first{/if}">
+						<span class="title"><a href="{$article.url}" title="{$article.title|escape:html}">{$article.short_title}</a></span>
+						<span class="author">{$article.author}</span>
+						<span class="time">{$article.add_time}</span>
+					</li>
+					{/foreach}
+				</ul>
+				<!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+			</div>
+			<b class="bt"><b></b></b>
+		</div>
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+	</div>
+	<div class="col-sub">
+	<!-- TemplateBeginEditable name="侧栏上方" --><!-- TemplateEndEditable -->
+	<!-- TemplateBeginEditable name="侧栏" -->
+	<!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/article_category_tree.lbi" --><!-- #EndLibraryItem -->
+	<!-- TemplateEndEditable -->
+	<!-- TemplateBeginEditable name="侧栏下方" --><!-- TemplateEndEditable -->
+	</div>
+</div></div>
+{include file="/library/page_footer.lbi"}
+</body>
+</html>

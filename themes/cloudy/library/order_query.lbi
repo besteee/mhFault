@@ -1,0 +1,23 @@
+{if empty($order_query)}
+<div class="order-query box">
+	<b class="tp"><b></b></b>
+	<div class="hd"><h3>{$lang.order_query}</h3></div>
+	<div class="bd">
+		<form name="ecsOrderQuery" class="main">
+			<input type="text" name="order_sn" class="input"/>
+			<input type="button" value="{$lang.query_order}" onclick="orderQuery()" class="btn-sm"/>
+		</form>
+		<span id="ECS_ORDER_QUERY">
+		{else}
+			<div class="result">
+			{if $order_query.user_id}<p><em>{$lang.order_number}</em><span><a href="user.php?act=order_detail&order_id={$order_query.order_id}" >{$order_query.order_sn}</a></span></p>{else}<p><em>{$lang.order_number}</em><span>{$order_query.order_sn}</span></p>{/if}
+			<p><em>{$lang.order_status}</em><span>{$order_query.order_status}</span></p>
+			{if $order_query.invoice_no }<p><em>{$lang.consignment}</em><span>{$order_query.invoice_no}</span></p>{/if}
+			{if $order_query.shipping_date}<p><em>{$lang.shipping_date}</em><span>{$order_query.shipping_date}</span></p>{/if}
+			</div>
+		{/if}
+		</span>
+	</div>
+	<b class="bt"><b></b></b>
+</div>
+<script>var invalid_order_sn = "{$lang.invalid_order_sn}"</script>

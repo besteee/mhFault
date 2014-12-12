@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>{$wxch_lang.cp_home}{if $wxch_lang.ur_here} - {$wxch_lang.ur_here} {/if}</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="styles/general.css" rel="stylesheet" type="text/css" />
+    <link href="styles/main.css" rel="stylesheet" type="text/css" />
+    {insert_scripts files="../js/transport_old.js,common.js"}
+</head>
+<body>
+
+<h1>
+    <span class="action-span1"><a href="index.php?act=main">{$wxch_lang.cp_home}</a> </span><span id="search_id" class="action-span1"> - {$wxch_lang.ur_here}</span>
+    <div style="clear:both"></div>
+</h1>
+
+{insert_scripts files="../js/utils.js,selectzone.js,colorselector.js"}
+<script type="text/javascript" src="../js/calendar.php?lang={$cfg_lang}"></script>
+<link href="../js/calendar/calendar.css" rel="stylesheet" type="text/css" />
+
+{if $warning}
+<ul style="padding:0; margin: 0; list-style-type:none; color: #CC0000;">
+    <li style="border: 1px solid #CC0000; background: #FFFFCC; padding: 10px; margin-bottom: 5px;" >{$warning}</li>
+</ul>
+{/if}
+
+<!-- start goods form -->
+<div class="tab-div">
+<!-- tab bar -->
+<div id="tabbar-div">
+    <p>
+        <span class="tab-front" id="general-tab">设置</span>
+    </p>
+</div>
+
+<!-- tab body -->
+<div id="tabbody-div">
+<form enctype="multipart/form-data" action="" method="post" name="theForm" >
+<!-- 通用信息 -->
+<table width="35%" id="general-table" align="center">
+    <tr>
+        <td class="label"></td>
+        <td></td>
+        <td align="center">积分值</td>
+    </tr>
+    {foreach from=$data item=item}
+    <tr>
+        <td class="label">{$item.name}：</td>
+        <td>
+            <label><input type="radio" name="autoload[{$item.point_name}]" value="1" {if $item.autoload eq yes}checked{/if}/>开启</label>
+            <label><input type="radio" name="autoload[{$item.point_name}]" value="0" {if $item.autoload eq no}checked{/if}/>关闭</label>
+        </td>
+        <td align="center">
+            <label>&nbsp;&nbsp;<input type="text" name="point_value[{$item.point_name}]" value="{$item.point_value}" size="5"/></label>
+            <input type="hidden" name="point_name[]" value="{$item.point_name}"/>
+        </td>
+    </tr>
+    {/foreach}
+</table>
+
+
+<div class="button-div">
+    <input type="submit" value="{$lang.button_submit}" class="button" onclick="validate('{$goods.goods_id}')" />
+    <input type="reset" value="{$lang.button_reset}" class="button" />
+</div>
+<input type="hidden" name="act" value="{$form_act}" />
+</form>
+</div>
+</div>
+<!-- end goods form -->
+{insert_scripts files="validator.js,tab.js"}
+
+<script language="JavaScript">
+var goodsId = '{$goods.goods_id}';
+var elements = document.forms['theForm'].elements;
+var sz1 = new SelectZone(1, elements['source_select1'], elements['target_select1']);
+var sz2 = new SelectZone(2, elements['source_select2'], elements['target_select2'], elements['price2']);
+var sz3 = new SelectZone(1, elements['source_select3'], elements['target_select3']);
+var marketPriceRate = {$cfg.market_price_rate|default:1};
+var integralPercent = {$cfg.integral_percent|default:0};
+
+{literal}
+onload = function()
+{
+
+    if (document.forms['theForm'].elements['auto_thumb'])
+    {
+        handleAutoThumb(document.forms['theForm'].elements['auto_thumb'].checked);
+    }
+
+    // 检查新订单
+    startCheckOrder();
+    {/literal}
+        {foreach from=$user_rank_list item=item}
+        set_price_note({$item.rank_id});
+    {/foreach}
+        {literal}
+        document.forms['theForm'].reset();
+    }
+
+
+    function setAttrList(result, text_result)
+    {
+        document.getElementById('tbody-goodsAttr').innerHTML = result.content;
+    }
+
+            {/literal}
+</script>
+{include file="wxch_pagefooter.htm"}

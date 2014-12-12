@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png"/>
+	<title>购物车</title>
+	
+	<link rel='stylesheet' type='text/css' href='css/shopping-cart.css' />
+    <link href="css/reset.css" rel="stylesheet" type="text/css" />
+	<link href="css/head.css" rel="stylesheet" type="text/css" />
+	<link href="css/foot.css" rel="stylesheet" type="text/css" />
+	<script src="js/jquery-1.6.2.min.js" type="text/javascript"></script>
+	<script src="/js/jquery.lazyload.js" type="text/javascript"></script>
+	<script src="js/jquery.autocomplete.js" type="text/javascript"></script>
+	<script src="js/jquery.touchScroll.js" type="text/javascript"></script>
+	{insert_scripts files='transport2.js,utils.js'}
+	<script>
+          var util = (function(){
+              var u = navigator.userAgent.toLowerCase();
+              return {
+                  isIphone : function(){return (RegExp("iphone").test(u) || RegExp("ipod touch").test(u))},
+                  isIpad : function(){return RegExp("ipad").test(u)},
+                  isAndroid : function(){return (RegExp("android").test(u) || RegExp("android 2").test(u))},
+                  isMB : function(){return (util.isIphone() || util.isIpad() || util.isAndroid())}
+              };
+          })();
+          window.util = util;
+          (function(){
+              if( !util.isMB() ){
+                  window.location.href = '../index.php';
+              }
+          })();
+    </script>
+	<script type="text/javascript">
+	var _hmt=_hmt||[];(function(){var e=document.createElement("script");
+	var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+	document.write('<div id="global_loading" style="width: 100%;height: 100%;position: fixed;top: 0;left: 0;background-color: #eee;z-index:999"><div style="width: 100px;height: 75px;margin:auto;top:50%;position:relative"><span style="display:block;float:left;width:32px;height:32px;background:url(images/spacer.gif);margin-top:-5px;"></span>&nbsp;&nbsp;加载中...</div></div>');
+	</script>
+	<script type="text/javascript">
+    function add_num(rec_id,goods_id){
+        document.getElementById("goods_number_"+rec_id+"").value++;
+        var number = document.getElementById("goods_number_"+rec_id+"").value;
+        //Ajax.call('cart.php', 'act=update_group_cart&rec_id=' + rec_id +'&number=' + number+'&goods_id=' + goods_id, changePriceResponse, 'GET', 'JSON');
+        Ajax.call('cart.php?act=update_group_cart', 'rec_id=' + rec_id +'&number=' + number+'&goods_id=' + goods_id, changePriceResponse, 'GET', 'JSON');
+    
+    }
+    
+    function red_num(rec_id,goods_id){
+        if (document.getElementById("goods_number_"+rec_id+"").value>1){
+            document.getElementById("goods_number_"+rec_id+"").value--;
+        }
+        var number = document.getElementById("goods_number_"+rec_id+"").value;
+        Ajax.call('cart.php', 'act=update_group_cart&rec_id=' + rec_id +'&number=' + number+'&goods_id=' + goods_id, changePriceResponse, 'GET', 'JSON');
+    }
+    
+    function change_price(rec_id,goods_id){
+        var number = document.getElementById("goods_number_"+rec_id+"").value;
+        Ajax.call('cart.php','act=update_group_cart&rec_id=' + rec_id +'&number=' + number+'&goods_id=' + goods_id, changePriceResponse, 'GET', 'JSON');
+    }
+    
+    function changePriceResponse(result){
+        if(result.error == 1){
+            alert(result.content);
+            document.getElementById("goods_number_"+result.rec_id+"").value =result.number;
+        }else{
+            document.getElementById('cart_amount_desc').innerHTML = result.cart_amount_desc;//购物车商品总价说明
+        }
+    }
+    </script>
+</head>
+<body> 
+	<div class="header">
+		<a class="back" href="javascript:history.back();"></a>
+		<span class="headline">购物车</span>
+		<a class="search" href="search.php"></a>
+	</div>
+	
+<section>
+	<div class="shopping-cart" id="ds_gal">
+<!--{if $goods_list}-->
+		<!--顶部begin-->
+		<div class="top clearfix">
+			<div class="pro-num">
+				<p>共{$total.real_goods_count}件商品</p>
+			</div>
+			<a class="continue" href="category.php">继续购物>></a>
+		</div>
+		<!--顶部end-->
+
+		<!--商品列表begin-->
+		<div class="list">
+			<ul>
+            <!-- {foreach from=$goods_list item=goods} -->
+				<li class="clearfix first">
+					<div class="container clearfix">
+						<div class="show clearfix">
+							<a href="goods.php?id={$goods.goods_id}"><img src="./../{$goods.goods_thumb}" /></a>
+                        </div>
+			 			<div class="info">
+							<p class="name"><a href="goods.php?id={$goods.goods_id}">{$goods.goods_name}</a></p>
+							<p class="price">本店价<strong>{$goods.goods_price}</strong></p>						
+							<div class="num num-edit clearfix" >
+								<p>数&nbsp;&nbsp;&nbsp;量</p>
+                                <!-- {if $goods.goods_id gt 0 && $goods.is_gift eq 0 && $goods.parent_id eq 0} 普通商品可修改数量 -->
+								<div><input onclick="red_num({$goods.rec_id},{$goods.goods_id});" class="edit" type="button" value="-"/></div>
+								<div><input class="number" type="text" name="goods_number[{$goods.rec_id}]" id="goods_number_{$goods.rec_id}" value="{$goods.goods_number}" onblur="change_price({$goods.rec_id},{$goods.goods_id})" /></div>
+								<div><input onclick="add_num({$goods.rec_id},{$goods.goods_id})" class="edit" type="button" value="+"/></div>
+                                <!-- {else} -->
+                                {$goods.goods_number}
+                                <!-- {/if} -->
+							</div>
+								<input type="hidden" name='rowid' value="a239d26ca5967a553b6db6489b378e17" />							
+						</div>
+					</div>
+					<a href="cart.php?act=drop_goods&id={$goods.rec_id}" class=trash> </a>									</li>
+            <!-- {/foreach} -->
+			</ul>
+		</div>
+		<!--商品列表end-->
+
+		<!--结算begin-->
+		<div class="account">
+									
+			<div class="delete clearfix">
+				<a href="cart.php?act=clear" class=delete-all><i></i>清空购物车</a>
+            </div>
+			
+			<div class="total">
+								<div class="final">
+					<p>实付金额：<strong id="cart_amount_desc">{$total.goods_price}</strong></p>
+				</div>
+			</div>
+			
+			<div class="buy"><input type="button" value="立即下单" onclick="location.href='buy.php?act=checkout'"></div>
+		</div>
+		<!--结算end-->
+
+<!--{else}-->
+<div class="tips_view mitu_01">
+    <div class="tips_msg">
+        <h3>购物车还是空的</h3>
+        <p>现在就去选购吧</p>
+    </div>
+    <div class="tips_btn"><a href="category.php" class="button disable_button">去逛逛</a></div>         
+</div>
+<!--{/if}-->
+		
+	</div>
+</section>
+{include file='foot.dwt'}
+<script type="text/javascript">
+		var global_loading=document.getElementById("global_loading");
+		global_loading.parentNode.removeChild(global_loading);
+</script>
+</body>
+</html>	

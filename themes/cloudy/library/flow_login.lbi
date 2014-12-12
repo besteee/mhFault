@@ -1,0 +1,82 @@
+<script type="text/javascript">
+{foreach from=$lang.flow_login_register item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+{literal}
+function checkLoginForm(frm) {
+	if (Utils.isEmpty(frm.elements['username'].value)) {
+		alert(username_not_null);
+		return false;
+	}
+	if (Utils.isEmpty(frm.elements['password'].value)) {
+		alert(password_not_null);
+		return false;
+	}
+	return true;
+}
+function checkSignupForm(frm) {
+	if (Utils.isEmpty(frm.elements['username'].value)) {
+		alert(username_not_null);
+		return false;
+	}
+	if (Utils.trim(frm.elements['username'].value).match(/^\s*$|^c:\\con\\con$|[%,\'\*\"\s\t\<\>\&\\]/))
+	{
+		alert(username_invalid);
+		return false;
+	}
+	if (Utils.isEmpty(frm.elements['email'].value)) {
+		alert(email_not_null);
+		return false;
+	}
+	if (!Utils.isEmail(frm.elements['email'].value)) {
+		alert(email_invalid);
+		return false;
+	}
+	if (Utils.isEmpty(frm.elements['password'].value)) {
+		alert(password_not_null);
+		return false;
+	}
+	if (frm.elements['password'].value.length < 6) {
+		alert(password_lt_six);
+		return false;
+	}
+	if (frm.elements['password'].value != frm.elements['confirm_password'].value) {
+		alert(password_not_same);
+		return false;
+	}
+	return true;
+}
+{/literal}
+</script>
+<div class="user-form clearfix">
+	<form action="flow.php?step=login" method="post" name="loginForm" onsubmit="return checkLoginForm(this)">
+		<h1>{$lang.login_title}</h1>
+		<div class="req"><b>*</b>{$lang.required_indicates}</div>
+		<label for="username"><b><span class="req">*</span>{$lang.label_username}{$lang.colon}</b>
+			<input type="text" name="username" value="" tabindex="1" id="username"/>
+		</label>
+		<label for="password"><b><span class="req">*</span>{$lang.label_password}{$lang.colon}</b>
+			<input type="password" name="password" value="" tabindex="2" id="password"/><em><a href="user.php?act=get_password">{$lang.forgot_password}</a></em>
+		</label>
+		{if $enabled_register_captcha}
+		<label for="captcha"><b><span class="req">*</span>{$lang.comment_captcha}{$lang.colon}</b>
+			<input type="text" name="captcha" maxlength="4" size="6" tabindex="3" class="captcha" id="captcha"/><img src="captcha.php?is_login=1&{$rand}" alt="{$lang.comment_captcha}" class="captcha" onClick="this.src='captcha.php?is_login=1&'+Math.random()">
+		</label>
+		{/if}
+		<fieldset class="checkbox-wrap label"><b>&nbsp;</b>
+			<fieldset>
+			<label for="remember"><input type="checkbox" name="remember" value="1" tabindex="3" class="checkbox" id="remember"/>{$lang.remember}</label>
+			</fieldset>
+		</fieldset>
+		<div class="submit-wrap">
+			<input type="submit" value="{$lang.btn_login}" tabindex="4" class="submit btn-md"/>
+			<input type="hidden" name="act" value="signin"/>
+			{if $anonymous_buy eq 1}<a href="flow.php?step=consignee&amp;direct_shopping=1" class="quick-buy">{$lang.direct_shopping}</a>{/if}
+		</div>
+	</form>
+	<div class="extra">
+		<h2>{$lang.new_account}</h2>
+		<p>{$lang.register_text}</p>
+		<p><a href="user.php?act=register" class="btn-sm"><span>{$lang.register_now}</span></a></p>
+	</div>
+</div>

@@ -1,0 +1,6 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $brand_list} -->
+  <!-- {foreach from=$brand_list item=brand name="brand_foreach"} -->
+        <li><a href="{$brand.url}"><img src="data/brandlogo/{$brand.brand_logo}" alt="{$brand.brand_name|escape:html} ({$brand.goods_num})" /></a><p><a href="{$brand.url}">{$brand.brand_name|escape:html}</a></p></li>
+  <!-- {/foreach} -->
+<!-- {/if} -->

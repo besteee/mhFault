@@ -1,0 +1,123 @@
+<!-- $Id: wxch_config.htm 14216 2013-10-13 14:27:21Z djks $ -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<title>{$lang.cp_home}{if $ur_here} - {$ur_here} {/if}</title>
+
+<meta name="robots" content="noindex, nofollow">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link href="styles/general.css" rel="stylesheet" type="text/css" />
+
+<link href="styles/main.css" rel="stylesheet" type="text/css" />
+
+{insert_scripts files="../js/transport.js,common.js"}
+
+<script language="JavaScript">
+
+<!--
+
+// 这里把JS用到的所有语言都赋值到这里
+
+{foreach from=$lang.js_languages key=key item=item}
+
+var {$key} = "{$item}";
+
+{/foreach}
+
+//-->
+
+</script>
+
+</head>
+
+<body>
+
+
+
+<h1>
+
+{if $action_link}
+
+<span class="action-span"><a href="{$action_link.href}">{$action_link.text}</a></span>
+
+{/if}
+
+{if $action_link2}
+
+<span class="action-span"><a href="{$action_link2.href}">{$action_link2.text}</a>&nbsp;&nbsp;</span>
+
+{/if}
+
+<span class="action-span1"><a href="index.php?act=main">{$lang.cp_home}</a> </span><span id="search_id" class="action-span1"> - 微信接口</span>
+
+<div style="clear:both"></div>
+
+</h1>
+
+<div class="main-div">
+
+  <form name="theForm" method="post" action="wxch.php?act=wxconfig" >
+
+  <table width="100%" >
+
+ <tr>
+
+    <td class="label">Url:</td>
+
+    <td>http://你的网址/wechat/weixin.php</td>
+
+  </tr>
+  <tr>
+
+    <td class="label">Token:</td>
+
+    <td><input type="text" name="token" size="20" value="{$token}"/></td>
+
+  </tr>
+
+  <tr>
+
+    <td class="label">AppId :</td>
+
+    <td><input type="text " name="appid" size="20" value="{$appid}"/></td>
+
+  </tr>
+
+ <tr>
+
+    <td class="label">AppSecret :</td>
+
+    <td><input type="text " name="appsecret" size="20" value="{$appsecret}"/>
+</td>
+
+  </tr>
+
+  <tr>
+
+    <td colspan="2" align="center">
+
+      <input type="submit" value="{$lang.button_submit}" class="button" />
+
+      <input type="reset" value="{$lang.button_reset}" class="button" />
+
+    </td>
+
+  </tr>
+
+</table>
+
+  </form>
+
+
+
+</div>
+
+
+
+{include file="pagefooter.htm"}

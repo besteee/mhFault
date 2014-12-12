@@ -1,0 +1,1 @@
+<div id="ECS_BOUGHT">{insert name='bought_notes' id=$id}</div>

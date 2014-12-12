@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}11</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link href="base.css" rel="stylesheet" type="text/css">
+<link href="channel.css" rel="stylesheet" type="text/css" />
+<!-- {if $cat_style} -->
+<link href="{$cat_style}" rel="stylesheet" type="text/css" />
+<!-- {/if} -->
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,global.js,compare.js'}
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="block">
+<div class="breadcrumb">
+<!--{foreach from=$categories item=cat}-->
+{if $category eq $cat.id}<h1>{$cat.name|escape:html}</h1><span>&nbsp;&nbsp;&nbsp;<!--{if $topcat_id eq $cat.id}--><!--{foreach from=$cat.cat_id item=child name=catn}--><a href="{$child.url}">{$child.name|escape:html}</a>{if !$smarty.foreach.catn.last}&nbsp;|&nbsp;{/if}<!--{/foreach}--><!--{/if}--><span></span></span>{/if}<!--{/foreach}--></div>
+<div class="AreacL">
+<!--{foreach from=$categories item=cat}-->
+{if $category eq $cat.id}
+<div class="m" id="sortlistch">
+				<div class="mt">
+					<h2>{$cat.name|escape:html}</h2>
+				</div>
+
+				<div class="mc">
+                    <div class="item current">
+                    <!--{if $topcat_id eq $cat.id}-->
+                    <!--{foreach from=$cat.cat_id item=child}-->
+                    <h3><b></b><a href="{$child.url}">{$child.name|escape:html}</a></h3>
+                    <ul>
+                    <!--{foreach from=$child.cat_id item=childer name=curn}-->
+                     <li><a href="{$childer.url}">{$childer.name|escape:html}</a></li>
+                     <!--{/foreach}-->
+                    </ul>
+                    <!--{/foreach}-->
+                   <!--{/if}-->
+                    </div>
+				</div>
+</div>
+
+
+             <!--{foreach from=$ecy_adpicl item=ecypic name=hotad}-->
+				<div class="m da211x140">
+                  <a href="{$ecypic.site_url}" target="_brank"><img src="data/ecyclasspic/{$ecypic.brand_logo}" border="0" height="140" width="211" /></a>
+                </div>
+              <!--{/foreach}-->
+{/if}
+<!--{/foreach}-->
+<div class="blank5"></div>
+
+  </div>
+
+  <div class="AreacR">
+
+
+			<span class="clr"></span>
+<?php $this->assign('get_child_list',get_child_tree($this->_var['category']));?>
+<!--{foreach from=$get_child_list item=cname}-->
+<div class="m plistcate">
+				<div class="mt">
+					<h2><a href="{$cname.url}" target="_blank" style="color:#fff;">{$cname.name}</a></h2>
+					<!--div class="hotwords">
+                  <?php $this->assign('catchild', get_child_tree($GLOBALS['smarty']->_var['cname']['id']));?>
+	      <!--{foreach from=$catchild item=cat name=catspan}-->
+           <a href="{$cat.url}" target="_blank">{$cat.name|escape:html}</a>{if !$smarty.foreach.catspan.last}|{/if}
+        <!--{/foreach}-->
+</div-->
+					<div class="extra"></div>
+				</div>
+				<div class="mc">
+					<div class="da da180x348"><!--{foreach from=get_ecy_classpic($GLOBALS['smarty']->_var['cname']['id'],1) item=ecypic}--><a href="{$ecypic.site_url}" target="_brank"><img src="data/ecyclasspic/{$ecypic.brand_logo}" border="0" /></a><!--{/foreach}--></div>
+					<ul class="list-h">
+                    <?php $this->assign("cat_goods",ecy_cat_goods($GLOBALS['smarty']->_var['cname']['id'],6));?>
+	                <!--{foreach from=$cat_goods item=goods name=cur}-->
+                      <li class="fore">
+                      <div class="p-img"><a target="_blank" href="{$goods.url}"><img  src="{$goods.thumb}" alt="{$goods.name}" class="thumb"></a></div>
+                      <div class="p-name"><a target="_blank" title="{$goods.name}" href="{$goods.url}">{$goods.name}<font color="#ff6600">{$goods.brief}</font></a></div>
+                      <div class="p-price"><!-- {if $goods.promote_price neq ""} -->{$lang.promote_price}<font class="f1"><b>{$goods.promote_price}</b></font><!-- {else}-->{$lang.shop_price}<font class="f1"><b>{$goods.shop_price}</b></font><!--{/if}--></div>
+
+                      </li>
+                      <!--{/foreach}-->
+
+					</ul>
+				</div>
+			</div>
+   <!--{/foreach}-->
+  </div>
+</div>
+<div class="blank"></div>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{if $cat_name}{$cat_name}{else}站内资讯{/if} - {$shop_name}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="ecdaddy.com">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" type="text/css" href="style/base.css?v=ecdaddy" />
+</head>
+<body>
+<div class="article-box radius w">
+<h3>{if $cat_name}{$cat_name}{else}站内资讯{/if}</h3>
+{foreach from=$article_array item=article_data}
+	<a href='article.php?act=detail&amp;a_id={$article_data.id}'>{$article_data.title}</a><br/>
+{/foreach}
+{if $pagebar}
+	{$pagebar}
+{/if}
+</div>
+{include file='foot.dwt'}
+</body>
+</html>

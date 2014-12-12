@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="Keywords" content="{$keywords}"/>
+<meta name="Description" content="{$description}"/>
+<!-- TemplateBeginEditable name="doctitle" --><title>{$topic.title}_{$page_title}</title><!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link href="{$static_path}static/css/style.css" rel="stylesheet" type="text/css"/>
+<!--[if IE]><link href="{$static_path}static/css/ie.css" rel="stylesheet" type="text/css"/><![endif]-->
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
+{if $topic.css neq ''}
+<style type="text/css">
+{$topic.css}
+</style>
+{/if}
+<script type="text/javascript" src="{$static_path}static/js/jquery.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.json.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/common.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/transport.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/effect.js"></script>
+</head>
+<body>
+{include file="/library/page_header.lbi"}
+<div id="content"><div class="container">
+	{include file="/library/ur_here.lbi"}
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+	<div class="topic box">
+		<b class="tp"><b></b></b>
+		<div class="bd">
+			<h1>{$topic.title}</h1>
+			<span class="text">{$topic.intro}</span>
+			{foreach from=$sort_goods_arr item=sort key=sort_name}
+			<h3>{$sort_name}</h3>
+			<ul class="goods-list clearfix">
+				{foreach from=$sort item=goods name=sort}
+				<li{if $smarty.foreach.sort.index %5==0} class="first-child"{/if}>
+					<span class="photo">
+						<a href="{$goods.url}" title="{$goods.name|escape:html}" class="image"><img src="{$goods.goods_thumb}" alt="{$goods.name|escape:html}"/></a>
+					</span>
+					<span class="info">
+						<a href="{$goods.url}" title="{$goods.goods_name|escape:html}" class="name">{$goods.short_style_name}</a>
+						<em class="price{if $goods.promote_price} promote{/if}">{if $goods.promote_price}{$goods.promote_price}{else}{$goods.shop_price}{/if}</em>
+					</span>
+					<span class="action">
+						<a href="javascript:addToCart({$goods.goods_id})" class="buy">{$lang.btn_buy}</a><a href="javascript:collect({$goods.goods_id});" class="collect">{$lang.btn_collect}</a>
+					</span>
+				</li>
+				{/foreach}
+			</ul>
+			{/foreach}
+		</div>
+		<b class="bt"><b></b></b>
+	</div>
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+</div></div>
+{include file="/library/page_footer.lbi"}
+</body>
+</html>

@@ -1,0 +1,14 @@
+{if $goods_article_list}
+<div class="goods-article box">
+	<b class="tp"><b></b></b>
+	<div class="hd"><h3>{$lang.article_releate}</h3></div>
+	<div class="bd">	
+		<ul class="text-list">
+			{foreach from=$goods_article_list item=article name=goods_article_list}
+			<li{if $smarty.foreach.goods_article_list.first} class="first"{/if}><a href="{$article.url}" title="{$article.title|escape:html}">{$article.short_title|escape:html}</a></li>
+			{/foreach}
+		</ul>
+	</div>
+	<b class="bt"><b></b></b>
+</div>
+{/if}

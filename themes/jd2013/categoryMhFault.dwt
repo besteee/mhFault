@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}111</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link href="base.css" rel="stylesheet" type="text/css">
+<!-- {if $cat_style} -->
+<link href="{$cat_style}" rel="stylesheet" type="text/css" />
+<!-- {/if} -->
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,global.js,compare.js'}
+<!--[if lte IE 6]>
+<script type="text/javascript" src="js/DD_belatedPNG.js"></script>
+<script type="text/javascript">
+  DD_belatedPNG.fix('.goodsItem span');
+</script>
+<![endif]-->
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="clear"></div>
+<!--当前位置 start-->
+<div class="block">
+ <div id="ur_here">
+  <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+ </div>
+</div>
+<!--当前位置 end-->
+<div class="blank5"></div>
+<div class="block clearfix">
+  <!--left start-->
+<div class="AreaL">
+<div id="sortlist">
+  <!--{foreach from=get_categories_tree() item=cat}-->
+{if $category eq $cat.id or $cat.id eq $topcat_id}
+<div class="mt"><h2>{$cat.name|escape:html}</h2></div>
+	<div class="mc">
+	<!--{if $topcat_id eq $cat.id}-->
+       <!--{foreach from=$cat.cat_id item=child name=childnum}-->
+	<div id="subitem{$smarty.foreach.childnum.iteration}" class="item{if $cat_parent_id eq $child.id} current{elseif $cat_parent_id eq $cat.id and $category eq $child.id} current{/if}"><h3 onclick="showmenu({$smarty.foreach.childnum.iteration})"><b></b><a href="{$child.url}">{$child.name|escape:html}</a></h3>
+	<ul>
+	 <!--{foreach from=$child.cat_id item=childer name=curn}-->
+	   <li><a href="{$childer.url}" {if $category eq $childer.id}class="cat3"{/if}>{$childer.name|escape:html}</a></li>
+	<!--{/foreach}-->
+	</ul>
+	</div>
+	  <!--{/foreach}-->
+	  <!--{/if}-->
+	</div>
+	{/if}
+<!--{/foreach}-->
+</div>
+<script language="javascript">
+function showmenu(sid)
+{
+var subitem=document.getElementById("subitem"+sid);
+if(subitem.className=='item'){
+subitem.className='item current';
+}
+else{
+subitem.className='item';
+}
+}
+</script>
+<div class="blank"></div>
+<div class="box">
+ <div class="box_1">
+  <div class="category_allc"><div class="tit">本周热销榜</div></div>
+  <div class="boxCenterList clearfix">
+	<!--{foreach from=$hot_goods item=goods}-->
+	<ul class="clearfix">
+	<li class="goodsimg"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a></li><li><p class="nmae"><a href="{$goods.url}" title="{$goods.name|escape:html}" target="_blank">{$goods.name|escape:html}</a></p><font class="f1"><!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}--></font><br /></li>
+	</ul>
+	<!--{/foreach}-->
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<div class="box_1">
+<div class="category_allc"><div class="tit">一周销量排行榜</div></div>
+ <div class="rank">
+  <div class="mc" style="border:0">
+					<ul class="tabcon">
+					<!-- {foreach name=top_goods from=$top_goods item=goods}-->
+					<!-- {if $smarty.foreach.top_goods.iteration<2}-->
+					<li class="fore"><span><!-- {$smarty.foreach.top_goods.iteration}--></span><div class="p-img"><a target="_blank" href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}"  height="50" width="50"></a></div><div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name}</a></div><div class="p-price"><strong>{$goods.price}</strong></div></li>
+					<!-- {else} -->
+					<li><span{if $smarty.foreach.top_goods.iteration>3} class="bg1"{/if}><!-- {$smarty.foreach.top_goods.iteration}--></span><div class="p-name"><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name}</a></div></li>
+					<!-- {/if} -->
+					<!-- {/foreach} -->
+					</ul>
+				</div>
+
+ </div>
+</div>
+<div class="blank5"></div>
+ <!-- #BeginLibraryItem "/library/history.lbi" --><!-- #EndLibraryItem -->
+    <!--AD end-->
+  </div>
+  <!--left end-->
+  <!--right start-->
+  <div class="AreaR">
+
+	 <!--组合搜索 开始-->
+	  <!--{if $brands.1 || $price_grade.1 || $filter_attr_list}-->
+	  <div id="select">
+	  <div class="box_1" style="border-bottom:0">
+       <div class="category_allc clearfix"><div class="tit" style="float:left"><span class="cname">{$cat_name}</span>&nbsp;-&nbsp;商品筛选</div><div class="extra"><a href="category.php?id={$category}">重置筛选条件</a></div></div>
+	    <div class="blank5"></div>
+			<!--{if $brands.1}-->
+			<div class="screeBox">
+              <div class="screeBoxs">
+			    <strong>{$lang.brand}：</strong>
+				<!--{foreach from=$brands item=brand}-->
+					<!-- {if $brand.selected} -->
+					<span>{$brand.brand_name}</span>
+					<!-- {else} -->
+					<a href="{$brand.url}">{$brand.brand_name}</a>&nbsp;
+					<!-- {/if} -->
+				<!--{/foreach}-->
+               </div>
+			</div>
+			<!--{/if}-->
+			<!--{if $price_grade.1}-->
+			<div class="screeBox">
+            <div class="screeBoxs">
+			<strong>{$lang.price}：</strong>
+			<!--{foreach from=$price_grade item=grade}-->
+				<!-- {if $grade.selected} -->
+				<span>{$grade.price_range}</span>
+				<!-- {else} -->
+				<a href="{$grade.url}">{$grade.price_range}</a>&nbsp;
+				<!-- {/if} -->
+			<!--{/foreach}-->
+             </div>
+			</div>
+			<!--{/if}-->
+			<!--{foreach from=$filter_attr_list item=filter_attr}-->
+      <div class="screeBox">
+           <div class="screeBoxs">
+			<strong>{$filter_attr.filter_attr_name|escape:html}：</strong>
+			<!--{foreach from=$filter_attr.attr_list item=attr}-->
+				<!-- {if $attr.selected} -->
+				<span>{$attr.attr_value}</span>
+				<!-- {else} -->
+				<a href="{$attr.url}">{$attr.attr_value}</a>&nbsp;
+				<!-- {/if} -->
+			<!--{/foreach}-->
+			</div>
+            </div>
+      <!--{/foreach}-->
+         <div class="screeBox screeBoxbnone clearfix">
+           <div class="screeBoxs">
+            <div class="f_l">
+			<strong>价格：</strong> <span>全部</span> </div> <div class="f_l pl10"><form action="" method="post" id="s_fm" onsubmit="return sbm();"><input class="inputt" name="price_start" id="minprice" maxlength="8" type="text">
+	&nbsp;<label>至</label>&nbsp;<input class="inputt" name="price_end" id="maxprice" maxlength="8" type="text">
+    <input value="确定" class="submitbtn" type="submit">
+</form></div>
+<script type="text/javascript">
+         function sbm(){
+         var $minprice;
+         var $maxprice;
+         $minprice=document.getElementById("minprice").value;
+         $maxprice=document.getElementById("maxprice").value;
+         document.getElementById("s_fm").action="category.php?id="+{$category}+"&price_min="+$minprice+"&price_max="+$maxprice;
+         }
+        </script>
+			</div>
+            <div class="clear"></div>
+            </div>
+            <div id="advanced"><div><a href="search.php?act=advanced_search">高级搜索</a><b></b></div></div>
+		</div>
+		<div class="blank5"></div>
+	  <!-- {/if} -->
+	 <!--组合搜索 结束-->
+
+
+  <!-- #BeginLibraryItem "/library/goods_list.lbi" --><!-- #EndLibraryItem -->
+  <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+  <!--right end-->
+  <div class="blank"></div>
+</div>
+</div>
+<div class="blank"></div>
+<!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

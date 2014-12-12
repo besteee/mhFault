@@ -1,0 +1,17 @@
+{if $article_categories}
+<div class="category box">
+	<b class="tp"><b></b></b>
+	<div class="hd"><h3>{$lang.article_cat}</h3></div>
+	<div class="bd">
+		{foreach from=$article_categories item=cat name=article_categories}
+		<dl{if $smarty.foreach.article_categories.last} class="last"{/if}>
+			<dt><a href="{$cat.url}">{$cat.name|escape:html}</a></dt>
+			{foreach from=$cat.children item=child}
+			<dd><a href="{$child.url}">{$child.name|escape:html}</a></dd>
+			{/foreach}
+		</dl>
+		{/foreach}
+	</div>
+	<b class="bt"><b></b></b>
+</div>
+{/if}

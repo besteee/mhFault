@@ -1,0 +1,84 @@
+<table class="data-table">
+	<colgroup>
+		<col width="100"/>
+		<col width="300"/>
+		<col width="100"/>
+		<col width="300"/>
+	</colgroup>
+	<tbody>
+		{if $real_goods_count gt 0}
+		<tr class="odd">
+			<th>{$lang.country_province}{$lang.colon}</th>
+			<td colspan="3" class="last">
+				<select name="country" id="selCountries_{$sn}" onchange="region.changed(this, 1, 'selProvinces_{$sn}')">
+					<option value="0">{$lang.please_select}{$name_of_region[0]}</option>
+					{foreach from=$country_list item=country}
+					<option value="{$country.region_id}" {if $consignee.country eq $country.region_id}selected{/if}>{$country.region_name}</option>
+					{/foreach}
+					</select>
+					<select name="province" id="selProvinces_{$sn}" onchange="region.changed(this, 2, 'selCities_{$sn}')">
+					<option value="0">{$lang.please_select}{$name_of_region[1]}</option>
+					{foreach from=$province_list.$sn item=province}
+					<option value="{$province.region_id}" {if $consignee.province eq $province.region_id}selected{/if}>{$province.region_name}</option>
+					{/foreach}
+				</select>
+				<select name="city" id="selCities_{$sn}" onchange="region.changed(this, 3, 'selDistricts_{$sn}')">
+					<option value="0">{$lang.please_select}{$name_of_region[2]}</option>
+					{foreach from=$city_list.$sn item=city}
+					<option value="{$city.region_id}" {if $consignee.city eq $city.region_id}selected{/if}>{$city.region_name}</option>
+					{/foreach}
+					</select>
+					<select name="district" id="selDistricts_{$sn}" {if !$district_list.$sn}style="display:none"{/if}>
+					<option value="0">{$lang.please_select}{$name_of_region[3]}</option>
+					{foreach from=$district_list.$sn item=district}
+					<option value="{$district.region_id}" {if $consignee.district eq $district.region_id}selected{/if}>{$district.region_name}</option>
+					{/foreach}
+				</select>
+				{$lang.require_field}
+			</td>
+		</tr>
+		{/if}
+		<tr class="{if $real_goods_count gt 0}even{else}odd{/if}">
+			<th>{$lang.consignee_name}{$lang.colon}</th>
+			<td><input type="text" name="consignee" value="{$consignee.consignee|escape}" id="consignee_{$sn}"/>{$lang.require_field}</td>
+			<th>{$lang.email_address}{$lang.colon}</th>
+			<td class="last"><input name="email" type="text" value="{$consignee.email|escape}" id="email_{$sn}"/>{$lang.require_field}</td>
+		</tr>
+		{if $real_goods_count gt 0}
+		<tr class="odd">
+			<th>{$lang.detailed_address}{$lang.colon}</th>
+			<td><input type="text" name="address" value="{$consignee.address|escape}" id="address_{$sn}"/>{$lang.require_field}</td>
+			<th>{$lang.postalcode}{$lang.colon}</th>
+			<td class="last"><input type="text" name="zipcode" value="{$consignee.zipcode|escape}" id="zipcode_{$sn}"/></td>
+		</tr>
+		{/if}
+		<tr class="even{if $real_goods_count lte 0} last{/if}">
+			<th>{$lang.phone}{$lang.colon}</th>
+			<td><input type="text" name="tel" value="{$consignee.tel|escape}" id="tel_{$sn}"/>{$lang.require_field}</td>
+			<th>{$lang.backup_phone}{$lang.colon}</th>
+			<td class="last"><input name="mobile" type="text" value="{$consignee.mobile|escape}" id="mobile_{$sn}"/></td>
+		</tr>
+		{if $real_goods_count gt 0}
+		<tr class="odd last">
+			<th>{$lang.sign_building}{$lang.colon}</th>
+			<td><input type="text" name="sign_building" value="{$consignee.sign_building|escape}" id="sign_building_{$sn}"/></td>
+			<th>{$lang.deliver_goods_time}{$lang.colon}</th>
+			<td class="last"><input type="text" name="best_time" value="{$consignee.best_time|escape}" id="best_time_{$sn}"/></td>
+		</tr>
+		{/if}
+	</tbody>
+	<tfoot>
+		<tr>
+			<td class="last">&nbsp;</td>
+			<td colspan="3" class="last">
+				{if $smarty.session.user_id gt 0 and $consignee.address_id gt 0}
+				<input type="submit" name="submit" value="{$lang.shipping_address}" class="btn-sm"/>
+				<a href="#" onclick="if (confirm('{$lang.confirm_drop_address}'))location.href='user.php?act=drop_consignee&id={$consignee.address_id}'" class="btn-rt"/>{$lang.drop}</a>
+				{else}<input type="submit" name="submit" value="{$lang.add_address}" class="btn-sm"/>{/if}
+				<input type="hidden" name="step" value="consignee"/>
+				<input type="hidden" name="act" value="checkout"/>
+				<input type="hidden" name="address_id" value="{$consignee.address_id}"/>
+			</td>
+		</tr>
+	</tfoot>
+</table>

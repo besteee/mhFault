@@ -1,0 +1,109 @@
+<ul class="comment-list clearfix">
+	{foreach from=$msg_lists key=key item=msg name=message_lists}
+	<li class="{cycle values="odd,even"}{if $smarty.foreach.message_lists.first} first{/if}">
+		<div class="info">
+			<span class="name">{if $msg.user_name eq ''}{$lang.anonymous}{else}{$msg.user_name|escape:html}{/if}</span>
+			<span class="time">{$msg.msg_time}</span>
+		</div>
+		<div class="talk">
+			<p class="title"><span class="type">[{$msg.msg_type}]</span>{$msg.msg_title}{if $msg.id_value gt 0}{$lang.feed_user_comment}<a href="{$msg.goods_url}" title="{$msg.goods_name}">{$msg.goods_name}</a>{/if}</p>
+			<p class="text">{$msg.msg_content}</p>
+			{if $msg.re_content}
+			<blockquote class="reply"><span class="name">{$lang.re_name}</span><span class="text">{$msg.re_content}</span></blockquote>
+			{/if}
+		</div>
+	</li>
+	{foreachelse}
+	<li class="empty">{$lang.no_message}</li>
+	{/foreach}
+</ul>
+{if $msg_lists}{include file="/library/pages.lbi"}{/if}
+<form action="message.php" method="post" name="formMsg" onSubmit="return submitMsgBoard(this)" class="form">
+	<div class="req"><b>*</b>{$lang.required_indicates}</div>
+	<fieldset>
+		<h4>{$lang.message_form_title}</h4>
+		<p class="label"><b>{$lang.username}</b>
+			<em>{if $smarty.session.user_name}{$username}{else}{$lang.anonymous}{/if}</em>
+		</p>
+		<label for="cf-email"><b><span class="req">*</span>{$lang.email}</b>
+			<input type="text" name="user_email" tabindex="1" value="{$smarty.session.email|escape}" id="cf-email"/>
+		</label>
+		<fieldset class="radio-wrap label"><b>{$lang.message_board_type}</b>
+			<fieldset>
+			<label for="cf-rank5"><input type="radio" name="msg_type" value="0" checked="checked" tabindex="2" class="radio" id="cf-rank5"/>{$lang.message_type[0]}</label>
+			<label for="cf-rank4"><input type="radio" name="msg_type" value="1" tabindex="3" class="radio" id="cf-rank4"/>{$lang.message_type[1]}</label>
+			<label for="cf-rank3"><input type="radio" name="msg_type" value="2" tabindex="4" class="radio" id="cf-rank3"/>{$lang.message_type[2]}</label>
+			<label for="cf-rank2"><input type="radio" name="msg_type" value="3" tabindex="5" class="radio" id="cf-rank2"/>{$lang.message_type[3]}</label>
+			<label for="cf-rank1"><input type="radio" name="msg_type" value="4" tabindex="6" class="radio" id="cf-rank1"/>{$lang.message_type[4]}</label>
+			</fieldset>
+		</fieldset>
+		<label for="cf-title"><b><span class="req">*</span>{$lang.message_title}</b>
+			<input type="text" name="msg_title" size="50" tabindex="7" id="cf-title"/>
+		</label>
+		<label for="cf-content"><b><span class="req">*</span>{$lang.message_content}</b>
+			<textarea name="msg_content" rows="6" cols="20" tabindex="7" id="cf-content"></textarea>
+		</label>
+		{if $enabled_mes_captcha}
+		<label for="cf-captcha"><b><span class="req">*</span>{$lang.comment_captcha}</b>
+			<input type="text" name="captcha" size="6" tabindex="8" class="captcha" id="cf-captcha"/><img src="captcha.php?{$rand}" alt="{$lang.comment_captcha}" class="captcha" onClick="this.src='captcha.php?'+Math.random()">
+		</label>
+		{/if}
+		<div class="submit-wrap">
+			<input type="submit" value="{$lang.post_message}" tabindex="9" class="submit btn-sm"/>
+		</div>
+		<input type="hidden" name="act" value="act_add_message" />
+		<input type="hidden" name="id" value="{$id}" />
+	</fieldset>
+</form>
+<script type="text/javascript">
+{foreach from=$lang.message_board_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+{literal}
+function submitMsgBoard(frm)
+{
+	var msg = new Object;
+	msg.user_email  = frm.elements['user_email'].value;
+	msg.msg_title   = frm.elements['msg_title'].value;
+	msg.msg_content = frm.elements['msg_content'].value;
+	msg.captcha     = frm.elements['captcha'] ? frm.elements['captcha'].value : '';
+	var msg_err = '';
+	if (msg.user_email.length > 0)
+	{
+		if (!(Utils.isEmail(msg.user_email)))
+		{
+			msg_err += msg_error_email + '\n';
+		}
+	}
+	else
+	{
+		msg_err += msg_empty_email + '\n';
+	}
+	if (msg.msg_title.length == 0)
+	{
+		msg_err += msg_title_empty + '\n';
+	}
+	if (frm.elements['captcha'] && msg.captcha.length==0)
+	{
+		msg_err += msg_captcha_empty + '\n'
+	}
+	if (msg.msg_content.length == 0)
+	{
+		msg_err += msg_content_empty + '\n'
+	}
+	if (msg.msg_title.length > 200)
+	{
+		msg_err += msg_title_limit + '\n';
+	}
+	if (msg_err.length > 0)
+	{
+		alert(msg_err);
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+{/literal}
+</script>

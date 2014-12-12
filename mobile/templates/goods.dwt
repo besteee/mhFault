@@ -1,0 +1,416 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png"/>
+	<title>{$goods_info.goods_name} - {$shop_name}</title>
+	<link rel='stylesheet' type='text/css' href='css/product-intro.css' />
+    <link href="css/reset.css" rel="stylesheet" type="text/css" />
+	<link href="css/head.css" rel="stylesheet" type="text/css" />
+	<link href="css/foot.css" rel="stylesheet" type="text/css" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<script src="js/jquery-1.6.2.min.js" type="text/javascript"></script>
+	<script src="js/jquery.json.js" type="text/javascript"></script>
+	{insert_scripts files='common.js,transport.js,utils.js'}
+	<script>
+          var util = (function(){
+              var u = navigator.userAgent.toLowerCase();
+              return {
+                  isIphone : function(){return (RegExp("iphone").test(u) || RegExp("ipod touch").test(u))},
+                  isIpad : function(){return RegExp("ipad").test(u)},
+                  isAndroid : function(){return (RegExp("android").test(u) || RegExp("android 2").test(u))},
+                  isMB : function(){return (util.isIphone() || util.isIpad() || util.isAndroid())}
+              };
+          })();
+          window.util = util;
+          (function(){
+              if( !util.isMB() ){
+                  window.location.href = '../index.php';
+              }
+          })();
+    </script>
+	<script type="text/javascript">
+	var _hmt=_hmt||[];(function(){var e=document.createElement("script");
+	var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+	document.write('<div id="global_loading" style="width: 100%;height: 100%;position: fixed;top: 0;left: 0;background-color: #eee;z-index:999"><div style="width: 100px;height: 75px;margin:auto;top:50%;position:relative"><span style="display:block;float:left;width:32px;height:32px;background:url(images/spacer.gif);margin-top:-5px;"></span>&nbsp;&nbsp;加载中...</div></div>');
+	</script>
+
+</head>
+<body> 
+	<div class="header">
+		<a class="back" href="javascript:history.back();"></a>
+		<span class="headline">{$goods_info.goods_name}</span>
+		<a class="search" href="search.php"></a>
+	</div>
+	<section class="sp">
+<div class="product-intro">
+	
+	<div id="cont_show">
+<script type="text/javascript">
+$(function() {
+	$("#btn_continue").click(function(){
+		$("#buy_lay").hide();
+		$("#buy_lay_frm").hide();
+	});
+	$("#btn_check").click(function(){
+		window.location='cart.php';
+	});	 
+	$(document).bind("click",function(){
+		$("#buy_lay").hide();
+		$("#buy_lay_frm").hide();
+	});
+});
+</script>
+<script type="text/javascript">
+var $$ = function (obj) {
+    if (obj != null && obj != undefined && obj.toString().length > 0) {
+        if (obj[0] == '#') {
+            return document.getElementById(obj.substr(1, obj.length - 1));
+        }
+    }
+}
+function chgNum(a) {
+    var number = $$("#number");
+    var p = parseInt(number.value);
+    if (a == 1) {
+        if (p < 1038) number.value = ++p;
+    }
+    else {
+        if (p > 1) number.value = --p;
+    }
+}
+</script>
+<div class="show">
+	<div class="icon">
+		<a class="no-collect" href="javascript:collect({$goods_info.goods_id});" id='collect'></a>
+	</div>
+	<!-- 切换Start -->
+	<script type="text/javascript" src="js/TouchSlide.1.1.js"></script>
+	<link href="css/TouchSlide.1.1.css" rel="stylesheet" type="text/css" />
+	<div id="focus" class="focus">
+		<div class="hd">
+		<ul></ul>
+		</div>
+		<div class="bd">
+		<ul>
+		<!-- {foreach from=$pictures item=picture name=no}-->
+		  <li><img src="./../{$picture.img_url}" /></li>
+		<!--{/foreach}-->
+		</ul>
+		</div>
+	</div>
+	<script type="text/javascript">
+	TouchSlide({ 
+		slideCell:"#focus",
+		titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+		mainCell:".bd ul",
+		delayTime:600,
+		interTime:4000,
+		effect:"leftLoop", 
+		autoPlay:true,//自动播放
+		autoPage:true, //自动分页
+		switchLoad:"_src" //切换加载，真实图片路径为"_src" 
+	});
+	</script>
+	<!-- 切换End -->
+</div>
+
+<div class="pro-info">
+<p class="pro-name"><strong>{$goods_info.goods_name}</strong></br>{$goods_info.goods_brief}</p>
+
+{if $goods_info.promote_price and $goods_info.gmt_end_time}
+<div class="price clearfix">
+<p class="jx-price">促销价&nbsp;&nbsp;&nbsp;<strong>{$goods_info.promote_price}</strong></p><p class="market-price"><strong>{$goods_info.market_price}</strong></p>
+</div>
+{else}
+<div class="price clearfix">
+<p class="jx-price">本店价&nbsp;&nbsp;&nbsp;<strong>{$goods_info.shop_price}</strong></p><p class="market-price"><strong>{$goods_info.market_price}</strong></p>
+</div>
+{/if}
+{if $goods_info.brand_id}
+<div class="brand clearfix">
+	<p class="name">品&nbsp;&nbsp;&nbsp;牌</p><p class="detial"><a href='brands.php?b_id={$goods_info.brand_id}'>{$brand_name}</a></p>
+</div>
+{/if}
+{if $goods_info.goods_number neq ""}
+<div class='goods_number clearfix'>
+	<p class="name">库&nbsp;&nbsp;&nbsp;存</p>
+	{if $goods_info.goods_number eq 0}<span id="msg">缺货</span>{else}<span id="msg">{$goods_info.goods_number} {$goods_info.measure_unit}</span>{/if}
+</div>
+{/if}
+<form action="javascript:addToCart({$goods_info.goods_id})" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY" >
+<div class="goods_number clearfix">
+	<p class="name">数&nbsp;&nbsp;&nbsp;量</p>
+	<div class="addForm">	
+		        <input type="button" value="-" class="btn" onClick="chgNum(-1);changePrice();" />	
+		        <input type="text" id='number' name="number" onblur="changePrice()" value="1" class="text"/>	
+		        <input type="button" value="+" class="btn" onClick="chgNum(1);changePrice();" />
+	</div>
+<!-- {if $goods_info.is_shipping} 为免运费商品则显示--><p class="free"><em></em>免运费!</p>	<!-- {/if} -->
+</div>
+<!-- {if $use_integral} 购买此商品可使用积分-->
+<div class='goods_number clearfix'>
+	<p class="detial clearfix">购买可使用：<font class="red">{$goods_info.integral} {$points_name}</font></p>
+</div>
+<!-- {/if} -->
+<!-- {if $goods_info.give_integral > 0} 购买此商品赠送积分-->
+<div class='goods_number clearfix'>
+	<p class="detial clearfix">赠送：<font class="red">{$goods_info.give_integral} {$points_name}</font></p>
+</div>
+<!-- {/if} -->
+<!-- {if $goods_info.bonus_money} 红包-->
+<div class='goods_number clearfix'>
+	<p class="detial clearfix">可获得红包：<font class="red">{$goods_info.bonus_money}</font></p>
+</div>
+<!-- {/if} -->
+{foreach from=$specification item=spec key=spec_key}
+<div class="spec clearfix">
+	<p class="name">{$spec.name}</p>
+        <!-- {* 判断属性是复选还是单选 *} -->
+                    <!-- {if $spec.attr_type eq 1} -->
+                      <!-- {if $cfg.goodsattr_style eq 1} -->
+                        <!-- {foreach from=$spec.values item=value key=key} -->
+	<p class="detial clearfix">
+                        <input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" {if $key eq 0}checked{/if} onclick="changePrice()" />
+                        {$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}] <br />
+	</p>
+                        <!-- {/foreach} -->
+                        <input type="hidden" name="spec_list" value="{$key}" />
+                        <!-- {else} -->
+ 	<p class="detial clearfix">
+                          <!-- {foreach from=$spec.values item=value key=key} -->
+  <a onclick="changeP('spec_{$spec_key}','{$value.id}')" name="sp_url_{$spec_key}" id="url_{$value.id}"  title="{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}" {if $key eq 0}class="selected"{/if}>{$value.label}<input style="display:none" id="spec_value_{$value.id}" type="radio" name="spec_{$spec_key}" value="{$value.id}" {if $key eq 0}checked{/if} /></a>
+                          <!-- {/foreach} -->
+	</p>
+                        <input type="hidden" name="spec_list" value="{$key}" />
+                      <!-- {/if} -->
+                    <!-- {else} -->
+                      <!-- {foreach from=$spec.values item=value key=key} -->
+ 	<p class="detial clearfix">
+                      <label for="spec_value_{$value.id}"><input type="checkbox" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" onclick="changePrice()" />
+                      {$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}]</label><br />
+	</p>
+                      <!-- {/foreach} -->
+                      <input type="hidden" name="spec_list" value="{$key}" />
+                    <!-- {/if} -->
+      <!-- {* 结束循环可选属性 *} -->
+</div>
+{/foreach}
+	  <!--服务站点-->
+	  <script src="js/geo.js"></script>
+	  <div id="serve_location">服务站点：<script type="text/javascript" ></script>
+        <form name="shareip" action="/cgi-bin/feedback" method="post">
+			<select class="select" name="province" id="s1">
+			  <option></option>
+			</select>
+			<select class="select" name="city" id="s2">
+			  <option></option>
+			</select>
+			<select class="select" name="town" id="s3">
+			  <option></option>
+			</select>
+			<input id="address" name="address" type="hidden" value="" />
+        </form>
+<script>
+setup();preselect('省份');promptinfo();
+function promptinfo()
+{
+	var address = document.getElementById('address');
+	var s1 = document.getElementById('s1');
+	var s2 = document.getElementById('s2');
+	var s3 = document.getElementById('s3');
+	address.value = s1.value + s2.value + s3.value;
+}
+
+</script>
+
+</div>
+	  <!--服务站点end-->
+ <!--服务套餐-->
+	  <div>
+	  <font>请选择服务套餐：</font><br>
+	  <input type='checkbox' name='VoteOption1' value=1><font style="color:rgb(200,0,0);">空调维修￥9000 质保3年</font><br>
+	  <input type='checkbox' name='VoteOption1' value=2><font style="color:rgb(200,0,0);">空调保养￥1380 质保1年</font><br>
+	  <input type='checkbox' name='VoteOption1' value=3><font style="color:rgb(200,0,0);">电控电子￥800 质保1年</font><br>
+	  <input type='checkbox' name='VoteOption1' value=4><font style="color:rgb(200,0,0);">动力恢复￥12800 质保10万公里</font><br>
+	  <input type='checkbox' name='VoteOption1' value=4><font style="color:rgb(200,0,0);">制动系统￥7600 质保3万公里</font><br>
+      </div>
+	  <!--服务套餐end-->
+<div class='goods_number clearfix'>
+	<p class="name">商品总价:</p>
+	<span class="shopcount" id="ECS_GOODS_AMOUNT"></span>
+</div>
+</form>
+
+{if $goods_info.goods_number eq 0}
+<div class="div_but1 clearfix" id="btn2">
+	<div class="buybut">
+		<a class='ljgm' name="goods_buy" href="javascript:void()">
+			<i></i>
+			立即购买
+		</a>
+	</div>
+	<div class="cartbut">
+		<a class='add' name="goods_cart" href="javascript:void()">
+			<i></i>
+			加入购物车
+		</a>
+	</div>
+</div>
+{else}
+<div class="div_but1 clearfix" id="btn1">
+	<div class="buybut" onclick="javascript:addToCart({$goods_info.goods_id}, 'quk_buy');">
+		<a class='ljgm' name="goods_buy" href="javascript:void()">
+			<i></i>
+			立即购买
+		</a>
+	</div>
+	<div class="cartbut" onclick="javascript:addToCart({$goods_info.goods_id}, 'add_cart');">
+		<a class='add' name="goods_cart" href="javascript:void()">
+			<i></i>
+			加入购物车
+		</a>
+	</div>
+</div>
+{/if}
+
+
+
+</div>
+
+
+<div class="active">
+<p class="tip"></p>
+</div>
+
+<div class="pro-detial">
+	<div class="judge clearfix">
+		<a href="comment.php?g_id={$goods_id}"><span class="m-ratescore"><i style="WIDTH: {$goods_info2.comment_rank2}%">{$goods_info2.comment_rank2}%</i></span>
+		<span class="all"><strong>{$goods_info2.comment_count}</strong>人评论</span>
+		<span class="nice"><strong>{$goods_info2.comment_rank2}%</strong>好评</span></a>
+		<span class="arrow"></span>
+	</div>
+	<div class="pro-intro clearfix">
+		<a href="goods.php?act=view_img&id={$goods_id}"><span>商品详细介绍</span></a>
+		<span class="arrow"></span>
+	</div>
+</div>
+
+<!-- {if $related_goods} -->
+<div class="recommend">
+	<h2>相关推荐<span></span></h2>
+	<a class="scroll-page pre-page" style="background-position: -2px -43px;float:left;left:10px;" id="prev" onclick="myScroll.scrollToPage('prev', 0);return false"></a>
+	<a class="scroll-page next-page" style="background-position: -305px -42px;float:right;right:10px;" id="next" onclick="myScroll.scrollToPage('next', 0);return false"></a>
+	<div class="item-container" id="item-container">
+		<div class="item-list" id="item_list">
+		<ul>
+        <!--{foreach from=$related_goods item=releated_goods_data}-->
+			<li>
+			<a href="{$releated_goods_data.url}" class="item-pic"><img src="./../{$releated_goods_data.goods_thumb}" /></a>
+            <p class="price"><!-- {if $releated_goods_data.promote_price neq 0} -->{$releated_goods_data.formated_promote_price}<!-- {else} -->
+{$releated_goods_data.shop_price}<!-- {/if} --></p>
+			</li>
+        <!--{/foreach}-->
+		</ul>
+		</div>
+	</div>
+</div>
+<!-- {/if} -->						
+
+<div id="buy_lay"></div>
+<div id="buy_lay_frm">
+	<div class="frm">
+		<div class="tips">商品已添加到购物车！</div>
+		<div class="btns">
+			<input id="btn_continue" class="btn" type="button" value=" 再逛会 " />
+			<input id="btn_check" class="btn" type="button" value=" 去结算 " />
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript" src="js/iscroll.js"></script>
+<script type="text/javascript">
+	var myScroll;
+	$(document).ready(function(){
+		var w = $('.item-list ul li').length*100+'px';
+		$('.item-list').width(w);
+ 		 myScroll = new iScroll('item-container', { 
+ 			snap: true,
+ 			hScrollbar: false,
+ 			vScrollbar: false,
+ 			momentum:false			 
+ 		});
+	});
+</script>
+	</div>
+</div>
+</section>
+
+	
+<script type="text/javascript">
+		var global_loading=document.getElementById("global_loading");
+		global_loading.parentNode.removeChild(global_loading);
+</script>
+<script type="text/javascript">
+var addto_cart_success = "该商品已添加到购物车。";
+var goods_id = {$goods_info.goods_id};
+var goodsattr_style = {$cfg.goodsattr_style|default:1};
+var goodsId = {$goods_info.goods_id};
+var now_time = {$now_time};
+onload = function(){
+  changePrice();
+  try {onload_leftTime();}
+  catch (e) {}
+}
+/**
+ * 点选可选属性或改变数量时修改商品价格的函数
+ */
+function changePrice()
+{
+  var attr = getSelectedAttributes(document.forms['ECS_FORMBUY']);
+  var qty = document.forms['ECS_FORMBUY'].elements['number'].value;
+  Ajax.call('goods.php', 'act=price&id=' + goodsId + '&attr=' + attr + '&number=' + qty, changePriceResponse, 'GET', 'JSON');
+}
+/**
+ * 接收返回的信息
+ */
+function changePriceResponse(res)
+{
+  if (res.err_msg.length > 0)
+  {
+    alert(res.err_msg);
+  }
+  else
+  {
+    document.forms['ECS_FORMBUY'].elements['number'].value = res.qty;
+    if (document.getElementById('ECS_GOODS_AMOUNT'))
+      document.getElementById('ECS_GOODS_AMOUNT').innerHTML = res.result;
+  }
+}
+/*
+*选择信息处理
+*/
+function changeP(b, c) {
+	var frm=document.forms['ECS_FORMBUY'];
+	var cur_id="";
+    document.getElementById('spec_value_' + c).checked=true;
+	document.getElementById('url_' + c).className="selected";
+	for (var i = 0; i < frm.elements[b].length; i++) {
+		cur_id=frm.elements[b][i].id.substr(11);
+        document.getElementById('url_' + cur_id).className="";
+		if (frm.elements[b][i].checked)
+		{
+		   document.getElementById('url_' + c).className="selected";
+		}
+    }
+	changePrice();
+}
+</script>
+{include file='foot.dwt'}
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png"/>
+	<title>订单详细 - {$shop_name}</title>
+	<link rel='stylesheet' type='text/css' href='css/order-detial.css' />
+    <link href="css/reset.css" rel="stylesheet" type="text/css" />
+	<link href="css/head.css" rel="stylesheet" type="text/css" />
+	<link href="css/foot.css" rel="stylesheet" type="text/css" />
+	<link href="css/head_foot.css" rel="stylesheet" type="text/css" />
+	<script src="js/jquery-1.6.2.min.js" type="text/javascript"></script>
+	<script src="/js/jquery.lazyload.js" type="text/javascript"></script>
+	<script src="js/jquery.autocomplete.js" type="text/javascript"></script>
+	<script src="js/jquery.touchScroll.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	var _hmt=_hmt||[];(function(){var e=document.createElement("script");
+	var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+	document.write('<div id="global_loading" style="width: 100%;height: 100%;position: fixed;top: 0;left: 0;background-color: #eee;z-index:999"><div style="width: 100px;height: 75px;margin:auto;top:50%;position:relative"><span style="display:block;float:left;width:32px;height:32px;background:url(images/spacer.gif);margin-top:-5px;"></span>&nbsp;&nbsp;加载中...</div></div>');
+	</script>
+</head>
+<body> 
+	<div class="header">
+		<a class="back" href="javascript:history.back();"></a>
+		<span class="headline">订单详情</span>
+		<a class="search" href="search.php"></a>
+	</div>
+	<section>
+<div class="pending-detial">
+		<h2>订单详情</h2>
+
+		<!--订单信息begin-->
+		<div class="order-info">
+			<ul>
+				<li class="first clearfix">
+					<p class="title">订单编号：</p>
+					<p class="sum">{$order.order_sn}</p>
+				</li>
+				<li class="clearfix">
+					<p class="title">订单状态：</p>
+					<p class="sum"><strong>{$order.order_status}<br>{$order.confirm_time}</strong></p>
+				</li>
+				<li class="clearfix">
+					<p class="title">支付状态：</p>
+					<p class="sum">{$order.pay_status}<br>{$order.pay_time}</p>
+				</li>
+                {if $order.order_amount gt 0}
+				<li class="clearfix">
+					<p class="title">在线支付：</p>
+                    {$order.pay_online}
+				</li>
+                {/if}
+				<li class="clearfix">
+					<p class="title">配送状态：</p>
+					<p class="sum"><strong class="decreas">{$order.shipping_status}<br>{$order.shipping_time}</strong></p>
+				</li>
+                {if $order.invoice_no}
+				<li class="clearfix">
+					<p class="title">发货单号：</p>
+					<p class="sum"><strong class="decreas">{$order.invoice_no}</strong></p>
+				</li>
+                {/if}
+				<li class="last clearfix">
+					<p class="title">商品总价：</p>
+					<p class="sum"><strong class="decreas"></strong>
+			 {$order.formated_goods_amount}<br>
+              <!-- {if $order.discount gt 0} 折扣 -->
+              <font class="red">-</font> 折扣: {$order.formated_discount}<br>
+              <!-- {/if} -->
+              <!-- {if $order.tax gt 0} -->
+              <font class="red">+</font> 发票税额: {$order.formated_tax}<br>
+              <!-- {/if} -->
+              <!-- {if $order.shipping_fee > 0} -->
+              <font class="red">+</font> 配送费用: {$order.formated_shipping_fee}<br>
+              <!-- {/if} -->
+              <!-- {if $order.insure_fee > 0} -->
+              <font class="red">+</font> 保价费用: {$order.formated_insure_fee}<br>
+              <!-- {/if} -->
+              <!-- {if $order.pay_fee > 0} -->
+              <font class="red">+</font> 支付手续费: {$order.formated_pay_fee}<br>
+              <!-- {/if} -->
+              <!-- {if $order.pack_fee > 0} -->
+              <font class="red">+</font> 包装费用: {$order.formated_pack_fee}<br>
+              <!-- {/if} -->
+              <!-- {if $order.card_fee > 0} -->
+              <font class="red">+</font> 贺卡费用: {$order.formated_card_fee}<br>
+              <!-- {/if} -->   
+              <!-- {if $order.money_paid > 0} -->
+              <font class="red">-</font> 已付款金额: {$order.formated_money_paid}<br>
+              <!-- {/if} -->
+              <!-- {if $order.surplus > 0} -->
+              <font class="red">-</font> 使用余额: {$order.formated_surplus}<br>
+              <!-- {/if} -->
+              <!-- {if $order.integral_money > 0} -->
+              <font class="red">-</font> 使用积分: {$order.formated_integral_money}<br>
+              <!-- {/if} -->
+              <!-- {if $order.bonus > 0} -->
+              <font class="red">-</font> 使用红包: {$order.formated_bonus}<br>
+              <!-- {/if} -->
+                    </p>
+				</li>
+				<li class="total clearfix">
+					<p class="title">共需支付：</p>
+					<p class="sum"><strong class="decreas">{$order.formated_order_amount}
+            <!-- {if $order.extension_code eq "group_buy"} --><br />
+            {$lang.notice_gb_order_amount}<!-- {/if} --></strong></p>
+				</li>
+			</ul>
+		</div>
+		<!--订单信息end-->
+
+		<!--商品列表begin-->
+		<div class="list">
+			<h3>商品列表</h3>
+			<ul>
+				<!-- {foreach from=$goods_list item=goods name=goods} -->
+                <li class="{if $smarty.foreach.goods.first}first {/if}clearfix">
+              <!-- {if $goods.goods_id gt 0 && $goods.extension_code neq 'package_buy'} 商品 -->
+                <a href="goods.php?id={$goods.goods_id}" target="_blank"><img src="./../{$goods.goods_thumb}"></a>
+                <!-- {if $goods.parent_id > 0} -->
+                <span style="color:#FF0000">（{$lang.accessories}）</span>
+                <!-- {elseif $goods.is_gift} -->
+                <span style="color:#FF0000">（{$lang.largess}）</span>
+                <!-- {/if} -->
+              <!-- {elseif $goods.goods_id gt 0 && $goods.extension_code eq 'package_buy'} -->
+                <a href="javascript:void(0)" onclick="setSuitShow({$goods.goods_id})" class="f6">{$goods.goods_name}<span style="color:#FF0000;">（礼包）</span></a>
+                <div id="suit_{$goods.goods_id}" style="display:none">
+                    <!-- {foreach from=$goods.package_goods_list item=package_goods_list} -->
+                      <a href="goods.php?id={$package_goods_list.goods_id}" target="_blank" class="f6">{$package_goods_list.goods_name}</a><br />
+                    <!-- {/foreach} -->
+                </div>
+              <!-- {/if} -->
+                    <div class="pro-info">
+						<a href="goods.php?id={$goods.goods_id}" target="_blank">{$goods.goods_name}</a>
+                        <p class="price">本店价：<strong>{$goods.goods_price}</strong></p>
+					</div>
+					<span>×{$goods.goods_number}</span>
+				</li>
+          <!-- {/foreach} -->
+							</ul>
+		</div>
+		<!--商品列表end-->
+
+		<!--收货地址begin-->
+		<div class="user-info">
+			<h3>收货地址</h3>
+			<ul>
+				<li>
+					<p class="title">联络贵宾：</p>
+					<p class="user">{$order.consignee}</p>
+				</li>
+				<li>
+					<p class="title">联络电话：</p>
+					<p class="user">{$order.tel}&nbsp;&nbsp;&nbsp;&nbsp;{$order.mobile}</p>
+				</li>
+				<li class="add">
+					<p class="title">收货地址：</p>
+					<p class="user">{$order.address}</p>
+				</li>
+			</ul>
+		</div>
+		<!--收货地址end-->
+
+
+		<!--其他信息begin-->
+		<div class="fapiao">
+			<h3>其他信息</h3>
+			<ul>
+				<li>
+					<p class="title">配送方式：</p>
+					<p class="sum">{$order.shipping_name}</p>
+				</li>
+				<li>
+					<p class="title">支付方式：</p>
+					<p class="sum">{$order.pay_name}</p>
+				</li>
+				<li>
+					<p class="title">缺货处理：</p>
+					<p class="sum">{$order.how_oos_name}</p>
+				</li>
+	            <!-- {if $order.pack_name} 是否使用包装 -->
+				<li>
+					<p class="title">使用包装：</p>
+					<p class="sum">{$order.pack_name}</p>
+				</li>
+                <!-- {/if} 是否使用包装 -->
+	            <!-- {if $order.card_name} 是否使用贺卡 -->
+				<li>
+					<p class="title">使用贺卡：</p>
+					<p class="sum">{$order.card_name}</p>
+				</li>
+				<li>
+					<p class="title">祝福语：</p>
+					<p class="sum">{$order.card_message}</p>
+				</li>
+                <!-- {/if} 是否使用贺卡 -->
+	            <!-- {if $order.integral > 0} 是否使用积分 -->
+				<li>
+					<p class="title">使用积分：</p>
+					<p class="sum">{$order.integral}</p>
+				</li>
+                <!-- {/if} 是否使用积分 -->
+	            <!-- {if $order.inv_payee && $order.inv_content} 是否开发票 -->
+				<li>
+					<p class="title">发票抬头：</p>
+					<p class="sum">{$order.inv_payee}</p>
+				</li>
+				<li>
+					<p class="title">发票内容：</p>
+					<p class="sum">{$order.inv_content}</p>
+				</li>
+                <!-- {/if} 是否开发票 -->
+	            <!-- {if $order.postscript} 是否有订单附言 -->
+				<li>
+					<p class="title">订单附言：</p>
+					<p class="sum">{$order.postscript}</p>
+				</li>
+                <!-- {/if} 是否有订单附言 -->
+			</ul>
+		</div>
+		<!--其他信息end-->
+
+</section>
+<script type="text/javascript">
+		var global_loading=document.getElementById("global_loading");
+		global_loading.parentNode.removeChild(global_loading);
+</script>
+{include file='foot.dwt'}
+</body>
+</html>

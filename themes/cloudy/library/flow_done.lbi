@@ -1,0 +1,28 @@
+<div class="flow-bar step4"></div>
+<dl class="message">
+	<dt class="title">{$lang.remember_order_number}{$lang.colon}<em>{$order.order_sn}</em></dt>
+	<dd>
+		<p>{if $order.shipping_name}{$lang.select_shipping}{$lang.colon}<em>{$order.shipping_name}</em>
+		{/if}{$lang.select_payment}{$lang.colon}<em>{$order.pay_name}</em>
+		{$lang.order_amount}{$lang.colon}<em class="price">{$total.amount_formated}</em></p>
+	</dd>
+	{if $pay_online}
+	<dd class="pay-online">{$pay_online}</dd>
+	{/if}
+	{if $virtual_card}
+	<dd class="virtual-card">
+		{foreach from=$virtual_card item=vgoods name=virtual_card}
+		<dl class="table{if $smarty.foreach.virtual_card.first} first{/if}">
+			<dt class="title">{$vgoods.goods_name}</dt>
+			{foreach from=$vgoods.info item=card name=vgoods_info}
+			{if $card.card_sn}<dt>{$lang.card_sn}{$lang.colon}</dt><dd class="odd"><em>{$card.card_sn}</em></dd>{/if}
+			{if $card.card_password}<dt>{$lang.card_password}{$lang.colon}</dt><dd class="even"><em>{$card.card_password}</em></dd>{/if}
+			{if $card.end_date}<dt>{$lang.end_date}{$lang.colon}</dt><dd class="odd">{$card.end_date}</dd>{/if}
+			{if !$smarty.foreach.vgoods_info.last}<hr />{/if}
+			{/foreach}
+		</dl>
+		{/foreach}
+	</dd>
+	{/if}
+	<dd><p>{$order_submit_back}</p></dd>
+</dl>

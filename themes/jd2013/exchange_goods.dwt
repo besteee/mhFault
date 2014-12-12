@@ -1,0 +1,280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link href="base.css" rel="stylesheet" type="text/css">
+<link href="home.css" rel="stylesheet" type="text/css">
+<link href="MagicZoom.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="js/mzp-packed-me.js"></script>
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+<script type="text/javascript">
+function $id(element) {
+  return document.getElementById(element);
+}
+//切屏--是按钮，_v是内容平台，_h是内容库
+function reg(str){
+  var bt=$id(str+"_b").getElementsByTagName("h2");
+  for(var i=0;i<bt.length;i++){
+    bt[i].subj=str;
+    bt[i].pai=i;
+    bt[i].style.cursor="pointer";
+    bt[i].onclick=function(){
+      $id(this.subj+"_v").innerHTML=$id(this.subj+"_h").getElementsByTagName("blockquote")[this.pai].innerHTML;
+      for(var j=0;j<$id(this.subj+"_b").getElementsByTagName("h2").length;j++){
+        var _bt=$id(this.subj+"_b").getElementsByTagName("h2")[j];
+        var ison=j==this.pai;
+        _bt.className=(ison?"":"h2bg");
+      }
+    }
+  }
+  $id(str+"_h").className="none";
+  $id(str+"_v").innerHTML=$id(str+"_h").getElementsByTagName("blockquote")[0].innerHTML;
+}
+</script>
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<!--当前位置 start-->
+<div class="block box">
+  <div id="ur_here">
+    <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+  </div>
+</div>
+<!--当前位置 end-->
+<div class="blank"></div>
+<div class="block clearfix">
+  <!--商品详情start-->
+   <div id="goodsInfo" class="clearfix">
+    <div class="imgInfo">
+     <!-- {if $pictures.0.img_url}-->
+    <a href="{$pictures.0.img_url}" id="Zoomer" class="MagicZoomPlus" rel="selectors-effect:false;zoom-fade:true;background-opacity:70;zoom-width:350;zoom-height:350;caption-source:img:title;thumb-change:mouseover" title=""  onclick="window.open('gallery.php?id={$goods.goods_id}'); return false;">
+    <img id="img_url" name="goods_img" src="{$pictures.0.img_url}" alt="{$goods.goods_name|escape:html}" class="thumb" />
+    </a>
+    <!-- {else} -->
+    <img id="img_url" name="goods_img" src="{$goods.goods_img}" alt="{$goods.goods_name|escape:html}" class="thumb" />
+    <!-- {/if}-->
+     <div class="blank5"></div>
+     <!--相册 START-->
+     <!-- #BeginLibraryItem "/library/goods_gallery.lbi" --><!-- #EndLibraryItem -->
+     <!--相册 END-->
+         <div class="blank5"></div>
+	 <div class="sharebg">
+<!-- JiaThis Button BEGIN -->
+<div id="ckepop">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_kaixin001"></a>
+	<a class="jiathis_button_taobao"></a>
+	<a class="jiathis_button_douban"></a>
+	<a class="jiathis_button_fav"></a>
+	<a class="jiathis_button_tsohu"></a>
+	<a class="jiathis_button_tieba"></a>
+	<a class="jiathis_button_baidu"></a>
+	<a class="jiathis_button_google"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+</div>
+	 </div>
+     <!--商品图片和相册 end-->
+	 
+	 <div class="textInfo">
+      <form action="exchange.php?act=buy" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY" >
+	  	 <div class="ntitle">{$goods.goods_style_name}</div>
+	 {if $goods.goods_brief}
+	 <div class="brief">{$goods.goods_brief}</div>
+	 {/if}	  
+       <div class="info">
+        <ul>
+          <!-- {if $cfg.show_goodssn} 显示商品货号-->
+          <li class="clearfix">
+            <dd>
+              <strong>{$lang.goods_sn}</strong>{$goods.goods_sn}
+            </dd>
+          </li>
+          <!-- {/if} -->
+          <!-- {if $goods.goods_brand neq "" and $cfg.show_brand} 显示商品品牌-->
+          <li class="clearfix">
+            <dd>
+              <strong>{$lang.goods_brand}</strong><a href="{$goods.goods_brand_url}" >{$goods.goods_brand}</a>
+            </dd>
+          </li>
+          <!--{/if}-->
+          <!-- {if $cfg.show_goodsweight} 商品重量-->
+          <li class="clearfix">
+            <dd>
+            <strong>{$lang.goods_weight}</strong>{$goods.goods_weight}
+            </dd>
+          </li>
+          <!-- {/if} -->
+          <li class="clearfix">
+            <dd>
+            <strong>{$lang.exchange_integral}</strong><font class="shop">{$goods.exchange_integral}</font><br />
+            </dd>
+          </li>
+          <!-- {* 开始循环所有可选属性 *} -->
+          <!-- {foreach from=$specification item=spec key=spec_key} 循环规格开始 -->
+          <li class="padd loop">
+            <strong>{$spec.name}:</strong><br />
+            <!-- {if $cfg.goodsattr_style eq 1} 规格显示方式：单选按钮 -->
+              <!-- {foreach from=$spec.values item=value key=key} -->
+                <label for="spec_value_{$value.id}">
+                <input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" {if $key eq 0}checked{/if} />
+                {$value.label} </label>
+              <!-- {/foreach} -->
+            <!-- {else} 规格显示方式：下拉列表 -->
+              <select name="spec_{$spec_key}" style="border:1px solid #ccc;">
+              <!-- {foreach from=$spec.values item=value key=key} -->
+                <option label="{$value.label}" value="{$value.id}">{$value.label} </option>
+              <!-- {/foreach} -->
+              </select>
+            <!-- {/if} 规格显示方式 -->
+          </li>
+          <!-- {/foreach} 循环规格结束 -->
+          <!-- {* 结束循环可选属性 *} -->
+          <li class="padd">
+            <input type="hidden" name="goods_id" value="{$goods.goods_id}" />
+            <input type="submit" value="{$lang.exchange_goods}" class="bnt_blue_1"/>
+          </li>
+        </ul>
+        </div>
+      </form>
+       <div class="boxCenterGoods clearfix">
+        <p>
+          <!-- {if $prev_good} -->
+          <a href="{$prev_good.url}"><img alt="prev" src="./images/up.gif" /></a>
+          <!-- {/if} -->
+          <!-- {if $next_good} -->
+          <a href="{$next_good.url}"><img alt="next" src="./images/down.gif" /></a>
+          <!-- {/if} -->
+        </p>
+       </div>
+	  
+      </div>
+    </div>
+    <div class="blank"></div>
+    <!--商品详情end-->
+	 
+</div>
+
+<div class="block clearfix">
+  <!--left start-->
+  <div class="AreaL">
+    <!-- TemplateBeginEditable name="左边区域" -->
+    <!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/filter_attr.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/price_grade.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/history.lbi" --><!-- #EndLibraryItem -->
+    <!-- TemplateEndEditable -->
+
+    <!-- TemplateBeginEditable name="左边广告区域（宽200px）" -->
+    <!-- TemplateEndEditable -->
+    <!--AD end-->
+  </div>
+  <!--left end-->
+  
+  <div class="AreaR">
+
+    <!--商品描述，商品属性 START-->
+    <div class="box">
+	<div id="innergoods">
+		<div class="h3goods">
+        <div id="com_b" class="history clearfix">
+        <h2>产品描述</h2>
+        <h2 class="h2bg">规格参数</h2>
+		<div class="f_r lirbuy"><a href="javascript:addToCart({$goods.goods_id})"><img src="images/rbuy.gif" /></a></div>
+        </div>
+		</div>
+	</div> 
+		<script type="text/javascript">
+var obj11 = document.getElementById("innergoods");
+var top11 = getTop(obj11);
+var isIE6 = /msie 6/i.test(navigator.userAgent);
+window.onscroll = function(){
+	var bodyScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+	if (bodyScrollTop > top11){
+		obj11.style.position = (isIE6) ? "absolute" : "fixed";
+		obj11.style.top = (isIE6) ? bodyScrollTop + "px" : "0px";
+	} else {
+		obj11.style.position = "static";
+	}
+}
+function getTop(e){
+	var offset = e.offsetTop;
+	if(e.offsetParent != null) offset += getTop(e.offsetParent);
+	return offset;
+}
+</script>
+
+      <div id="com_v" style="border-top:0;"></div>
+      <div id="com_h">
+          <blockquote>
+		  	   	<ul class="detail-list">
+					<li title="{$goods.goods_style_name}">商品名称：{$goods.goods_style_name}</li>
+					<li>商品编号：{$goods.goods_sn}</li>
+					<li>品牌：<a href="{$goods.goods_brand_url}" target="_blank">{$goods.goods_brand}</a></li>
+					<li>上架时间：{$goods.add_time}</li>
+		 <!-- {foreach from=$properties item=property_group key=key} -->
+        <!-- {foreach from=$property_group item=property name=curn} -->
+		 {if $smarty.foreach.curn.iteration <11} 
+				<li>{$property.name|escape:html}：{$property.value}</li>
+		{/if}			
+ <!-- {/foreach}-->
+        <!-- {/foreach}-->	
+				</ul>
+            {$goods.goods_desc}
+          </blockquote>
+
+          <blockquote>
+            <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#dddddd">
+              <!-- {foreach from=$properties item=property_group key=key} -->
+              <tr>
+                <th colspan="2" bgcolor="#FFFFFF">{$key|escape}</th>
+              </tr>
+              <!-- {foreach from=$property_group item=property} -->
+              <tr>
+                <td bgcolor="#FFFFFF" align="left" width="30%" class="f1">[{$property.name|escape:html}]</td>
+                <td bgcolor="#FFFFFF" align="left" width="70%">{$property.value|escape:html}</td>
+              </tr>
+              <!-- {/foreach}-->
+              <!-- {/foreach}-->
+            </table>
+          </blockquote>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    <!--
+    reg("com");
+    //-->
+    </script>
+    <div class="blank"></div>
+    <!--商品描述，商品属性 END-->
+   </div>
+</div>
+<div class="blank5"></div>
+<!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+<script type="text/javascript">
+<!-- {literal} -->
+onload = function()
+{
+  fixpng();
+}
+<!-- {/literal} -->
+</script>
+</html>

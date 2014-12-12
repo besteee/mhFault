@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="Keywords" content="{$keywords}"/>
+<meta name="Description" content="{$description}"/>
+<!-- TemplateBeginEditable name="doctitle" --><title>{$page_title}</title><!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link href="{$static_path}static/css/style.css" rel="stylesheet" type="text/css"/>
+<!--[if IE]><link href="{$static_path}static/css/ie.css" rel="stylesheet" type="text/css"/><![endif]-->
+<script type="text/javascript" src="{$static_path}static/js/jquery.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.json.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/common.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/transport.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/utils.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="{$static_path}static/js/effect.js"></script>
+</head>
+<body>
+{include file="/library/page_header.lbi"}
+<div id="content"><div class="container">
+	{include file="/library/ur_here.lbi"}
+	<div class="col-main">
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+		{if $action eq "form"}
+		<div class="search-form box">
+			<b class="tp"><b></b></b>
+			<div class="hd"><h3>{$lang.search_goods}</h3></div>
+			<div class="bd">
+				<form action="search.php" method="get" name="advancedSearchForm" class="form">
+					<fieldset>
+						<h4>{$lang.search_form_title}</h4>
+						<label for="keywords"><b>{$lang.label_keywords}</b>
+							<input type="text" name="keywords" maxlength="120" tabindex="1" value="{$adv_val.keywords}" id="keywords"/>
+							<span class="directions">{$lang.searchkeywords_notice}</span>
+						</label>
+						<fieldset class="radio-wrap label"><b>{$lang.label_sc_ds}</b>
+							<fieldset>
+							<label for="sc_ds1"><input type="radio" name="sc_ds" value="1" {if $scck}checked="checked"{/if} tabindex="3" class="radio" id="sc_ds1"/>{$lang.yes}</label>
+							<label for="sc_ds0"><input type="radio" name="sc_ds" value="0" {if !$scck}checked="checked"{/if} tabindex="2" class="radio" id="sc_ds0"/>{$lang.no}</label>
+							</fieldset>
+						</fieldset>
+						<label for="cat_select"><b>{$lang.label_category}</b>
+							<select name="category" id="cat_select"><option value="0">{$lang.all_category_select}</option>{$cat_list}</select>
+						</label>
+						<label for="brand_select"><b>{$lang.label_brand}</b>
+							<select name="brand" id="brand_select">
+								<option value="0">{$lang.all_brand}</option>
+								{html_options options=$brand_list selected=$adv_val.brand}
+							</select>
+						</label>
+						<label for="min_price"><b>{$lang.label_price}</b>
+							<input name="min_price" type="text" value="{$adv_val.min_price}" size="5" maxlength="8" id="min_price"/>
+							<span class="to">-</span><input name="max_price" type="text" value="{$adv_val.max_price}" size="5" maxlength="8" id="max_price"/>
+						</label>
+						{if $goods_type_list}
+						<label for="goods_type"><b>{$lang.label_extension}</b>
+							<select name="goods_type" id="goods_type" onchange="this.form.submit()">
+								<option value="0">{$lang.all_option}</option>
+								{html_options options=$goods_type_list selected=$goods_type_selected}
+							</select>
+						</label>
+						{/if}
+						{if $goods_type_selected > 0}
+							{foreach from=$goods_attributes item=item}
+							{if $item.type eq 1}
+						<label for="attr_{$item.id}"><b>{$item.attr}{$lang.colon}</b>
+							<input type="text" name="attr[{$item.id}]" size="20" maxlength="120" value="{$item.value}" id="attr_{$item.id}"/>
+						</label>
+							{/if}
+							{if $item.type eq 2}
+						<label for="attr_{$item.id}_from"><b>{$item.attr}{$lang.colon}</b>
+							<input type="text" name="attr[{$item.id}][from]" size="5" maxlength="5" value="{$item.value.from}" id="attr_{$item.id}_from"/>
+							<span class="to">-</span><input type="text" name="attr[{$item.id}][to]" size="5" maxlength="5" value="{$item.value.to}" id="attr_{$item.id}_to"/>
+						</label>
+							{/if}
+							{if $item.type eq 3}
+						<label for="attr_{$item.id}"><b>{$item.attr}{$lang.colon}</b>
+							<select name="attr[{$item.id}]" id="attr_{$item.id}">
+								<option value="0">{$lang.all_option}</option>
+								{html_options options=$item.options selected=$item.value}
+							</select>
+						</label>
+							{/if}
+							{/foreach}
+						{/if}
+						{if $use_storage eq 1}
+						<fieldset class="radio-wrap label"><b>{$lang.label_hidden_outstock}</b>
+							<fieldset>
+							<label for="outstock1"><input type="radio" name="outstock" value="1" {if $outstock}checked="checked"{/if} tabindex="3" class="radio" id="outstock1"/>{$lang.yes}</label>
+							<label for="outstock0"><input type="radio" name="outstock" value="0" {if !$outstock}checked="checked"{/if} tabindex="2" class="radio" id="outstock0"/>{$lang.no}</label>
+							</fieldset>
+						</fieldset>
+						{/if}
+						<div class="submit-wrap">
+							<input type="submit" value="{$lang.button_search}" tabindex="9" class="submit btn-sm"/>
+						</div>
+						<input type="hidden" name="action" value="form"/>
+					</fieldset>
+				</form>
+			</div>
+			<b class="bt"><b></b></b>
+		</div>
+		{/if}
+		<!-- #BeginLibraryItem "/library/search_goods_list.lbi" --><!-- #EndLibraryItem -->
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+	</div>
+	<div class="col-sub">
+	<!-- TemplateBeginEditable name="侧栏上方" --><!-- TemplateEndEditable -->
+	<!-- TemplateBeginEditable name="侧栏" -->
+	<!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/history.lbi" --><!-- #EndLibraryItem -->
+	<!-- TemplateEndEditable -->
+	<!-- TemplateBeginEditable name="侧栏下方" --><!-- TemplateEndEditable -->
+	</div>
+</div></div>
+{include file="/library/page_footer.lbi"}
+</body>
+</html>
